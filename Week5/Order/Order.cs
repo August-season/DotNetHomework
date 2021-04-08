@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Order
 {
+    [Serializable]
    public class Order : IComparable
     {
 
@@ -21,12 +22,7 @@ namespace Order
         public List<OrderDetails> Items { set; get; }
         public double TotalPrice { get; }
 
-        public Order()
-        {
-            OrderId = Guid.NewGuid().ToString();
-            Items = new List<OrderDetails>();
-            Client = new Client("c01");
-        }
+
         public Order(string id, Client c, string addr, List<OrderDetails> items)
         {
             OrderId = id;

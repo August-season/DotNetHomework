@@ -8,12 +8,14 @@ namespace Order
     {
         public List<Order> orders { get; set; }
 
-        //public OrderService() { }
+        public OrderService() {
+           
+        }
 
-        //public static OrderService(List<Order> ods)
-        //{
-        //    orders = ods;
-        //}
+        public OrderService(List<Order> ods)
+        {
+            orders = ods;
+        }
 
 
 
@@ -23,7 +25,7 @@ namespace Order
             {
                 orders.Add(od);
             }
-            catch(Exception e)
+            catch(NullReferenceException e)
             {
                 Console.WriteLine("添加订单失败");
                 Console.WriteLine(e.Message);
