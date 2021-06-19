@@ -1,0 +1,704 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin-when-crossorigin" />
+    
+    
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Empirefree - 博客园</title>
+    <link id="favicon" rel="shortcut icon" href="//common.cnblogs.com/favicon.svg" type="image/svg+xml" />
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=6tvK5XC6GPbg3p_sy7wzz_2291HoYACr4440iKBzQIw" />
+    <link id="MainCss" rel="stylesheet" href="/skins/codinglife/bundle-codinglife.min.css?v=2uJkpdACLVfstRQ7zeCFK19brTwKuDEaNBLgKz9nm3A" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/codinglife/bundle-codinglife-mobile.min.css?v=DwDRKMd1bmjnJZ4iQqrTCO9QLlYb6OZaUAzHoHIIihg" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/meditation5201314/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/meditation5201314/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/meditation5201314/wlwmanifest.xml" />
+    <script>
+        var currentBlogId = 390333;
+        var currentBlogApp = 'meditation5201314';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var isBlogOwner = false;
+        var skinName = 'CodingLife';
+        var visitorUserId = '';
+    </script>
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=ZUvfwhWs5fv-s8Nv7WofCOhwKAxiDO928zdWFzhnOPk"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML&amp;v=20200504"></script>
+    
+</head>
+<body class="has-navbar has-bannerbar">
+    <a name="top"></a>
+            <a target="_blank" href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:pc|pp:bokeyuan-huodong-21nianzhongdacu-neiyePCtonglanbanner|pu:21nianzhongdacu-neiyePCtonglanbanner|ci:21nzdc|kw:10224545" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-pc')">
+                <div class="bannerbar aliyun forpc" style="background-size: contain; filter: brightness(0.95); background-image: url(https://img2020.cnblogs.com/blog/35695/202106/35695-20210610183724605-1725070929.jpg)">
+                </div>
+            </a>
+            <div id="bannerbar" class="bannerbar-mobile formobile">
+            <a href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:mb|pp:bokeyuan-huodong-21nianzhongdacu-neiyeyidongduantonglanbanner|pu:21nianzhongdacu-neiyeyidongduantonglanbanner|ci:21nzdc|kw:10224547" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-mobile')">
+                <img src="https://img2020.cnblogs.com/blog/35695/202106/35695-20210610184806729-1738888164.jpg" alt="" />
+            </a>
+            </div>
+    <div id="top_nav" class="navbar forpc">
+        <nav id="nav_main" class="navbar-main">
+            <ul id="nav_left" class="navbar-list navbar-left">
+                <li class="navbar-branding"><a href="https://www.cnblogs.com/" title="开发者的网上家园"><img src="/images/logo.svg?v=R9M0WmLAIPVydmdzE2keuvnjl-bPR7_35oHqtiBzGsM" alt="博客园Logo" /></a></li>
+                <li><a href="/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-sitehome')">首页</a></li>
+                <li><a href="https://news.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-news')">新闻</a></li>
+                <li><a href="https://q.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-q')">博问</a></li>
+                <li><a id="nav_brandzone" href="https://brands.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-brands')">专区</a></li>
+                <li><a href="https://ing.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-ing')">闪存</a></li>
+                <li><a href="https://edu.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-edu')">班级</a></li>
+            </ul>
+            <ul id="nav_right" class="navbar-list navbar-right">
+                <li>
+                    <form id="zzk_search" class="navbar-search" action="https://zzk.cnblogs.com/s" method="get">
+                        <input name="w" id="zzk_search_input" placeholder="代码改变世界" type="text" tabindex="3" />
+                        <button type="submit" id="zzk_search_button">
+                            <img src="/images/aggsite/search.svg" alt="搜索" />
+                        </button>
+                    </form>
+                </li>
+                <li id="navbar_login_status" class="navbar-list">
+                    <a class="navbar-user-info navbar-blog" href="https://i.cnblogs.com/EditPosts.aspx?opt=1" alt="写随笔" title="写随笔">
+                        <img id="new_post_icon" class="navbar-icon" src="/images/aggsite/newpost.svg" alt="写随笔" />
+                    </a>
+                    <a id="navblog-myblog-icon" class="navbar-user-info navbar-blog" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx" alt="我的博客" title="我的博客">
+                        <img id="myblog_icon" class="navbar-icon" src="/images/aggsite/myblog.svg" alt="我的博客" />
+                    </a>
+                    <a class="navbar-user-info navbar-message navbar-icon-wrapper" href="https://msg.cnblogs.com/" alt="短消息" title="短消息">
+                        <img id="msg_icon" class="navbar-icon" src="/images/aggsite/message.svg?v=J0WS2P2iPgaIVgXxcAhliw4AFZIpaTWxtdoNAv9eiCA" alt="短消息" />
+                        <span id="msg_count" style="display: none"></span>
+                    </a>
+                    <div id="user_info" class="navbar-user-info dropdown">
+                        <a class="dropdown-button" href="https://home.cnblogs.com/">
+                            <img id="user_icon" class="navbar-avatar" src="/images/aggsite/avatar-default.svg" alt="用户头像" />
+                        </a>
+                        <div class="dropdown-menu">
+                            <a id="navblog-myblog-text" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx">我的博客</a>
+                            <a href="https://home.cnblogs.com/">我的园子</a>
+                            <a href="https://account.cnblogs.com/settings/account">账号设置</a>
+                            <a href="javascript:void(0)" id="navbar_lite_mode_toggle" title="简洁模式会使用简洁款皮肤显示所有博客">
+    简洁模式 <img id="navbar_lite_mode_on" src="/images/lite-mode-check.svg" class="hide" /><span id="navbar_lite_mode_spinner" class="hide">...</span>
+</a>
+                            <a href="javascript:void(0)" onclick="account.logout();">退出登录</a>
+                        </div>
+                    </div>
+                    <a class="navbar-anonymous" href="https://account.cnblogs.com/signup/">注册</a>
+                    <a class="navbar-anonymous" href="javascript:void(0);" onclick="account.login()">登录</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    
+    <!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/meditation5201314/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/meditation5201314/">Empirefree</a>
+</h1>
+<h2></h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/meditation5201314/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/Empirefree">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="javascript:void(0)" data-rss="https://www.cnblogs.com/meditation5201314/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			<div id="blog_stats_place_holder"><script>loadBlogStats();</script></div>
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+
+
+
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/meditation5201314/archive/2021/05/23.html">2021年5月23日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/meditation5201314/p/14292079.html">
+    <span>
+            <span>[置顶]</span>
+        2021年度目标汇总---学习规划(未完待续)
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：2021年度目标汇总 学习规划(未完待续) es: https://www.cnblogs.com/meditation5201314/p/14801585.html kafka,zk:https://www.cnblogs.com/meditation5201314/p/14825615.html        <a href="https://www.cnblogs.com/meditation5201314/p/14292079.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-05-23 17:30
+Empirefree
+<span data-post-id="14292079" class="post-view-count">阅读(103)</span> 
+<span data-post-id="14292079" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14292079" class="post-digg-count">推荐(1)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14292079" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/meditation5201314/archive/2020/05/28.html">2020年5月28日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/meditation5201314/p/12529717.html">
+    <span>
+            <span>[置顶]</span>
+        Java核心技术---学习笔记【更新中....】
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：面试补充 Java内存结构：堆，栈，方法区 Java后台开发面试知识汇总：https://uploadfiles.nowcoder.com/images/20180914/826546_1536916757441_FF474C03D9D513A3519773CB35561940 全局变量：堆 静态变        <a href="https://www.cnblogs.com/meditation5201314/p/12529717.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2020-05-28 22:33
+Empirefree
+<span data-post-id="12529717" class="post-view-count">阅读(183)</span> 
+<span data-post-id="12529717" class="post-comment-count">评论(0)</span> 
+<span data-post-id="12529717" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12529717" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/meditation5201314/archive/2021/06/19.html">2021年6月19日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/meditation5201314/p/14903870.html">
+    <span>
+        SpringBoot--整合ShardingJDBC实现分库分表
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：Mysql优化--分库分表 项目地址：https://gitee.com/empirefree/spring-boot-sharding 参考链接：https://www.cnblogs.com/chenyanbin/p/14666668.html#usermybatisdo.java &#128181;背景.分        <a href="https://www.cnblogs.com/meditation5201314/p/14903870.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-06-19 18:31
+Empirefree
+<span data-post-id="14903870" class="post-view-count">阅读(3)</span> 
+<span data-post-id="14903870" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14903870" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14903870" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+            <div class="postSeparator"></div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/meditation5201314/p/14903827.html">
+    <span>
+        Servlet--核心内容汇总
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：Servlet汇总 因为看公司代码，有个cookie+jwt.Token登录验证接口，于是回顾下servlet、cookie、session、前后端分离restful、jwt.token相关内容。虽然现在流行的是网关封装各个接口，但是基础还是比较重要，需要重新复习。 Servlet--基础理论、实战        <a href="https://www.cnblogs.com/meditation5201314/p/14903827.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-06-19 18:18
+Empirefree
+<span data-post-id="14903827" class="post-view-count">阅读(38)</span> 
+<span data-post-id="14903827" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14903827" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14903827" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/meditation5201314/archive/2021/06/14.html">2021年6月14日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/meditation5201314/p/14882992.html">
+    <span>
+        Redis--狂神说Redis基础汇总(完结)
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：Redis--狂神说Redis基础汇总(完结) 2021.6.12-2021.6.14：端午学学玩玩弄完了Redis基础的汇总，越学越觉得自己知识量的匮乏。 参考链接：狂神说Java--Redis汇总：https://www.bilibili.com/video/BV1S54y1R7SB?p=1 R        <a href="https://www.cnblogs.com/meditation5201314/p/14882992.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-06-14 18:26
+Empirefree
+<span data-post-id="14882992" class="post-view-count">阅读(445)</span> 
+<span data-post-id="14882992" class="post-comment-count">评论(2)</span> 
+<span data-post-id="14882992" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14882992" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/meditation5201314/archive/2021/06/06.html">2021年6月6日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/meditation5201314/p/14854788.html">
+    <span>
+        缓存--java三级缓存、Mybatis的二级缓存
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：Java缓存和Mybatis缓存 每一次的笔记都是当初面试官给我的打击...... 所谓缓存，即每次读取数据先去缓存中读，没有再去数据库里找，以此来提高性能与效率 Java缓存 一级缓存 栈：一级缓存，用完即释放 二级缓存 堆：二级缓存，垃圾回收算法进行回收 三级缓存 三级缓存： 1.内存缓存（LR        <a href="https://www.cnblogs.com/meditation5201314/p/14854788.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-06-06 10:57
+Empirefree
+<span data-post-id="14854788" class="post-view-count">阅读(25)</span> 
+<span data-post-id="14854788" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14854788" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14854788" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/meditation5201314/archive/2021/06/05.html">2021年6月5日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/meditation5201314/p/14852723.html">
+    <span>
+        SpringBoot--整合itextpdf
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：SpringBoot--整合itextpdf Dependency &lt;!--SpringBoot:PDF--&gt; &lt;!-- https://mvnrepository.com/artifact/com.itextpdf/itextpdf --&gt; &lt;dependency&gt; &lt;groupId&gt;com.it        <a href="https://www.cnblogs.com/meditation5201314/p/14852723.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-06-05 14:40
+Empirefree
+<span data-post-id="14852723" class="post-view-count">阅读(18)</span> 
+<span data-post-id="14852723" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14852723" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14852723" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+            <div class="postSeparator"></div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/meditation5201314/p/14852476.html">
+    <span>
+        极客教程--Java基础内容（完结）
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：Java--基础内容（完结） 之前有赞笔试题基础题挂了，还是得承认自己基础很垃圾，要多补补，不能只搞框架。精通基础，结合设计模式，以后能走得更远 极客教程--参考链接：https://geek-docs.com/java/java-tutorial/super-keyword-in-java-wit        <a href="https://www.cnblogs.com/meditation5201314/p/14852476.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-06-05 12:25
+Empirefree
+<span data-post-id="14852476" class="post-view-count">阅读(8)</span> 
+<span data-post-id="14852476" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14852476" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14852476" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/meditation5201314/archive/2021/05/30.html">2021年5月30日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/meditation5201314/p/14828302.html">
+    <span>
+        Java--ThreadLocal原理与使用
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：ThreadLocal保证线程安全： ThreadLocal内部持有ThreadLocalMap对象，线程内部单独创建副本，来保证数据隔离，但是由于ThreadLocalMap中key为弱引用，GC自动回收,但是value如果为强引用，就没法回收，就会造成内存泄露（除非线程退出） 关于垃圾回收(自动        <a href="https://www.cnblogs.com/meditation5201314/p/14828302.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-05-30 16:48
+Empirefree
+<span data-post-id="14828302" class="post-view-count">阅读(9)</span> 
+<span data-post-id="14828302" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14828302" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14828302" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+            <div class="postSeparator"></div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/meditation5201314/p/14828236.html">
+    <span>
+        Redis--Springboot使用
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：Redis--springboot使用: 之前用redis是用命令行，现在整合到springboot做个简单使用：string,list,set,zset,hash，后面可能还要对redis分布式锁，秒杀项目，狂神说redis还要进一步做个总结 参考链接：https://blog.csdn.net/        <a href="https://www.cnblogs.com/meditation5201314/p/14828236.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-05-30 16:23
+Empirefree
+<span data-post-id="14828236" class="post-view-count">阅读(9)</span> 
+<span data-post-id="14828236" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14828236" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14828236" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/meditation5201314/archive/2021/05/29.html">2021年5月29日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/meditation5201314/p/14825615.html">
+    <span>
+        消息队列--Springboot整合Kafka
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：消息队列--Kafka: 由于公司用到了Kafka，所以花点时间了解下。kafka要安装zk，zk要安装jdk且内置有个进程端口号为8080，所以linux上有tomcat给停了，或者换端口 Zk安装： zk安装启动：https://www.cnblogs.com/rgever/p/10222167        <a href="https://www.cnblogs.com/meditation5201314/p/14825615.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-05-29 16:32
+Empirefree
+<span data-post-id="14825615" class="post-view-count">阅读(18)</span> 
+<span data-post-id="14825615" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14825615" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14825615" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/meditation5201314/archive/2021/05/24.html">2021年5月24日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/meditation5201314/p/14805762.html">
+    <span>
+        Mapper.xml--配置map&lt;String, List&lt;String&gt;&gt;输入
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：Mapper.xml 本文章关于mapper.xml中读取传入实体类中map&lt;String, List&gt; map这种入参，以及postman中如何模拟输入 传入参数如下： Map&lt;String, List&gt; clientTag ​	主要就是在foreach中套入一层foreach，其中clietnT        <a href="https://www.cnblogs.com/meditation5201314/p/14805762.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-05-24 19:03
+Empirefree
+<span data-post-id="14805762" class="post-view-count">阅读(28)</span> 
+<span data-post-id="14805762" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14805762" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14805762" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+
+<div class="topicListFooter">
+    <div id="nav_next_page">
+        
+    <a href="https://www.cnblogs.com/meditation5201314/default.html?page=2">
+        下一页
+    </a>
+
+    </div>    
+</div>
+
+
+
+
+
+
+<script>
+    updatePostStats(
+        $(".post-view-count").map(function () { return this.dataset.postId }).get(),
+        function(id, count) { $(".post-view-count[data-post-id=" + id + "]").text("阅读(" + count + ")") },
+        function(id, count) { $(".post-comment-count[data-post-id=" + id + "]").text("评论(" + count + ")") },
+        function(id, count) { $(".post-digg-count[data-post-id=" + id + "]").text("推荐(" + count + ")") });
+</script>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+	<div id="sideBar">
+		<div id="sideBarMain">
+			<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+<div id="sidebar_c3"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2021 Empirefree
+<br /><span id="poweredby">Powered by .NET 5.0 on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+
+    <input type="hidden" id="antiforgery_token" value="CfDJ8L-rpLgFVEJMgssCVvNUAjujqdLZTmcxIQ521vLx7sDxGZcTK3mQ9xEEs0k3qHhaEyPVikFCnq3OwEEHqtKfe6A3ZpQm4x_nFqRovyrTk2vl3uz5uJVHgiNjdIO7iGMnZ05Rt3Ve8Ofld6O3YvKO8qg" />
+</body>
+</html>

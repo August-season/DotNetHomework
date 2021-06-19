@@ -1,0 +1,700 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin-when-crossorigin" />
+    
+    
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>废物大师兄 - 博客园</title>
+    <link id="favicon" rel="shortcut icon" href="//common.cnblogs.com/favicon.svg" type="image/svg+xml" />
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=6tvK5XC6GPbg3p_sy7wzz_2291HoYACr4440iKBzQIw" />
+    <link id="MainCss" rel="stylesheet" href="/skins/darkgreentrip/bundle-darkgreentrip.min.css?v=eoZATbPKwJCL5eWVDTQIYC6CIxJPcFz191dkzN2tSyQ" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/cjsblog/custom.css?v=UFbU/dh4&#x2B;y0zN9F/qbUQblZzPNs=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/darkgreentrip/bundle-darkgreentrip-mobile.min.css?v=lU86o8mZVn3FOSdFt7nHKYTD8gzeKaiQIIZ6lSjEFyo" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/cjsblog/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/cjsblog/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/cjsblog/wlwmanifest.xml" />
+    <script>
+        var currentBlogId = 303122;
+        var currentBlogApp = 'cjsblog';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var isBlogOwner = false;
+        var skinName = 'darkgreentrip';
+        var visitorUserId = '';
+    </script>
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=ZUvfwhWs5fv-s8Nv7WofCOhwKAxiDO928zdWFzhnOPk"></script>
+    
+    
+    
+</head>
+<body class="no-navbar">
+    <a name="top"></a>
+            <div id="bannerbar" class="bannerbar-mobile formobile">
+            <a href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:mb|pp:bokeyuan-huodong-21nianzhongdacu-neiyeyidongduantonglanbanner|pu:21nianzhongdacu-neiyeyidongduantonglanbanner|ci:21nzdc|kw:10224547" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-mobile')">
+                <img src="https://img2020.cnblogs.com/blog/35695/202106/35695-20210610184806729-1738888164.jpg" alt="" />
+            </a>
+            </div>
+    <div id="top_nav" class="navbar forpc navbar-custom">
+        <nav id="nav_main" class="navbar-main">
+            <ul id="nav_left" class="navbar-list navbar-left">
+                <li class="navbar-branding"><a href="https://www.cnblogs.com/" title="开发者的网上家园"><img src="/images/logo.svg?v=R9M0WmLAIPVydmdzE2keuvnjl-bPR7_35oHqtiBzGsM" alt="博客园Logo" /></a></li>
+                <li><a href="/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-sitehome')">首页</a></li>
+                <li><a href="https://news.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-news')">新闻</a></li>
+                <li><a href="https://q.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-q')">博问</a></li>
+                <li><a id="nav_brandzone" href="https://brands.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-brands')">专区</a></li>
+                <li><a href="https://ing.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-ing')">闪存</a></li>
+                <li><a href="https://edu.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-edu')">班级</a></li>
+            </ul>
+            <ul id="nav_right" class="navbar-list navbar-right">
+                <li>
+                    <form id="zzk_search" class="navbar-search" action="https://zzk.cnblogs.com/s" method="get">
+                        <input name="w" id="zzk_search_input" placeholder="代码改变世界" type="text" tabindex="3" />
+                        <button type="submit" id="zzk_search_button">
+                            <img src="/images/aggsite/search.svg" alt="搜索" />
+                        </button>
+                    </form>
+                </li>
+                <li id="navbar_login_status" class="navbar-list">
+                    <a class="navbar-user-info navbar-blog" href="https://i.cnblogs.com/EditPosts.aspx?opt=1" alt="写随笔" title="写随笔">
+                        <img id="new_post_icon" class="navbar-icon" src="/images/aggsite/newpost.svg" alt="写随笔" />
+                    </a>
+                    <a id="navblog-myblog-icon" class="navbar-user-info navbar-blog" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx" alt="我的博客" title="我的博客">
+                        <img id="myblog_icon" class="navbar-icon" src="/images/aggsite/myblog.svg" alt="我的博客" />
+                    </a>
+                    <a class="navbar-user-info navbar-message navbar-icon-wrapper" href="https://msg.cnblogs.com/" alt="短消息" title="短消息">
+                        <img id="msg_icon" class="navbar-icon" src="/images/aggsite/message.svg?v=J0WS2P2iPgaIVgXxcAhliw4AFZIpaTWxtdoNAv9eiCA" alt="短消息" />
+                        <span id="msg_count" style="display: none"></span>
+                    </a>
+                    <div id="user_info" class="navbar-user-info dropdown">
+                        <a class="dropdown-button" href="https://home.cnblogs.com/">
+                            <img id="user_icon" class="navbar-avatar" src="/images/aggsite/avatar-default.svg" alt="用户头像" />
+                        </a>
+                        <div class="dropdown-menu">
+                            <a id="navblog-myblog-text" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx">我的博客</a>
+                            <a href="https://home.cnblogs.com/">我的园子</a>
+                            <a href="https://account.cnblogs.com/settings/account">账号设置</a>
+                            <a href="javascript:void(0)" id="navbar_lite_mode_toggle" title="简洁模式会使用简洁款皮肤显示所有博客">
+    简洁模式 <img id="navbar_lite_mode_on" src="/images/lite-mode-check.svg" class="hide" /><span id="navbar_lite_mode_spinner" class="hide">...</span>
+</a>
+                            <a href="javascript:void(0)" onclick="account.logout();">退出登录</a>
+                        </div>
+                    </div>
+                    <a class="navbar-anonymous" href="https://account.cnblogs.com/signup/">注册</a>
+                    <a class="navbar-anonymous" href="javascript:void(0);" onclick="account.login()">登录</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    
+    <!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/cjsblog/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/cjsblog/">狂乱的贵公子</a>
+</h1>
+<h2>为你，千千万万遍！</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/cjsblog/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E5%BA%9F%E7%89%A9%E5%A4%A7%E5%B8%88%E5%85%84">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="javascript:void(0)" data-rss="https://www.cnblogs.com/cjsblog/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			<div id="blog_stats_place_holder"><script>loadBlogStats();</script></div>
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+
+
+
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/cjsblog/archive/2018/11/28.html">2018年11月28日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/cjsblog/p/10028984.html">
+    <span>
+            <span>[置顶]</span>
+        一转头如释重负，一瞬间心如刀绞
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：故事的开头总是这样，适逢其会，猝不及防；故事的结局总是这样，花开两朵，天各一方。 曾经，努力到无能为力，拼搏到感动自己，我坚信，遗憾比失败更可怕，如今，我发现，遗憾和失败我都无法承受，不是因为我付出了太多，而是因为真心没有被认真对待过。 我难过，我嫉妒，有种深情，你从未给过我。你是我心中永远的痛，解        <a href="https://www.cnblogs.com/cjsblog/p/10028984.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2018-11-28 18:12
+废物大师兄
+<span data-post-id="10028984" class="post-view-count">阅读(4304)</span> 
+<span data-post-id="10028984" class="post-comment-count">评论(29)</span> 
+<span data-post-id="10028984" class="post-digg-count">推荐(16)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10028984" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/cjsblog/archive/2021/06/19.html">2021年6月19日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/cjsblog/p/14904861.html">
+    <span>
+        基于 Spring Security 的前后端分离的权限控制系统
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：话不多说，入正题。一个简单的权限控制系统需要考虑的问题如下： 权限如何加载 权限匹配规则 登录 1. 引入maven依赖 1 &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt; 2 &lt;project xmlns=&quot;http://maven.apache.org/POM/4.        <a href="https://www.cnblogs.com/cjsblog/p/14904861.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-06-19 20:29
+废物大师兄
+<span data-post-id="14904861" class="post-view-count">阅读(45)</span> 
+<span data-post-id="14904861" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14904861" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14904861" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/cjsblog/archive/2021/06/11.html">2021年6月11日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/cjsblog/p/14874647.html">
+    <span>
+        Java图片加水印
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：采用Java自带的Image IO 废话不多说，上菜 1. 文字水印 1 import sun.font.FontDesignMetrics; 2 3 import javax.imageio.ImageIO; 4 import java.awt.*; 5 import java.awt.image        <a href="https://www.cnblogs.com/cjsblog/p/14874647.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-06-11 12:38
+废物大师兄
+<span data-post-id="14874647" class="post-view-count">阅读(30)</span> 
+<span data-post-id="14874647" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14874647" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14874647" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/cjsblog/archive/2021/06/09.html">2021年6月9日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/cjsblog/p/14866335.html">
+    <span>
+        Linux安装Nexus
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：当我们尝试从官网下载最新的Nexus 3.x的时候，哦吼，死活下载不下来 https://www.sonatype.com/products/repository-oss-download https://sonatype-download.global.ssl.fastly.net/reposit        <a href="https://www.cnblogs.com/cjsblog/p/14866335.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-06-09 17:20
+废物大师兄
+<span data-post-id="14866335" class="post-view-count">阅读(42)</span> 
+<span data-post-id="14866335" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14866335" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14866335" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/cjsblog/archive/2021/05/10.html">2021年5月10日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/cjsblog/p/14707826.html">
+    <span>
+        Spring Security 入门篇
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：本文是一个笔记系列，目标是完成一个基于角色的权限访问控制系统（RBAC），有基本的用户、角色、权限管理，重点在Spring Security的各种配置。万丈高楼平地起，接下来，一步一步，由浅入深，希望给一起学习的小伙伴一个参考。 1. Hello Security 按照惯例，先写个Hello Wor        <a href="https://www.cnblogs.com/cjsblog/p/14707826.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-05-10 19:12
+废物大师兄
+<span data-post-id="14707826" class="post-view-count">阅读(435)</span> 
+<span data-post-id="14707826" class="post-comment-count">评论(1)</span> 
+<span data-post-id="14707826" class="post-digg-count">推荐(4)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14707826" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/cjsblog/archive/2021/04/28.html">2021年4月28日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/cjsblog/p/14714444.html">
+    <span>
+        树形结构的菜单表设计与查询
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：开发中经常会遇到树形结构的场景，比如：导航菜单、组织机构等等，但凡是有这种父子层级结构的都是如此，一级类目、二级类目、三级类目。。。 对于这种树形结构的表要如何设计呢？接下来一起探讨一下 首先，想一个问题，用非关系型数据库存储可不可以？ 答案是肯定可以的，比如用mongoDB，直接将整棵树存成jso        <a href="https://www.cnblogs.com/cjsblog/p/14714444.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-04-28 15:51
+废物大师兄
+<span data-post-id="14714444" class="post-view-count">阅读(746)</span> 
+<span data-post-id="14714444" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14714444" class="post-digg-count">推荐(1)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14714444" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/cjsblog/archive/2021/04/02.html">2021年4月2日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/cjsblog/p/14612169.html">
+    <span>
+        延迟队列的常用的实现方式
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：延迟队列的使用场景还比较多，例如： 1、超时未收到支付回调，主动查询支付状态； 2、规定时间内，订单未支付，自动取消； 。。。 总之，但凡需要在未来的某个确定的时间点执行检查的场景中都可以用延迟队列。 常见的手段主要有：定时任务扫描、RocketMQ延迟队列、Java自动的延迟队列、监听Redis         <a href="https://www.cnblogs.com/cjsblog/p/14612169.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-04-02 19:01
+废物大师兄
+<span data-post-id="14612169" class="post-view-count">阅读(244)</span> 
+<span data-post-id="14612169" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14612169" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14612169" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/cjsblog/archive/2021/03/14.html">2021年3月14日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/cjsblog/p/14530818.html">
+    <span>
+        Spring Boot 自动配置 源码分析
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：Spring Boot 最大的特点（亮点）就是自动配置&#160;AutoConfiguration 下面，先说一下&#160;@EnableAutoConfiguration ，然后再看源代码，到底自动配置是怎么配置的 1. @EnableAutoConfiguration @SpringBootApplicatio        <a href="https://www.cnblogs.com/cjsblog/p/14530818.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-03-14 16:31
+废物大师兄
+<span data-post-id="14530818" class="post-view-count">阅读(352)</span> 
+<span data-post-id="14530818" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14530818" class="post-digg-count">推荐(3)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14530818" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/cjsblog/archive/2021/03/13.html">2021年3月13日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/cjsblog/p/14528923.html">
+    <span>
+        Spring Boot 启动过程
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：一切从SpringApplication.run()开始，最终返回一个ConfigurableApplicationContext 构造了一个SpringApplication对象，然后调用它的run方法。下面看下构造方法都做了什么 1、推断Web应用类型（WebApplicationType），本        <a href="https://www.cnblogs.com/cjsblog/p/14528923.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-03-13 17:39
+废物大师兄
+<span data-post-id="14528923" class="post-view-count">阅读(354)</span> 
+<span data-post-id="14528923" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14528923" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14528923" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/cjsblog/archive/2021/03/11.html">2021年3月11日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/cjsblog/p/14516909.html">
+    <span>
+        服务端如何防止重复支付
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：如图是一个简化的下单流程，首先是提交订单，然后是支付。支付的话，一般是走支付网关（支付中心），然后支付中心与第三方支付渠道（微信、支付宝、银联）交互，支付成功以后，异步通知支付中心，支付中心更新自身支付订单状态，再通知业务应用，各业务再更新各自订单状态。 这个过程中经常可能遇到的问题是掉单，无论是超        <a href="https://www.cnblogs.com/cjsblog/p/14516909.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-03-11 14:32
+废物大师兄
+<span data-post-id="14516909" class="post-view-count">阅读(625)</span> 
+<span data-post-id="14516909" class="post-comment-count">评论(3)</span> 
+<span data-post-id="14516909" class="post-digg-count">推荐(3)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14516909" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/cjsblog/archive/2021/03/09.html">2021年3月9日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/cjsblog/p/14505817.html">
+    <span>
+        Prometheus自定义指标
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：1. 自定义指标 为了注册自定义指标，请将MeterRegistry注入到组件中，例如： public class Dictionary { private final List&lt;String&gt; words = new CopyOnWriteArrayList&lt;&gt;(); Dictionary(Met        <a href="https://www.cnblogs.com/cjsblog/p/14505817.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-03-09 21:38
+废物大师兄
+<span data-post-id="14505817" class="post-view-count">阅读(873)</span> 
+<span data-post-id="14505817" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14505817" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14505817" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+
+<div class="topicListFooter">
+    <div id="nav_next_page">
+        
+    <a href="https://www.cnblogs.com/cjsblog/default.html?page=2">
+        下一页
+    </a>
+
+    </div>    
+</div>
+
+
+
+
+
+
+<script>
+    updatePostStats(
+        $(".post-view-count").map(function () { return this.dataset.postId }).get(),
+        function(id, count) { $(".post-view-count[data-post-id=" + id + "]").text("阅读(" + count + ")") },
+        function(id, count) { $(".post-comment-count[data-post-id=" + id + "]").text("评论(" + count + ")") },
+        function(id, count) { $(".post-digg-count[data-post-id=" + id + "]").text("推荐(" + count + ")") });
+</script>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+	<div id="sideBar">
+		<div id="sideBarMain">
+			<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+<div id="sidebar_c3"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2021 废物大师兄
+<br /><span id="poweredby">Powered by .NET 5.0 on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <img src="https://files.cnblogs.com/files/cjsblog/reward.bmp" class="journal-reward" />
+<script type="text/javascript" src="https://files.cnblogs.com/files/cjsblog/mycnblogs.js"></script>
+<script type="text/javascript" src="https://files.cnblogs.com/files/cjsblog/love.js"></script>
+<script type="text/javascript" src="https://files.cnblogs.com/files/cjsblog/flutter-hearts-zmt.js" charset="utf-8"></script>
+<script type="text/javascript" src="https://blog-static.cnblogs.com/files/cjsblog/tctip-1.0.3.min.js"></script>
+<script>
+    new tctip({
+        top: '20%',
+        button: {
+        id: 9,
+        type: 'zanzhu'
+    },
+    list: [
+    {
+        type: 'alipay',
+        qrImg: 'https://files-cdn.cnblogs.com/files/cjsblog/alipay.bmp'
+    }, {
+        type: 'wechat',
+        qrImg: 'https://files-cdn.cnblogs.com/files/cjsblog/wechat.bmp'
+    }
+    ]
+  }).init()
+</script>
+    </div>
+
+    <input type="hidden" id="antiforgery_token" value="CfDJ8L-rpLgFVEJMgssCVvNUAjtqgcPycwSK8aJJEi-s5VZYI06xYArUy1ff9fOH3PgEAdKhDQ4dLcpDpA8d2YOcEitq4kQcn4PXOnV2PGwazHHxgLrynVlobMMHOrBSGhdu9HLsh_tvLbI_jgutaYPzQes" />
+</body>
+</html>

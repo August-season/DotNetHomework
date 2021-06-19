@@ -1,0 +1,412 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="never" />
+    <meta name="description" content="Servlet汇总 因为看公司代码，有个cookie&#x2B;jwt.Token登录验证接口，于是回顾下servlet、cookie、session、前后端分离restful、jwt.token相关内容。虽然" />
+    <meta property="og:description" content="Servlet汇总 因为看公司代码，有个cookie&#x2B;jwt.Token登录验证接口，于是回顾下servlet、cookie、session、前后端分离restful、jwt.token相关内容。虽然" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Servlet--核心内容汇总 - Empirefree - 博客园</title>
+    <link id="favicon" rel="shortcut icon" href="//common.cnblogs.com/favicon.svg" type="image/svg+xml" />
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=6tvK5XC6GPbg3p_sy7wzz_2291HoYACr4440iKBzQIw" />
+    <link id="MainCss" rel="stylesheet" href="/skins/codinglife/bundle-codinglife.min.css?v=2uJkpdACLVfstRQ7zeCFK19brTwKuDEaNBLgKz9nm3A" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/codinglife/bundle-codinglife-mobile.min.css?v=DwDRKMd1bmjnJZ4iQqrTCO9QLlYb6OZaUAzHoHIIihg" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/meditation5201314/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/meditation5201314/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/meditation5201314/wlwmanifest.xml" />
+    <script>
+        var currentBlogId = 390333;
+        var currentBlogApp = 'meditation5201314';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var isBlogOwner = false;
+        var skinName = 'CodingLife';
+        var visitorUserId = '';
+    </script>
+        <script>
+            var currentPostDateAdded = '2021-06-19 06:18';
+        </script>
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=ZUvfwhWs5fv-s8Nv7WofCOhwKAxiDO928zdWFzhnOPk"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML&amp;v=20200504"></script>
+    
+</head>
+<body class="has-navbar has-bannerbar">
+    <a name="top"></a>
+            <a target="_blank" href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:pc|pp:bokeyuan-huodong-21nianzhongdacu-neiyePCtonglanbanner|pu:21nianzhongdacu-neiyePCtonglanbanner|ci:21nzdc|kw:10224545" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-pc')">
+                <div class="bannerbar aliyun forpc" style="background-size: contain; filter: brightness(0.95); background-image: url(https://img2020.cnblogs.com/blog/35695/202106/35695-20210610183724605-1725070929.jpg)">
+                </div>
+            </a>
+            <div id="bannerbar" class="bannerbar-mobile formobile">
+            <a href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:mb|pp:bokeyuan-huodong-21nianzhongdacu-neiyeyidongduantonglanbanner|pu:21nianzhongdacu-neiyeyidongduantonglanbanner|ci:21nzdc|kw:10224547" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-mobile')">
+                <img src="https://img2020.cnblogs.com/blog/35695/202106/35695-20210610184806729-1738888164.jpg" alt="" />
+            </a>
+            </div>
+    <div id="top_nav" class="navbar forpc">
+        <nav id="nav_main" class="navbar-main">
+            <ul id="nav_left" class="navbar-list navbar-left">
+                <li class="navbar-branding"><a href="https://www.cnblogs.com/" title="开发者的网上家园"><img src="/images/logo.svg?v=R9M0WmLAIPVydmdzE2keuvnjl-bPR7_35oHqtiBzGsM" alt="博客园Logo" /></a></li>
+                <li><a href="/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-sitehome')">首页</a></li>
+                <li><a href="https://news.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-news')">新闻</a></li>
+                <li><a href="https://q.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-q')">博问</a></li>
+                <li><a id="nav_brandzone" href="https://brands.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-brands')">专区</a></li>
+                <li><a href="https://ing.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-ing')">闪存</a></li>
+                <li><a href="https://edu.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-edu')">班级</a></li>
+            </ul>
+            <ul id="nav_right" class="navbar-list navbar-right">
+                <li>
+                    <form id="zzk_search" class="navbar-search" action="https://zzk.cnblogs.com/s" method="get">
+                        <input name="w" id="zzk_search_input" placeholder="代码改变世界" type="text" tabindex="3" />
+                        <button type="submit" id="zzk_search_button">
+                            <img src="/images/aggsite/search.svg" alt="搜索" />
+                        </button>
+                    </form>
+                </li>
+                <li id="navbar_login_status" class="navbar-list">
+                    <a class="navbar-user-info navbar-blog" href="https://i.cnblogs.com/EditPosts.aspx?opt=1" alt="写随笔" title="写随笔">
+                        <img id="new_post_icon" class="navbar-icon" src="/images/aggsite/newpost.svg" alt="写随笔" />
+                    </a>
+                    <a id="navblog-myblog-icon" class="navbar-user-info navbar-blog" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx" alt="我的博客" title="我的博客">
+                        <img id="myblog_icon" class="navbar-icon" src="/images/aggsite/myblog.svg" alt="我的博客" />
+                    </a>
+                    <a class="navbar-user-info navbar-message navbar-icon-wrapper" href="https://msg.cnblogs.com/" alt="短消息" title="短消息">
+                        <img id="msg_icon" class="navbar-icon" src="/images/aggsite/message.svg?v=J0WS2P2iPgaIVgXxcAhliw4AFZIpaTWxtdoNAv9eiCA" alt="短消息" />
+                        <span id="msg_count" style="display: none"></span>
+                    </a>
+                    <div id="user_info" class="navbar-user-info dropdown">
+                        <a class="dropdown-button" href="https://home.cnblogs.com/">
+                            <img id="user_icon" class="navbar-avatar" src="/images/aggsite/avatar-default.svg" alt="用户头像" />
+                        </a>
+                        <div class="dropdown-menu">
+                            <a id="navblog-myblog-text" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx">我的博客</a>
+                            <a href="https://home.cnblogs.com/">我的园子</a>
+                            <a href="https://account.cnblogs.com/settings/account">账号设置</a>
+                            <a href="javascript:void(0)" id="navbar_lite_mode_toggle" title="简洁模式会使用简洁款皮肤显示所有博客">
+    简洁模式 <img id="navbar_lite_mode_on" src="/images/lite-mode-check.svg" class="hide" /><span id="navbar_lite_mode_spinner" class="hide">...</span>
+</a>
+                            <a href="javascript:void(0)" onclick="account.logout();">退出登录</a>
+                        </div>
+                    </div>
+                    <a class="navbar-anonymous" href="https://account.cnblogs.com/signup/">注册</a>
+                    <a class="navbar-anonymous" href="javascript:void(0);" onclick="account.login()">登录</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    
+    <!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/meditation5201314/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/meditation5201314/">Empirefree</a>
+</h1>
+<h2></h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/meditation5201314/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/Empirefree">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="javascript:void(0)" data-rss="https://www.cnblogs.com/meditation5201314/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			<div id="blog_stats_place_holder"><script>loadBlogStats();</script></div>
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2 vertical-middle" href="https://www.cnblogs.com/meditation5201314/p/14903827.html">
+    <span>Servlet--核心内容汇总</span>
+    
+
+
+
+</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                <div id="cnblogs_post_body" class="blogpost-body cnblogs-markdown">
+<p>Servlet汇总</p>
+<blockquote>
+<p>因为看公司代码，有个cookie+jwt.Token登录验证接口，于是回顾下servlet、cookie、session、前后端分离restful、jwt.token相关内容。虽然现在流行的是网关封装各个接口，但是基础还是比较重要，需要重新复习。</p>
+</blockquote>
+<p>Servlet--基础理论、实战代码锻炼：<a href="https://how2j.cn/k/servlet/servlet-eclipse/558.html" target="_blank">https://how2j.cn/k/servlet/servlet-eclipse/558.html</a></p>
+<p>Servlet--拓展理论、实例参考链接：<a href="https://github.com/ZhongFuCheng3y/3y/blob/master/README.md#dollarservlettomcat" target="_blank">https://github.com/ZhongFuCheng3y/3y/blob/master/README.md#dollarservlettomcat</a><br>
+<br></p>
+<p align="center">
+  <a href="https://www.cnblogs.com/meditation5201314/"><img src="https://img.shields.io/badge/cnblogs-博客园-important.svg" alt="csdn"></a>
+  <a href="https://blog.csdn.net/Empire_ing?spm=1010.2135.3001.5421"><img src="https://img.shields.io/badge/csdn-csdn-brightgreen" alt="csdn"></a>
+</p>
+<br>
+---
+<p></p><div class="toc"><div class="toc-container-header">目录</div><ul><li><a href="#背景servlet相关对象介绍"> 背景.Servlet相关对象介绍​</a><ul><li><a href="#简介servlet">简介Servlet</a></li></ul></li><li><a href="#1servlet第一篇tomcat、http协议"> 1.Servlet第一篇(tomcat、http协议)</a><ul><li><a href="#1tomcat">1.tomcat</a></li><li><a href="#2http协议">2.Http协议</a></li></ul></li><li><a href="#2servlet第二篇request，response">2.Servlet第二篇(request，response)</a><ul><li><a href="#1request">1.request</a></li><li><a href="#2response">2.response</a></li></ul></li><li><a href="#3servlet第三篇cookiesession">3.Servlet第三篇(cookie,session)*</a><ul><li><a href="#1cookie">1.Cookie</a></li><li><a href="#2session">2.Session</a></li></ul></li></ul></div><p></p>
+<p><br><br></p>
+<h4 id="coffee-背景servlet相关对象介绍">☕ 背景.Servlet相关对象介绍​</h4>
+<h6 id="简介servlet">简介Servlet</h6>
+<p>​	首先Tomcat是servlet容器，用以 <strong>接受和返回</strong> 服务端和客户端的请求（在此之前，没有tomcat，就使用socket进行监听处理）。</p>
+<p>​	其次，在上述交互过程中，采用Http协议处理。<strong>HTTP协议是客户端和服务器交互的一种通迅的格式</strong>。</p>
+<p>​	最后，Servlet的生命周期即伴随内置tomcat的调用而产生，伴随tomcat的关闭而销毁。下面列出Servlet相关对象。</p>
+<ul>
+<li>ServletConfig</li>
+</ul>
+<p>​	通过此配置获取web.xml中参数</p>
+<ul>
+<li>
+<p>ServletContext</p>
+<p>​	tomcat启动时获取整个应用的配置文件。</p>
+</li>
+<li>
+<p>Request、Response</p>
+<p>​	分别对应http请求头和响应头</p>
+</li>
+<li>
+<p>Cookie、Session</p>
+<p>Cookie：存储与客户端，存储用户身份。Session：存储与服务端，判断用户身份。</p>
+<p><br><br></p>
+</li>
+</ul>
+<h4 id="coffee-1servlet第一篇tomcat、http协议">☕ 1.Servlet第一篇(tomcat、http协议)</h4>
+<blockquote>
+<p>目前都是httpservlet实现servlet的方法，重写doget和dopost方法。</p>
+</blockquote>
+<h6 id="1tomcat">1.tomcat</h6>
+<p>​	tomcat底层是socket程序，也是jsp、servlet容器。</p>
+<p>​	介绍tomcat中虚拟目录和虚拟主机</p>
+<p>​		虚拟目录：文件不一定都放在webapps下，所以项目启动后要访问其他磁盘下的文件就需要配置虚拟目录</p>
+<p>​		虚拟主机：一个tomcat中配置多个域名，这样就能通过多个域名访问到同一个tomcat中.</p>
+<br>
+<h6 id="2http协议">2.Http协议</h6>
+<p>​	Http协议：超文本传输协议，在客户端client和服务端server中交互</p>
+<p>​	Http1.0：client和server属于短暂连接，获取资源后就断开</p>
+<p>​	Http1.1：client、server保持连接，并且可以获得多个web资源</p>
+<p><br><br></p>
+<h4 id="jack_o_lantern2servlet第二篇request，response">🎃2.Servlet第二篇(request，response)</h4>
+<h6 id="1request">1.request</h6>
+<pre><code class="language-shell">#request参数介绍
+request.getRequestURL(): 浏览器发出请求时的完整URL，包括协议 主机名 端口(如果有)"
+request.getRequestURI(): 浏览器发出请求的资源名部分，去掉了协议和主机名"
+request.getQueryString(): 请求行中的参数部分，只能显示以get方式发出的参数，post方式的看不到
+request.getRemoteAddr(): 浏览器所处于的客户机的IP地址
+request.getRemoteHost(): 浏览器所处于的客户机的主机名
+request.getRemotePort(): 浏览器所处于的客户机使用的网络端口
+request.getLocalAddr(): 服务器的IP地址
+request.getLocalName(): 服务器的主机名
+request.getMethod(): 得到客户机请求方式一般是GET或者POST
+
+#浏览器中header信息
+host: 主机地址
+user-agent: 浏览器基本资料
+accept: 表示浏览器接受的数据类型
+accept-language: 表示浏览器接受的语言
+accept-encoding: 表示浏览器接受的压缩方式，是压缩方式，并非编码
+connection: 是否保持连接
+cache-control: 缓存时限
+</code></pre>
+<h6 id="2response">2.response</h6>
+<p>防盗链：某个珍贵资源B，需要通过链接A进来才能访问，所以对请求B的接口中需要加入防盗链的功能</p>
+<pre><code class="language-java">        //防盗链
+        String referer = request.getHeader("Referer");
+        if (referer == null || !referer.contains("localhost:9090/huyuqiao")){
+            response.sendRedirect("huyuqiao");
+            return "盗取链接";
+        }
+        response.setContentType("text/html;charset=UTF-8");
+        response.getWriter().write("正版链接");
+</code></pre>
+<p><br><br></p>
+<h4 id="book3servlet第三篇cookiesession">📖3.Servlet第三篇(cookie,session)*</h4>
+<h6 id="1cookie">1.Cookie</h6>
+<p>​	Cookie：在浏览器用以保存用户身份/浏览记录。结合其他技术(session,token,sso等)用以实现用户登录身份验证功能。</p>
+<pre><code class="language-java">        //组装Cookie
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter printWriter = response.getWriter();
+        String name = "胡宇乔";
+        Cookie cookie = new Cookie("country", URLEncoder.encode(name, "UTF-8"));
+        cookie.setMaxAge(2000);
+
+        response.addCookie(cookie);
+        printWriter.write("服务器颁布的cookie，保存了中文数据");
+
+
+        //解码cookie
+        Cookie[] cookies = request.getCookies();
+        Arrays.stream(cookies).forEach(c -&gt;{
+            String cookieName = c.getName();
+            try {
+                String value = URLDecoder.decode(c.getValue(), "UTF-8");
+                printWriter.write(name + "-----" + value);
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+
+        });
+</code></pre>
+<h6 id="2session">2.Session</h6>
+<p>​	Session：保存在浏览器(默认30分钟，关闭浏览器即消失)，在登录注册中保存用户信息，然后前端可以通过el表达式提取出用户信息。</p>
+<pre><code class="language-shell">#session获取、得到、设置、销毁
+HttpSession session = request.getSession
+httpSession.getAttribute("name")
+httpSession.setAttribute("name", "huyuqiao")
+session.removeAttribute("name")
+</code></pre>
+
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2021-06-19 18:18</span>&nbsp;
+<a href="https://www.cnblogs.com/meditation5201314/">Empirefree</a>&nbsp;
+阅读(<span id="post_view_count">18</span>)&nbsp;
+评论(<span id="post_comment_count">0</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14903827" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(14903827);return false;">收藏</a>&nbsp;
+<a href="javascript:void(0)" onclick="reportManager.report({ currentUserId: '', targetType: 'blogPost', targetId: '14903827', targetLink: 'https://www.cnblogs.com/meditation5201314/p/14903827.html', title: 'Servlet--核心内容汇总' })">举报</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/10.3.1/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 390333, cb_blogApp = 'meditation5201314', cb_blogUserGuid = 'a2fbb153-8a2c-40c2-2c6c-08d4a8d9e085';
+    var cb_entryId = 14903827, cb_entryCreatedDate = '2021-06-19 18:18', cb_postType = 1;
+    updatePostStats(
+        [cb_entryId],
+        function(id, count) { $("#post_view_count").text(count) },
+        function(id, count) { $("#post_comment_count").text(count) })
+    zoomManager.apply("#cnblogs_post_body img:not(.code_img_closed):not(.code_img_opened)");
+</script>
+<a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <div id="cnblogs_c1" class="under-post-card">
+        <div id='div-gpt-ad-1592365906576-0' style='width: 300px; height: 250px;'></div>
+    </div>
+    <div id="under_post_card1"></div>
+    <div id="cnblogs_c2" class="under-post-card">
+        <div id='div-gpt-ad-1592366332455-0' style='width: 468px; height: 60px;'></div>
+    </div>
+    <div id="under_post_card2"></div>
+    <div id="HistoryToday" class="under-post-card"></div>
+    <script type="text/javascript">
+       var commentManager = new blogCommentManager();
+       commentManager.renderComments(0);
+       fixPostBody();
+       deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);       deliverT2();
+       deliverC1C2();
+       loadNewsAndKb();
+       loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);       LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+       GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+       loadOptUnderPost();
+       GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+	<div id="sideBar">
+		<div id="sideBarMain">
+			<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+<div id="sidebar_c3"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2021 Empirefree
+<br /><span id="poweredby">Powered by .NET 5.0 on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+
+    <input type="hidden" id="antiforgery_token" value="CfDJ8L-rpLgFVEJMgssCVvNUAjtxGZhTmPLwwpXHYkT67G7z2XhqqkN9jN0qvPXB6wR_sO4FmxaaEbhpXemQ0CZrYjQk8PL42Hy14veiYGTHRiXAnvvytpIrePrrvZG1y5hJdcucWOL37rAVDk5ovPP39Pk" />
+</body>
+</html>

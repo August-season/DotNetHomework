@@ -1,0 +1,1247 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin-when-crossorigin" />
+    <meta name="description" content="spring boot 加载web容器tomcat流程源码分析 我本地的springboot版本是2.5.1，后面的分析都是基于这个版本 &amp;lt;parent&amp;gt; &amp;lt;groupId&amp;gt;o" />
+    <meta property="og:description" content="spring boot 加载web容器tomcat流程源码分析 我本地的springboot版本是2.5.1，后面的分析都是基于这个版本 &amp;lt;parent&amp;gt; &amp;lt;groupId&amp;gt;o" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>spring boot 加载web容器tomcat流程源码分析 - wang03 - 博客园</title>
+    <link id="favicon" rel="shortcut icon" href="//common.cnblogs.com/favicon.svg" type="image/svg+xml" />
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=6tvK5XC6GPbg3p_sy7wzz_2291HoYACr4440iKBzQIw" />
+    <link id="MainCss" rel="stylesheet" href="/skins/minyx2_lite/bundle-minyx2_lite.min.css?v=F-kpmc_yPJF8Dd7d6eY5Dqj_SeF3hi4z94QnNXriWxc" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/minyx2_lite/bundle-minyx2_lite-mobile.min.css?v=iPf_XHQsJ-ofZZ2RiaeMCHG0JEaMNLa9yhkUGK3xTSQ" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/wbo112/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/wbo112/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/wbo112/wlwmanifest.xml" />
+    <script>
+        var currentBlogId = 137986;
+        var currentBlogApp = 'wbo112';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var isBlogOwner = false;
+        var skinName = 'Minyx2_Lite';
+        var visitorUserId = '';
+    </script>
+        <script>
+            var currentPostDateAdded = '2021-06-19 09:19';
+        </script>
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=ZUvfwhWs5fv-s8Nv7WofCOhwKAxiDO928zdWFzhnOPk"></script>
+    
+    
+    <script src="/skins/minyx2_lite/bundle-minyx2_lite.min.js?v=z_XLIOc5JYwRKqTPu9fAWp7D8tchhGxVWGYvlAiigUQ" type="text/javascript" language="javascript"></script>
+</head>
+<body class="has-navbar has-bannerbar">
+    <a name="top"></a>
+            <a target="_blank" href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:pc|pp:bokeyuan-huodong-21nianzhongdacu-neiyePCtonglanbanner|pu:21nianzhongdacu-neiyePCtonglanbanner|ci:21nzdc|kw:10224545" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-pc')">
+                <div class="bannerbar aliyun forpc" style="background-size: contain; filter: brightness(0.95); background-image: url(https://img2020.cnblogs.com/blog/35695/202106/35695-20210610183724605-1725070929.jpg)">
+                </div>
+            </a>
+            <div id="bannerbar" class="bannerbar-mobile formobile">
+            <a href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:mb|pp:bokeyuan-huodong-21nianzhongdacu-neiyeyidongduantonglanbanner|pu:21nianzhongdacu-neiyeyidongduantonglanbanner|ci:21nzdc|kw:10224547" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-mobile')">
+                <img src="https://img2020.cnblogs.com/blog/35695/202106/35695-20210610184806729-1738888164.jpg" alt="" />
+            </a>
+            </div>
+    <div id="top_nav" class="navbar forpc">
+        <nav id="nav_main" class="navbar-main">
+            <ul id="nav_left" class="navbar-list navbar-left">
+                <li class="navbar-branding"><a href="https://www.cnblogs.com/" title="开发者的网上家园"><img src="/images/logo.svg?v=R9M0WmLAIPVydmdzE2keuvnjl-bPR7_35oHqtiBzGsM" alt="博客园Logo" /></a></li>
+                <li><a href="/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-sitehome')">首页</a></li>
+                <li><a href="https://news.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-news')">新闻</a></li>
+                <li><a href="https://q.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-q')">博问</a></li>
+                <li><a id="nav_brandzone" href="https://brands.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-brands')">专区</a></li>
+                <li><a href="https://ing.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-ing')">闪存</a></li>
+                <li><a href="https://edu.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-edu')">班级</a></li>
+            </ul>
+            <ul id="nav_right" class="navbar-list navbar-right">
+                <li>
+                    <form id="zzk_search" class="navbar-search" action="https://zzk.cnblogs.com/s" method="get">
+                        <input name="w" id="zzk_search_input" placeholder="代码改变世界" type="text" tabindex="3" />
+                        <button type="submit" id="zzk_search_button">
+                            <img src="/images/aggsite/search.svg" alt="搜索" />
+                        </button>
+                    </form>
+                </li>
+                <li id="navbar_login_status" class="navbar-list">
+                    <a class="navbar-user-info navbar-blog" href="https://i.cnblogs.com/EditPosts.aspx?opt=1" alt="写随笔" title="写随笔">
+                        <img id="new_post_icon" class="navbar-icon" src="/images/aggsite/newpost.svg" alt="写随笔" />
+                    </a>
+                    <a id="navblog-myblog-icon" class="navbar-user-info navbar-blog" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx" alt="我的博客" title="我的博客">
+                        <img id="myblog_icon" class="navbar-icon" src="/images/aggsite/myblog.svg" alt="我的博客" />
+                    </a>
+                    <a class="navbar-user-info navbar-message navbar-icon-wrapper" href="https://msg.cnblogs.com/" alt="短消息" title="短消息">
+                        <img id="msg_icon" class="navbar-icon" src="/images/aggsite/message.svg?v=J0WS2P2iPgaIVgXxcAhliw4AFZIpaTWxtdoNAv9eiCA" alt="短消息" />
+                        <span id="msg_count" style="display: none"></span>
+                    </a>
+                    <div id="user_info" class="navbar-user-info dropdown">
+                        <a class="dropdown-button" href="https://home.cnblogs.com/">
+                            <img id="user_icon" class="navbar-avatar" src="/images/aggsite/avatar-default.svg" alt="用户头像" />
+                        </a>
+                        <div class="dropdown-menu">
+                            <a id="navblog-myblog-text" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx">我的博客</a>
+                            <a href="https://home.cnblogs.com/">我的园子</a>
+                            <a href="https://account.cnblogs.com/settings/account">账号设置</a>
+                            <a href="javascript:void(0)" id="navbar_lite_mode_toggle" title="简洁模式会使用简洁款皮肤显示所有博客">
+    简洁模式 <img id="navbar_lite_mode_on" src="/images/lite-mode-check.svg" class="hide" /><span id="navbar_lite_mode_spinner" class="hide">...</span>
+</a>
+                            <a href="javascript:void(0)" onclick="account.logout();">退出登录</a>
+                        </div>
+                    </div>
+                    <a class="navbar-anonymous" href="https://account.cnblogs.com/signup/">注册</a>
+                    <a class="navbar-anonymous" href="javascript:void(0);" onclick="account.login()">登录</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    
+    
+<div id="container">
+    <a class="minyx" href="https://www.cnblogs.com/">代码改变世界</a>
+    <ul id="topMnu">
+        <!-- 统计数据 -->
+        <li>
+            <div id="blog_stats_place_holder"><script>loadBlogStats();</script></div>
+        </li>
+        <!-- 这边可以增加一些链接 -->
+        <!-- 博客园 -->
+        <li><a href="https://www.cnblogs.com/">Cnblogs</a></li>
+        <!-- 管理 -->
+        <li id="topMnu-dashboard">
+            <a id="lnkDashboard" href="https://i.cnblogs.com/">Dashboard</a>
+        </li>
+        <li>
+            
+    <a id="lnkLogin" href="https://account.cnblogs.com/signin/?returnUrl=https://www.cnblogs.com/wbo112/">Login</a>
+
+
+        </li>
+    </ul>
+
+    <script type="text/javascript">
+        var m = window.__blog.topMenuRendered;
+        if (m) { m(__$("topMnu")); }
+    </script>
+
+    <div id="header">
+        <ul id="menu">
+            <!-- 首页，当前section加上current类 -->
+            <li id="menu-home" class="current">
+                <a id="lnkHome" href="https://www.cnblogs.com/wbo112/">Home</a></li>
+            <!-- 联系 -->
+            <li id="menu-contact">
+                <a id="lnkContact" href="https://msg.cnblogs.com/send/wang03">Contact</a></li>
+            <!-- 相册 -->
+            <li id="menu-gallary">
+                <a id="lnkGallery" href="https://www.cnblogs.com/wbo112/gallery.html">Gallery</a></li>
+            <!-- 订阅 -->
+            <li id="menu-subscribe">
+                <a id="blog_nav_rss" href="javascript:void(0);" data-rss="https://www.cnblogs.com/wbo112/rss/">Subscribe</a></li>
+            <!-- Rss订阅 -->
+            <li id="rss">
+                <a id="lnkRss" href="https://www.cnblogs.com/wbo112/rss/">RSS</a></li>
+        </ul>
+        <div id="newmsg"></div>
+        <h1>
+            <!-- 主标题 -->
+            <a id="lnkBlogTitle" href="https://www.cnblogs.com/wbo112/">wang03</a>
+            <!-- 子标题 -->
+            <small>
+                
+            </small>
+        </h1>
+    </div>
+
+    <script type="text/javascript">
+        var m = window.__blog.headerRendered;
+        if (m) { m(__$("header")); }
+    </script>
+
+    <div id="wrapper">
+        <div id="content">
+            <script type="text/javascript">
+                var m = window.__blog.preRenderPosts;
+                if (m) { m(); }
+            </script>
+            <div id="post_detail">
+<div class="post" id="post">
+    <a name="top"></a>
+    <h2>
+<a id="cb_post_title_url" class="postTitle2 vertical-middle" href="https://www.cnblogs.com/wbo112/p/14904986.html">
+    <span>spring boot 加载web容器tomcat流程源码分析</span>
+    
+
+
+
+</a>
+</h2>
+    <small>
+<span id="post-date">2021-06-19 21:19</span>&nbsp;
+<a href="https://www.cnblogs.com/wbo112/">wang03</a>&nbsp;
+阅读(<span id="post_view_count">0</span>)&nbsp;
+评论(<span id="post_comment_count">0</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14904986" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(14904986);return false;">收藏</a>&nbsp;
+<a href="javascript:void(0)" onclick="reportManager.report({ currentUserId: '', targetType: 'blogPost', targetId: '14904986', targetLink: 'https://www.cnblogs.com/wbo112/p/14904986.html', title: 'spring boot 加载web容器tomcat流程源码分析' })">举报</a></small>
+    <div class="entry">
+        <div id="cnblogs_post_body" class="blogpost-body cnblogs-markdown">
+<h1 id="spring-boot-加载web容器tomcat流程源码分析">spring boot 加载web容器tomcat流程源码分析</h1>
+<p>我本地的springboot版本是2.5.1，后面的分析都是基于这个版本</p>
+<pre><code class="language-xml">    &lt;parent&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
+        &lt;version&gt;2.5.1&lt;/version&gt;
+        &lt;relativePath/&gt; &lt;!-- lookup parent from repository --&gt;
+    &lt;/parent&gt;
+  
+</code></pre>
+<p>我们通过在pom文件中引入</p>
+<pre><code class="language-xml">        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+</code></pre>
+<p>来引入web容器，默认的web容器时tomcat。</p>
+<p>本文章主要描述spring boot加载web容器 tomcat的部分，为了避免文章知识点过于分散，其他相关的如bean的加载，tomcat内部流程等不做深入讨论。</p>
+<h3 id="1、在springboot-web工程中，全局上下文是annotationconfigservletwebapplicationcontext">1、在springboot web工程中，全局上下文是<strong>AnnotationConfigServletWebApplicationContext</strong></h3>
+<p>下面的部分，我们具体来看下</p>
+<p>首先，我们的入口代码一般都是这样写的</p>
+<pre><code class="language-java">    public static void main(String[] args) {
+        SpringApplication.run(BootargsApplication.class,args);
+    }
+
+</code></pre>
+<p>跳转到run方法里面，依次会调用下面两个方法</p>
+<pre><code class="language-java">	public static ConfigurableApplicationContext run(Class&lt;?&gt; primarySource, String... args) {
+		return run(new Class&lt;?&gt;[] { primarySource }, args);
+	}
+</code></pre>
+<pre><code class="language-java">public static ConfigurableApplicationContext run(Class&lt;?&gt;[] primarySources, String[] args) {
+   return new SpringApplication(primarySources).run(args);
+}
+</code></pre>
+<p>首先会创建SpringApplication实例对象，跳转到SpringApplication的构造方法去看看，依次会调用如下方法</p>
+<pre><code class="language-java">	public SpringApplication(Class&lt;?&gt;... primarySources) {
+		this(null, primarySources);
+	}
+</code></pre>
+<pre><code class="language-java">@SuppressWarnings({ "unchecked", "rawtypes" })
+public SpringApplication(ResourceLoader resourceLoader, Class&lt;?&gt;... primarySources) {
+   ......
+   //本次不相关的代码全部省略掉，只保留相关代码
+   //这里的 this.webApplicationType=WebApplicationType.SERVLET， 我们来分析下这个代码的具体的执行赋值
+   this.webApplicationType = WebApplicationType.deduceFromClasspath();
+   ......
+}
+</code></pre>
+<p>继续跳转到WebApplicationType.deduceFromClasspath()去看看</p>
+<pre><code class="language-java">	//这个方法主要是在当前类路径下查找指定的class类是否存在，返回对饮枚举类型
+	static WebApplicationType deduceFromClasspath() {
+	// WEBMVC_INDICATOR_CLASS = "org.springframework.web.servlet.DispatcherServlet";
+	
+	//我们通过pom文件引入spring-boot-starter-web，会简介引入spring-webmvc,上面这个类就在这个webmvc中，所以不会进入这个if分支
+		if (ClassUtils.isPresent(WEBFLUX_INDICATOR_CLASS, null) &amp;&amp; !ClassUtils.isPresent(WEBMVC_INDICATOR_CLASS, null)
+				&amp;&amp; !ClassUtils.isPresent(JERSEY_INDICATOR_CLASS, null)) {
+			return WebApplicationType.REACTIVE;
+		}
+	//SERVLET_INDICATOR_CLASSES = { "javax.servlet.Servlet",
+			"org.springframework.web.context.ConfigurableWebApplicationContext" }
+	//javax.servlet.Servlet这个类存在于tomcat-embed-core中
+    //org.springframework.web.context.ConfigurableWebApplicationContext这个类存在于spring-web中
+    //这两个jar都是由spring-boot-starter-web间接引入的，所以也不会走这个分支
+		for (String className : SERVLET_INDICATOR_CLASSES) {
+			if (!ClassUtils.isPresent(className, null)) {
+				return WebApplicationType.NONE;
+			}
+		}
+		//所以会从这里返回
+		return WebApplicationType.SERVLET;
+	}
+</code></pre>
+<p>下面看下jar包的引入</p>
+<p><img src="https://img2020.cnblogs.com/blog/368308/202106/368308-20210619211329972-1694676182.png" alt="" loading="lazy"></p>
+<p>回到new SpringApplication(primarySources).run(args)的调用来看run方法的代码</p>
+<pre><code class="language-java">public ConfigurableApplicationContext run(String... args) {
+		.......
+		try {
+			......
+			//我们来看这个context的创建，context=new AnnotationConfigServletWebServerApplicationContext()下面来具体看这块的执行
+			context = createApplicationContext();
+		    ......
+		    //后续几个部分会来说明这个方法
+			refreshContext(context);
+			......
+		}
+		catch (Throwable ex) {
+			......
+		}
+
+		try {
+		.......
+		}
+		catch (Throwable ex) {
+		.......
+		}
+		return context;
+	}
+</code></pre>
+<p>createApplicationContext()依次会调用如下方法</p>
+<pre><code class="language-java">	protected ConfigurableApplicationContext createApplicationContext() {
+		//这里的this.webApplicationType就是上面的WebApplicationType.SERVLET
+		return this.applicationContextFactory.create(this.webApplicationType);
+	}
+</code></pre>
+<pre><code class="language-java">	//最终会调用到这个lambda表达式，入参就是上面的WebApplicationType.SERVLET
+	ApplicationContextFactory DEFAULT = (webApplicationType) -&gt; {
+		try {
+			switch (webApplicationType) {
+			case SERVLET:
+				//会从这里返回
+				return new AnnotationConfigServletWebServerApplicationContext();
+			case REACTIVE:
+				return new AnnotationConfigReactiveWebServerApplicationContext();
+			default:
+				return new AnnotationConfigApplicationContext();
+			}
+		}
+		catch (Exception ex) {
+			throw new IllegalStateException("Unable create a default ApplicationContext instance, "
+					+ "you may need a custom ApplicationContextFactory", ex);
+		}
+	};
+</code></pre>
+<p>到这里，我们的上下文context就已经创建出来了，这块代码也比较简单。就不多说什么了</p>
+<h3 id="2、查找servletwebserverfactory">2、查找ServletWebServerFactory</h3>
+<p>再次回到new SpringApplication(primarySources).run(args)的调用来看run方法的代码</p>
+<pre><code class="language-java">public ConfigurableApplicationContext run(String... args) {
+		.......
+		try {
+			......
+			//上面已经对context做过了讲解，context=new AnnotationConfigServletWebServerApplicationContext()
+			context = createApplicationContext();
+		    ......
+		    //下面来看这个方法
+			refreshContext(context);
+			......
+		}
+		catch (Throwable ex) {
+			......
+		}
+
+		try {
+		.......
+		}
+		catch (Throwable ex) {
+		.......
+		}
+		return context;
+	}
+</code></pre>
+<p>点到refreshContext(context)</p>
+<pre><code class="language-java">	private void refreshContext(ConfigurableApplicationContext context) {
+		if (this.registerShutdownHook) {
+			shutdownHook.registerApplicationContext(context);
+		}
+		refresh(context);
+	}
+
+</code></pre>
+<p>继续点到refresh(context)</p>
+<pre><code class="language-java">	protected void refresh(ConfigurableApplicationContext applicationContext) {
+        //这里的applicationContext就是AnnotationConfigServletWebServerApplicationContext的对象，由于这个类没有refresh方法，会跳转到它的父类ServletWebServerApplicationContext的方法中去,我们继续点进去
+		applicationContext.refresh();
+	}
+</code></pre>
+<p>点到ServletWebServerApplicationContext的refresh方法</p>
+<pre><code class="language-java">	public final void refresh() throws BeansException, IllegalStateException {
+		try {
+            //继续跳转到父类AbstractApplicationContext方法
+			super.refresh();
+		}
+		catch (RuntimeException ex) {
+			WebServer webServer = this.webServer;
+			if (webServer != null) {
+				webServer.stop();
+			}
+			throw ex;
+		}
+	}
+</code></pre>
+<p>打开AbstractApplicationContext的refresh方法</p>
+<pre><code class="language-java">//springboot 大部分的初始化工作是在这里完成的，不过这不是我们本地的重点，不相关的我们统统略过
+public void refresh() throws BeansException, IllegalStateException {
+		synchronized (this.startupShutdownMonitor) {
+			......
+			try {
+			......
+				//继续点到这个方法，这里又会跳转到ServletWebServerApplicationContext这个类的方法
+				onRefresh();
+			.....
+			}
+
+			catch (BeansException ex) {
+			.....
+			}
+
+			finally {
+			.....
+			}
+		}
+	}
+</code></pre>
+<p>打开ServletWebServerApplicationContext的onRefresh方法</p>
+<pre><code class="language-java">	protected void onRefresh() {
+		super.onRefresh();
+		try {
+			//这里就是我们本次的重点，会在这里创建具体的web容器，我们点进去看看，还是ServletWebServerApplicationContext这个类的方法
+			createWebServer();
+		}
+		catch (Throwable ex) {
+			throw new ApplicationContextException("Unable to start web server", ex);
+		}
+	}
+</code></pre>
+<p>打开ServletWebServerApplicationContext的createWebServer方法</p>
+<pre><code class="language-java">	private void createWebServer() {
+	
+		WebServer webServer = this.webServer;
+		ServletContext servletContext = getServletContext();
+		//第一次进来webServer servletContext都是null,会进到if分支里面
+		if (webServer  == null &amp;&amp; servletContext == null) {
+		   //这里只是做个标记，不用关注，跳过
+			StartupStep createWebServer = this.getApplicationStartup().start("spring.boot.webserver.create");
+			//这里就会来查找ServletWebServerFactory，也就是web容器的工厂,具体看下getWebServerFactory()方法，还是ServletWebServerApplicationContext这个类的方法
+			ServletWebServerFactory factory = getWebServerFactory();
+			createWebServer.tag("factory", factory.getClass().toString());
+			this.webServer = factory.getWebServer(getSelfInitializer());
+			createWebServer.end();
+			getBeanFactory().registerSingleton("webServerGracefulShutdown",
+					new WebServerGracefulShutdownLifecycle(this.webServer));
+			getBeanFactory().registerSingleton("webServerStartStop",
+					new WebServerStartStopLifecycle(this, this.webServer));
+		}
+		else if (servletContext != null) {
+			try {
+				getSelfInitializer().onStartup(servletContext);
+			}
+			catch (ServletException ex) {
+				throw new ApplicationContextException("Cannot initialize servlet context", ex);
+			}
+		}
+		initPropertySources();
+	}
+</code></pre>
+<p>打开ServletWebServerApplicationContext的getWebServerFactory方法</p>
+<pre><code class="language-java">	protected ServletWebServerFactory getWebServerFactory() {
+		// Use bean names so that we don't consider the hierarchy
+		//从beanFactory中查找ServletWebServerFactory类型的bean的定义，返回对应bean的名字
+		String[] beanNames = getBeanFactory().getBeanNamesForType(ServletWebServerFactory.class);
+		if (beanNames.length == 0) {
+			throw new ApplicationContextException("Unable to start ServletWebServerApplicationContext due to missing "
+					+ "ServletWebServerFactory bean.");
+		}
+		if (beanNames.length &gt; 1) {
+			throw new ApplicationContextException("Unable to start ServletWebServerApplicationContext due to multiple "
+					+ "ServletWebServerFactory beans : " + StringUtils.arrayToCommaDelimitedString(beanNames));
+		}
+        //这里会从beanFactory中返回bean的名字为beanNames[0],类型为ServletWebServerFactory.class的bean对象，如果当前bean还未创建，则此时就会创建bean对象并返回	
+		return getBeanFactory().getBean(beanNames[0], ServletWebServerFactory.class);
+	}
+</code></pre>
+<p>从上面的代码并看不出来实际的ServletWebServerFactory对象具体是什么？下面带着大家一起简单过下这部分的加载，这里具体就是springboot 加载bean的流程了，这部分的逻辑比较多，本次就不具体展开。关于springboot 加载bean的流程计划后续专门再写一篇。</p>
+<p>springboot在启动过程中会在当前类路径下<strong>META-INF/spring.factories</strong>这个文件中，key=org.springframework.boot.autoconfigure.EnableAutoConfiguration的属性的作为bean的定义进行加载，在这过程中还会使用key=org.springframework.boot.autoconfigure.AutoConfigurationImportFilterfilter的属性作为过滤，配合<strong>META-INF/spring-autoconfigure-metadata.properties</strong>对这些类做一个过滤，剔除掉不符合的类(后续还会根据类上的注解判断是否要继续剔除)。</p>
+<p>当前这些主要在spring-boot-autoconfigure-2.5.1.jar这个文件中</p>
+<p><img src="https://img2020.cnblogs.com/blog/368308/202106/368308-20210619211436518-1065102613.png" alt="" loading="lazy"></p>
+<p>下面截取上面说的两部分,可以看到这里的过滤器就3个，具体不展开讨论了，自动导入的类就是下面的再加过滤去掉的</p>
+<pre><code class="language-properties"># Auto Configuration Import Filters
+org.springframework.boot.autoconfigure.AutoConfigurationImportFilter=\
+org.springframework.boot.autoconfigure.condition.OnBeanCondition,\
+org.springframework.boot.autoconfigure.condition.OnClassCondition,\
+org.springframework.boot.autoconfigure.condition.OnWebApplicationCondition
+
+# Auto Configure
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+......
+#下面这个会在创建servelt中使用，下部分我们再关注它
+org.springframework.boot.autoconfigure.web.servlet.DispatcherServletAutoConfiguration,\
+#下面这个就是我们需要用到的
+org.springframework.boot.autoconfigure.web.servlet.ServletWebServerFactoryAutoConfiguration,\
+......
+org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration,\
+......
+
+</code></pre>
+<p>我们看下上面的org.springframework.boot.autoconfigure.web.servlet.ServletWebServerFactoryAutoConfiguration这个类，这个类在web 场景下，不会被剔除。会被加载。我们看看这个类，我们只看头部就可以了</p>
+<p><img src="https://img2020.cnblogs.com/blog/368308/202106/368308-20210619211459194-1642488503.png" alt="" loading="lazy"></p>
+<p>这里我们看到类上有Import注解，会继续导入这几个类，</p>
+<pre><code>ServletWebServerFactoryConfiguration.EmbeddedTomcat.class,
+ServletWebServerFactoryConfiguration.EmbeddedJetty.class,
+ServletWebServerFactoryConfiguration.EmbeddedUndertow.class
+</code></pre>
+<p>这三个都是本次相关的，它们都是ServletWebServerFactoryConfiguration的内部类，我们进去看看，类的结构都是一样的，我们就看下ServletWebServerFactoryConfiguration.EmbeddedTomcat类吧</p>
+<p><img src="https://img2020.cnblogs.com/blog/368308/202106/368308-20210619211515030-1426699496.png" alt="" loading="lazy"></p>
+<p>可以看到EmbeddedTomcat上面有ConditionalOnClass，ConditionalOnMissingBean这两个注解，</p>
+<p>简单说下，ConditionalOnClass是表示当前类路径下存在对应类是加载</p>
+<p>ConditionalOnMissingBean是表示当前beanFactory中没有对应类型bean定义的话加载</p>
+<p>多个条件都是and的关系，有一个条件不成立，就不会去进行后续处理。</p>
+<p>在这里EmbeddedTomcat类这两个条件是成立的，这时就会继续遍历当前类的所有方法，找到@Bean注解的方法，加载到beanFactory中去</p>
+<p>而EmbeddedJetty，EmbeddedUndertow两个类条件是不成立的，就不会进行后续执行，剔除掉了</p>
+<p><img src="https://img2020.cnblogs.com/blog/368308/202106/368308-20210619211537393-2072200182.png" alt="" loading="lazy"></p>
+<p><img src="https://img2020.cnblogs.com/blog/368308/202106/368308-20210619211552418-2086129599.png" alt="" loading="lazy"></p>
+<p>这里就会把EmbeddedTomcat.tomcatServletWebServerFactory这个方法进行加载，返回值是TomcatServletWebServerFactory类型，我们看下TomcatServletWebServerFactory类的继承图,可以看到它正好是继承了ServletWebServerFactory接口。</p>
+<p><img src="https://img2020.cnblogs.com/blog/368308/202106/368308-20210619211608946-133410728.png" alt="" loading="lazy"></p>
+<p>再次打开ServletWebServerApplicationContext的getWebServerFactory方法</p>
+<pre><code class="language-java">	protected ServletWebServerFactory getWebServerFactory() {
+		.......
+        //所以这里的逻辑实际上会执行ServletWebServerFactoryConfiguration.EmbeddedTomcat类的tomcatServletWebServerFactory方法，返回TomcatServletWebServerFactory对象,相关的属性注入等等这里就不讲述了            
+		return getBeanFactory().getBean(beanNames[0], ServletWebServerFactory.class);
+	}
+</code></pre>
+<p>到这里，整个ServletWebServerFactory的查找就完成了</p>
+<h3 id="3、创建dispatcherservletregistrationbean，dispatcherservlet">3、创建DispatcherServletRegistrationBean，DispatcherServlet</h3>
+<p>再看看上面的META-INF/spring.factories文件</p>
+<pre><code class="language-properties"># Auto Configuration Import Filters
+org.springframework.boot.autoconfigure.AutoConfigurationImportFilter=\
+org.springframework.boot.autoconfigure.condition.OnBeanCondition,\
+org.springframework.boot.autoconfigure.condition.OnClassCondition,\
+org.springframework.boot.autoconfigure.condition.OnWebApplicationCondition
+
+# Auto Configure
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+......
+#现在我们重点来看这个类
+org.springframework.boot.autoconfigure.web.servlet.DispatcherServletAutoConfiguration,\
+org.springframework.boot.autoconfigure.web.servlet.ServletWebServerFactoryAutoConfiguration,\
+......
+org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration,\
+......
+
+</code></pre>
+<p>我们打开org.springframework.boot.autoconfigure.web.servlet.DispatcherServletAutoConfiguration这个类看看</p>
+<pre><code class="language-java">@AutoConfigureOrder(Ordered.HIGHEST_PRECEDENCE)
+@Configuration(proxyBeanMethods = false)
+//我们当前只关注这ConditionalOnWebApplication、ConditionalOnClass注解
+//ConditionalOnWebApplication是根据type来判断指定类是否存在
+//当前的type是 Type.SERVLET，是来查找org.springframework.web.context.support.GenericWebApplicationContext类是否存在，这个类存在于spring-web中，所以这个条件是true
+@ConditionalOnWebApplication(type = Type.SERVLET)
+//这个注解上面说过了 ，就是查找指定的类是否存在，这个是查找DispatcherServlet.class是否存在，这里也会返回true
+@ConditionalOnClass(DispatcherServlet.class)
+//上面两个条件都成立，就会执行后续的操作，去遍历内部类和方法
+@AutoConfigureAfter(ServletWebServerFactoryAutoConfiguration.class)
+public class DispatcherServletAutoConfiguration {
+
+	/**
+	 * The bean name for a DispatcherServlet that will be mapped to the root URL "/".
+	 */
+	public static final String DEFAULT_DISPATCHER_SERVLET_BEAN_NAME = "dispatcherServlet";
+
+	/**
+	 * The bean name for a ServletRegistrationBean for the DispatcherServlet "/".
+	 */
+	public static final String DEFAULT_DISPATCHER_SERVLET_REGISTRATION_BEAN_NAME = "dispatcherServletRegistration";
+
+	@Configuration(proxyBeanMethods = false)
+    //这里还是个条件，通过实现Condition接口，通过matches方法来判断
+    //DefaultDispatcherServletCondition这个类就在当前这个文件里，matches判断的结果也是true
+	@Conditional(DefaultDispatcherServletCondition.class)
+    //ServletRegistration.class这个类存在于tomcat-embed-core里面，这个结果也是true
+	@ConditionalOnClass(ServletRegistration.class)
+    //上面两个条件成立，就会执行后续的操作，去遍历内部类和方法
+	@EnableConfigurationProperties(WebMvcProperties.class)
+	protected static class DispatcherServletConfiguration {
+
+        //beanFactory会创建这个DispatcherServletbean的定义，bean的名字就是dispatcherServlet
+		@Bean(name = DEFAULT_DISPATCHER_SERVLET_BEAN_NAME)
+		public DispatcherServlet dispatcherServlet(WebMvcProperties webMvcProperties) {
+			DispatcherServlet dispatcherServlet = new DispatcherServlet();
+			dispatcherServlet.setDispatchOptionsRequest(webMvcProperties.isDispatchOptionsRequest());
+			dispatcherServlet.setDispatchTraceRequest(webMvcProperties.isDispatchTraceRequest());
+			dispatcherServlet.setThrowExceptionIfNoHandlerFound(webMvcProperties.isThrowExceptionIfNoHandlerFound());
+			dispatcherServlet.setPublishEvents(webMvcProperties.isPublishRequestHandledEvents());
+			dispatcherServlet.setEnableLoggingRequestDetails(webMvcProperties.isLogRequestDetails());
+			return dispatcherServlet;
+		}
+
+		@Bean
+		@ConditionalOnBean(MultipartResolver.class)
+		@ConditionalOnMissingBean(name = DispatcherServlet.MULTIPART_RESOLVER_BEAN_NAME)
+		public MultipartResolver multipartResolver(MultipartResolver resolver) {
+			// Detect if the user has created a MultipartResolver but named it incorrectly
+			return resolver;
+		}
+
+	}
+
+	@Configuration(proxyBeanMethods = false)
+    //和上面的一样，不说了
+	@Conditional(DispatcherServletRegistrationCondition.class)
+    //和上面的一样，不说了
+	@ConditionalOnClass(ServletRegistration.class)
+	@EnableConfigurationProperties(WebMvcProperties.class)
+    //这里会要在查找DispatcherServletConfiguration.class，并执行加载bean定义的流程，这就是上面的类了
+	@Import(DispatcherServletConfiguration.class)
+	protected static class DispatcherServletRegistrationConfiguration {
+
+		@Bean(name = DEFAULT_DISPATCHER_SERVLET_REGISTRATION_BEAN_NAME)
+        //ConditionalOnBean查找是否存在指定bean的定义，这个方法要注入参数，需要这个类，当前这里就是上面的dispatcherServlet方法定义的，这里也是存在的
+		@ConditionalOnBean(value = DispatcherServlet.class, name = DEFAULT_DISPATCHER_SERVLET_BEAN_NAME)
+        //DispatcherServlet dispatcherServlet这个就是dispatcherServlet这个方法定义的bean，在创建DispatcherServletRegistrationBean这个bean的时候，就会去查找dispatcherServlet是否存在，如果不存在，先创建dispatcherServlet这个bean,再创建DispatcherServletRegistrationBean
+		public DispatcherServletRegistrationBean dispatcherServletRegistration(DispatcherServlet dispatcherServlet,
+				WebMvcProperties webMvcProperties, ObjectProvider&lt;MultipartConfigElement&gt; multipartConfig) {
+			DispatcherServletRegistrationBean registration = new DispatcherServletRegistrationBean(dispatcherServlet,
+					webMvcProperties.getServlet().getPath());
+			registration.setName(DEFAULT_DISPATCHER_SERVLET_BEAN_NAME);
+			registration.setLoadOnStartup(webMvcProperties.getServlet().getLoadOnStartup());
+			multipartConfig.ifAvailable(registration::setMultipartConfig);
+			return registration;
+		}
+
+	}
+  ......
+}
+      
+</code></pre>
+<p>上面就是创建DispatcherServlet，DispatcherServletRegistrationBean的过程了</p>
+<h3 id="4、创建tomcat，加载servletclassfilterclass，监听器">4、创建tomcat，加载Servlet.class,filter.class，监听器</h3>
+<p>再次回到ServletWebServerApplicationContext的createWebServer方法</p>
+<pre><code class="language-java">	private void createWebServer() {
+		WebServer webServer = this.webServer;
+		ServletContext servletContext = getServletContext();
+		if (webServer == null &amp;&amp; servletContext == null) {
+			StartupStep createWebServer = this.getApplicationStartup().start("spring.boot.webserver.create");
+			//上面我们已经看到了这里，factory是TomcatServletWebServerFactory类的一个实例对象
+			ServletWebServerFactory factory = getWebServerFactory();
+            //这里还是做个标记，不用关注
+            createWebServer.tag("factory", factory.getClass().toString());
+            //这里就是具体创建tomcat了，这里的入参getSelfInitializer()是个lambda表达式，这个后续很重要
+			this.webServer = factory.getWebServer(getSelfInitializer());
+			createWebServer.end();
+			getBeanFactory().registerSingleton("webServerGracefulShutdown",
+					new WebServerGracefulShutdownLifecycle(this.webServer));
+			getBeanFactory().registerSingleton("webServerStartStop",
+					new WebServerStartStopLifecycle(this, this.webServer));
+		}
+		else if (servletContext != null) {
+			try {
+				getSelfInitializer().onStartup(servletContext);
+			}
+			catch (ServletException ex) {
+				throw new ApplicationContextException("Cannot initialize servlet context", ex);
+			}
+		}
+		initPropertySources();
+	}
+</code></pre>
+<pre><code class="language-java">	private org.springframework.boot.web.servlet.ServletContextInitializer getSelfInitializer() {
+		return this::selfInitialize;
+	}
+	//是创建webServer的参数
+	private void selfInitialize(ServletContext servletContext) throws ServletException {
+		prepareWebApplicationContext(servletContext);
+		registerApplicationScope(servletContext);
+		WebApplicationContextUtils.registerEnvironmentBeans(getBeanFactory(), servletContext);
+		for (ServletContextInitializer beans : getServletContextInitializerBeans()) {
+			beans.onStartup(servletContext);
+		}
+	}
+</code></pre>
+<p>factory.getWebServer(getSelfInitializer())会调用到TomcatServletWebServerFactory的getWebServer的方法</p>
+<pre><code class="language-java">	public WebServer getWebServer(ServletContextInitializer... initializers) {
+        .......
+		//上面的入参会在这里传下去
+		prepareContext(tomcat.getHost(), initializers);
+		return getTomcatWebServer(tomcat);
+	}
+</code></pre>
+<p>点进prepareContext(tomcat.getHost(), initializers)去看看</p>
+<pre><code class="language-java">
+	protected void prepareContext(Host host, ServletContextInitializer[] initializers) {
+		......
+		ServletContextInitializer[] initializersToUse = mergeInitializers(initializers);
+		host.addChild(context);
+		//继续传下去
+		configureContext(context, initializersToUse);
+		postProcessContext(context);
+	}
+</code></pre>
+<p>再点到configureContext(context, initializersToUse)这个调用去看看</p>
+<pre><code class="language-java">	protected void configureContext(Context context, ServletContextInitializer[] initializers) {
+		//会传递给TomcatStarter，作为构造参数，下面我们去这里看看
+		TomcatStarter starter = new TomcatStarter(initializers);
+        ......
+    }
+</code></pre>
+<p>下面我们去看看TomcatStarter这个类是怎么使用这个initializers这个构造参数的。</p>
+<pre><code class="language-java">这个类不长
+class TomcatStarter implements ServletContainerInitializer {
+    ......
+	TomcatStarter(ServletContextInitializer[] initializers) {
+        //入参会作为它的成员属性
+		this.initializers = initializers;
+	}
+
+	@Override
+	public void onStartup(Set&lt;Class&lt;?&gt;&gt; classes, ServletContext servletContext) throws ServletException {
+		try {
+			for (ServletContextInitializer initializer : this.initializers) {
+                //会在这里调用onStartup方法，这里的入参就是ApplicationContextFacade的对象，里面包装了ApplicationContext，里面再包装了TomcatEmbeddedContext，这要就和tomcat联系起来了，下面的截图就是servletContext的对象结构
+				initializer.onStartup(servletContext);
+			}
+		}
+		catch (Exception ex) {
+			......
+	}
+</code></pre>
+<p><img src="https://img2020.cnblogs.com/blog/368308/202106/368308-20210619211649883-2047287599.png" alt="" loading="lazy"></p>
+<p>上面的initializer.onStartup(servletContext)会调用到ServletWebServerApplicationContext的selfInitialize方法</p>
+<pre><code class="language-java">	private void selfInitialize(ServletContext servletContext) throws ServletException {
+        //这里是将ApplicationContextFacade设置到当前的servletContext上
+		prepareWebApplicationContext(servletContext);
+        //这里是在beanFactory中注册application的scope
+		registerApplicationScope(servletContext);
+        //这里还是注册上下文相关的bean
+		WebApplicationContextUtils.registerEnvironmentBeans(getBeanFactory(), servletContext);
+        //我们重点来看这里getServletContextInitializerBeans()是定义个一个ServletContextInitializerBeans对象，我们点进去看看
+		for (ServletContextInitializer beans : getServletContextInitializerBeans()) {
+			beans.onStartup(servletContext);
+		}
+	}
+</code></pre>
+<pre><code>	protected Collection&lt;ServletContextInitializer&gt; getServletContextInitializerBeans() {
+		//这里的getBeanFactory()就是全局的beanFactory
+		return new ServletContextInitializerBeans(getBeanFactory());
+	}
+
+</code></pre>
+<pre><code class="language-java">	public ServletContextInitializerBeans(ListableBeanFactory beanFactory,
+			Class&lt;? extends ServletContextInitializer&gt;... initializerTypes) {
+		this.initializers = new LinkedMultiValueMap&lt;&gt;();
+        //由于我们没有传initializerTypes这个参数，所以this.initializerTypes里面就只有ServletContextInitializer.class这个类
+		this.initializerTypes = (initializerTypes.length != 0) ? Arrays.asList(initializerTypes)
+				: Collections.singletonList(ServletContextInitializer.class);
+        //这里主要是从beanFactory中查找this.initializerTypes类型，我们进去看看，就是下面这个方法了
+		addServletContextInitializerBeans(beanFactory);
+		addAdaptableBeans(beanFactory);
+		List&lt;ServletContextInitializer&gt; sortedInitializers = this.initializers.values().stream()
+				.flatMap((value) -&gt; value.stream().sorted(AnnotationAwareOrderComparator.INSTANCE))
+				.collect(Collectors.toList());
+		this.sortedList = Collections.unmodifiableList(sortedInitializers);
+		logMappings(this.initializers);
+	}
+
+	private void addServletContextInitializerBeans(ListableBeanFactory beanFactory) {
+		for (Class&lt;? extends ServletContextInitializer&gt; initializerType : this.initializerTypes) {
+            //默认情况下这里找到就只有上面第3部分的DispatcherServletRegistrationBean对应的bean
+			for (Entry&lt;String, ? extends ServletContextInitializer&gt; initializerBean : getOrderedBeansOfType(beanFactory,
+					initializerType)) {
+                //这里的key是bean的名字,value就是bean对象，在进去看看，就是下面这个方法
+				addServletContextInitializerBean(initializerBean.getKey(), initializerBean.getValue(), beanFactory);
+			}
+		}
+	}
+	private void addServletContextInitializerBean(String beanName, ServletContextInitializer initializer,
+			ListableBeanFactory beanFactory) {
+        //会走到这个分支
+		if (initializer instanceof ServletRegistrationBean) {
+            //这里返回的servlet也还是第3部分DispatcherServlet对应的bean
+			Servlet source = ((ServletRegistrationBean&lt;?&gt;) initializer).getServlet();
+            //再点进去
+			addServletContextInitializerBean(Servlet.class, beanName, initializer, beanFactory, source);
+		}
+		else if (initializer instanceof FilterRegistrationBean) {
+			Filter source = ((FilterRegistrationBean&lt;?&gt;) initializer).getFilter();
+			addServletContextInitializerBean(Filter.class, beanName, initializer, beanFactory, source);
+		}
+		else if (initializer instanceof DelegatingFilterProxyRegistrationBean) {
+			String source = ((DelegatingFilterProxyRegistrationBean) initializer).getTargetBeanName();
+			addServletContextInitializerBean(Filter.class, beanName, initializer, beanFactory, source);
+		}
+		else if (initializer instanceof ServletListenerRegistrationBean) {
+			EventListener source = ((ServletListenerRegistrationBean&lt;?&gt;) initializer).getListener();
+			addServletContextInitializerBean(EventListener.class, beanName, initializer, beanFactory, source);
+		}
+		else {
+			addServletContextInitializerBean(ServletContextInitializer.class, beanName, initializer, beanFactory,
+					initializer);
+		}
+	}
+
+	private void addServletContextInitializerBean(Class&lt;?&gt; type, String beanName, ServletContextInitializer initializer,
+			ListableBeanFactory beanFactory, Object source) {
+        //这里的initializers是个map,按照类型，bean对象进行加载，这里的type是javax.servlet.Servlet.class,value是上面的DispatcherServletRegistrationBean
+		this.initializers.add(type, initializer);
+		if (source != null) {
+			// Mark the underlying source as seen in case it wraps an existing bean
+            //将DispatcherServlet对应的bean加到这里
+			this.seen.add(source);
+		}
+		if (logger.isTraceEnabled()) {
+			String resourceDescription = getResourceDescription(beanName, beanFactory);
+			int order = getOrder(initializer);
+			logger.trace("Added existing " + type.getSimpleName() + " initializer bean '" + beanName + "'; order="
+					+ order + ", resource=" + resourceDescription);
+		}
+	}
+
+</code></pre>
+<p>再回到ServletContextInitializerBeans的构造方法,接着看后面的</p>
+<pre><code class="language-java">	public ServletContextInitializerBeans(ListableBeanFactory beanFactory,
+			Class&lt;? extends ServletContextInitializer&gt;... initializerTypes) {
+		...... //这里的内容上面已经看过了，我们现在看下面这句，点进去
+		addAdaptableBeans(beanFactory);
+		List&lt;ServletContextInitializer&gt; sortedInitializers = this.initializers.values().stream()
+				.flatMap((value) -&gt; value.stream().sorted(AnnotationAwareOrderComparator.INSTANCE))
+				.collect(Collectors.toList());
+		this.sortedList = Collections.unmodifiableList(sortedInitializers);
+		logMappings(this.initializers);
+	}
+
+</code></pre>
+<pre><code class="language-java">	protected void addAdaptableBeans(ListableBeanFactory beanFactory) {
+		//这句不用关注
+		MultipartConfigElement multipartConfig = getMultipartConfig(beanFactory);
+		//这句不用关注
+		addAsRegistrationBean(beanFactory, Servlet.class, new ServletRegistrationBeanAdapter(multipartConfig));
+		//点到这里去看看
+		addAsRegistrationBean(beanFactory, Filter.class, new FilterRegistrationBeanAdapter());
+        
+		for (Class&lt;?&gt; listenerType : ServletListenerRegistrationBean.getSupportedTypes()) {
+			addAsRegistrationBean(beanFactory, EventListener.class, (Class&lt;EventListener&gt;) listenerType,
+					new ServletListenerRegistrationBeanAdapter());
+		}
+	}
+
+</code></pre>
+<pre><code class="language-java">	
+	private &lt;T, B extends T&gt; void addAsRegistrationBean(ListableBeanFactory beanFactory, Class&lt;T&gt; type,
+			Class&lt;B&gt; beanType, RegistrationBeanAdapter&lt;T&gt; adapter) {
+		//这里的beanType是 Filter.class,下面这句就是从beanFactory中获取所有类型为Filter.class的bean
+		List&lt;Map.Entry&lt;String, B&gt;&gt; entries = getOrderedBeansOfType(beanFactory, beanType, this.seen);
+		for (Entry&lt;String, B&gt; entry : entries) {
+			String beanName = entry.getKey();
+			B bean = entry.getValue();
+            //将bean放置到this.seen里面
+			if (this.seen.add(bean)) {
+				// One that we haven't already seen
+                //包装成RegistrationBean对象
+				RegistrationBean registration = adapter.createRegistrationBean(beanName, bean, entries.size());
+				int order = getOrder(bean);
+				registration.setOrder(order);
+                //同样放置到this.initializers里面
+				this.initializers.add(type, registration);
+				if (logger.isTraceEnabled()) {
+					logger.trace("Created " + type.getSimpleName() + " initializer for bean '" + beanName + "'; order="
+							+ order + ", resource=" + getResourceDescription(beanName, beanFactory));
+				}
+			}
+		}
+	}
+</code></pre>
+<p>再回到上面的addAdaptableBeans方法，看后面的</p>
+<pre><code class="language-java">
+	protected void addAdaptableBeans(ListableBeanFactory beanFactory) {
+		......//这里刚才说过了
+         //下面这部分不说了，这里基本和上面一样，不过处理的类型变成了ServletContextAttributeListener.class、ServletRequestListener.class、ServletRequestAttributeListener.class、HttpSessionAttributeListener.class、HttpSessionIdListener.class、HttpSessionListener.class、ServletContextListener.class这些类型
+		for (Class&lt;?&gt; listenerType : ServletListenerRegistrationBean.getSupportedTypes()) {
+			addAsRegistrationBean(beanFactory, EventListener.class, (Class&lt;EventListener&gt;) listenerType,
+					new ServletListenerRegistrationBeanAdapter());
+		}
+	}
+</code></pre>
+<p>再回到ServletContextInitializerBeans的构造方法,接着看后面的</p>
+<pre><code class="language-java">	public ServletContextInitializerBeans(ListableBeanFactory beanFactory,
+			Class&lt;? extends ServletContextInitializer&gt;... initializerTypes) {
+		......//这里刚才都说过了，看下面
+        //这里就是把上面所有获取到的相关的bean放置到this.sortedList中，下面我是我本地this.sortedList的截图
+		List&lt;ServletContextInitializer&gt; sortedInitializers = this.initializers.values().stream()
+				.flatMap((value) -&gt; value.stream().sorted(AnnotationAwareOrderComparator.INSTANCE))
+				.collect(Collectors.toList());
+		this.sortedList = Collections.unmodifiableList(sortedInitializers);
+		logMappings(this.initializers);
+	}
+</code></pre>
+<p><img src="https://img2020.cnblogs.com/blog/368308/202106/368308-20210619211709749-1450815159.png" alt="" loading="lazy"></p>
+<p>这里ServletContextInitializerBeans的构造方法就完成了，再回过头去看看这个类的定义</p>
+<pre><code class="language-java">public class ServletContextInitializerBeans extends AbstractCollection&lt;ServletContextInitializer&gt;
+</code></pre>
+<p>这个类继承了AbstractCollection类，那它就需要实现下面这个抽象方法</p>
+<pre><code class="language-java">public abstract Iterator&lt;E&gt; iterator();
+</code></pre>
+<p>我们看看ServletContextInitializerBeans的iterator的方法</p>
+<pre><code class="language-java">@Override
+public Iterator&lt;ServletContextInitializer&gt; iterator() {
+   return this.sortedList.iterator();
+}
+</code></pre>
+<p>看到了吧，这就是返回上面的this.sortedList.iterator()</p>
+<p>我们再次回到ServletWebServerApplicationContext的selfInitialize方法</p>
+<pre><code class="language-java">private void selfInitialize(ServletContext servletContext) throws ServletException {
+	......//这里上面都说过了
+	//getServletContextInitializerBeans()这个方法就是构造了ServletContextInitializerBeans
+	//这里的for循环也是调用了ServletContextInitializerBeans的iterator的方法，实际上遍历的也就是上面的this.sortedList
+	for (ServletContextInitializer beans : getServletContextInitializerBeans()) {
+		//这里就是把在beanFactory中查找到的Servlet.class,filter.class，监听器等等添加到tomcat容器中,我们就只进到servlet里面去看看
+		//进到DispatcherServletRegistrationBean里面去看看
+		beans.onStartup(servletContext);
+	}
+}
+</code></pre>
+<pre><code>	//这个方法在DispatcherServletRegistrationBean的父类RegistrationBean中
+	//所有的Servlet.class,filter.class，监听器都会走到这里
+	public final void onStartup(ServletContext servletContext) throws ServletException {
+		//这里是返回的表述，不关注
+		String description = getDescription();
+		if (!isEnabled()) {
+			logger.info(StringUtils.capitalize(description) + " was not registered (disabled)");
+			return;
+		}
+		//这里由不同的子类去实现，DispatcherServletRegistrationBean会调用到ServletRegistrationBean中
+		register(description, servletContext);
+	}
+</code></pre>
+<pre><code class="language-java">	//这个方法是在ServletRegistrationBean这个类中
+	@Override
+	protected ServletRegistration.Dynamic addRegistration(String description, ServletContext servletContext) {
+		String name = getServletName();
+		//这里的servletContext上面的ApplicationContextFacade的对象，这里就会将DispatcherServlet的bean对象加载到TomcatEmbeddedContext中，后续所有的http请求最后都会流转到DispatcherServlet去进行具体的分发
+		return servletContext.addServlet(name, this.servlet);
+	}
+</code></pre>
+<p>到这里Servlet.class,filter.class，监听器就全部加载到tomcat中去</p>
+<h3 id="5、创建requestmappinghandlermapping">5、创建RequestMappingHandlerMapping</h3>
+<p>再看看上面的META-INF/spring.factories文件</p>
+<pre><code class="language-properties"># Auto Configuration Import Filters
+org.springframework.boot.autoconfigure.AutoConfigurationImportFilter=\
+org.springframework.boot.autoconfigure.condition.OnBeanCondition,\
+org.springframework.boot.autoconfigure.condition.OnClassCondition,\
+org.springframework.boot.autoconfigure.condition.OnWebApplicationCondition
+
+# Auto Configure
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+......
+org.springframework.boot.autoconfigure.web.servlet.DispatcherServletAutoConfiguration,\
+org.springframework.boot.autoconfigure.web.servlet.ServletWebServerFactoryAutoConfiguration,\
+......
+#现在我们重点来看这个类
+org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration,\
+......
+
+</code></pre>
+<p>具体的加载和上面部分都类似，就不展开了，直接看我们需要的</p>
+<pre><code class="language-java">		//这里会创建RequestMappingHandlerMapping的bean
+		@Bean
+		@Primary
+		@Override
+		public RequestMappingHandlerMapping requestMappingHandlerMapping(
+				@Qualifier("mvcContentNegotiationManager") ContentNegotiationManager contentNegotiationManager,
+				@Qualifier("mvcConversionService") FormattingConversionService conversionService,
+				@Qualifier("mvcResourceUrlProvider") ResourceUrlProvider resourceUrlProvider) {
+			// Must be @Primary for MvcUriComponentsBuilder to work
+			return super.requestMappingHandlerMapping(contentNegotiationManager, conversionService,
+					resourceUrlProvider);
+
+</code></pre>
+<p>看下这个类的继承图</p>
+<p><img src="https://img2020.cnblogs.com/blog/368308/202106/368308-20210619211726349-1108039691.png" alt="" loading="lazy"></p>
+<p>RequestMappingHandlerMapping实现了InitializingBean接口，会在bean对象创建后的invokeInitMethods方法中调用afterPropertiesSet方法,最终会调用的AbstractHandlerMethodMapping的afterPropertiesSet方法中</p>
+<pre><code class="language-java">	@Override
+	public void afterPropertiesSet() {
+		initHandlerMethods();
+	}
+
+	/**
+	 * Scan beans in the ApplicationContext, detect and register handler methods.
+	 * @see #getCandidateBeanNames()
+	 * @see #processCandidateBean
+	 * @see #handlerMethodsInitialized
+	 */
+	protected void initHandlerMethods() {
+        //这里查找beanFactory中的所有bean进行遍历
+		for (String beanName : getCandidateBeanNames()) {
+			if (!beanName.startsWith(SCOPED_TARGET_NAME_PREFIX)) {
+                //点到这里去看看
+				processCandidateBean(beanName);
+			}
+		}
+		handlerMethodsInitialized(getHandlerMethods());
+	}
+</code></pre>
+<pre><code>	protected void processCandidateBean(String beanName) {
+		Class&lt;?&gt; beanType = null;
+		try {
+			//根据beanName获取对应bean的Class对象
+			beanType = obtainApplicationContext().getType(beanName);
+		}
+		catch (Throwable ex) {
+			// An unresolvable bean type, probably from a lazy bean - let's ignore it.
+			if (logger.isTraceEnabled()) {
+				logger.trace("Could not resolve type for bean '" + beanName + "'", ex);
+			}
+		}
+		//判断类上是否有Controller.class，RequestMapping.class注解
+		if (beanType != null &amp;&amp; isHandler(beanType)) {
+			//这里就会解析beanName上的所有方法进行遍历，查找有 RequestMapping.class注解的方法，创建RequestMappingInfo对象，放置到registry属性中(在AbstractHandlerMethodMapping)中，这样我们所有定义的controller中的http请求就会全部被扫描到
+			detectHandlerMethods(beanName);
+		}
+	}
+</code></pre>
+<h3 id="6、加载requestmappinghandlermapping到dispatcherservlet中">6、加载RequestMappingHandlerMapping到DispatcherServlet中</h3>
+<p>在我们第一次请求的时候，会执行到DispatcherServlet的initStrategies方法，这个方法只会执行一次</p>
+<pre><code class="language-java">	protected void initStrategies(ApplicationContext context) {
+		......
+		这就会加载之前查找到的RequestMappingHandlerMapping中的我们定义的controller
+		initHandlerMappings(context);
+		......
+	}
+</code></pre>
+<p>会调用到这里</p>
+<pre><code class="language-java">	private void initHandlerMappings(ApplicationContext context) {
+		this.handlerMappings = null;
+
+		if (this.detectAllHandlerMappings) {
+			// Find all HandlerMappings in the ApplicationContext, including ancestor contexts.
+			//这里会在beanFactory中查找所有HandlerMapping.class的bean,其中就包含我们第5部分的RequestMappingHandlerMapping
+			Map&lt;String, HandlerMapping&gt; matchingBeans =
+					BeanFactoryUtils.beansOfTypeIncludingAncestors(context, HandlerMapping.class, true, false);
+			if (!matchingBeans.isEmpty()) {
+			//将所有查找到的放置到handlerMappings中
+				this.handlerMappings = new ArrayList&lt;&gt;(matchingBeans.values());
+				// We keep HandlerMappings in sorted order.
+				AnnotationAwareOrderComparator.sort(this.handlerMappings);
+			}
+		}
+		......
+	}
+</code></pre>
+<p>当我们浏览器请求的时候，最终会走到DispatcherServlet的doDispatch的方法，处理我们的请求并返回,简单看看</p>
+<pre><code class="language-java">	protected void doDispatch(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		......
+
+		try {
+			ModelAndView mv = null;
+			Exception dispatchException = null;
+
+			try {
+				processedRequest = checkMultipart(request);
+				multipartRequestParsed = (processedRequest != request);
+
+				// Determine handler for the current request.
+                //在这里，就会请求request的请求路径去查找实际要执行的controller的方法，点进去看看
+				mappedHandler = getHandler(processedRequest);
+				......
+	}
+
+</code></pre>
+<pre><code class="language-java">	@Nullable
+	protected HandlerExecutionChain getHandler(HttpServletRequest request) throws Exception {
+		if (this.handlerMappings != null) {
+            //这其实就是根据遍历，查找对应的路径，这个this.handlerMappings就是就是在initHandlerMappings方法中赋值的
+			for (HandlerMapping mapping : this.handlerMappings) {
+				HandlerExecutionChain handler = mapping.getHandler(request);
+				if (handler != null) {
+					return handler;
+				}
+			}
+		}
+		return null;
+	}
+</code></pre>
+<p>到这里，springboot 加载web容器的整个流程基本就算完成了，这块涉及的东西比较多，所以说的可能比较粗，大家见谅。</p>
+
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+        <div class="clear"></div>
+        <div id="blog_post_info_block">
+        <div id="blog_post_info">
+        </div>
+        <div class="clear"></div>
+        <div id="post_next_prev"></div>
+    </div>
+</div>
+    <ul class="postmetadata">
+        
+
+<li class="icon_bullet" id="EntryTag">
+&nbsp;</li>
+    </ul>
+</div>
+<script type="text/javascript">
+    var m = window.__blog.postRendered;
+    if (m) { m(__$("post")); }
+</script>
+<script type="text/javascript">
+    var m = window.__blog.postRenderPosts;
+    if (m) { m(); }
+</script>
+<script src="https://common.cnblogs.com/highlight/10.3.1/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 137986, cb_blogApp = 'wbo112', cb_blogUserGuid = 'f11aeaa9-7e3a-e111-b988-842b2b196315';
+    var cb_entryId = 14904986, cb_entryCreatedDate = '2021-06-19 21:19', cb_postType = 1;
+    updatePostStats(
+        [cb_entryId],
+        function(id, count) { $("#post_view_count").text(count) },
+        function(id, count) { $("#post_comment_count").text(count) })
+    zoomManager.apply("#cnblogs_post_body img:not(.code_img_closed):not(.code_img_opened)");
+</script>
+<a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <div id="cnblogs_c1" class="under-post-card">
+        <div id='div-gpt-ad-1592365906576-0' style='width: 300px; height: 250px;'></div>
+    </div>
+    <div id="under_post_card1"></div>
+    <div id="cnblogs_c2" class="under-post-card">
+        <div id='div-gpt-ad-1592366332455-0' style='width: 468px; height: 60px;'></div>
+    </div>
+    <div id="under_post_card2"></div>
+    <div id="HistoryToday" class="under-post-card"></div>
+    <script type="text/javascript">
+       var commentManager = new blogCommentManager();
+       commentManager.renderComments(0);
+       fixPostBody();
+       deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);       deliverT2();
+       deliverC1C2();
+       loadNewsAndKb();
+       loadBlogSignature();
+       LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+       GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+       loadOptUnderPost();
+       GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+
+</div>
+
+
+        </div>
+
+        <script type="text/javascript">
+            var m = window.__blog.contentRendered;
+            if (m) { m(__$("content")); }
+        </script>
+
+        <div id="sidebar">
+            <div id="about">
+                <div>
+                    <h2 id="about_title">About</h2>
+                    <div id="about_body">
+                        <div id="sidebar_news"></div>
+                        <script type="text/javascript">loadBlogNews();</script>
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                var m = window.__blog.aboutRendered;
+                if (m) { m(__$("about")); }
+            </script>
+            <div id="mySearchWrapper">
+                <div id="mySearch">
+                    <input type="image" src="/skins/minyx2_lite/images/btnsearch.gif" id="btnZzk"  class="submit" onclick="zzk_go();return false;"/>
+                    <label class="lb_search"><input type="text" id="q" onkeydown="return zzk_go_enter(event);" class="keyword" /></label>
+                </div>
+            </div>
+            <script type="text/javascript">
+                var m = window.__blog.searchFormRendered;
+                if (m) { m(__$("searchform")); }
+            </script>
+            <div id="sideMain">
+            </div>
+            <div id="sideRight">
+            </div>
+            <div id="sideLeft">
+            </div>            
+                <div id="sideContainer">
+                </div>
+                <script type="text/javascript">
+                    $.ajax({
+                        url: '/' + currentBlogApp + '/ajax/Minyx2_Lite_SideColumn.aspx',
+                        data: '{}',
+                        type: 'post',
+                        dataType: 'text',
+                        contentType: 'application/json; charset=utf-8',
+                        success: function (data) {
+                            if (data) {
+                                $("#sideContainer").html(data);
+                                $.ajax({
+                                    url: getAjaxBaseUrl() + 'TopLists.aspx',
+                                    type: 'get',
+                                    dataType: 'text',
+                                    success: function (topLists) {
+                                        if (topLists) {
+                                            $("#sideContainer").append(topLists);
+                                        }
+                                        var m = window.__blog.sideContainerRendered;
+                                        if (m) { m(__$("sideContainer")); }
+                                        window.__blog.sidebar.__layout();
+                                    }
+                                });
+                            }
+                        }
+                    });
+
+                </script>
+        </div>
+
+        <script type="text/javascript">
+            var m = window.__blog.sidebarRendered;
+            if (m) { m(__$("sidebar")); }
+        </script>
+
+        <div id="footer">
+            <p id="logoFoot">
+    <a href="http://www.spiga.com.mx/" title="Agencia Interactiva Spiga">www.spiga.com.mx</a>
+</p>
+<div class="footText">
+<p>
+Copyright &copy; 2021 wang03
+<br /><span id="poweredby">Powered by .NET 5.0 on Kubernetes</span>
+
+</p>
+<p>
+<a href="http://www.cnblogs.com">博客园</a>
+</p>
+</div>
+
+
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var m = window.__blog.wrapperRendered;
+        if (m) { m(__$("wrapper")); }
+    </script>
+
+</div>
+<script type="text/javascript">
+    var m = window.__blog.containerRendered;
+    if (m) { m(__$("container")); }
+</script>
+
+
+    
+
+    <input type="hidden" id="antiforgery_token" value="CfDJ8L-rpLgFVEJMgssCVvNUAjv0TjbCH7j9UojKxi79VL2sXZYPX4nA5k_btDRo5Xf-rL9AKEe-G7sBjBW8NEmUQ_fZv6YTVPdAbYMIFVSP96dq353LTk02QgHi0RFiEsxVWuuk0rU1Hu8zIlaZuk75uy4" />
+</body>
+</html>

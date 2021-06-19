@@ -1,0 +1,398 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin-when-crossorigin" />
+    <meta name="description" content="项目里面有一个需求，要对sql进行简单的语法分析 为了避免sql里面的字符串和注释对语法分析做干扰，我写了一个java函数，对sql进行修剪，删除里面字符串和注释，用空格代替 周末闲着没事，我用go重" />
+    <meta property="og:description" content="项目里面有一个需求，要对sql进行简单的语法分析 为了避免sql里面的字符串和注释对语法分析做干扰，我写了一个java函数，对sql进行修剪，删除里面字符串和注释，用空格代替 周末闲着没事，我用go重" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>我的go练手项目--使用go实现“删除sql里面的注释和字符串”功能 - 皇家救星 - 博客园</title>
+    <link id="favicon" rel="shortcut icon" href="//common.cnblogs.com/favicon.svg" type="image/svg+xml" />
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=6tvK5XC6GPbg3p_sy7wzz_2291HoYACr4440iKBzQIw" />
+    <link id="MainCss" rel="stylesheet" href="/skins/simpleblue/bundle-simpleblue.min.css?v=2hjghzSZyhYA1HxvSxKnXih3JbC120DBjeO9V9T_nSs" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/simpleblue/bundle-simpleblue-mobile.min.css?v=3tvwgOOqUo3RpS6gGzEdK0LbptOPv4Bx7M85_UAnFGs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/kingstarer/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/kingstarer/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/kingstarer/wlwmanifest.xml" />
+    <script>
+        var currentBlogId = 234136;
+        var currentBlogApp = 'kingstarer';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var isBlogOwner = false;
+        var skinName = 'SimpleBlue';
+        var visitorUserId = '';
+    </script>
+        <script>
+            var currentPostDateAdded = '2020-11-29 10:22';
+        </script>
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=ZUvfwhWs5fv-s8Nv7WofCOhwKAxiDO928zdWFzhnOPk"></script>
+    
+    
+    
+</head>
+<body class="has-navbar has-bannerbar">
+    <a name="top"></a>
+            <a target="_blank" href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:pc|pp:bokeyuan-huodong-21nianzhongdacu-neiyePCtonglanbanner|pu:21nianzhongdacu-neiyePCtonglanbanner|ci:21nzdc|kw:10224545" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-pc')">
+                <div class="bannerbar aliyun forpc" style="background-size: contain; filter: brightness(0.95); background-image: url(https://img2020.cnblogs.com/blog/35695/202106/35695-20210610183724605-1725070929.jpg)">
+                </div>
+            </a>
+            <div id="bannerbar" class="bannerbar-mobile formobile">
+            <a href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:mb|pp:bokeyuan-huodong-21nianzhongdacu-neiyeyidongduantonglanbanner|pu:21nianzhongdacu-neiyeyidongduantonglanbanner|ci:21nzdc|kw:10224547" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-mobile')">
+                <img src="https://img2020.cnblogs.com/blog/35695/202106/35695-20210610184806729-1738888164.jpg" alt="" />
+            </a>
+            </div>
+    <div id="top_nav" class="navbar forpc">
+        <nav id="nav_main" class="navbar-main">
+            <ul id="nav_left" class="navbar-list navbar-left">
+                <li class="navbar-branding"><a href="https://www.cnblogs.com/" title="开发者的网上家园"><img src="/images/logo.svg?v=R9M0WmLAIPVydmdzE2keuvnjl-bPR7_35oHqtiBzGsM" alt="博客园Logo" /></a></li>
+                <li><a href="/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-sitehome')">首页</a></li>
+                <li><a href="https://news.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-news')">新闻</a></li>
+                <li><a href="https://q.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-q')">博问</a></li>
+                <li><a id="nav_brandzone" href="https://brands.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-brands')">专区</a></li>
+                <li><a href="https://ing.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-ing')">闪存</a></li>
+                <li><a href="https://edu.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-edu')">班级</a></li>
+            </ul>
+            <ul id="nav_right" class="navbar-list navbar-right">
+                <li>
+                    <form id="zzk_search" class="navbar-search" action="https://zzk.cnblogs.com/s" method="get">
+                        <input name="w" id="zzk_search_input" placeholder="代码改变世界" type="text" tabindex="3" />
+                        <button type="submit" id="zzk_search_button">
+                            <img src="/images/aggsite/search.svg" alt="搜索" />
+                        </button>
+                    </form>
+                </li>
+                <li id="navbar_login_status" class="navbar-list">
+                    <a class="navbar-user-info navbar-blog" href="https://i.cnblogs.com/EditPosts.aspx?opt=1" alt="写随笔" title="写随笔">
+                        <img id="new_post_icon" class="navbar-icon" src="/images/aggsite/newpost.svg" alt="写随笔" />
+                    </a>
+                    <a id="navblog-myblog-icon" class="navbar-user-info navbar-blog" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx" alt="我的博客" title="我的博客">
+                        <img id="myblog_icon" class="navbar-icon" src="/images/aggsite/myblog.svg" alt="我的博客" />
+                    </a>
+                    <a class="navbar-user-info navbar-message navbar-icon-wrapper" href="https://msg.cnblogs.com/" alt="短消息" title="短消息">
+                        <img id="msg_icon" class="navbar-icon" src="/images/aggsite/message.svg?v=J0WS2P2iPgaIVgXxcAhliw4AFZIpaTWxtdoNAv9eiCA" alt="短消息" />
+                        <span id="msg_count" style="display: none"></span>
+                    </a>
+                    <div id="user_info" class="navbar-user-info dropdown">
+                        <a class="dropdown-button" href="https://home.cnblogs.com/">
+                            <img id="user_icon" class="navbar-avatar" src="/images/aggsite/avatar-default.svg" alt="用户头像" />
+                        </a>
+                        <div class="dropdown-menu">
+                            <a id="navblog-myblog-text" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx">我的博客</a>
+                            <a href="https://home.cnblogs.com/">我的园子</a>
+                            <a href="https://account.cnblogs.com/settings/account">账号设置</a>
+                            <a href="javascript:void(0)" id="navbar_lite_mode_toggle" title="简洁模式会使用简洁款皮肤显示所有博客">
+    简洁模式 <img id="navbar_lite_mode_on" src="/images/lite-mode-check.svg" class="hide" /><span id="navbar_lite_mode_spinner" class="hide">...</span>
+</a>
+                            <a href="javascript:void(0)" onclick="account.logout();">退出登录</a>
+                        </div>
+                    </div>
+                    <a class="navbar-anonymous" href="https://account.cnblogs.com/signup/">注册</a>
+                    <a class="navbar-anonymous" href="javascript:void(0);" onclick="account.login()">登录</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    
+    <div id="home">
+    <div id="header">
+        <div id="blogTitle">
+            <div class="title"><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/kingstarer/">皇家救星</a>
+</div>
+<div class="subtitle"></div>
+
+        </div>
+        <div id="navigator">
+            
+<ul id="navList">
+    <li id="nav_sitehome"><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+    <li id="nav_myhome">
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/kingstarer/">
+首页</a>
+</li>
+    <li id="nav_newpost">
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+    <li id="nav_contact">
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E7%9A%87%E5%AE%B6%E6%95%91%E6%98%9F">
+联系</a></li>
+    <li id="nav_rss">
+<a id="blog_nav_rss" class="menu" href="javascript:void(0)" data-rss="https://www.cnblogs.com/kingstarer/rss/">
+订阅</a></li>
+    <li id="nav_admin">
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+            <div class="blogStats">
+                <div id="blog_stats_place_holder"><script>loadBlogStats();</script></div>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div id="mainContent">
+            <div class="forFlow">
+                <div id="post_detail">
+    <div id="topics">
+        <div class="post">
+            <h1 class="postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2 vertical-middle" href="https://www.cnblogs.com/kingstarer/p/14058474.html">
+    <span>我的go练手项目--使用go实现“删除sql里面的注释和字符串”功能</span>
+    
+
+
+
+</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                <div id="cnblogs_post_body" class="blogpost-body cnblogs-markdown">
+<p>项目里面有一个需求，要对sql进行简单的语法分析</p>
+<p>为了避免sql里面的字符串和注释对语法分析做干扰，我写了一个java函数，对sql进行修剪，删除里面字符串和注释，用空格代替<br>
+周末闲着没事，我用go重新实现了这个功能，感觉应该会有后来人可以用上</p>
+<p>说明：<br>
+sql里面的注释有两种单行注释和多行注释，其中单行注释以--开头，以\n结尾，多行注释以/<em>开头，以</em>/结尾<br>
+sql字符串是以'开头，'结尾，但特别的地方是连续两个单引号是代表一个单引号而不是字符串结束标志</p>
+<p>关键函数如下：</p>
+<p>`<br>
+/**</p>
+<ul>
+<li>
+<p>将字节数组里面注释和字符串，用空格替换 rangeBeg和rangeEnd是数组元素起始位置 左闭右开<br>
+*/<br>
+func TrimSqlByteArray(sql []byte, rangeBeg int, rangeEnd int) []byte {<br>
+sqlLength := rangeEnd - rangeBeg - 1;<br>
+//删除注释或者字符串后 用空格填充 必免因删除导致粘连改变sql语义<br>
+const chPad = ' '</p>
+<p>//结果切片，预分配空间为入参sql长度一半<br>
+result := make([] byte, 0, sqlLength / 2)</p>
+<p>//本字符类型<br>
+var charType int = NORMAL;<br>
+for i := rangeBeg; i &lt; rangeEnd; i++ {<br>
+/*<br>
+*utf8编码不影响判断<br>
+//跳过非英文字符<br>
+if sql[i] &amp; 0x80 != 0 {<br>
+//utf8编码：UTF-8是一种变长字节编码方式。对于某一个字符的UTF-8编码，如果只有一个字节则其最高二进制位为0；<br>
+//如果是多字节，其第一个字节从最高位开始，连续的二进制位值为1的个数决定了其编码的位数，其余各字节均以10开头。<br>
+//UTF-8最多可用到6个字节。 这里不考虑异常，因为go的字符串基本都是标准utf8编码<br>
+i += getPreNotZeroCount(sql[i]) - 1<br>
+continue;<br>
+}<br>
+*/</p>
+<pre><code>  //本字符类型 预设为普通字符
+  charType = NORMAL
+  ch := sql[i]
+
+  //下一个字符
+  var chNext byte;
+  chNext = getCharSafe(sql, rangeEnd, i + 1)
+
+  //非有效sql内容结束位置
+  endPos := 0
+
+  if ch == '-' &amp;&amp; chNext == '-' {
+  	//单行注释
+  	charType = LINE
+  	//下标移到非有效字符的最后
+  	endPos = seekToNext(sql, i + 2, rangeEnd, charType)
+  } else if ch == '/' &amp;&amp; chNext == '*' {
+  	//多行注释
+  	charType = MULTI
+  	//下标移到非有效字符的最后
+  	endPos = seekToNext(sql, i + 2, rangeEnd, charType)
+  } else if ch == '\'' {
+  	//字符串
+  	charType = STRING
+  	//下标移到非有效字符的最后
+  	endPos = seekToNext(sql, i + 1, rangeEnd, charType)
+  }
+
+  //如果字符是非有效字符 则用空格代替 否则保持原样
+  if charType == NORMAL {
+  	result = append(result, ch)
+  } else {
+  	result = append(result, chPad)
+  	i = endPos - 1
+  }
+</code></pre>
+<p>}</p>
+<p>return result;<br>
+}</p>
+</li>
+</ul>
+<p>/**</p>
+<ul>
+<li>
+<p>获取字符串或者注释的右边界位置（不包含）</p>
+</li>
+<li>
+<p>rangeEnd是数组边界<br>
+*/<br>
+func seekToNext(sql []byte, begPos int, rangeEnd int, charType int) int {</p>
+<p>result := begPos;</p>
+<p>switch charType {<br>
+case MULTI:<br>
+for ; result &lt; rangeEnd; result++ {<br>
+ch := sql[result]<br>
+chNext := getCharSafe(sql, rangeEnd, result+ 1)</p>
+<pre><code>  	if ch == '*' &amp;&amp; chNext == '/' {
+  		result = result + 1;
+  		break;
+  	}
+  }
+
+  break
+</code></pre>
+<p>case LINE:<br>
+for ; result &lt; rangeEnd; result++ {<br>
+ch := sql[result]</p>
+<pre><code>  	if ch == '\n' {
+  		break;
+  	}
+  }
+
+  break
+</code></pre>
+<p>case STRING:<br>
+for ; result &lt; rangeEnd; result++ {<br>
+ch := sql[result]<br>
+chNext := getCharSafe(sql, rangeEnd, result + 1)</p>
+<pre><code>  	//sql字符串里面连续的单引号被认为是' 则不是字符串结束标志
+  	if ch == '\'' &amp;&amp; chNext == '\'' {
+  		result = result + 1;
+  		continue;
+  	} else if ch == '\'' {
+  		break;
+  	}
+  }
+
+  break
+</code></pre>
+<p>default:<br>
+break;<br>
+}</p>
+<p>result++;</p>
+<p>return result;<br>
+}<br>
+`</p>
+</li>
+</ul>
+<p>完整代码及单元测试已上传 <a href="https://github.com/kingstarer/kingstarer.git" target="_blank">https://github.com/kingstarer/kingstarer.git</a></p>
+
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-11-29 22:22</span>&nbsp;
+<a href="https://www.cnblogs.com/kingstarer/">皇家救星</a>&nbsp;
+阅读(<span id="post_view_count">152</span>)&nbsp;
+评论(<span id="post_comment_count">1</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14058474" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(14058474);return false;">收藏</a>&nbsp;
+<a href="javascript:void(0)" onclick="reportManager.report({ currentUserId: '', targetType: 'blogPost', targetId: '14058474', targetLink: 'https://www.cnblogs.com/kingstarer/p/14058474.html', title: '我的go练手项目--使用go实现“删除sql里面的注释和字符串”功能' })">举报</a></div>
+        </div>
+        <script src="https://common.cnblogs.com/highlight/10.3.1/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 234136, cb_blogApp = 'kingstarer', cb_blogUserGuid = '6c01f56e-ee22-e511-b908-9dcfd8948a71';
+    var cb_entryId = 14058474, cb_entryCreatedDate = '2020-11-29 22:22', cb_postType = 1;
+    updatePostStats(
+        [cb_entryId],
+        function(id, count) { $("#post_view_count").text(count) },
+        function(id, count) { $("#post_comment_count").text(count) })
+    zoomManager.apply("#cnblogs_post_body img:not(.code_img_closed):not(.code_img_opened)");
+</script>
+        <a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <div id="cnblogs_c1" class="under-post-card">
+        <div id='div-gpt-ad-1592365906576-0' style='width: 300px; height: 250px;'></div>
+    </div>
+    <div id="under_post_card1"></div>
+    <div id="cnblogs_c2" class="under-post-card">
+        <div id='div-gpt-ad-1592366332455-0' style='width: 468px; height: 60px;'></div>
+    </div>
+    <div id="under_post_card2"></div>
+    <div id="HistoryToday" class="under-post-card"></div>
+    <script type="text/javascript">
+       var commentManager = new blogCommentManager();
+       commentManager.renderComments(0);
+       fixPostBody();
+       deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);       deliverT2();
+       deliverC1C2();
+       loadNewsAndKb();
+       loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);       LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+       GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+       loadOptUnderPost();
+       GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+
+    </div>
+</div>
+            </div>
+        </div>
+
+        <div id="sideBar">
+            <div id="sideBarMain">
+                <div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+<div id="sidebar_c3"></div>
+                <div id="calendar"><div id="blog-calendar" style="display:none"></div></div>                
+                <script>loadBlogDefaultCalendar();</script>
+                <div id="leftcontentcontainer">
+                    <!-- begin:SingleColumn -->
+                    <div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+                    <!-- end:  SingleColumn -->
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div id="footer">
+        <!--done-->
+Copyright &copy; 2021 皇家救星
+<br /><span id="poweredby">Powered by .NET 5.0 on Kubernetes</span>
+
+    </div>
+</div>
+
+    
+
+    <input type="hidden" id="antiforgery_token" value="CfDJ8L-rpLgFVEJMgssCVvNUAjvrNqSIoWtBMBAGPBwqs4ED_lYefegkC3Wb-uYXIiIjpGYR0udF_ky0k82y3ATXmE_hDpCqtx7cugtylZFE_SJdiA1vXKiqNXo1aZiJrK1NhjpXCdUqL2W0rL80tajIaoA" />
+</body>
+</html>

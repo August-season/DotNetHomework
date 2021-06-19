@@ -1,0 +1,567 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin-when-crossorigin" />
+    <meta name="description" content="Redis做为单机缓存使用建议 前言 由于原来项目使用的缓存中间件无法在国产麒麟操作系统里面使用，准备在项目中引入redis做为单机缓存。 配置优化建议 配置redis服务以守护进程启动 Redis默" />
+    <meta property="og:description" content="Redis做为单机缓存使用建议 前言 由于原来项目使用的缓存中间件无法在国产麒麟操作系统里面使用，准备在项目中引入redis做为单机缓存。 配置优化建议 配置redis服务以守护进程启动 Redis默" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Redis做为单机缓存使用建议 - 皇家救星 - 博客园</title>
+    <link id="favicon" rel="shortcut icon" href="//common.cnblogs.com/favicon.svg" type="image/svg+xml" />
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=6tvK5XC6GPbg3p_sy7wzz_2291HoYACr4440iKBzQIw" />
+    <link id="MainCss" rel="stylesheet" href="/skins/simpleblue/bundle-simpleblue.min.css?v=2hjghzSZyhYA1HxvSxKnXih3JbC120DBjeO9V9T_nSs" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/simpleblue/bundle-simpleblue-mobile.min.css?v=3tvwgOOqUo3RpS6gGzEdK0LbptOPv4Bx7M85_UAnFGs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/kingstarer/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/kingstarer/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/kingstarer/wlwmanifest.xml" />
+    <script>
+        var currentBlogId = 234136;
+        var currentBlogApp = 'kingstarer';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var isBlogOwner = false;
+        var skinName = 'SimpleBlue';
+        var visitorUserId = '';
+    </script>
+        <script>
+            var currentPostDateAdded = '2020-03-03 09:32';
+        </script>
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=ZUvfwhWs5fv-s8Nv7WofCOhwKAxiDO928zdWFzhnOPk"></script>
+    
+    
+    
+</head>
+<body class="has-navbar has-bannerbar">
+    <a name="top"></a>
+            <a target="_blank" href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:pc|pp:bokeyuan-huodong-21nianzhongdacu-neiyePCtonglanbanner|pu:21nianzhongdacu-neiyePCtonglanbanner|ci:21nzdc|kw:10224545" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-pc')">
+                <div class="bannerbar aliyun forpc" style="background-size: contain; filter: brightness(0.95); background-image: url(https://img2020.cnblogs.com/blog/35695/202106/35695-20210610183724605-1725070929.jpg)">
+                </div>
+            </a>
+            <div id="bannerbar" class="bannerbar-mobile formobile">
+            <a href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:mb|pp:bokeyuan-huodong-21nianzhongdacu-neiyeyidongduantonglanbanner|pu:21nianzhongdacu-neiyeyidongduantonglanbanner|ci:21nzdc|kw:10224547" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-mobile')">
+                <img src="https://img2020.cnblogs.com/blog/35695/202106/35695-20210610184806729-1738888164.jpg" alt="" />
+            </a>
+            </div>
+    <div id="top_nav" class="navbar forpc">
+        <nav id="nav_main" class="navbar-main">
+            <ul id="nav_left" class="navbar-list navbar-left">
+                <li class="navbar-branding"><a href="https://www.cnblogs.com/" title="开发者的网上家园"><img src="/images/logo.svg?v=R9M0WmLAIPVydmdzE2keuvnjl-bPR7_35oHqtiBzGsM" alt="博客园Logo" /></a></li>
+                <li><a href="/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-sitehome')">首页</a></li>
+                <li><a href="https://news.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-news')">新闻</a></li>
+                <li><a href="https://q.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-q')">博问</a></li>
+                <li><a id="nav_brandzone" href="https://brands.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-brands')">专区</a></li>
+                <li><a href="https://ing.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-ing')">闪存</a></li>
+                <li><a href="https://edu.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-edu')">班级</a></li>
+            </ul>
+            <ul id="nav_right" class="navbar-list navbar-right">
+                <li>
+                    <form id="zzk_search" class="navbar-search" action="https://zzk.cnblogs.com/s" method="get">
+                        <input name="w" id="zzk_search_input" placeholder="代码改变世界" type="text" tabindex="3" />
+                        <button type="submit" id="zzk_search_button">
+                            <img src="/images/aggsite/search.svg" alt="搜索" />
+                        </button>
+                    </form>
+                </li>
+                <li id="navbar_login_status" class="navbar-list">
+                    <a class="navbar-user-info navbar-blog" href="https://i.cnblogs.com/EditPosts.aspx?opt=1" alt="写随笔" title="写随笔">
+                        <img id="new_post_icon" class="navbar-icon" src="/images/aggsite/newpost.svg" alt="写随笔" />
+                    </a>
+                    <a id="navblog-myblog-icon" class="navbar-user-info navbar-blog" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx" alt="我的博客" title="我的博客">
+                        <img id="myblog_icon" class="navbar-icon" src="/images/aggsite/myblog.svg" alt="我的博客" />
+                    </a>
+                    <a class="navbar-user-info navbar-message navbar-icon-wrapper" href="https://msg.cnblogs.com/" alt="短消息" title="短消息">
+                        <img id="msg_icon" class="navbar-icon" src="/images/aggsite/message.svg?v=J0WS2P2iPgaIVgXxcAhliw4AFZIpaTWxtdoNAv9eiCA" alt="短消息" />
+                        <span id="msg_count" style="display: none"></span>
+                    </a>
+                    <div id="user_info" class="navbar-user-info dropdown">
+                        <a class="dropdown-button" href="https://home.cnblogs.com/">
+                            <img id="user_icon" class="navbar-avatar" src="/images/aggsite/avatar-default.svg" alt="用户头像" />
+                        </a>
+                        <div class="dropdown-menu">
+                            <a id="navblog-myblog-text" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx">我的博客</a>
+                            <a href="https://home.cnblogs.com/">我的园子</a>
+                            <a href="https://account.cnblogs.com/settings/account">账号设置</a>
+                            <a href="javascript:void(0)" id="navbar_lite_mode_toggle" title="简洁模式会使用简洁款皮肤显示所有博客">
+    简洁模式 <img id="navbar_lite_mode_on" src="/images/lite-mode-check.svg" class="hide" /><span id="navbar_lite_mode_spinner" class="hide">...</span>
+</a>
+                            <a href="javascript:void(0)" onclick="account.logout();">退出登录</a>
+                        </div>
+                    </div>
+                    <a class="navbar-anonymous" href="https://account.cnblogs.com/signup/">注册</a>
+                    <a class="navbar-anonymous" href="javascript:void(0);" onclick="account.login()">登录</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    
+    <div id="home">
+    <div id="header">
+        <div id="blogTitle">
+            <div class="title"><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/kingstarer/">皇家救星</a>
+</div>
+<div class="subtitle"></div>
+
+        </div>
+        <div id="navigator">
+            
+<ul id="navList">
+    <li id="nav_sitehome"><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+    <li id="nav_myhome">
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/kingstarer/">
+首页</a>
+</li>
+    <li id="nav_newpost">
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+    <li id="nav_contact">
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E7%9A%87%E5%AE%B6%E6%95%91%E6%98%9F">
+联系</a></li>
+    <li id="nav_rss">
+<a id="blog_nav_rss" class="menu" href="javascript:void(0)" data-rss="https://www.cnblogs.com/kingstarer/rss/">
+订阅</a></li>
+    <li id="nav_admin">
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+            <div class="blogStats">
+                <div id="blog_stats_place_holder"><script>loadBlogStats();</script></div>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div id="mainContent">
+            <div class="forFlow">
+                <div id="post_detail">
+    <div id="topics">
+        <div class="post">
+            <h1 class="postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2 vertical-middle" href="https://www.cnblogs.com/kingstarer/p/12400574.html">
+    <span>Redis做为单机缓存使用建议</span>
+    
+
+
+
+</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                <div id="cnblogs_post_body" class="blogpost-body blogpost-body-html">
+<h1 align="center">Redis做为单机缓存使用建议</h1>
+<p>&nbsp;</p>
+<h3>前言</h3>
+<p>&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;由于原来项目使用的缓存中间件无法在国产麒麟操作系统里面使用，准备在项目中引入redis做为单机缓存。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+<h3>配置优化建议</h3>
+<h4>配置redis服务以守护进程启动</h4>
+<p>&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;Redis默认不是以守护进程的方式运行，可以通过将配置项daemonize修改为yes，这样启动redis-server后会自动在后台运行。</p>
+<h4>安全配置</h4>
+<p>&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;将bind配置为127.0.0.1可以避免redis受外部攻击。另外使用requirepass配置项，可以设置访问redis服务器数据时先要输入密码。</p>
+<p>一个小遗憾是redis只支持在配置文件中使用明文保存访问密码，这里提供一个动态生成配置文件的思路增加安全性：</p>
+<p>&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;首先将redis.conf备份成redis.conf.tml，在里面的requirepass配置好密码密文。</p>
+<p>在启动redis服务前使用其它程序读取redis.conf.tml的requirepass配置项，把密文解密，替换requirepass值生成redis配置文件redis.conf.，启动redis服务后把redis.conf删除，这样就达到保密效果。</p>
+<h4>设置最大内存及内存淘汰策略</h4>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 为避免redis占用内存无限膨胀，导致把系统内存耗尽，建议将maxmemory设置为1024mb。（实际用ps命令查看，会发现redis-server最多会使用比maxmemory多一些的内存）</p>
+<p>同时配置内存淘汰策略maxmemory-policy为allkeys-lru，让redis在内存满时在所有的key中使用LRU算法对数据进行淘汰。</p>
+<h4>日志文件配置</h4>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Redis提供了logfile配置项，可以指定日志输出位置。但默认情况下redis会把所有日志输出到同一个文件，天常日久，这个日志文件会越积越大。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 建议修改redis的源码，把里面的redisLog函数改为按天输出日志。</p>
+<h4>持久化配置</h4>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 由于我们只需要使用redis做数据库缓存，所以不需要持久化。也不需要担心redis重启出现“缓存雪崩”的现象，因为我们业务服务器有很多台，不会同时重启。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 单台业务服务器tps有限，缓存清零对数据库也不会产生太大压力。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 关闭持久化方法把原来的save配置屏蔽，增加save ""</p>
+<h4>慢查询配置</h4>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 设置slowlog-log-slower-than 5000，把所有响应时间大于5ms的请求记录起来，方便出故障时定位问题。</p>
+<h4>高风险命令配置</h4>
+<p>&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;有一些redis命令会消耗redis服务器比较多资源，导致查询缓存效率下降。为了防止新手误操作，我们可以把这些命令改名，配置如下：</p>
+<p>rename-command MONITOR "DANGEROUS_CMD_MONITOR"</p>
+<p>rename-command FLUSHALL "DANGEROUS_CMD_FLUSHALL"</p>
+<p>rename-command FLUSHDB&nbsp; "DANGEROUS_CMD_FLUSHDB"</p>
+<p>rename-command CONFIG&nbsp;&nbsp; "DANGEROUS_CMD_CONFIG"</p>
+<p>rename-command KEYS&nbsp;&nbsp;&nbsp;&nbsp; "DANGEROUS_CMD_KEYS"</p>
+<p>&nbsp;</p>
+<h4>优化前后性能测试比较</h4>
+<p>&nbsp;</p>
+<p>优化前：</p>
+<p><em>&nbsp;</em></p>
+<div class="cnblogs_code">
+<pre>[huangcihui:/home/huangcihui] redis-benchmark -h <span style="color: rgba(128, 0, 128, 1)">127.0</span>.<span style="color: rgba(128, 0, 128, 1)">0.1</span> -p <span style="color: rgba(128, 0, 128, 1)">6379</span> -c <span style="color: rgba(128, 0, 128, 1)">100</span> -n <span style="color: rgba(128, 0, 128, 1)">100000</span>  -k <span style="color: rgba(128, 0, 128, 1)">1</span> -e  -q -r <span style="color: rgba(128, 0, 128, 1)">10000</span>  -d <span style="color: rgba(128, 0, 128, 1)">512</span><span style="color: rgba(0, 0, 0, 1)">
+
+PING_INLINE: </span><span style="color: rgba(128, 0, 128, 1)">56148.23</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+PING_BULK: </span><span style="color: rgba(128, 0, 128, 1)">55617.35</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+SET: </span><span style="color: rgba(128, 0, 128, 1)">57570.52</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+GET: </span><span style="color: rgba(128, 0, 128, 1)">56085.25</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+INCR: </span><span style="color: rgba(128, 0, 128, 1)">55309.73</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+LPUSH: </span><span style="color: rgba(128, 0, 128, 1)">54764.51</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+RPUSH: </span><span style="color: rgba(128, 0, 128, 1)">57570.52</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+LPOP: </span><span style="color: rgba(128, 0, 128, 1)">54644.81</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+RPOP: </span><span style="color: rgba(128, 0, 128, 1)">54884.74</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+SADD: </span><span style="color: rgba(128, 0, 128, 1)">50327.12</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+HSET: </span><span style="color: rgba(128, 0, 128, 1)">58445.36</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+SPOP: </span><span style="color: rgba(128, 0, 128, 1)">53191.49</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+LPUSH (needed to benchmark LRANGE): </span><span style="color: rgba(128, 0, 128, 1)">54945.05</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+LRANGE_100 (first </span><span style="color: rgba(128, 0, 128, 1)">100</span> elements): <span style="color: rgba(128, 0, 128, 1)">11693.17</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+LRANGE_300 (first </span><span style="color: rgba(128, 0, 128, 1)">300</span> elements): <span style="color: rgba(128, 0, 128, 1)">3824.09</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+LRANGE_500 (first </span><span style="color: rgba(128, 0, 128, 1)">450</span> elements): <span style="color: rgba(128, 0, 128, 1)">2342.19</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+LRANGE_600 (first </span><span style="color: rgba(128, 0, 128, 1)">600</span> elements): <span style="color: rgba(128, 0, 128, 1)">1671.12</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+MSET (</span><span style="color: rgba(128, 0, 128, 1)">10</span> keys): <span style="color: rgba(128, 0, 128, 1)">40192.93</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+ 
+
+[huangcihui:</span>/home/huangcihui] redis-benchmark -h <span style="color: rgba(128, 0, 128, 1)">127.0</span>.<span style="color: rgba(128, 0, 128, 1)">0.1</span> -p <span style="color: rgba(128, 0, 128, 1)">6379</span> -c <span style="color: rgba(128, 0, 128, 1)">100</span> -n <span style="color: rgba(128, 0, 128, 1)">100000</span>  -k <span style="color: rgba(128, 0, 128, 1)">1</span> -e  -q -r <span style="color: rgba(128, 0, 128, 1)">10000</span>  -d <span style="color: rgba(128, 0, 128, 1)">512</span><span style="color: rgba(0, 0, 0, 1)">
+
+PING_INLINE: </span><span style="color: rgba(128, 0, 128, 1)">55340.34</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+PING_BULK: </span><span style="color: rgba(128, 0, 128, 1)">54854.64</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+SET: </span><span style="color: rgba(128, 0, 128, 1)">53937.43</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+GET: </span><span style="color: rgba(128, 0, 128, 1)">54347.82</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+INCR: </span><span style="color: rgba(128, 0, 128, 1)">52910.05</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+LPUSH: </span><span style="color: rgba(128, 0, 128, 1)">54674.69</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+RPUSH: </span><span style="color: rgba(128, 0, 128, 1)">51894.13</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+LPOP: </span><span style="color: rgba(128, 0, 128, 1)">53676.86</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+RPOP: </span><span style="color: rgba(128, 0, 128, 1)">53022.27</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+SADD: </span><span style="color: rgba(128, 0, 128, 1)">53676.86</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+HSET: </span><span style="color: rgba(128, 0, 128, 1)">55401.66</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+SPOP: </span><span style="color: rgba(128, 0, 128, 1)">56085.25</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+LPUSH (needed to benchmark LRANGE): </span><span style="color: rgba(128, 0, 128, 1)">54347.82</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+LRANGE_100 (first </span><span style="color: rgba(128, 0, 128, 1)">100</span> elements): <span style="color: rgba(128, 0, 128, 1)">11160.71</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+LRANGE_300 (first </span><span style="color: rgba(128, 0, 128, 1)">300</span> elements): <span style="color: rgba(128, 0, 128, 1)">3383.98</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+LRANGE_500 (first </span><span style="color: rgba(128, 0, 128, 1)">450</span> elements): <span style="color: rgba(128, 0, 128, 1)">2246.33</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+LRANGE_600 (first </span><span style="color: rgba(128, 0, 128, 1)">600</span> elements): <span style="color: rgba(128, 0, 128, 1)">1592.66</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+MSET (</span><span style="color: rgba(128, 0, 128, 1)">10</span> keys): <span style="color: rgba(128, 0, 128, 1)">37622.27</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+ 
+
+[huangcihui:</span>/home/huangcihui] redis-benchmark -h <span style="color: rgba(128, 0, 128, 1)">127.0</span>.<span style="color: rgba(128, 0, 128, 1)">0.1</span> -p <span style="color: rgba(128, 0, 128, 1)">6379</span> -c <span style="color: rgba(128, 0, 128, 1)">100</span> -n <span style="color: rgba(128, 0, 128, 1)">100000</span>  -k <span style="color: rgba(128, 0, 128, 1)">1</span> -e  -q -r <span style="color: rgba(128, 0, 128, 1)">10000</span>  -d <span style="color: rgba(128, 0, 128, 1)">512</span><span style="color: rgba(0, 0, 0, 1)">
+
+PING_INLINE: </span><span style="color: rgba(128, 0, 128, 1)">54734.54</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+PING_BULK: </span><span style="color: rgba(128, 0, 128, 1)">54024.85</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+SET: </span><span style="color: rgba(128, 0, 128, 1)">54854.64</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+GET: </span><span style="color: rgba(128, 0, 128, 1)">52798.31</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+INCR: </span><span style="color: rgba(128, 0, 128, 1)">55463.12</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+LPUSH: </span><span style="color: rgba(128, 0, 128, 1)">55432.37</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+RPUSH: </span><span style="color: rgba(128, 0, 128, 1)">55834.73</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+LPOP: </span><span style="color: rgba(128, 0, 128, 1)">54495.91</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+RPOP: </span><span style="color: rgba(128, 0, 128, 1)">53705.69</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+SADD: </span><span style="color: rgba(128, 0, 128, 1)">52521.01</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+HSET: </span><span style="color: rgba(128, 0, 128, 1)">54229.93</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+SPOP: </span><span style="color: rgba(128, 0, 128, 1)">54585.15</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+LPUSH (needed to benchmark LRANGE): </span><span style="color: rgba(128, 0, 128, 1)">55648.30</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+LRANGE_100 (first </span><span style="color: rgba(128, 0, 128, 1)">100</span> elements): <span style="color: rgba(128, 0, 128, 1)">11225.86</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+LRANGE_300 (first </span><span style="color: rgba(128, 0, 128, 1)">300</span> elements): <span style="color: rgba(128, 0, 128, 1)">3598.29</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+LRANGE_500 (first </span><span style="color: rgba(128, 0, 128, 1)">450</span> elements): <span style="color: rgba(128, 0, 128, 1)">2222.77</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+LRANGE_600 (first </span><span style="color: rgba(128, 0, 128, 1)">600</span> elements): <span style="color: rgba(128, 0, 128, 1)">1620.25</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+MSET (</span><span style="color: rgba(128, 0, 128, 1)">10</span> keys): <span style="color: rgba(128, 0, 128, 1)">38684.72</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+ </span></pre>
+</div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>优化后：</p>
+<p><em>&nbsp;</em></p>
+<div class="cnblogs_code">
+<pre>[huangcihui:/home/huangcihui] redis-benchmark -h <span style="color: rgba(128, 0, 128, 1)">127.0</span>.<span style="color: rgba(128, 0, 128, 1)">0.1</span> -p <span style="color: rgba(128, 0, 128, 1)">6379</span> -c <span style="color: rgba(128, 0, 128, 1)">100</span> -n <span style="color: rgba(128, 0, 128, 1)">100000</span>  -k <span style="color: rgba(128, 0, 128, 1)">1</span> -e  -q -r <span style="color: rgba(128, 0, 128, 1)">10000</span>  -d <span style="color: rgba(128, 0, 128, 1)">512</span> -<span style="color: rgba(0, 0, 0, 1)">a pass123
+
+PING_INLINE: </span><span style="color: rgba(128, 0, 128, 1)">51361.07</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+PING_BULK: </span><span style="color: rgba(128, 0, 128, 1)">46838.41</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+SET: </span><span style="color: rgba(128, 0, 128, 1)">49043.65</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+GET: </span><span style="color: rgba(128, 0, 128, 1)">50150.45</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+INCR: </span><span style="color: rgba(128, 0, 128, 1)">51786.64</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+LPUSH: </span><span style="color: rgba(128, 0, 128, 1)">55493.89</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+RPUSH: </span><span style="color: rgba(128, 0, 128, 1)">50150.45</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+LPOP: </span><span style="color: rgba(128, 0, 128, 1)">56915.20</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+RPOP: </span><span style="color: rgba(128, 0, 128, 1)">55928.41</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+SADD: </span><span style="color: rgba(128, 0, 128, 1)">56369.79</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+HSET: </span><span style="color: rgba(128, 0, 128, 1)">58651.02</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+SPOP: </span><span style="color: rgba(128, 0, 128, 1)">57703.40</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+LPUSH (needed to benchmark LRANGE): </span><span style="color: rgba(128, 0, 128, 1)">56593.10</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+LRANGE_100 (first </span><span style="color: rgba(128, 0, 128, 1)">100</span> elements): <span style="color: rgba(128, 0, 128, 1)">11723.33</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+LRANGE_300 (first </span><span style="color: rgba(128, 0, 128, 1)">300</span> elements): <span style="color: rgba(128, 0, 128, 1)">3954.76</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+LRANGE_500 (first </span><span style="color: rgba(128, 0, 128, 1)">450</span> elements): <span style="color: rgba(128, 0, 128, 1)">2504.95</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+LRANGE_600 (first </span><span style="color: rgba(128, 0, 128, 1)">600</span> elements): <span style="color: rgba(128, 0, 128, 1)">1733.61</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+MSET (</span><span style="color: rgba(128, 0, 128, 1)">10</span> keys): <span style="color: rgba(128, 0, 128, 1)">44444.45</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+ 
+
+[huangcihui:</span>/home/huangcihui] redis-benchmark -h <span style="color: rgba(128, 0, 128, 1)">127.0</span>.<span style="color: rgba(128, 0, 128, 1)">0.1</span> -p <span style="color: rgba(128, 0, 128, 1)">6379</span> -c <span style="color: rgba(128, 0, 128, 1)">100</span> -n <span style="color: rgba(128, 0, 128, 1)">100000</span>  -k <span style="color: rgba(128, 0, 128, 1)">1</span> -e  -q -r <span style="color: rgba(128, 0, 128, 1)">10000</span>  -d <span style="color: rgba(128, 0, 128, 1)">512</span> -<span style="color: rgba(0, 0, 0, 1)">a pass123
+
+PING_INLINE: </span><span style="color: rgba(128, 0, 128, 1)">57339.45</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+PING_BULK: </span><span style="color: rgba(128, 0, 128, 1)">56561.09</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+SET: </span><span style="color: rgba(128, 0, 128, 1)">56116.72</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+GET: </span><span style="color: rgba(128, 0, 128, 1)">56625.14</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+INCR: </span><span style="color: rgba(128, 0, 128, 1)">57142.86</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+LPUSH: </span><span style="color: rgba(128, 0, 128, 1)">59880.24</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+RPUSH: </span><span style="color: rgba(128, 0, 128, 1)">51387.46</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+LPOP: </span><span style="color: rgba(128, 0, 128, 1)">51599.59</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+RPOP: </span><span style="color: rgba(128, 0, 128, 1)">51334.70</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+SADD: </span><span style="color: rgba(128, 0, 128, 1)">55865.92</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+HSET: </span><span style="color: rgba(128, 0, 128, 1)">57937.43</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+SPOP: </span><span style="color: rgba(128, 0, 128, 1)">58719.91</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+LPUSH (needed to benchmark LRANGE): </span><span style="color: rgba(128, 0, 128, 1)">56625.14</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+LRANGE_100 (first </span><span style="color: rgba(128, 0, 128, 1)">100</span> elements): <span style="color: rgba(128, 0, 128, 1)">11845.53</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+LRANGE_300 (first </span><span style="color: rgba(128, 0, 128, 1)">300</span> elements): <span style="color: rgba(128, 0, 128, 1)">3999.20</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+LRANGE_500 (first </span><span style="color: rgba(128, 0, 128, 1)">450</span> elements): <span style="color: rgba(128, 0, 128, 1)">2414.70</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+LRANGE_600 (first </span><span style="color: rgba(128, 0, 128, 1)">600</span> elements): <span style="color: rgba(128, 0, 128, 1)">1702.16</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+MSET (</span><span style="color: rgba(128, 0, 128, 1)">10</span> keys): <span style="color: rgba(128, 0, 128, 1)">39494.47</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+ 
+
+[huangcihui:</span>/home/huangcihui] redis-benchmark -h <span style="color: rgba(128, 0, 128, 1)">127.0</span>.<span style="color: rgba(128, 0, 128, 1)">0.1</span> -p <span style="color: rgba(128, 0, 128, 1)">6379</span> -c <span style="color: rgba(128, 0, 128, 1)">100</span> -n <span style="color: rgba(128, 0, 128, 1)">100000</span>  -k <span style="color: rgba(128, 0, 128, 1)">1</span> -e  -q -r <span style="color: rgba(128, 0, 128, 1)">10000</span>  -d <span style="color: rgba(128, 0, 128, 1)">512</span> -<span style="color: rgba(0, 0, 0, 1)">a pass123
+
+PING_INLINE: </span><span style="color: rgba(128, 0, 128, 1)">51786.64</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+PING_BULK: </span><span style="color: rgba(128, 0, 128, 1)">38417.21</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+SET: </span><span style="color: rgba(128, 0, 128, 1)">55524.71</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+GET: </span><span style="color: rgba(128, 0, 128, 1)">39047.25</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+INCR: </span><span style="color: rgba(128, 0, 128, 1)">44822.95</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+LPUSH: </span><span style="color: rgba(128, 0, 128, 1)">53276.50</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+RPUSH: </span><span style="color: rgba(128, 0, 128, 1)">58582.31</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+LPOP: </span><span style="color: rgba(128, 0, 128, 1)">57208.24</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+RPOP: </span><span style="color: rgba(128, 0, 128, 1)">55066.08</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+SADD: </span><span style="color: rgba(128, 0, 128, 1)">52910.05</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+HSET: </span><span style="color: rgba(128, 0, 128, 1)">55187.64</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+SPOP: </span><span style="color: rgba(128, 0, 128, 1)">57405.28</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+LPUSH (needed to benchmark LRANGE): </span><span style="color: rgba(128, 0, 128, 1)">57570.52</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+LRANGE_100 (first </span><span style="color: rgba(128, 0, 128, 1)">100</span> elements): <span style="color: rgba(128, 0, 128, 1)">10960.11</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+LRANGE_300 (first </span><span style="color: rgba(128, 0, 128, 1)">300</span> elements): <span style="color: rgba(128, 0, 128, 1)">3794.20</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+LRANGE_500 (first </span><span style="color: rgba(128, 0, 128, 1)">450</span> elements): <span style="color: rgba(128, 0, 128, 1)">2355.44</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+LRANGE_600 (first </span><span style="color: rgba(128, 0, 128, 1)">600</span> elements): <span style="color: rgba(128, 0, 128, 1)">1705.41</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+MSET (</span><span style="color: rgba(128, 0, 128, 1)">10</span> keys): <span style="color: rgba(128, 0, 128, 1)">44130.62</span><span style="color: rgba(0, 0, 0, 1)"> requests per second
+
+ </span></pre>
+</div>
+<p>&nbsp;</p>
+<p>经优化后运行效率会有小提升</p>
+<h3>使用约定</h3>
+<h4>集群</h4>
+<p>&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;Redis提供三种集群模式，分别是主从，哨兵，分片三种。但因为我们只打算做为单机缓存，所以不需要配置。</p>
+<h4>合理使用数据库和键名前缀区分业务</h4>
+<p>&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;Redis提供了多数据库配置，最多支持256个数据库。我们可以规定不同业务模块使用不同的数据库，这样可以避免数据库主键名称冲突。</p>
+<p>但即使同一业务模块，也经常容易出现主键名称相同的情况，所以键名需要制定一些规范：统一使用”前缀:” + 具体值。</p>
+<p>例如set uname:13560453764 huangcihui</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 前缀可以使用excel管理起来，这样基本可以解决键名冲突问题。</p>
+<h4>失效时间</h4>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 最好对所有键设置失效时间，失效时间最好是某个范围内的随机数，这样可以避免缓存同时失效的情况。</p>
+<p>&nbsp;</p>
+<h4>压测</h4>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 部署redis前最好先执行压测命令，看一下性能是否有异常。如果有异常需要考虑是否调整操作系统参数。</p>
+<p>redis-benchmark -h 127.0.0.1 -p 6379 -c 100 -n 100000&nbsp; -k 1 -e -a pass123 -q</p>
+<p>注意需要使用-k参数，设置长连接，不然测试结果性能会差很多。（我的机器上测试相差5倍）</p>
+<p>&nbsp;</p>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-03-03 09:32</span>&nbsp;
+<a href="https://www.cnblogs.com/kingstarer/">皇家救星</a>&nbsp;
+阅读(<span id="post_view_count">923</span>)&nbsp;
+评论(<span id="post_comment_count">0</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12400574" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12400574);return false;">收藏</a>&nbsp;
+<a href="javascript:void(0)" onclick="reportManager.report({ currentUserId: '', targetType: 'blogPost', targetId: '12400574', targetLink: 'https://www.cnblogs.com/kingstarer/p/12400574.html', title: 'Redis做为单机缓存使用建议' })">举报</a></div>
+        </div>
+        <script src="https://common.cnblogs.com/highlight/10.3.1/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 234136, cb_blogApp = 'kingstarer', cb_blogUserGuid = '6c01f56e-ee22-e511-b908-9dcfd8948a71';
+    var cb_entryId = 12400574, cb_entryCreatedDate = '2020-03-03 09:32', cb_postType = 1;
+    updatePostStats(
+        [cb_entryId],
+        function(id, count) { $("#post_view_count").text(count) },
+        function(id, count) { $("#post_comment_count").text(count) })
+    zoomManager.apply("#cnblogs_post_body img:not(.code_img_closed):not(.code_img_opened)");
+</script>
+        <a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <div id="cnblogs_c1" class="under-post-card">
+        <div id='div-gpt-ad-1592365906576-0' style='width: 300px; height: 250px;'></div>
+    </div>
+    <div id="under_post_card1"></div>
+    <div id="cnblogs_c2" class="under-post-card">
+        <div id='div-gpt-ad-1592366332455-0' style='width: 468px; height: 60px;'></div>
+    </div>
+    <div id="under_post_card2"></div>
+    <div id="HistoryToday" class="under-post-card"></div>
+    <script type="text/javascript">
+       var commentManager = new blogCommentManager();
+       commentManager.renderComments(0);
+       fixPostBody();
+       deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);       deliverT2();
+       deliverC1C2();
+       loadNewsAndKb();
+       loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);       LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+       GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+       loadOptUnderPost();
+       GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+
+    </div>
+</div>
+            </div>
+        </div>
+
+        <div id="sideBar">
+            <div id="sideBarMain">
+                <div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+<div id="sidebar_c3"></div>
+                <div id="calendar"><div id="blog-calendar" style="display:none"></div></div>                
+                <script>loadBlogDefaultCalendar();</script>
+                <div id="leftcontentcontainer">
+                    <!-- begin:SingleColumn -->
+                    <div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+                    <!-- end:  SingleColumn -->
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div id="footer">
+        <!--done-->
+Copyright &copy; 2021 皇家救星
+<br /><span id="poweredby">Powered by .NET 5.0 on Kubernetes</span>
+
+    </div>
+</div>
+
+    
+
+    <input type="hidden" id="antiforgery_token" value="CfDJ8L-rpLgFVEJMgssCVvNUAjuolzsk54Omv0AU_gxygl24Wy93iirQJ3B9Ep4Vdi1z0dO7OhYvAEkUbq4gJuBtw6ua1VZZGy10EUhKddYG9JIqOoPegY3DEhB81RDmKpKH2Xhy2Fnq6kFrQ7Dd_FS-b9g" />
+</body>
+</html>

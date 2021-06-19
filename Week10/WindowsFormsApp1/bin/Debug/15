@@ -1,0 +1,452 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin-when-crossorigin" />
+    <meta name="description" content="这是我好多年前，模仿awk写的。 awk大家都比较熟悉，使用awk处理文件，读取文件，分割字段这些工作awk自己帮你实现了。 程序员只要编写业务逻辑代码，并且awk还提供了很多常用的字符串操作函数，可" />
+    <meta property="og:description" content="这是我好多年前，模仿awk写的。 awk大家都比较熟悉，使用awk处理文件，读取文件，分割字段这些工作awk自己帮你实现了。 程序员只要编写业务逻辑代码，并且awk还提供了很多常用的字符串操作函数，可" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>分享一个的c++写的，模仿awk的框架类CAwkDoc - 皇家救星 - 博客园</title>
+    <link id="favicon" rel="shortcut icon" href="//common.cnblogs.com/favicon.svg" type="image/svg+xml" />
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=6tvK5XC6GPbg3p_sy7wzz_2291HoYACr4440iKBzQIw" />
+    <link id="MainCss" rel="stylesheet" href="/skins/simpleblue/bundle-simpleblue.min.css?v=2hjghzSZyhYA1HxvSxKnXih3JbC120DBjeO9V9T_nSs" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/simpleblue/bundle-simpleblue-mobile.min.css?v=3tvwgOOqUo3RpS6gGzEdK0LbptOPv4Bx7M85_UAnFGs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/kingstarer/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/kingstarer/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/kingstarer/wlwmanifest.xml" />
+    <script>
+        var currentBlogId = 234136;
+        var currentBlogApp = 'kingstarer';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var isBlogOwner = false;
+        var skinName = 'SimpleBlue';
+        var visitorUserId = '';
+    </script>
+        <script>
+            var currentPostDateAdded = '2021-01-10 10:32';
+        </script>
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=ZUvfwhWs5fv-s8Nv7WofCOhwKAxiDO928zdWFzhnOPk"></script>
+    
+    
+    
+</head>
+<body class="has-navbar has-bannerbar">
+    <a name="top"></a>
+            <a target="_blank" href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:pc|pp:bokeyuan-huodong-21nianzhongdacu-neiyePCtonglanbanner|pu:21nianzhongdacu-neiyePCtonglanbanner|ci:21nzdc|kw:10224545" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-pc')">
+                <div class="bannerbar aliyun forpc" style="background-size: contain; filter: brightness(0.95); background-image: url(https://img2020.cnblogs.com/blog/35695/202106/35695-20210610183724605-1725070929.jpg)">
+                </div>
+            </a>
+            <div id="bannerbar" class="bannerbar-mobile formobile">
+            <a href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:mb|pp:bokeyuan-huodong-21nianzhongdacu-neiyeyidongduantonglanbanner|pu:21nianzhongdacu-neiyeyidongduantonglanbanner|ci:21nzdc|kw:10224547" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-mobile')">
+                <img src="https://img2020.cnblogs.com/blog/35695/202106/35695-20210610184806729-1738888164.jpg" alt="" />
+            </a>
+            </div>
+    <div id="top_nav" class="navbar forpc">
+        <nav id="nav_main" class="navbar-main">
+            <ul id="nav_left" class="navbar-list navbar-left">
+                <li class="navbar-branding"><a href="https://www.cnblogs.com/" title="开发者的网上家园"><img src="/images/logo.svg?v=R9M0WmLAIPVydmdzE2keuvnjl-bPR7_35oHqtiBzGsM" alt="博客园Logo" /></a></li>
+                <li><a href="/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-sitehome')">首页</a></li>
+                <li><a href="https://news.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-news')">新闻</a></li>
+                <li><a href="https://q.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-q')">博问</a></li>
+                <li><a id="nav_brandzone" href="https://brands.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-brands')">专区</a></li>
+                <li><a href="https://ing.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-ing')">闪存</a></li>
+                <li><a href="https://edu.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-edu')">班级</a></li>
+            </ul>
+            <ul id="nav_right" class="navbar-list navbar-right">
+                <li>
+                    <form id="zzk_search" class="navbar-search" action="https://zzk.cnblogs.com/s" method="get">
+                        <input name="w" id="zzk_search_input" placeholder="代码改变世界" type="text" tabindex="3" />
+                        <button type="submit" id="zzk_search_button">
+                            <img src="/images/aggsite/search.svg" alt="搜索" />
+                        </button>
+                    </form>
+                </li>
+                <li id="navbar_login_status" class="navbar-list">
+                    <a class="navbar-user-info navbar-blog" href="https://i.cnblogs.com/EditPosts.aspx?opt=1" alt="写随笔" title="写随笔">
+                        <img id="new_post_icon" class="navbar-icon" src="/images/aggsite/newpost.svg" alt="写随笔" />
+                    </a>
+                    <a id="navblog-myblog-icon" class="navbar-user-info navbar-blog" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx" alt="我的博客" title="我的博客">
+                        <img id="myblog_icon" class="navbar-icon" src="/images/aggsite/myblog.svg" alt="我的博客" />
+                    </a>
+                    <a class="navbar-user-info navbar-message navbar-icon-wrapper" href="https://msg.cnblogs.com/" alt="短消息" title="短消息">
+                        <img id="msg_icon" class="navbar-icon" src="/images/aggsite/message.svg?v=J0WS2P2iPgaIVgXxcAhliw4AFZIpaTWxtdoNAv9eiCA" alt="短消息" />
+                        <span id="msg_count" style="display: none"></span>
+                    </a>
+                    <div id="user_info" class="navbar-user-info dropdown">
+                        <a class="dropdown-button" href="https://home.cnblogs.com/">
+                            <img id="user_icon" class="navbar-avatar" src="/images/aggsite/avatar-default.svg" alt="用户头像" />
+                        </a>
+                        <div class="dropdown-menu">
+                            <a id="navblog-myblog-text" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx">我的博客</a>
+                            <a href="https://home.cnblogs.com/">我的园子</a>
+                            <a href="https://account.cnblogs.com/settings/account">账号设置</a>
+                            <a href="javascript:void(0)" id="navbar_lite_mode_toggle" title="简洁模式会使用简洁款皮肤显示所有博客">
+    简洁模式 <img id="navbar_lite_mode_on" src="/images/lite-mode-check.svg" class="hide" /><span id="navbar_lite_mode_spinner" class="hide">...</span>
+</a>
+                            <a href="javascript:void(0)" onclick="account.logout();">退出登录</a>
+                        </div>
+                    </div>
+                    <a class="navbar-anonymous" href="https://account.cnblogs.com/signup/">注册</a>
+                    <a class="navbar-anonymous" href="javascript:void(0);" onclick="account.login()">登录</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    
+    <div id="home">
+    <div id="header">
+        <div id="blogTitle">
+            <div class="title"><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/kingstarer/">皇家救星</a>
+</div>
+<div class="subtitle"></div>
+
+        </div>
+        <div id="navigator">
+            
+<ul id="navList">
+    <li id="nav_sitehome"><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+    <li id="nav_myhome">
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/kingstarer/">
+首页</a>
+</li>
+    <li id="nav_newpost">
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+    <li id="nav_contact">
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E7%9A%87%E5%AE%B6%E6%95%91%E6%98%9F">
+联系</a></li>
+    <li id="nav_rss">
+<a id="blog_nav_rss" class="menu" href="javascript:void(0)" data-rss="https://www.cnblogs.com/kingstarer/rss/">
+订阅</a></li>
+    <li id="nav_admin">
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+            <div class="blogStats">
+                <div id="blog_stats_place_holder"><script>loadBlogStats();</script></div>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div id="mainContent">
+            <div class="forFlow">
+                <div id="post_detail">
+    <div id="topics">
+        <div class="post">
+            <h1 class="postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2 vertical-middle" href="https://www.cnblogs.com/kingstarer/p/14257523.html">
+    <span>分享一个的c++写的，模仿awk的框架类CAwkDoc</span>
+    
+
+
+
+</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                <div id="cnblogs_post_body" class="blogpost-body cnblogs-markdown">
+<p>这是我好多年前，模仿awk写的。<br>
+awk大家都比较熟悉，使用awk处理文件，读取文件，分割字段这些工作awk自己帮你实现了。<br>
+程序员只要编写业务逻辑代码，并且awk还提供了很多常用的字符串操作函数，可以方便地调用，所以使用起来很方便。<br>
+但awk脚本毕竟不适合开发复杂的逻辑，而且它提供的库函数也有限，不像c++，有很多第三方库可以调用。<br>
+于是我就想到了写一个框架类，把按行读文件，分割字段这些基本功能实现了，只留下业务逻辑供开发人员自由实现</p>
+<hr>
+<p>这里用了策略模式，程序员把业务逻辑封装成为一个策略类（实现IAwkOneDualItr接口）传给CAwkDoc即可享受CAwkDoc提供的读文件功能。<br>
+最开始考虑过使用模板方法就行，但又担心继承CAwkDoc的程序员覆盖了它的实现，所以觉得还是策略方法好。</p>
+<hr>
+<p>这是我之前用CAwkDoc实现的一个小工具：<a href="https://github.com/kingstarer/kingstarer/tree/master/c%2B%2B/feepacker" target="_blank">代码生成器</a>（<a href="https://github.com/kingstarer/kingstarer/tree/master/c%2B%2B/feepacker%EF%BC%89" target="_blank">https://github.com/kingstarer/kingstarer/tree/master/c%2B%2B/feepacker）</a><br>
+当年这个工具给项目组减轻了不少工作量，我同事们当时特别喜欢。<br>
+可惜项目现在早就凉了，不然这个工具估计还是在用：）<br>
+工具虽然早没用了，但这个代码生成器的思想（代码模板替换）我还是蛮喜欢的，前段时间搞java项目，写了一个curd代码生成器，还是套用了这个方法，使用代码模板思想。</p>
+<hr>
+<p>分享一下CAwkDoc的主要代码</p>
+<p>AwkBase.h</p>
+<pre><code class="language-c++">#pragma once
+#include "AwkFunc.h"
+
+class CAwkDoc;
+class IAwkOneDualItr
+{
+public:
+    virtual int dualBegin(CAwkDoc &amp;Doc) = 0;
+    //返回0代表正常，继续处理下一条 返回1代表退出文本处理直接到End阶段 返回-1代表处理出错，直接退出  
+    virtual int dualOneLine(CAwkDoc &amp;Doc) = 0;
+    virtual int dualEnd(CAwkDoc &amp;Doc) = 0;
+};
+
+class CAwkOneDualItrBase:public IAwkOneDualItr
+{
+public:
+    virtual int dualBegin(CAwkDoc&amp; Doc)
+    {
+        return 0;
+    }
+
+    virtual int dualEnd(CAwkDoc&amp; Doc)
+    {
+        return 0;
+    }
+};
+
+class CAwkDoc
+{
+public:
+    typedef map&lt;string, string&gt; AwkMapType;
+    typedef vector&lt;string&gt; AwkVecType;
+
+public:
+    CAwkDoc(void);
+    CAwkDoc(IAwkOneDualItr* lineopr, const string&amp; filepath);
+    virtual ~CAwkDoc(void);
+    virtual bool run();
+
+    void setFileName(const string&amp; filepath) 
+    { 
+        m_filename = filepath; 
+    }
+
+    void setDelimer(const string delimer) 
+    { 
+        m_delimer = delimer; 
+    }
+
+    vector&lt;string&gt;&amp; Parts()
+    {
+        return m_vecParts;
+    }
+
+    void setStrParam(const string&amp; paramname, const string&amp; paramvalue);
+    string&amp; getStrParam(const string&amp; paramname);
+
+    AwkVecType&amp; getVecParam(const string&amp; paramname);
+    AwkMapType&amp; getMapParam(const string&amp; paramname);
+
+public:
+
+    int m_nf;
+    int m_nr;
+    string m_filename;
+    string m_line;
+    string m_delimer;
+    vector&lt;string&gt; m_vecParts;
+
+
+    map&lt;string, string&gt; m_strParams;
+    map&lt; string, AwkMapType &gt; m_mpParams;
+    map&lt; string, AwkVecType &gt; m_vecParams;
+
+public:
+
+    IAwkOneDualItr *m_lineopr;
+};
+</code></pre>
+<p>AwkBase.cpp</p>
+<pre><code class="language-c++">#include "stdafx.h"
+#include "AwkBase.h"
+
+CAwkDoc::CAwkDoc(void)
+{
+    m_delimer = " ";
+    m_nf = m_nr = 0;
+    m_lineopr = NULL;
+}
+
+CAwkDoc::CAwkDoc(IAwkOneDualItr* lineopr, const string&amp; filepath):
+m_lineopr(lineopr), m_filename(filepath)
+{
+    m_nf = m_nr = 0; 
+    m_delimer = " ";
+}
+
+CAwkDoc::~CAwkDoc(void)
+{
+}
+
+
+bool CAwkDoc::run()
+{
+    //读取文件
+    string inparamStr = FileToString(m_filename);
+
+
+    //将文件分行
+    vector&lt;string&gt; vecLines;
+    SplitStr(inparamStr, "\n", vecLines);
+
+    if (vecLines.size() == 0)
+    {
+        cerr &lt;&lt; "ERR: 文件(" &lt;&lt;  m_filename &lt;&lt; ")为空或不存在!" &lt;&lt; endl;
+        return false;
+    }
+
+    assert(m_lineopr != NULL);
+    m_lineopr-&gt;dualBegin(*this);
+
+    for (size_t i = 0; i &lt; vecLines.size(); i++)
+    {
+        m_line = vecLines[i];
+        if (m_line == "")
+        {
+            continue;
+        }
+
+
+        //删除多余空格(为后面分割做准备)
+        string theline = m_line;
+        //constrictSpace(theline);
+
+        m_nr++;
+        m_nf = SplitStr(theline, m_delimer, m_vecParts);
+
+        if (m_vecParts.size() &lt; 20)
+        {
+            m_vecParts.resize(20);
+        }
+
+        int ret = m_lineopr-&gt;dualOneLine(*this);
+
+        //1是正常结束 -1是异常结束
+        if ( ret == 1 )
+        {
+            break;
+        }
+        else if ( ret == -1 )
+        {
+            return false;
+        }
+    }
+
+    m_lineopr-&gt;dualEnd(*this);
+
+    return true;
+}
+
+void CAwkDoc::setStrParam(const string&amp; paramname, const string&amp; paramvalue)
+{
+    m_strParams[paramname] = paramvalue;
+}
+
+string&amp; CAwkDoc::getStrParam(const string&amp; paramname)
+{
+    return m_strParams[paramname];
+}
+</code></pre>
+
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2021-01-10 10:32</span>&nbsp;
+<a href="https://www.cnblogs.com/kingstarer/">皇家救星</a>&nbsp;
+阅读(<span id="post_view_count">219</span>)&nbsp;
+评论(<span id="post_comment_count">0</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14257523" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(14257523);return false;">收藏</a>&nbsp;
+<a href="javascript:void(0)" onclick="reportManager.report({ currentUserId: '', targetType: 'blogPost', targetId: '14257523', targetLink: 'https://www.cnblogs.com/kingstarer/p/14257523.html', title: '分享一个的c&#x2B;&#x2B;写的，模仿awk的框架类CAwkDoc' })">举报</a></div>
+        </div>
+        <script src="https://common.cnblogs.com/highlight/10.3.1/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 234136, cb_blogApp = 'kingstarer', cb_blogUserGuid = '6c01f56e-ee22-e511-b908-9dcfd8948a71';
+    var cb_entryId = 14257523, cb_entryCreatedDate = '2021-01-10 10:32', cb_postType = 1;
+    updatePostStats(
+        [cb_entryId],
+        function(id, count) { $("#post_view_count").text(count) },
+        function(id, count) { $("#post_comment_count").text(count) })
+    zoomManager.apply("#cnblogs_post_body img:not(.code_img_closed):not(.code_img_opened)");
+</script>
+        <a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <div id="cnblogs_c1" class="under-post-card">
+        <div id='div-gpt-ad-1592365906576-0' style='width: 300px; height: 250px;'></div>
+    </div>
+    <div id="under_post_card1"></div>
+    <div id="cnblogs_c2" class="under-post-card">
+        <div id='div-gpt-ad-1592366332455-0' style='width: 468px; height: 60px;'></div>
+    </div>
+    <div id="under_post_card2"></div>
+    <div id="HistoryToday" class="under-post-card"></div>
+    <script type="text/javascript">
+       var commentManager = new blogCommentManager();
+       commentManager.renderComments(0);
+       fixPostBody();
+       deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);       deliverT2();
+       deliverC1C2();
+       loadNewsAndKb();
+       loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);       LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+       GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+       loadOptUnderPost();
+       GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+
+    </div>
+</div>
+            </div>
+        </div>
+
+        <div id="sideBar">
+            <div id="sideBarMain">
+                <div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+<div id="sidebar_c3"></div>
+                <div id="calendar"><div id="blog-calendar" style="display:none"></div></div>                
+                <script>loadBlogDefaultCalendar();</script>
+                <div id="leftcontentcontainer">
+                    <!-- begin:SingleColumn -->
+                    <div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+                    <!-- end:  SingleColumn -->
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div id="footer">
+        <!--done-->
+Copyright &copy; 2021 皇家救星
+<br /><span id="poweredby">Powered by .NET 5.0 on Kubernetes</span>
+
+    </div>
+</div>
+
+    
+
+    <input type="hidden" id="antiforgery_token" value="CfDJ8L-rpLgFVEJMgssCVvNUAjtV2G7K2yhWLHLoGzDrrBpT030rIAvsXR5PPr-WK8R7huLQffC6Ye-NctSsJXNj-HrSNag9I5D2Mwn7U9Ac34m-X_qMS1YV96zDljBOodJ5JmFwvv5hkEAT0EtELmTe55c" />
+</body>
+</html>

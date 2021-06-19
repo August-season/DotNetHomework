@@ -1,0 +1,953 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin-when-crossorigin" />
+    <meta name="description" content="续上一篇随笔：https://www.cnblogs.com/kingstarer/p/11355612.html《工作碰上的技术问题及处理经验》（三） 我这人记忆力比较差，经常出现有些知识学了不久后" />
+    <meta property="og:description" content="续上一篇随笔：https://www.cnblogs.com/kingstarer/p/11355612.html《工作碰上的技术问题及处理经验》（三） 我这人记忆力比较差，经常出现有些知识学了不久后" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>《工作碰上的技术问题及处理经验》（四） - 皇家救星 - 博客园</title>
+    <link id="favicon" rel="shortcut icon" href="//common.cnblogs.com/favicon.svg" type="image/svg+xml" />
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=6tvK5XC6GPbg3p_sy7wzz_2291HoYACr4440iKBzQIw" />
+    <link id="MainCss" rel="stylesheet" href="/skins/simpleblue/bundle-simpleblue.min.css?v=2hjghzSZyhYA1HxvSxKnXih3JbC120DBjeO9V9T_nSs" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/simpleblue/bundle-simpleblue-mobile.min.css?v=3tvwgOOqUo3RpS6gGzEdK0LbptOPv4Bx7M85_UAnFGs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/kingstarer/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/kingstarer/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/kingstarer/wlwmanifest.xml" />
+    <script>
+        var currentBlogId = 234136;
+        var currentBlogApp = 'kingstarer';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var isBlogOwner = false;
+        var skinName = 'SimpleBlue';
+        var visitorUserId = '';
+    </script>
+        <script>
+            var currentPostDateAdded = '2020-02-01 04:53';
+        </script>
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=ZUvfwhWs5fv-s8Nv7WofCOhwKAxiDO928zdWFzhnOPk"></script>
+    
+    
+    
+</head>
+<body class="has-navbar has-bannerbar">
+    <a name="top"></a>
+            <a target="_blank" href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:pc|pp:bokeyuan-huodong-21nianzhongdacu-neiyePCtonglanbanner|pu:21nianzhongdacu-neiyePCtonglanbanner|ci:21nzdc|kw:10224545" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-pc')">
+                <div class="bannerbar aliyun forpc" style="background-size: contain; filter: brightness(0.95); background-image: url(https://img2020.cnblogs.com/blog/35695/202106/35695-20210610183724605-1725070929.jpg)">
+                </div>
+            </a>
+            <div id="bannerbar" class="bannerbar-mobile formobile">
+            <a href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:mb|pp:bokeyuan-huodong-21nianzhongdacu-neiyeyidongduantonglanbanner|pu:21nianzhongdacu-neiyeyidongduantonglanbanner|ci:21nzdc|kw:10224547" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-mobile')">
+                <img src="https://img2020.cnblogs.com/blog/35695/202106/35695-20210610184806729-1738888164.jpg" alt="" />
+            </a>
+            </div>
+    <div id="top_nav" class="navbar forpc">
+        <nav id="nav_main" class="navbar-main">
+            <ul id="nav_left" class="navbar-list navbar-left">
+                <li class="navbar-branding"><a href="https://www.cnblogs.com/" title="开发者的网上家园"><img src="/images/logo.svg?v=R9M0WmLAIPVydmdzE2keuvnjl-bPR7_35oHqtiBzGsM" alt="博客园Logo" /></a></li>
+                <li><a href="/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-sitehome')">首页</a></li>
+                <li><a href="https://news.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-news')">新闻</a></li>
+                <li><a href="https://q.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-q')">博问</a></li>
+                <li><a id="nav_brandzone" href="https://brands.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-brands')">专区</a></li>
+                <li><a href="https://ing.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-ing')">闪存</a></li>
+                <li><a href="https://edu.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-edu')">班级</a></li>
+            </ul>
+            <ul id="nav_right" class="navbar-list navbar-right">
+                <li>
+                    <form id="zzk_search" class="navbar-search" action="https://zzk.cnblogs.com/s" method="get">
+                        <input name="w" id="zzk_search_input" placeholder="代码改变世界" type="text" tabindex="3" />
+                        <button type="submit" id="zzk_search_button">
+                            <img src="/images/aggsite/search.svg" alt="搜索" />
+                        </button>
+                    </form>
+                </li>
+                <li id="navbar_login_status" class="navbar-list">
+                    <a class="navbar-user-info navbar-blog" href="https://i.cnblogs.com/EditPosts.aspx?opt=1" alt="写随笔" title="写随笔">
+                        <img id="new_post_icon" class="navbar-icon" src="/images/aggsite/newpost.svg" alt="写随笔" />
+                    </a>
+                    <a id="navblog-myblog-icon" class="navbar-user-info navbar-blog" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx" alt="我的博客" title="我的博客">
+                        <img id="myblog_icon" class="navbar-icon" src="/images/aggsite/myblog.svg" alt="我的博客" />
+                    </a>
+                    <a class="navbar-user-info navbar-message navbar-icon-wrapper" href="https://msg.cnblogs.com/" alt="短消息" title="短消息">
+                        <img id="msg_icon" class="navbar-icon" src="/images/aggsite/message.svg?v=J0WS2P2iPgaIVgXxcAhliw4AFZIpaTWxtdoNAv9eiCA" alt="短消息" />
+                        <span id="msg_count" style="display: none"></span>
+                    </a>
+                    <div id="user_info" class="navbar-user-info dropdown">
+                        <a class="dropdown-button" href="https://home.cnblogs.com/">
+                            <img id="user_icon" class="navbar-avatar" src="/images/aggsite/avatar-default.svg" alt="用户头像" />
+                        </a>
+                        <div class="dropdown-menu">
+                            <a id="navblog-myblog-text" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx">我的博客</a>
+                            <a href="https://home.cnblogs.com/">我的园子</a>
+                            <a href="https://account.cnblogs.com/settings/account">账号设置</a>
+                            <a href="javascript:void(0)" id="navbar_lite_mode_toggle" title="简洁模式会使用简洁款皮肤显示所有博客">
+    简洁模式 <img id="navbar_lite_mode_on" src="/images/lite-mode-check.svg" class="hide" /><span id="navbar_lite_mode_spinner" class="hide">...</span>
+</a>
+                            <a href="javascript:void(0)" onclick="account.logout();">退出登录</a>
+                        </div>
+                    </div>
+                    <a class="navbar-anonymous" href="https://account.cnblogs.com/signup/">注册</a>
+                    <a class="navbar-anonymous" href="javascript:void(0);" onclick="account.login()">登录</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    
+    <div id="home">
+    <div id="header">
+        <div id="blogTitle">
+            <div class="title"><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/kingstarer/">皇家救星</a>
+</div>
+<div class="subtitle"></div>
+
+        </div>
+        <div id="navigator">
+            
+<ul id="navList">
+    <li id="nav_sitehome"><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+    <li id="nav_myhome">
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/kingstarer/">
+首页</a>
+</li>
+    <li id="nav_newpost">
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+    <li id="nav_contact">
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E7%9A%87%E5%AE%B6%E6%95%91%E6%98%9F">
+联系</a></li>
+    <li id="nav_rss">
+<a id="blog_nav_rss" class="menu" href="javascript:void(0)" data-rss="https://www.cnblogs.com/kingstarer/rss/">
+订阅</a></li>
+    <li id="nav_admin">
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+            <div class="blogStats">
+                <div id="blog_stats_place_holder"><script>loadBlogStats();</script></div>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div id="mainContent">
+            <div class="forFlow">
+                <div id="post_detail">
+    <div id="topics">
+        <div class="post">
+            <h1 class="postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2 vertical-middle" href="https://www.cnblogs.com/kingstarer/p/12249028.html">
+    <span>《工作碰上的技术问题及处理经验》（四）</span>
+    
+
+
+
+</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                <div id="cnblogs_post_body" class="blogpost-body blogpost-body-html">
+<p>续上一篇随笔：https://www.cnblogs.com/kingstarer/p/11355612.html《工作碰上的技术问题及处理经验》（三）</p>
+<p>&nbsp;</p>
+<p>我这人记忆力比较差，经常出现有些知识学了不久后就忘了，或者有些问题花了很多时间百度解决后，再过一段时间碰上时只有模糊印象，却忘了具体解决方法。</p>
+<p>最近几年工作时我开始有意识地把登记每天工作碰上的技术问题做个简单笔记。</p>
+<p>一般上班时间比较忙，只能草草记了一两句话。等过一段时间，我会把这个笔记整理一下，把问题和处理经验整理通顺，以加深自己的印象。</p>
+<div class="cnblogs_code">
+<pre><span style="color: rgba(128, 0, 128, 1)">20180721</span><span style="color: rgba(0, 0, 0, 1)">:
+    gprof 可以打印出程序运行中各个函数消耗的时间，可以帮助程序员找出众多函数中耗时最多的函数。
+
+</span><span style="color: rgba(128, 0, 128, 1)">20180723</span><span style="color: rgba(0, 0, 0, 1)">:
+    字符集和字符编码的关系：字符集是指字符的集合，也就是一些图形的集合，在字符集里面每个图形会有一个整数值编码。比较常见的是Unicode字符集。虽然为每个字符分配了一个唯一的整数值，但具体怎么用字节来表示每个字符，是由字符编码决定的。字符编码有GBK ASCII UTF8。相同的字节序列使用不同的字符编码解析，会得到不同的字符表整数序列，从而显示出不同字符。因为文件信息里面没有编码这个属性，所以编辑器在读取文件时先要猜测文件的编码方法。如果保存时编码与读取时用的编码不一样，就会出现乱码。
+
+</span><span style="color: rgba(128, 0, 128, 1)">20180802</span><span style="color: rgba(0, 0, 0, 1)">:
+    crontab里面设置MAILTO</span>=<span style="color: rgba(128, 0, 0, 1)">""</span>可以避免脚本出错时产生邮件。（如果不然，时间久了会消耗尽/<span style="color: rgba(0, 0, 0, 1)">var下面的inode节点空间）
+
+    查看哪个目录（不包含子目录）下文件数最多
+    find . </span>-type d | awk <span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">{print "echo $(ls " $0 "|wc -l) " $0}</span><span style="color: rgba(128, 0, 0, 1)">'</span> | sh | sort -n |<span style="color: rgba(0, 0, 0, 1)"> tail
+
+    查看哪个目录（包含子目录）下文件数最多
+    find . </span>-type d | awk <span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">{print "echo $(ls -R " $0 "|wc -l) " $0}</span><span style="color: rgba(128, 0, 0, 1)">'</span> | sh | sort -n |<span style="color: rgba(0, 0, 0, 1)"> tail
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20180803</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天找到sqlplus按退格符不删除字符，而只是显示</span>^<span style="color: rgba(0, 0, 0, 1)">H的解决方法。有两种方法，试过都有效:
+</span><span style="color: rgba(128, 0, 128, 1)">1</span> 使用stty erase ^<span style="color: rgba(0, 0, 0, 1)">H，把删除字符按键改为退格键。
+</span><span style="color: rgba(128, 0, 128, 1)">2</span> 修改SecureCRT会话选项，找到Terminal-&gt;Mapped Keys选项卡，钩选<span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">Other mappings</span><span style="color: rgba(128, 0, 0, 1)">"</span>分组下面两个选项改成一个打钩，另一个不打钩即可。（我是打钩了<span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">Backspace send delete</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">）
+    顺便总结一下SecureCRT其它使用技巧吧:
+a Terminal</span>-&gt;<span style="color: rgba(0, 0, 0, 1)">Emulation 把Scrollback buffer改大点，这样可以看到更多的历史输出
+b 如果服务器使用UTF</span>-8字符编码，需要在Terminal-&gt;appearance把<span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">Character encoding</span><span style="color: rgba(128, 0, 0, 1)">"</span>改为UTF-<span style="color: rgba(0, 0, 0, 1)">8才能正常显示中文。
+c 在Connection</span>-&gt;Logon Actions选项卡可以设置终端登录后自动执行的操作。（如果需要比较复杂的自动登录功能，还可以使用vbs脚本。设置在登录时自动执行vbs。vbs脚本可以使用Script-&gt;<span style="color: rgba(0, 0, 0, 1)">Start Recoding Script根据鼠标键盘操作生成脚本。）
+d terminal</span>-&gt;<span style="color: rgba(0, 0, 0, 1)">Log File选项卡可以设置把操作日志自动输出到日志文件。
+e View</span>-&gt;<span style="color: rgba(0, 0, 0, 1)">Chat Window可以打开文本输入框，可以在文本框写好脚本命令后一次执行（可以使用鼠标辅助编辑）
+f View</span>-&gt;<span style="color: rgba(0, 0, 0, 1)">Button Bar可以打开一个按钮窗口，把常用命令写在一个按钮里面，需要时点击按钮即可自动输出
+g 如果一次打开多个终端，想同时执行一个命令，可以使用交谈窗口（View</span>-&gt;<span style="color: rgba(0, 0, 0, 1)">Chat Window）编辑好命令，然后右键钩先“Send Chat to All Tabs”，再发送
+h 如果打算执行临时记录比较关键的操作日志，可以使用File</span>-&gt;<span style="color: rgba(0, 0, 0, 1)">Log Session功能，可以把操作过程屏幕输出到指定文件
+i Options</span>-&gt;<span style="color: rgba(0, 0, 0, 1)">Global options可以设置“选中文字自动复制”“右（中）键自动粘贴”功能
+j 有时候不小心用cat输出二进制文件后，屏幕会出现花屏。这里使用Edit</span>-&gt;Reset就好了。或者使用echo -e <span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">\xf</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)"> (原理是ascii码14会让屏幕花屏，15可让屏幕恢复正常)
+k 如果需要往服务器输入大量文本（剪贴板都无法容纳），可以先把文本保存到文件。使用Transfer</span>-&gt;<span style="color: rgba(0, 0, 0, 1)">Send ASCII选择发送文件。
+l 有些服务器设置间隔多长时间不操作就会自动断开连接，可以在设置Session options</span>-&gt;terminal选项卡里面<span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">Anti-idle</span><span style="color: rgba(128, 0, 0, 1)">"</span>设置间隔多少秒自动发送字符。（一般是发空格）或者在离开时执行命令while [ <span style="color: rgba(128, 0, 128, 1)">1</span> ]; <span style="color: rgba(0, 0, 255, 1)">do</span> echo; sleep <span style="color: rgba(128, 0, 128, 1)">1</span><span style="color: rgba(0, 0, 0, 1)">; done（可以配置在Button Bar里面的快捷按钮）
+m 如果终端输出字符不满屏，可以考虑是否Session options</span>-&gt;terminal-&gt;emulation-&gt;<span style="color: rgba(0, 0, 0, 1)">Size设置的终端高度和宽度太小。如果不是，看看stty命令设置是否有问题。
+n 如果使用ls </span>--color=<span style="color: rgba(0, 0, 0, 1)">auto输出的内容没有彩色，可能是终端类型设置的问题。
+o 打开多个终端操作时，可以使用锁屏功能防止来回切换时误操作比较重要的终端，ctrl</span>+s锁屏 ctrl+<span style="color: rgba(0, 0, 0, 1)">q解锁
+p 使用ssh2连接服务器时，可以在终端选项卡右击选择</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">Connect SFTP Tab</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">快速打开sftp功能上传或下载文件。
+q secureCRT可以配置端口转发功能，需要使用ssh2连接的服务器才可以用。配置路径:Session options</span>-&gt;Connection-&gt;<span style="color: rgba(0, 0, 0, 1)">PortForwarding
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20180807</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天发现有些同事不知道这两个shell脚本运行技巧:
+    sh </span>-<span style="color: rgba(0, 0, 0, 1)">x 调试运行
+    sh </span>-<span style="color: rgba(0, 0, 0, 1)">n 检查脚本是否有语法错误
+
+    awk需要从屏幕读取信息时可以使用：getline </span>&lt; <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">-</span><span style="color: rgba(128, 0, 0, 1)">"</span>，用户输入会保存在$<span style="color: rgba(128, 0, 128, 1)">0</span>
+
+
+<span style="color: rgba(128, 0, 128, 1)">20180808</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天给同事们准备培训ppt时，我在一个页面里面放了很多元素，通过动画控制出现顺序。
+但发现这样放的元素太多了页面很混乱，不好编辑。后来发现可以暂时隐藏一些暂时不关心的素材，这样编辑起来方便很多。 
+方法：格式</span>-&gt;选择窗格-&gt;<span style="color: rgba(0, 0, 0, 1)">关闭需要隐藏的元素右边的眼睛
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20180810</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天完成gcc在32位win系统编译
+
+</span><span style="color: rgba(128, 0, 128, 1)">20180814</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天发现atof(</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">1F01F00000.01</span><span style="color: rgba(128, 0, 0, 1)">"</span>)得到的值是1.<span style="color: rgba(128, 0, 128, 1)">000000</span><span style="color: rgba(0, 0, 0, 1)">，想来是碰到第一个非数字的字符就返回了
+
+</span><span style="color: rgba(128, 0, 128, 1)">20180815</span><span style="color: rgba(0, 0, 0, 1)">:
+    excel默认筛选数据时碰上空行就会停止，不进行空行后面的数据行的筛选。
+如果要忽略空行先全选，再进行数据筛选。
+    excel 分列第三步可以选中不同列设置数据类型
+
+</span><span style="color: rgba(128, 0, 128, 1)">20180816</span><span style="color: rgba(0, 0, 0, 1)">:
+    vs2010默认if</span>/<span style="color: rgba(0, 0, 0, 1)">else语句块是不能大纲折叠的，需要修改设置
+工具</span>-&gt;选项-&gt;文本编辑器-&gt;C/C++-&gt;格式设置-&gt;<span style="color: rgba(0, 0, 0, 1)">大纲语句块 把False改为True
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20170817</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天发现source insight居然更新了，出了source insight </span><span style="color: rgba(128, 0, 128, 1)">4</span>，对中文支持比较好，而且默认文件编码变成utf-<span style="color: rgba(128, 0, 128, 1)">8</span><span style="color: rgba(0, 0, 0, 1)">。
+之前一直苦恼，现在项目源码是utf</span>-<span style="color: rgba(128, 0, 128, 1)">8</span><span style="color: rgba(0, 0, 0, 1)">，用source insight看比较累。
+    不过用4麻烦的是gbk编码默认显示是乱码，要手动选择编码重新加载。
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20180824</span><span style="color: rgba(0, 0, 0, 1)">:
+    oracle允许在线重建索引增加online选项，对于频繁访问的表进行索引重建可以考虑使用这个特性。
+
+</span><span style="color: rgba(128, 0, 128, 1)">20180907</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天碰到两个问题：</span><span style="color: rgba(128, 0, 128, 1)">1</span><span style="color: rgba(0, 0, 0, 1)"> 对一个sql做逻辑等价修改后执行计划发生比较大变化，导致效率慢很多。
+我们项目原来有一个交易使用的sql里面有类似这样的逻辑：</span><span style="color: rgba(0, 0, 255, 1)">where</span> tran_id <span style="color: rgba(0, 0, 255, 1)">in</span> (<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">T1</span><span style="color: rgba(128, 0, 0, 1)">'</span>, <span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">T2</span><span style="color: rgba(128, 0, 0, 1)">'</span>, ..., <span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">TN</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">)
+    最近为了让这个sql显示更灵活，我们建了一个表，把in子句里面的id全放到表里面，然后把sql改成这样where tran_id </span><span style="color: rgba(0, 0, 255, 1)">in</span> (<span style="color: rgba(0, 0, 255, 1)">select</span> tran_id <span style="color: rgba(0, 0, 255, 1)">from</span><span style="color: rgba(0, 0, 0, 1)"> tbl_tran_inf)
+    结果上线后发现原来只需要运行2秒的sql突然变成60秒。后来查了一下发现是新的sql的tran_id没使用索引。‘
+    这个是一个值得注意的教训，尽管改造前后sql逻辑结果是一样的，但效率却差不少，以后要关注这种非功能变化。
+
+    问题2：
+    我们项目中出现了bug，导致把一些交易的返回报文发给了错误的前端socket。幸好我们每个交易有一个跟踪号，前端系统发现收到的返回报文跟踪号与发出的不一样，抛弃了交易。
+    做异步程序时要多注意报文错乱的问题。
+
+</span><span style="color: rgba(128, 0, 128, 1)">20180909</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天打开一个之前保存在本地的csden博客网页，打开一会后总是会自动跳转到csdn首页。不得以只能关了js。
+网上找了fireforx关闭js的方法:在火狐地址栏输入:about:config。搜索javascript.enabled，然后双击该栏，把值变为false即可
+
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20180910</span><span style="color: rgba(0, 0, 0, 1)">:
+    使用ssh做端口转发的命令例子：
+    ssh </span>-L <span style="color: rgba(128, 0, 128, 1)">33019</span>:<span style="color: rgba(128, 0, 128, 1)">10.153</span>.<span style="color: rgba(128, 0, 128, 1)">198.92</span>:<span style="color: rgba(128, 0, 128, 1)">33016</span> hg@<span style="color: rgba(128, 0, 128, 1)">132.97</span>.<span style="color: rgba(128, 0, 128, 1)">190.157</span> -<span style="color: rgba(0, 0, 0, 1)">N
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20180911</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天在A_SVN_SRV服务器搭建了svn服务，想在B_SVN_CLIENT服务器上访问（两台都是linux）。不过A_SVN_SRV与B_SVN_CLIENT直连不了。
+幸好有win主机C，可以通过ssh分别访问A_SVN_SRV与B（但a与b不能访问c，只能单向访问）。于是尝试通过secureCRT来做ssh端口转发实现服务互转。
+    配置如下:
+    首先，建session A，通过ssh连接服务器A_SVN_SRV。在session options</span>-&gt;<span style="color: rgba(0, 0, 0, 1)">PortForwarding添加一条映射规则。
+Local端口填3691，Remote端口填36901。这样就实现了将主机A_SVN_SRV的3690端口映射到主机C的36901端口。
+访问C的36901端口就等于访问了A_SVN_SRV的3690端口。
+    接着，建Session B，通过ssh连接服务器B_SVN_CLIENT。在session options</span>-&gt;PortForwarding-&gt;Remote/<span style="color: rgba(0, 0, 0, 1)">X11添加一条映射规则。
+Remote端口填3690，Local端口填36901。这样就实现了将主机C的36901端口映射到主机B_SVN_CLIENT的端口3690端口。
+B_SVN_CLIENT服务器上访问本机3690端口就等于访问了C的36910端口。
+
+    今天在win上用gcc编译代码时碰上一个问题:有一个.c文件编译总是失败，gcc运行到一半会自动退出，报错“MapViewOfFileEx:尝试访问无效地址”。
+    编译其它.c没问题，就这个总是报错。于是尝试用</span><span style="color: rgba(0, 0, 255, 1)">#if</span> 0屏蔽部分代码再编译，逐步缩小编译代码范围。最终确定是由于包含了某个头文件时出现问题。并且把这个头文件名字改一下，编译也能通过。<span style="color: rgba(0, 0, 0, 1)">
+    怀疑是由于有重名头文件导致的。到硬盘找了一下，发现这个头文件在目录里面有一个对应的.gch文件，删了再重新编译就好了。
+
+</span><span style="color: rgba(128, 0, 128, 1)">20180912</span><span style="color: rgba(0, 0, 0, 1)">:
+    windows下的批处理脚本，可以使用start </span>/b把一个命令在后台启动运行，如start /<span style="color: rgba(0, 0, 0, 1)">b dir
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20180913</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天听一个网友介绍greenplum分布式数据库，号称可以通过增加机器线性增加数据库性能。有机会要试试真假。
+
+    vs 离线安装扩展：把其它机的扩展文件复制到C:\Users\Andrew\AppData\Local\Microsoft\VisualStudio\</span><span style="color: rgba(128, 0, 128, 1)">10.0</span><span style="color: rgba(0, 0, 0, 1)">\Extensions
+然后在扩展管理器就可以看到，启用即可
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20180918</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天从一台机复制svn到另一台机后，启动时总报找不到对应的.so，但我的so也有复制过来的。
+即使我修改了ld_library_path也无效。
+    后来上网找了资料，使用readlef </span>-<span style="color: rgba(0, 0, 0, 1)">d查看程序，发现里面指定了rpath。把so放到rpath指定的路径再启动就好了。
+
+</span><span style="color: rgba(128, 0, 128, 1)">20180919</span><span style="color: rgba(0, 0, 0, 1)">:
+    分布式系统不同组件之前处理同一个业务超时时间要符合漏斗原则。
+    
+    今天写一个头文件，在最后面的</span><span style="color: rgba(0, 0, 255, 1)">#endif</span> 后没加回车，导致其它cpp文件引用它后编译报奇怪的错误，查了好一会。<span style="color: rgba(0, 0, 0, 1)">
+
+    今天编译安装svn服务器，中间make过程耗时很长。后来发现使用make </span>-<span style="color: rgba(0, 0, 0, 1)">j 4启动四个进程同时编译，速度快不少。
+
+</span><span style="color: rgba(128, 0, 128, 1)">20180928</span><span style="color: rgba(0, 0, 0, 1)">:
+    番茄vs助手终于安装好。今年年初由于进了新项目，不能在自己本地写代码，需要到云桌面上开发。云桌面c:</span>/<span style="color: rgba(0, 0, 0, 1)">program file是受限的，没法自行安装程序。
+    开始时跟着原来的团队一样，使用source insight 3开发代码，一段时间后觉得特不好用，最受不了的是它对utf8中文支持不好。
+    后来偶然发现原来云桌面上默认安装了vs2010，于是尝试使用vs2010写代码，但是没vc助手还是不习惯。而且项目里面的代码还有很多gcc语法特性，
+    没法在vs上编译。后来发现在vs上可以使用gcc编译，写起代码就方便多了。但是没有vs写代码还是不方便。
+    偶然机会，让我发现原来云桌面上默认安装了一个旧版本的vc助手，但可惜过了注册时间，所以不可用。于是上网找方法破解（正版要上千块钱，舍不得买）
+    但这些破解版都需要替换安装目录下面一个dll文件，而我们开发环境没权限修改。
+    在网上找了好久，最后终于发现有一个工具叫trial</span>-<span style="color: rgba(0, 0, 0, 1)">Reset，它可以在注册表删除vs助手的使用信息，这样就不会过期了。
+
+</span><span style="color: rgba(128, 0, 128, 1)">20181010</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天一个同事找过来，说我们提供的sql逻辑有问题，他们在程序里面运行出现ora</span>-<span style="color: rgba(0, 0, 0, 1)">24347错误。原在很容易找出来，是因为sum了空值记录。但我查了一下代码，发现我们程序用的是同样的逻辑，居然没报错。
+    后来仔细分析了一下，发现这个“聚合函数出现空值”并不是一个oracle错误，而只是警告。java认为这种警告是异常而我们写的c程序没处理警告，所以没出现异常。
+    类似的情况还有密码快过期的警告，java程序登录数据库时会因为这个警告而导致登录失败，而使用sqlplus则不会出错。
+
+</span><span style="color: rgba(128, 0, 128, 1)">20181011</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天一个同事让我看一个问题：他有一个proc脚本，在plsql developer编译是正常的，但是传到服务器上编译后运行就会出现异常。
+我后来发现在来是他脚本里面有中文，在plsql developer运行时编码选对了，所以编译通过。但在服务器上NLS_LANG设置错了，导致服务器编译脚本时出异常。
+
+</span><span style="color: rgba(128, 0, 128, 1)">20181012</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天发现gcc支持</span>%.*s格式化输出，这对于打印没<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">\0</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">结尾的字符串来说特别方便。
+
+</span><span style="color: rgba(128, 0, 128, 1)">20181015</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天用gdb调试时发现有一个变量在不同函数打印出来变量内容不一样（变量是指针）
+    后来发现是改了头文件里面结构体定义，但没删了所有引用该头文件的.c文件生成的.o导致的
+
+
+    gdb调试完程序后可以用save breadpoints保存断点，下次启动时用source命令重新加载断点内容
+
+</span><span style="color: rgba(128, 0, 128, 1)">20181016</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天其它项目组发现一个服务寻址组件的问题。寻址组件是用于交易寻址的，各组件在调用其它系统交易前，通过寻址组件查找目标组件ip（需要部署一个寻址服务用的客户端进程）。
+    发生的问题是寻址组件一台服务器宕机，导致部署在业务组件机器上的寻址客户端需要更新本地的寻址服务器缓存。
+    因为寻址服务器比较多（一百多台），这个过程耗时比较长（</span><span style="color: rgba(128, 0, 128, 1)">20</span>+<span style="color: rgba(0, 0, 0, 1)">秒），导致这段时间组件寻址失败，业务服务出现故障。
+    后来寻址组件给出的解决方案是，更新缓存前先备份现有的缓存，在更新完毕前继续使用旧缓存寻址。等新缓存更新完毕后替换，这样就不会出现长时间等待缓存更新的情况。
+
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20181017</span><span style="color: rgba(0, 0, 0, 1)">:
+    箱形图（Box</span>-<span style="color: rgba(0, 0, 0, 1)">plot）又称为盒须图、盒式图或箱线图，是一种用作显示一组数据分散情况资料的统计图。因形状如箱子而得名。在各种领域也经常被使用，常见于品质管理。可以通过箱形图比较直观地看出数据质量，找出明显偏离其它数据的点。
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20181023</span><span style="color: rgba(0, 0, 0, 1)">:
+    </span><span style="color: rgba(0, 0, 255, 1)">select</span> * <span style="color: rgba(0, 0, 255, 1)">from</span> (<span style="color: rgba(0, 0, 255, 1)">select</span> c1, c2, c3 <span style="color: rgba(0, 0, 255, 1)">from</span> tb <span style="color: rgba(0, 0, 255, 1)">where</span> c1 = :key) a, dual <span style="color: rgba(0, 0, 255, 1)">where</span> dual.dummy = a.c1(+<span style="color: rgba(0, 0, 0, 1)">);
+
+</span><span style="color: rgba(128, 0, 128, 1)">20181024</span><span style="color: rgba(0, 0, 0, 1)">:
+    tcp的keepalive机制是检测死连接用的，http的keeplive机制则是防止频繁重连用的
+
+
+    oracle提供了dbms_redefinition存储过程用于在线修改库表结构。
+
+    </span><span style="color: rgba(0, 0, 255, 1)">select</span> <span style="color: rgba(0, 0, 255, 1)">for</span> update是给记录加锁，并不是检查记录是否有锁。如果select <span style="color: rgba(0, 0, 255, 1)">for</span><span style="color: rgba(0, 0, 0, 1)"> update后忘了执行rollback或commit，
+记录会一直锁着。
+
+</span><span style="color: rgba(128, 0, 128, 1)">20181025</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天使用Loadrunner进行性能测试时，发现在200并发时频繁出现连接系统失败的情况。但是以前是没这情况的。
+    查了一下配置，与旧系统比，新增的一个服务（一个服务由多个进程组成）。把这个服务停了，系统又恢复正常的。
+    但是该服务监听的端口跟以前系统服务监听的都不一样，理论上不应该相互影响。
+    开始怀疑是由于服务增加导致系统调度更加频繁，因此降低了系统性能。但是测试了一下，启动多几个其它服务，并没有影响。
+    于是又怀疑，虽然监听的是不同端口，但会对系统底层有影响，相互之间会有干扰，造成性能下降。但查百度没找到相关理论或案例。
+    后来偶然发现，原来是新服务与旧服务在进程总数配置上使用了同一块共享内存（该共享内存记录目前启动的进程数量）。
+    因为调度进程要求新服务进程数</span>+旧服务进程数=<span style="color: rgba(0, 0, 0, 1)">共享内存总数配置，导致旧服务进程启动数量大大减少。把配置改改，分别使用不同共享内存即可。
+
+</span><span style="color: rgba(128, 0, 128, 1)">20181026</span><span style="color: rgba(0, 0, 0, 1)">:
+    最近对系统做压测优化，基本思路就通过loadrunner压测并出报告，同时用建行内部提供的一个监控工具查看系统负载。
+压测期间通过多次执行pstack，看程序经常停留在函数，是否存在优化点。再通过ltrace和strace分析标准库函数与系统函数调用次数，时间开销，占比是否合理。
+（我们系统是用c语言写的）
+    对于怀疑不合理的地方，可以使用gdb连接进程设置断点，让进程执行到相应函数时停下来，看函数堆栈。结合代码就可以看出函数调用原因进行分析。
+    这里用到gdb调试的一个小技巧:忽略一定次数的断点，命令形式是</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">ignore break_number count</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">。因为有些函数调用十分频繁，而且大部分是合理调用。
+    如果每次调用都停下来，按c（gdb继续运行命令）要按得手酸。 
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20181028</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天系统cpu突然暴涨，怀疑是监控进程问题。业务增高，导致日志增多。日志多了，导致监控进程大量读写日志。于是io与cpu就让升，导致业务进程处理请求速度下降。
+    于是导致请求堆积，而接入进程为了处理堆积请求又会大量fork新进程处理，从而导致系统负载更大。
+    最后只能重启应用，停了监控完事。奇怪的是我们系统是集群机，不知为何十几台机里面只有一台有这问题。莫非是由于负载不均衡的原因？
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20181029</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天看见别人优化写日志的经验文章，发现有一个常见的标准库函数:localtime，居然是写日志的性能杀手。文章作者自己写了一个localtime，把写日志时间减少了1</span>/<span style="color: rgba(128, 0, 128, 1)">3</span><span style="color: rgba(0, 0, 0, 1)">
+原因说是因为这个函数内部使用了锁机制。不明白为何获取时间需要用到锁。
+    我查了一下，系统内部有不少无谓的localtime调用，把它们去掉，tps竟然增加了10。之前把一个重要逻辑优化了，也才差不多增加10
+    另外昨天的问题，查出来是所有机器cpu都高了，原因是微信出现异常导致相关交易量上升。
+
+</span><span style="color: rgba(128, 0, 128, 1)">20181030</span><span style="color: rgba(0, 0, 0, 1)">:
+    glib的g_list_append时间复杂度并不是O(</span><span style="color: rgba(128, 0, 128, 1)">1</span><span style="color: rgba(0, 0, 0, 1)">)，而是O(n)
+
+    gdb 打印字符串变量 不显示全
+    print </span>*<span style="color: rgba(0, 0, 255, 1)">var</span><span style="color: rgba(0, 0, 0, 1)">@len也不行
+    </span><span style="color: rgba(0, 0, 255, 1)">set</span><span style="color: rgba(0, 0, 0, 1)"> print element 0才可以
+
+
+    最近用perf分析程序性能问题，记录下几个常用的命令perf stat </span>-<span style="color: rgba(0, 0, 0, 1)">p
+    perf record </span>-e cpu-clock -g -<span style="color: rgba(0, 0, 0, 1)">p
+
+    目前发现的性能分析工具有perf pprof gprof valgrind
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20181102</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天想把crontab每30分钟执行一次的任务改为每两天运行一次，于是这样改：
+    把</span>*/<span style="color: rgba(128, 0, 128, 1)">30</span> * * * *改为* */<span style="color: rgba(128, 0, 128, 1)">2</span> * * *<span style="color: rgba(0, 0, 0, 1)">
+    但发现这样改后，反而是每分钟都执行一次。
+    正确改法应为0 </span>*/<span style="color: rgba(128, 0, 128, 1)">2</span> * * *<span style="color: rgba(0, 0, 0, 1)">
+
+
+    gdb可以使用source  加载gdbscript脚本
+
+    最后用callgrind分析程序性能，发现非常好用。记录几个常用的命令
+time valgrind </span>--tool=callgrind Query <span style="color: rgba(128, 0, 128, 1)">1611</span> <span style="color: rgba(128, 0, 128, 1)">9</span><span style="color: rgba(0, 0, 0, 1)">
+
+time valgrind </span>--tool=callgrind --callgrind-<span style="color: rgba(0, 0, 255, 1)">out</span>-file=<span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">callgrind.query_1622_%p.out</span><span style="color: rgba(128, 0, 0, 1)">"</span> Query <span style="color: rgba(128, 0, 128, 1)">1622</span> <span style="color: rgba(128, 0, 128, 1)">9</span><span style="color: rgba(0, 0, 0, 1)"> 
+
+# 在其它会话
+callgrind_control </span>-<span style="color: rgba(0, 0, 0, 1)">d # dump出目前收集的信息
+callgrind_control </span>-<span style="color: rgba(0, 0, 0, 1)">b # 打印堆栈
+callgrind_control </span>-<span style="color: rgba(0, 0, 0, 1)">s # 打印当前的函数收集状态
+callgrind_control </span>-<span style="color: rgba(0, 0, 0, 1)">z # 清零
+callgrind_control </span>-<span style="color: rgba(0, 0, 0, 1)">k # 停止callgrind（不会输出收集文件 所以先要dump）
+
+
+callgrind_annotate </span>--tree=caller/calling/<span style="color: rgba(0, 0, 0, 1)">both 生成函数调用关系
+
+
+callgrind_annotate 
+</span>--inclusive=<span style="color: rgba(0, 0, 0, 1)">yes #
+</span>--tree=<span style="color: rgba(0, 0, 0, 1)">both
+</span>--auto=<span style="color: rgba(0, 0, 0, 1)">yes
+
+</span>--separate-threads=<span style="color: rgba(0, 0, 0, 1)">yes
+
+
+    今天分另在两台机上用ltrace分析程序标准库调用。发现其中一台输出结果跟另一台输出结果差很多。
+程序是一样的，ltrace版本号不一样。想来是有些版本的ltrace有bug
+
+
+    mv  </span>-<span style="color: rgba(0, 0, 0, 1)">b：当目标文件存在时，先进行备份在覆盖
+
+</span><span style="color: rgba(128, 0, 128, 1)">20181107</span><span style="color: rgba(0, 0, 0, 1)">:
+    kill(</span>-<span style="color: rgba(128, 0, 128, 1)">1</span><span style="color: rgba(0, 0, 0, 1)">)  所有会话都关闭
+
+    今天做压测时发现怎么增大客户端数量，服务器的压力上不去。后来发现是loadrunner代理机磁盘空间满了造成的。
+
+</span><span style="color: rgba(128, 0, 128, 1)">20181112</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天碰上一个链接库顺序，导致链接时库函数找不到的问题：
+    我的编译命令是这样的：a.c (里面没有调用OutputLog) </span>-lCommon(里面有OutputLog函数) -<span style="color: rgba(0, 0, 0, 1)">lOpr（里面调用了OutputLog函数）
+    这样编译会提示“undefind reference to `OutputLog</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)"> ”</span>
+<span style="color: rgba(0, 0, 0, 1)">    换过来也不行，因为libOpr.a里面有函数调用了libCommon.a里面的函数。即两个链接库函数互相调用，交缠不清。
+
+</span><span style="color: rgba(128, 0, 128, 1)">20181113</span><span style="color: rgba(0, 0, 0, 1)">:
+    </span>-O -<span style="color: rgba(0, 0, 0, 1)">g 即优化，又方便调试（代码信息会有一点错乱，但偏差不大）
+
+    cp </span>-<span style="color: rgba(0, 0, 0, 1)">f：目标无法修改，删除再重试。 适用于替换正在运行的程序
+
+    time 输出到日志
+
+    file命令可以查看core文件是哪个程序生成的
+
+</span><span style="color: rgba(128, 0, 128, 1)">20181115</span><span style="color: rgba(0, 0, 0, 1)">:
+    </span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">宏定义转字符串。原理:如果宏定义涉及到字符串连接##，字符串化#，则编译器不会对传入宏的参数做展开
+    </span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">所以需要做二层转换</span>
+    <span style="color: rgba(0, 0, 255, 1)">#define</span> __MACRO2STR(macro_value) #macro_value
+    <span style="color: rgba(0, 128, 0, 1)">/*</span><span style="color: rgba(0, 128, 0, 1)">传人MACRO2STR的macro_name会被编译器自动展开成macro_value</span><span style="color: rgba(0, 128, 0, 1)">*/</span>
+    <span style="color: rgba(0, 0, 255, 1)">#define</span> MACRO2STR(macro_name) __MACRO2STR(macro_name)<span style="color: rgba(0, 0, 0, 1)">
+
+    看到一些同事喜欢用if (strlen(str) </span>== <span style="color: rgba(128, 0, 128, 1)">0</span>)检测字符串是否为空，其实没必要。直接用(str[<span style="color: rgba(128, 0, 128, 1)">0</span>] == <span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">\0</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">)效率会高点
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20181116</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天碰到一个访问函数返回指针导致程序core的问题。
+问题原因是在未声明函数的情况下调用了一个返回指针的函数。
+c语言对于未声明的函数，默认是以为返回int，占4个字节。但实际函数是返回了一个8个字节长的指针。
+这样就导致获取到的返回值出现了差异，后面访问时出现段错误，程序core了。
+
+    今天在atexit注册了一个函数，里面执行fclose。运行后出现程序退出时core。猜测是因为fclose使用到的全局变量已销毁。
+
+
+    今天碰上一个链接问题：两个文件都定义了一个全局变量fp，其中一个有初始化，另一个没初始化。
+链接时居然不会出现冲突，而且把两个符号合并了。后来上网搜，说这是gcc链接的规则，有初始化的全局变量是硬符号，
+没初始化的是软符号，硬符号和软符号同名时，会使用硬符号覆盖软符号。
+
+</span><span style="color: rgba(128, 0, 128, 1)">20181120</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天使用loadrunner跑应用时发现交易总是不能送达服务器，昨天还好好的，今天突然不行了。
+后来查了一下，发现是代理机空间满了。把空间清理一下就好了。
+
+    今天写了itoa函数，为了方便我把输入的负数都乘以</span>-<span style="color: rgba(0, 0, 0, 1)">1得到它们的绝对值再处理。
+这样对于大多数测试用例是没问题的，但后来传进去INT_MIN，发现结果错了。原来</span>-<span style="color: rgba(128, 0, 128, 1)">1</span> *<span style="color: rgba(0, 0, 0, 1)"> INT_MIN用int是表示不了的。
+
+
+    今天看到别人使用args把文本转成多行输出，每行三个单词，感觉很巧妙：cat test.txt </span>| xargs -<span style="color: rgba(0, 0, 0, 1)">n3
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20181129</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天碰上一个日志打印太快，导致日志丢失的问题：原因是我们程序设置了每个日志文件最大行数
+如果达到最大行数，日志组件会把目前的日志重命名，增加时间戳后缀，成为日志名.log.hh24miss这样的形式
+    但如果日志打印速度太快，导致一秒内出现两次备份，后面的备份就会覆盖前面的备份。
+
+    今天测试了一下服务器的硬盘读写速度，发现比家里的ssd还快。使用的命令：
+time dd </span><span style="color: rgba(0, 0, 255, 1)">if</span>=/dev/zero of=tmp bs=128k count=<span style="color: rgba(128, 0, 128, 1)">10000</span><span style="color: rgba(0, 0, 0, 1)">
+time dd </span><span style="color: rgba(0, 0, 255, 1)">if</span>=tmp of=/dev/<span style="color: rgba(0, 0, 255, 1)">null</span> bs=128k count=<span style="color: rgba(128, 0, 128, 1)">10000</span><span style="color: rgba(0, 0, 0, 1)">
+    测试结果：写速度 759M</span>/<span style="color: rgba(0, 0, 0, 1)">秒
+
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20181130</span><span style="color: rgba(0, 0, 0, 1)">:
+    grep VmStk </span>/proc/${pid}/<span style="color: rgba(0, 0, 0, 1)">status 查看进程占用栈空间
+
+
+
+
+
+
+
+ar rusc 
+lib
+
+要编译zlib的动态库和静态库的话，从visual studio tool里面打开Visual Studio </span><span style="color: rgba(128, 0, 128, 1)">2008</span> Command Prompt，切换到zlib-<span style="color: rgba(128, 0, 128, 1)">1.2</span>.8目录，在Command Prompt里执行nmake -f win32/Makefile.msc，然就会在zlib-<span style="color: rgba(128, 0, 128, 1)">1.2</span><span style="color: rgba(0, 0, 0, 1)">.8目录生成相关的dll和lib文件。
+
+
+
+dumpbin
+
+dumpbin </span>/symbols  compress.obj /<span style="color: rgba(0, 0, 255, 1)">out</span><span style="color: rgba(0, 0, 0, 1)">:compress.txt
+
+nm </span>-g --defined-<span style="color: rgba(0, 0, 0, 1)">only libpath
+
+dumpbin </span>/<span style="color: rgba(0, 0, 0, 1)">linkermember libc.lib
+
+
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20181202</span><span style="color: rgba(0, 0, 0, 1)">:
+</span><span style="color: rgba(0, 0, 255, 1)">extern</span> <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">C</span><span style="color: rgba(128, 0, 0, 1)">"</span> unsigned <span style="color: rgba(0, 0, 255, 1)">char</span> g_to_char_map_list[<span style="color: rgba(128, 0, 128, 1)">4</span>][<span style="color: rgba(128, 0, 128, 1)">17</span><span style="color: rgba(0, 0, 0, 1)">];
+
+</span><span style="color: rgba(0, 0, 255, 1)">extern</span> <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">C</span><span style="color: rgba(128, 0, 0, 1)">"</span> unsigned <span style="color: rgba(0, 0, 255, 1)">char</span> *<span style="color: rgba(0, 0, 0, 1)">g_to_char_map_list; 访问异常
+
+[</span><span style="color: rgba(128, 0, 128, 1)">4</span>][<span style="color: rgba(128, 0, 128, 1)">17</span><span style="color: rgba(0, 0, 0, 1)">];
+
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20181203</span><span style="color: rgba(0, 0, 0, 1)">:
+    base64编码固定把源内存三个字节转成四个可见字符，不足三个字节补0并且在字符串末尾添加</span>=<span style="color: rgba(0, 0, 0, 1)">补全四个字符
+所以base64字符串长度肯定是4的倍数，并且末尾有0</span>~2个等号字符<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">=</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">
+
+
+
+今天发现vs2010的strcmp比memcmp快一点（debug模式）
+100万次调用，strcmp花了32ms，memcmp花了59ms
+    PerformanceTestLog(TEST_LOG_INF, </span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">test strcmp</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">);
+    </span><span style="color: rgba(0, 0, 255, 1)">for</span> (i = <span style="color: rgba(128, 0, 128, 1)">0</span>; i &lt; nTimes; ++<span style="color: rgba(0, 0, 0, 1)">i)
+    {
+        </span><span style="color: rgba(0, 0, 255, 1)">if</span> (<span style="color: rgba(128, 0, 128, 1)">0</span> == strcmp(tmp, <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">test strcpy</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">))
+        {
+            i </span>=<span style="color: rgba(0, 0, 0, 1)"> i;
+        }
+    }
+
+    PerformanceTestLog(TEST_LOG_INF, </span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">test memcmp</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">);
+    </span><span style="color: rgba(0, 0, 255, 1)">for</span> (i = <span style="color: rgba(128, 0, 128, 1)">0</span>; i &lt; nTimes; ++<span style="color: rgba(0, 0, 0, 1)">i)
+    {
+        </span><span style="color: rgba(0, 0, 255, 1)">if</span> (<span style="color: rgba(128, 0, 128, 1)">0</span> == memcmp(tmp, <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">test strcpy</span><span style="color: rgba(128, 0, 0, 1)">"</span>, <span style="color: rgba(0, 0, 255, 1)">sizeof</span>(<span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">test strcpy</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">)))
+        {
+            i </span>=<span style="color: rgba(0, 0, 0, 1)"> i;
+        }
+    }
+
+效率差异挺小，记录下来只是因为出乎我意料。因为之前一直以为strcmp需要判断字符串结束，会慢一点的。
+开始时我以为是函数参数不同带来的影响，但我把字符串加大几倍再测试，结果分别是101和158，差距更大了，是不是编译器对strcmp函数有特别优化。
+
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20181206</span><span style="color: rgba(0, 0, 0, 1)">:
+
+    今天发现了程序一处内存泄漏，每次泄漏8个字节。之前压测都没发现，当时看监控曲线内存上升量几乎没变化。
+    现在想想系统内存是32g，压测时最多时也就压测几万次，总共泄漏80m内存，相比内存总量太小了，所以看监控曲线是不会有什么变化的。
+    后来发现这个bug后启动了一次8千万的测试，终于看到内存曲线略有点变化。（</span><span style="color: rgba(128, 0, 128, 1)">0.1</span>%变成0.<span style="color: rgba(128, 0, 128, 1)">8</span>%<span style="color: rgba(0, 0, 0, 1)">）
+
+</span><span style="color: rgba(128, 0, 128, 1)">20181207</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天发现有同事不知道strncpy会把目标缓冲区结尾添加多个</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">\0</span><span style="color: rgba(128, 0, 0, 1)">'</span>，而不是只在字符串结尾添加一个<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">\0</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">；在这里记录一下，避免其它人踩坑
+    </span><span style="color: rgba(0, 0, 255, 1)">char</span> tmpBuf[<span style="color: rgba(128, 0, 128, 1)">1024</span><span style="color: rgba(0, 0, 0, 1)">];
+    memset(tmpBuf, </span><span style="color: rgba(128, 0, 128, 1)">0xff</span>, <span style="color: rgba(0, 0, 255, 1)">sizeof</span><span style="color: rgba(0, 0, 0, 1)">(tmpBuf));
+    printf(</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">bef strncpy %d %d\n</span><span style="color: rgba(128, 0, 0, 1)">"</span>, tmpBuf[<span style="color: rgba(128, 0, 128, 1)">0</span>], tmpBuf[<span style="color: rgba(0, 0, 255, 1)">sizeof</span>(tmpBuf) - <span style="color: rgba(128, 0, 128, 1)">1</span><span style="color: rgba(0, 0, 0, 1)">]);
+    strncpy(tmpBuf, </span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">123</span><span style="color: rgba(128, 0, 0, 1)">"</span>, <span style="color: rgba(0, 0, 255, 1)">sizeof</span>(<span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">123</span><span style="color: rgba(128, 0, 0, 1)">"</span>)); <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">传入4，只会写4个字节</span>
+    printf(<span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">aft strncpy %d %d\n</span><span style="color: rgba(128, 0, 0, 1)">"</span>, tmpBuf[<span style="color: rgba(128, 0, 128, 1)">0</span>], tmpBuf[<span style="color: rgba(0, 0, 255, 1)">sizeof</span>(tmpBuf) - <span style="color: rgba(128, 0, 128, 1)">1</span><span style="color: rgba(0, 0, 0, 1)">]);
+
+    memset(tmpBuf, </span><span style="color: rgba(128, 0, 128, 1)">0xff</span>, <span style="color: rgba(0, 0, 255, 1)">sizeof</span><span style="color: rgba(0, 0, 0, 1)">(tmpBuf));
+    printf(</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">bef strncpy %d %d\n</span><span style="color: rgba(128, 0, 0, 1)">"</span>, tmpBuf[<span style="color: rgba(128, 0, 128, 1)">0</span>], tmpBuf[<span style="color: rgba(0, 0, 255, 1)">sizeof</span>(tmpBuf) - <span style="color: rgba(128, 0, 128, 1)">1</span><span style="color: rgba(0, 0, 0, 1)">]);
+    strncpy(tmpBuf, </span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">123</span><span style="color: rgba(128, 0, 0, 1)">"</span>, <span style="color: rgba(0, 0, 255, 1)">sizeof</span>(tmpBuf)); <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">传入1024，会写1024个字节，其中后面1021个字节全是\0</span>
+    printf(<span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">aft strncpy %d %d\n</span><span style="color: rgba(128, 0, 0, 1)">"</span>, tmpBuf[<span style="color: rgba(128, 0, 128, 1)">0</span>], tmpBuf[<span style="color: rgba(0, 0, 255, 1)">sizeof</span>(tmpBuf) - <span style="color: rgba(128, 0, 128, 1)">1</span><span style="color: rgba(0, 0, 0, 1)">]);
+</span>================================<span style="color: rgba(0, 0, 0, 1)">
+bef strncpy </span>-<span style="color: rgba(128, 0, 128, 1)">1</span> -<span style="color: rgba(128, 0, 128, 1)">1</span><span style="color: rgba(0, 0, 0, 1)">
+aft strncpy </span><span style="color: rgba(128, 0, 128, 1)">49</span> -<span style="color: rgba(128, 0, 128, 1)">1</span><span style="color: rgba(0, 0, 0, 1)">
+bef strncpy </span>-<span style="color: rgba(128, 0, 128, 1)">1</span> -<span style="color: rgba(128, 0, 128, 1)">1</span><span style="color: rgba(0, 0, 0, 1)">
+aft strncpy </span><span style="color: rgba(128, 0, 128, 1)">49</span> <span style="color: rgba(128, 0, 128, 1)">0</span><span style="color: rgba(0, 0, 0, 1)">
+
+    幸好，测试了vc 2010的snprintf函数倒不会出现这个问题。我们平时用strncpy比snpritnf少很多
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20181210</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天发现开启了编译器优化后，有一个函数被编译器主动内联了（我没有加inline）。之前没注意，以为只有限定inline的函数，编译器才会内联。
+
+
+    今天发现gcc也支持静态断言：_STATIC_ASSERT
+
+</span><span style="color: rgba(128, 0, 128, 1)">20181211</span><span style="color: rgba(0, 0, 0, 1)">:
+    同事今天分享的技巧:
+    shell变量默认是全局的，如果需要递归调用会出现干扰。可以加上一行变量声明代码，将变量声明成local的以避免这个问题，如:local i;
+    这个技巧只在bash里面有用。
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20181212</span><span style="color: rgba(0, 0, 0, 1)">:
+    alias在脚本里面无效
+
+
+    gcc </span><span style="color: rgba(128, 0, 128, 1)">4.47</span><span style="color: rgba(0, 0, 0, 1)">
+    static变量（文件级）会自动初始化置0
+    栈上定义变量占用内存空间超过8M多一点后进程会挂（不管变量定义后有没有用）
+    此时ps显示系统占用内存很少，但是虚拟内存使用比较多（</span>%<span style="color: rgba(0, 0, 0, 1)">M为0 VSZ大概是实际使用值）
+    gdb查看core文件，显示是接到信号11导致进程coredown
+    看函数堆栈入参显示很多can not access memory at address </span><span style="color: rgba(128, 0, 128, 1)">0x7ff7cc738eb78</span><span style="color: rgba(0, 0, 0, 1)">
+    a.out大小变化不大
+    static变量可以超过8M，我定义了一个1G大小的char数组都没问题
+    如果static变量后代码里面根本没使用，gcc会自动优化掉
+
+
+    监听 </span><span style="color: rgba(128, 0, 128, 1)">127.0</span>.<span style="color: rgba(128, 0, 128, 1)">0.1</span><span style="color: rgba(0, 0, 0, 1)">，端口只有本机客户端可以访问，其他服务器无法访问
+
+
+    今天用vi打开一个文件，发现显示出现异常，不能全屏显示。后来网上找了一下，在打开文件前先执行stty rows </span><span style="color: rgba(128, 0, 128, 1)">36</span><span style="color: rgba(0, 0, 0, 1)"> cols 134就好了
+
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20181219</span><span style="color: rgba(0, 0, 0, 1)">:
+    结构体中变量地址是按定义的先后顺序从低到高，而在函数中定义的变量则相反，先定义的变量地址反而比后定义的高。
+
+    今天又碰上信号函数重入导致程序core或死锁的问题。
+
+    ftp类工具需要注意写入磁盘失败（目标磁盘空间满)，今天没注意，传了一个文件后没检查有没有成功。
+后面出了异常才回来检查发现问题。
+
+
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190102</span><span style="color: rgba(0, 0, 0, 1)">:
+    utf</span>-<span style="color: rgba(0, 0, 0, 1)">8编码规则:
+    如果只有一个字节，则其最高二进制位为0；如果是多字节，其第一个字节从最高位开始，连续的二进制位值为1的个数决定了
+其编码的字节数，其余各字节均以10开头。utf</span>-<span style="color: rgba(0, 0, 0, 1)">8转换表表示如下:
+unicode</span>/ucs-<span style="color: rgba(128, 0, 128, 1)">4</span>    bit数    utf-<span style="color: rgba(128, 0, 128, 1)">8</span>
+<span style="color: rgba(128, 0, 128, 1)">0000</span>~007f        <span style="color: rgba(128, 0, 128, 1)">0</span>~<span style="color: rgba(128, 0, 128, 1)">7</span><span style="color: rgba(0, 0, 0, 1)">    0XXX XXXX
+
+</span><span style="color: rgba(128, 0, 128, 1)">0080</span>~07FF        <span style="color: rgba(128, 0, 128, 1)">8</span>~<span style="color: rgba(128, 0, 128, 1)">11</span><span style="color: rgba(0, 0, 0, 1)">    110X XXXX
+                10XX XXXX
+
+</span><span style="color: rgba(128, 0, 128, 1)">0800</span>~FFFF        <span style="color: rgba(128, 0, 128, 1)">12</span>~<span style="color: rgba(128, 0, 128, 1)">16</span>    <span style="color: rgba(128, 0, 128, 1)">1110</span><span style="color: rgba(0, 0, 0, 1)"> XXXX
+                10XX XXXX
+                10XX XXXX
+
+</span><span style="color: rgba(128, 0, 128, 1)">10000</span>~1F FFFF        <span style="color: rgba(128, 0, 128, 1)">17</span>~<span style="color: rgba(128, 0, 128, 1)">21</span>    <span style="color: rgba(128, 0, 128, 1)">1111</span><span style="color: rgba(0, 0, 0, 1)"> 0XXX
+                10XX XXXX
+                10XX XXXX
+                10XX XXXX
+
+</span><span style="color: rgba(128, 0, 128, 1)">20</span> <span style="color: rgba(128, 0, 128, 1)">0000</span>~3FF FFFF    <span style="color: rgba(128, 0, 128, 1)">22</span>~<span style="color: rgba(128, 0, 128, 1)">26</span>    <span style="color: rgba(128, 0, 128, 1)">1111</span><span style="color: rgba(0, 0, 0, 1)"> 10XX
+                10XX XXXX
+                10XX XXXX
+                10XX XXXX
+                10XX XXXX
+
+</span><span style="color: rgba(128, 0, 128, 1)">400</span> <span style="color: rgba(128, 0, 128, 1)">0000</span>~7FFF FFFF    <span style="color: rgba(128, 0, 128, 1)">27</span>~<span style="color: rgba(128, 0, 128, 1)">31</span>    <span style="color: rgba(128, 0, 128, 1)">1111</span><span style="color: rgba(0, 0, 0, 1)"> 10XX
+                10XX XXXX
+                10XX XXXX
+                10XX XXXX
+                10XX XXXX
+                10XX XXXX
+
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190102</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天碰上ue光标定位不正确的问题，后来发现是字体原因，设置一下精确点阵就好了。
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190107</span><span style="color: rgba(0, 0, 0, 1)">
+
+    最近写了不少loadrunner脚本，记录一下心得:
+</span><span style="color: rgba(128, 0, 128, 1)">1</span><span style="color: rgba(0, 0, 0, 1)"> loadrunner脚本基本可以认为就是c语言代码（loadrunner支持不同语言的脚本，默认生成的是用c语言写的脚本）
+</span><span style="color: rgba(128, 0, 128, 1)">2</span><span style="color: rgba(0, 0, 0, 1)"> loadrunner自己实现了一个c编译器及对应的ide（也就是vugen），所以有一些地方跟我们常用的开发习惯不一样。loadrunner内置编译编译器怀疑是在gcc基础上改的，因为一些语法特性跟gcc比较像。
+</span><span style="color: rgba(128, 0, 128, 1)">3</span><span style="color: rgba(0, 0, 0, 1)"> loadrunner的c编译器实现了不少标准库函数，但不提供对应的头文件。所以使用到库函数（如malloc）时最好自己声明。（不然malloc会被编译器认为是未知函数，返回值是int类型）
+</span><span style="color: rgba(128, 0, 128, 1)">4</span> 一些特殊的库函数，如atof必须提前声明，因为其返回值是double类型，而sizeof(<span style="color: rgba(0, 0, 255, 1)">double</span>)跟sizeof(<span style="color: rgba(0, 0, 255, 1)">int</span><span style="color: rgba(0, 0, 0, 1)">)是不一样的，这会导致返回值异常。
+</span><span style="color: rgba(128, 0, 128, 1)">5</span> loadrunner可以使用#include包含头文件，但由于没有提供标准库头文件，所以#include &lt;stdio.h&gt;<span style="color: rgba(0, 0, 0, 1)">这样会报错，stdio.h找不到
+</span><span style="color: rgba(128, 0, 128, 1)">6</span><span style="color: rgba(0, 0, 0, 1)"> loadrunner具体实现了哪些标准库函数可以查看帮助
+</span><span style="color: rgba(128, 0, 128, 1)">7</span><span style="color: rgba(0, 0, 0, 1)"> loadrunner提供了不少额外函数辅助编写测试代码，这些函数以lr_打头，一样在帮助文档里面有。我觉得比较好用的是日志、http访问、变量转换系列函数。
+</span><span style="color: rgba(128, 0, 128, 1)">8</span><span style="color: rgba(0, 0, 0, 1)"> loadrunner编译脚本时是把工程里面vuser_init.c Action.c vuser_end.c合并到一个文件再编译，所以在这些文件里面声明的static变量会相互影响
+</span><span style="color: rgba(128, 0, 128, 1)">9</span><span style="color: rgba(0, 0, 0, 1)"> loadrunner脚本程序栈空间很小，所以大数组最好用malloc动态生成
+</span><span style="color: rgba(128, 0, 128, 1)">10</span><span style="color: rgba(0, 0, 0, 1)"> VuGen动画模式下运行脚本速度很慢，因为每执行一行脚本代码前，VuGen都会将光标跳到改行代码并高亮，很耗时。（12版本这个问题非常明显，15版本好很多）把动画模式关闭运行速度能提高不少，但是还是远不如在Controller里面执行脚本的速度。
+
+
+
+    今天装了个新的loadrunner，报lr_load_dll找不到指定的模块。后来用windows dependency wallker查了一下，发现是缺少了几个dll，上网下载回来放到system32就好了
+
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190117</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天解决了vi命令打开日志文件中文总是显示乱码的问题。由于项目组中的日志包含一些特殊字符，所以使用vim打开日志文件时总是不能正确识别出文件字符编码。此时用:</span><span style="color: rgba(0, 0, 255, 1)">set</span><span style="color: rgba(0, 0, 0, 1)"> fileencoding命令可以看出vim把文件编码识别成latin1。
+    在这种情况下无论终端设置成gbk还是utf</span>-<span style="color: rgba(0, 0, 0, 1)">8编码，都不能正确显示中文。解决方法有两个:
+</span><span style="color: rgba(128, 0, 128, 1)">1</span> 使用:e ++enc=utf-8命令强制让vim以utf-<span style="color: rgba(0, 0, 0, 1)">8编码重新打开文件
+注意:由于我们程序有时也会输出gbk编码的中文字符日志，所以有时还会有少量乱码。
+
+</span><span style="color: rgba(128, 0, 128, 1)">2</span><span style="color: rgba(0, 0, 0, 1)"> 在打开文件前设置好正确的fileencodings（注意这个参数比前面多了一个s，上面的是vim探测出来的文件编码，这个是可供vim选择的文件编码列表）
+在</span>~/<span style="color: rgba(0, 0, 0, 1)">.vimrc里面加上一行设置
+</span><span style="color: rgba(0, 0, 255, 1)">set</span> fileencodings=ucs-bom,utf-<span style="color: rgba(128, 0, 128, 1)">8</span>,gbk18030 （我们项目组机器默认的fileencodings是ucs-bom,utf-<span style="color: rgba(128, 0, 128, 1)">8</span><span style="color: rgba(0, 0, 0, 1)">,latin1，latin1是一种兼容性很强的字符编码，这样的设置让vim很倾向于认为文件编码是latin1）
+    总结一下今天学到的vim编码知识:vim涉及字符显示的选项有三个，fileencoding文件字符编码，encoding缓冲区字符编码，termencoding终端字符编码。
+    vim显示字符的顺序:按fileencoding编码读取文件</span>-&gt;将读取到的内容转成encoding编码-&gt;将encoding编码转换成termencoding打印到终端-&gt;<span style="color: rgba(0, 0, 0, 1)">终端(我们平时主要使用的是securecrt)按设置的编码(一般是utf8)显示字符。其中fileencoding必须在文件打开前设置才有效，encoding必须在vim启动前设置才有效，termencoding可以根据需要随时设置。
+    这四个编码如果设置不统一，就很有可能出现中文乱码问题，其中前三个编码可以在vim查看，最后一个编码需要在securecrt设置查看。
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190122</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天看了一篇文章介绍说平时我们生成指定范围内的随机数方法，其实是有问题的。平时我们要生成[a,b]范围内的随机数，是这样写的:rand() </span>% (b - a + <span style="color: rgba(128, 0, 128, 1)">1</span>) + a。这样写有一个问题是rand的范围是[<span style="color: rgba(128, 0, 128, 1)">0</span>, RAND_MAX]，不一定能整除(b - a +<span style="color: rgba(128, 0, 128, 1)">1</span><span style="color: rgba(0, 0, 0, 1)">)，这样生成的随机数概率是不均衡的，里面某些数字出现的概率是其它数字的几倍。
+    一个推荐的做法是用(</span><span style="color: rgba(0, 0, 255, 1)">int</span>)(rand() / RAND_MAX) * (b - a +<span style="color: rgba(128, 0, 128, 1)">1</span>) +a，但这样做也是并不是完全随机的。具体原因可以参考:https:<span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">gameinstitute.qq.com/community/detail/100067  随机数常见算法优劣剖析</span>
+
+<span style="color: rgba(128, 0, 128, 1)">20190123</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天发现原来xml换行符转义写法有两种:</span>&amp;#x000A和&amp;<span style="color: rgba(128, 0, 128, 1)">0010</span>
+    
+
+<span style="color: rgba(128, 0, 128, 1)">20190124</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天发现crontab居然没办法设置隔五天运行一次脚本，因为它只支持配置分时日月星期间隔。
+    crontab这样设置每隔五天执行:</span><span style="color: rgba(128, 0, 128, 1)">0</span> <span style="color: rgba(128, 0, 128, 1)">0</span> */<span style="color: rgba(128, 0, 128, 1)">5</span> * *<span style="color: rgba(0, 0, 0, 1)">，在月底时会出现问题，30号执行后1号又执行。
+    
+</span><span style="color: rgba(128, 0, 128, 1)">20190130</span><span style="color: rgba(0, 0, 0, 1)">:
+    linux删除文件后空间没释放，这种情况一般是由于文件还在被其它进程打开。这里可以用lsof </span>|<span style="color: rgba(0, 0, 0, 1)"> grep deleted，找出占用空间的文件及进程，把相关进程全杀完就好了。（注意，最好用root运行上面的命令。因为如果文件是其它用户进程打开，这样执行可能因为权限不够找不出来）
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190201</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天用vs调试时，发现一个变量显示值总是有问题。我明明设置它的值是5，但调试总显示其它值，我把这个变量改成const变量，也一样显示不正确。后来才发现因为我工程是release模式，改成debug就没问题了。release模式下调试程序，watch窗口显示的变量值显示是不一定正确的。
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190202</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天发现用loadlib加载的dll（假设名为a.dll;）如果依赖其它dll（假设名为b.dll），
+并且b.dll不在PATH指定的目录下(a.dll)，会报加载a.dll失败。
+    
+</span><span style="color: rgba(128, 0, 128, 1)">20190203</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天一个同事分享一篇文章，作者称经过测试发现strncpy效率不如snprintf高，跟我之前自己测试的结果是相反的。
+我自己测试出来snprintf函数比strncpy慢了一个数量级。后来仔细看了文章作者测试过程，是用snprintf(buf, </span><span style="color: rgba(128, 0, 128, 1)">1024</span>, <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">test</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">);
+跟strncpy(buf, </span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">test</span><span style="color: rgba(128, 0, 0, 1)">"</span>, <span style="color: rgba(128, 0, 128, 1)">1024</span><span style="color: rgba(0, 0, 0, 1)">)做比较。
+    猜测文章作者并没有注意到两个问题导致的:</span><span style="color: rgba(128, 0, 128, 1)">1</span><span style="color: rgba(0, 0, 0, 1)"> snprintf调用比较简单可能会被编译器优化（之前碰到过sprintf会被优化成strcpy的情况）
+    </span><span style="color: rgba(128, 0, 128, 1)">2</span> strncpy实际往buf写了1024个字节，其中前4个字节是test，剩下1000个字节填了\<span style="color: rgba(128, 0, 128, 1)">0</span><span style="color: rgba(0, 0, 0, 1)">。而snprintf只会往buf填5个字节。
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190213</span><span style="color: rgba(0, 0, 0, 1)">
+    今天使用远程连接上一台机器看，发现UE菜单栏的字符十分模糊（感觉是一种奇怪的字体）。网上找了几个方法都没改过来，后来我随意设置参数，居然让我发现一个方法:windows屏幕分辨率设置界面</span>-&gt;放大或缩小文本和其它项目-&gt;<span style="color: rgba(0, 0, 0, 1)">调整ClearType文本。
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190214</span><span style="color: rgba(0, 0, 0, 1)">
+    今天修改了系统程序一个问题:Fork出来的子进程可能带有日志缓冲，导致输出日志时出现混乱。
+    解决方法:Fork前先关闭日志文件
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190219</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天在windows系统上安装一个软件，在用户环境变量配置了软件需要的环境变量居然不生效。
+要改成在系统环境变量配置才行。之前不知道用户环境变量与系统环境变量对于windows程序是有区别的，以为效果是一样。
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190220</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天安装loadrunner 11过程中报</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">存储空间不足，无法执行此命令</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">的错误。后来网上找原因，
+说是因为操作系统是2008，不需要安装windows installer </span><span style="color: rgba(128, 0, 128, 1)">3.1</span><span style="color: rgba(0, 0, 0, 1)">，安装时候会因为版本不正确而出现这个提示。（微软这个错误提示真差）
+修改安装配置lrunner</span>/Chs/<span style="color: rgba(0, 0, 0, 1)">pwraper.ini把第一行删除（我开始用#注释，发现不行，必须删除），然后重启安装程序。
+这样就不会要求先安装windows installer </span><span style="color: rgba(128, 0, 128, 1)">3.1</span><span style="color: rgba(0, 0, 0, 1)">，可以顺序往下执行。
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190306</span><span style="color: rgba(0, 0, 0, 1)">:
+    这两天发现项目组一个程序有内存泄漏（ps aux www观察可以发现rss一直在增长）。今天使用valgrind跟踪一下，看是啥情况。记一下命令
+valgrind </span>--tool=memcheck --leak-check=<span style="color: rgba(0, 0, 0, 1)">full 程序名 运行参数
+    执行命令后运行一段时间，然后想办法让程序退出（我这里直接kill就行），valgrind就会输出内存泄漏的地方(</span><span style="color: rgba(0, 0, 255, 1)">malloc</span><span style="color: rgba(0, 0, 0, 1)">)。
+    之后再用gdb跟踪一下，看malloc申请的内存为何没free，很容易就找到问题。
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190321</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天碰上一个loadrunner 11程序启动报msvcr110.dll找不到的问题，解决过程中学到一些知识点，记录一下。
+    开始我看C:\Windows\System32\下面没这个文件，于是到其它机复制了一个放到该目录下。
+    （C:\Windows\System32\是windows寻找dll默认目录之一，其它的路径包括当前目录和PATH）
+    但重启程序还是报这个错，于是我以为是因为msvcr110.dll依赖的dll没被拷过来的原因。因为以前碰上过类似的问题:
+    用loadrunner装载dll，提示模块不存在，但其实该dll是存在的，但是由于其依赖的dll不存在，导致装载dll失败。
+    但loadrunner误以为dll不存在，所以提示“模块不存在”。
+    于是下载了一个windows dependency wallker。想用dependency检查一下，发现并没有缺失依赖dll。
+    再用它打开启动报错的程序，发现也没提示缺失依赖dll。但有提示dll的cpu类型不正确。后来仔细检查发现我那个程序是32位的，
+但依赖了system32下面很多64位的dll。
+    这就比较奇怪了，一般32位程序是不能使用64位dll的，后来上网搜索，偶然发现一篇文章提到一个知识点:
+    “64位windows操作系统，Windows\System32下面放的是64位的dll，而32位dll是放在Windows\SysWOW64。
+    为保证程序兼容性，32位程序访问Windows\System32时系统会自动链接成Windows\SysWOW64”
+    于是明白了，我那个msvcr110.dll是32位的，要启动的程序也是32位的，所以必须把它放到Windows\SysWOW64才行。
+    把文件拷贝过去后，再启动程序，果然可以了！ 以前只知道windows64位系统兼容32位和64位程序，但从来没考虑过具体怎么兼容，这次踩坑了。
+    我下载的windows dependency wallker是64位程序，所以使用它去查找32位程序依赖时会出现问题，应该再下载一个32位的。
+    顺便说一下另一个技巧:如何识别程序或者dll是64位还是32位的。最简单当然是用windows dependency wallker打开看看，但有时没这个
+工具，我们可以使用ue以16进制打开程序或者dll文件，在比较靠前的位置应该能发现字母PE字样（一般在第一屏就有，找不到可以搜索asscii码50 </span><span style="color: rgba(128, 0, 128, 1)">45</span><span style="color: rgba(0, 0, 0, 1)">）
+看PE后面跟的字线是L还是d，如果是L说明是32位程序，如果是d说明是64位程序。
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190322</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天有其它系统同事说访问我们系统失败，服务拒绝连接，问我们是不是应用有问题。我查看日志，发现他是使用get协议访问我们的应用。
+而我们的系统对于get请求，默认处理动作是返回指定文件，而那个文件不存在，所以连接就被关闭了。我们的连接底层库只有对post请求才往上送。
+    后来咨询了一下，原来同事直接在浏览器输入我们系统url，没按协议要求使用post请求。他以为效果应该一样的，实际上不是。
+    做交易最好还是多遵守人家的协议标准，有时不能按常识推理。我记得以前有一个系统在nginx配置了url处理规则，使用http域名跟使用ip访问走不同的请求逻辑。
+而其他人不知道，访问他们系统时使用了http:</span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">IP地址/path，结果返回的结果错误。其实按该系统标准，应该使用http:</span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">域名/path</span>
+
+<span style="color: rgba(128, 0, 128, 1)">20190325</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天一个同事问我sqlplus连接串 user</span>/pass@<span style="color: rgba(128, 0, 128, 1)">128.192</span>.<span style="color: rgba(128, 0, 128, 1)">118.1</span>/<span style="color: rgba(0, 0, 0, 1)">addb1 最后面的addb1是什么。我说是数据库实例名，但他说不是。因为他连接
+到数据库后查询v$instance里面显示数据库实例名sid是另一个名称。而且它用这个SID配置了tnsnames.ora，结果连接不上。
+    后来上网搜索了一下，才知道sqlplus连接串</span>/<span style="color: rgba(0, 0, 0, 1)">后面一截，除了可以是sid之外，还可以是数据库服务名。一个数据库可以有多个服务名，一般只有一个。
+而一个数据库服务可以有多个实例，如果是rac一般是两个实例。
+    我让同事在tnsnames.ora配置，使用SERVICE_NAME </span>= addb1，代替原来SID =<span style="color: rgba(0, 0, 0, 1)"> addb1就可以正常连接了。
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190326</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天碰到写的程序用Os优化后速度反而不如O2优化快的问题。（十次测试有9次比原来的慢5</span>%<span style="color: rgba(0, 0, 0, 1)">左右）
+这个有点奇怪。网上说Os是在O2基础上优化的，相当于O2.</span><span style="color: rgba(128, 0, 128, 1)">5</span><span style="color: rgba(0, 0, 0, 1)">。
+    另外，今天碰上一个奇怪的问题，我把程序的一个函数改了。原来需要传两个参数，改成只传一个参数（另一个参数原代码没有用上）。
+另外把原来判断空格的逻辑从ch </span>== <span style="color: rgba(128, 0, 0, 1)">'</span> <span style="color: rgba(128, 0, 0, 1)">'</span> || ch == <span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">\t</span><span style="color: rgba(128, 0, 0, 1)">'</span> || ch == <span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">\r</span><span style="color: rgba(128, 0, 0, 1)">'</span> || ch == <span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">\n</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">改成查表（用256长的数组，在程序开始时初始化）。
+    本来以为会快一点，但实际运行发现优化过的函数反而比原来的慢了一点点。（程序同时调用优化前后的函数处理同样数据1万次得出的结论）
+    后来我打算用callgrind分析效率慢在哪时，又发现在callgrind下面跑，优化过的代码却比没优化的快。
+    再之后，我把程序编译优化选项从Os改为O2，再对比。发现这样改后就比原来函数快。猜测Os编译选项里面有针ch这种判断做优化。
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190327</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天安装jemalloc时发现目录下没有configure，网上说要执行autogen.sh生成。但是我执行时提示autoconf不存在，
+于是又上网下载了autoconf安装。
+    最开始下载时下错了版本，下了个2.10的版本，不能用:执行autogen.sh时提示没有找到configure.</span><span style="color: rgba(0, 0, 255, 1)">in</span><span style="color: rgba(0, 0, 0, 1)">。
+    后来上网找，说autoconf要下载2.6以上的版本，因为新版本用的配置文件名是configure.ac，以前版本才需要configure.</span><span style="color: rgba(0, 0, 255, 1)">in</span><span style="color: rgba(0, 0, 0, 1)">。
+    于是又重新下载了新版本再编译，这次就好了。顺便提一下，如果下载的文件是.xz压缩包，可以用xz </span>-<span style="color: rgba(0, 0, 0, 1)">d命令解压。
+    jemalloc编译好后使用倒是简单，启动前在LD_PRELOAD环境变量里面增加jemalloc编译出来的.so路径就行。
+    不过我实际测试，我们的应用使用jemalloc后速度反而下降了，不知道是不是因为我们程序都是单进程的原因
+    （jemalloc确认是已经使用了，因为程序运行过程中可以使用lsof</span>|<span style="color: rgba(0, 0, 0, 1)">grep jemalloc可以看到程序装载了对应的so）
+    
+</span><span style="color: rgba(128, 0, 128, 1)">20190328</span><span style="color: rgba(0, 0, 0, 1)">:
+    实测:glibc分配超过1k内存的时间消耗远大于分配512B，估计超过1k的内存跟没超过的处理方式是不一样的。
+    tcmalloc测试效率差不多。
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190329</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天一个同事突然找到我，说我前几天给他们改的一个程序，在测试机运行得好好的，但到了生产却报需要的libc版本太低。
+后来我查了一下，编译环境和测试环境的libc.so链接的是libc</span>-<span style="color: rgba(128, 0, 128, 1)">2.17</span>.so，而生产的是libc-<span style="color: rgba(128, 0, 128, 1)">2.12</span><span style="color: rgba(0, 0, 0, 1)">.so。
+    之前不知道这个情况，所以出了问题。我后来找了一个装了低版本的操作系统重新编译一下程序，再拿到测试和生产环境，发现可以兼容。
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190407</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天发现xargs命令做字符串处理还是挺方便的，以前知道用它来跟管道组合处理参数太多超过命令行限制的情况。这里摘录几个用法:
+替换字符串:echo </span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">nameXnameXnameXname</span><span style="color: rgba(128, 0, 0, 1)">"</span> | xargs -<span style="color: rgba(0, 0, 0, 1)">dX
+多行输入单行输出:(echo a; echo b; echo c) </span>|<span style="color: rgba(0, 0, 0, 1)"> xargs
+组装shell命令:cat arg.txt </span>| xargs -I {} ./sk.sh -<span style="color: rgba(0, 0, 0, 1)">p {} 
+
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190616</span><span style="color: rgba(0, 0, 0, 1)">:
+    一个web请求可能需要经过的cdn，dns负载均衡，f5负载均衡，nginx反向代理，消息队列，redis，数据库（读写分离，集群），文件缓冲等这么多种缓存机制
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190630</span><span style="color: rgba(0, 0, 0, 1)">:
+    </span><span style="color: rgba(0, 0, 255, 1)">select</span> <span style="color: rgba(0, 0, 255, 1)">for</span> update是上锁，不是检查有没有锁</pre>
+</div>
+<p>&nbsp;</p>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-02-01 16:53</span>&nbsp;
+<a href="https://www.cnblogs.com/kingstarer/">皇家救星</a>&nbsp;
+阅读(<span id="post_view_count">293</span>)&nbsp;
+评论(<span id="post_comment_count">0</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12249028" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12249028);return false;">收藏</a>&nbsp;
+<a href="javascript:void(0)" onclick="reportManager.report({ currentUserId: '', targetType: 'blogPost', targetId: '12249028', targetLink: 'https://www.cnblogs.com/kingstarer/p/12249028.html', title: '《工作碰上的技术问题及处理经验》（四）' })">举报</a></div>
+        </div>
+        <script src="https://common.cnblogs.com/highlight/10.3.1/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 234136, cb_blogApp = 'kingstarer', cb_blogUserGuid = '6c01f56e-ee22-e511-b908-9dcfd8948a71';
+    var cb_entryId = 12249028, cb_entryCreatedDate = '2020-02-01 16:53', cb_postType = 1;
+    updatePostStats(
+        [cb_entryId],
+        function(id, count) { $("#post_view_count").text(count) },
+        function(id, count) { $("#post_comment_count").text(count) })
+    zoomManager.apply("#cnblogs_post_body img:not(.code_img_closed):not(.code_img_opened)");
+</script>
+        <a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <div id="cnblogs_c1" class="under-post-card">
+        <div id='div-gpt-ad-1592365906576-0' style='width: 300px; height: 250px;'></div>
+    </div>
+    <div id="under_post_card1"></div>
+    <div id="cnblogs_c2" class="under-post-card">
+        <div id='div-gpt-ad-1592366332455-0' style='width: 468px; height: 60px;'></div>
+    </div>
+    <div id="under_post_card2"></div>
+    <div id="HistoryToday" class="under-post-card"></div>
+    <script type="text/javascript">
+       var commentManager = new blogCommentManager();
+       commentManager.renderComments(0);
+       fixPostBody();
+       deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);       deliverT2();
+       deliverC1C2();
+       loadNewsAndKb();
+       loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);       LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+       GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+       loadOptUnderPost();
+       GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+
+    </div>
+</div>
+            </div>
+        </div>
+
+        <div id="sideBar">
+            <div id="sideBarMain">
+                <div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+<div id="sidebar_c3"></div>
+                <div id="calendar"><div id="blog-calendar" style="display:none"></div></div>                
+                <script>loadBlogDefaultCalendar();</script>
+                <div id="leftcontentcontainer">
+                    <!-- begin:SingleColumn -->
+                    <div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+                    <!-- end:  SingleColumn -->
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div id="footer">
+        <!--done-->
+Copyright &copy; 2021 皇家救星
+<br /><span id="poweredby">Powered by .NET 5.0 on Kubernetes</span>
+
+    </div>
+</div>
+
+    
+
+    <input type="hidden" id="antiforgery_token" value="CfDJ8L-rpLgFVEJMgssCVvNUAjuXjKxMRxW2O30BhYWRjXwINgetAkEIe3QmgbqM3j_APLqFQuKqh0UPIHywdWfFV3jQmg0AYngebQIJ4MI0Kl790sgHhqjnxltX23zvbNtuWkJ4qgGwO0gBlZ54sPyNCO0" />
+</body>
+</html>

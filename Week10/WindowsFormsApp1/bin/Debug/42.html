@@ -1,0 +1,507 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin-when-crossorigin" />
+    <meta name="description" content="作者：Grey 原文地址：Java IO学习笔记七：多路复用从单线程到多线程 在前面提到的多路复用的服务端代码中, 我们在处理读数据的同时，也处理了写事件: public void readHandl" />
+    <meta property="og:description" content="作者：Grey 原文地址：Java IO学习笔记七：多路复用从单线程到多线程 在前面提到的多路复用的服务端代码中, 我们在处理读数据的同时，也处理了写事件: public void readHandl" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Java IO学习笔记七：多路复用从单线程到多线程 - Grey Zeng - 博客园</title>
+    <link id="favicon" rel="shortcut icon" href="//common.cnblogs.com/favicon.svg" type="image/svg+xml" />
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=6tvK5XC6GPbg3p_sy7wzz_2291HoYACr4440iKBzQIw" />
+    <link id="MainCss" rel="stylesheet" href="/skins/simpleclear/bundle-simpleclear.min.css?v=YwqKpZSlReWrFAl5bydbTTB3DX1yfsPdM9XzR5Ip8sU" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/simpleclear/bundle-simpleclear-mobile.min.css?v=gORgGj4k30_xdrBBjR8BlmIqd0gwMNLDu1WI_swQtPE" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/greyzeng/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/greyzeng/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/greyzeng/wlwmanifest.xml" />
+    <script>
+        var currentBlogId = 201719;
+        var currentBlogApp = 'greyzeng';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var isBlogOwner = false;
+        var skinName = 'SimpleClear';
+        var visitorUserId = '';
+    </script>
+        <script>
+            var currentPostDateAdded = '2021-06-19 11:21';
+        </script>
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=ZUvfwhWs5fv-s8Nv7WofCOhwKAxiDO928zdWFzhnOPk"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML&amp;v=20200504"></script>
+    
+</head>
+<body class="has-navbar has-bannerbar">
+    <a name="top"></a>
+            <a target="_blank" href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:pc|pp:bokeyuan-huodong-21nianzhongdacu-neiyePCtonglanbanner|pu:21nianzhongdacu-neiyePCtonglanbanner|ci:21nzdc|kw:10224545" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-pc')">
+                <div class="bannerbar aliyun forpc" style="background-size: contain; filter: brightness(0.95); background-image: url(https://img2020.cnblogs.com/blog/35695/202106/35695-20210610183724605-1725070929.jpg)">
+                </div>
+            </a>
+            <div id="bannerbar" class="bannerbar-mobile formobile">
+            <a href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:mb|pp:bokeyuan-huodong-21nianzhongdacu-neiyeyidongduantonglanbanner|pu:21nianzhongdacu-neiyeyidongduantonglanbanner|ci:21nzdc|kw:10224547" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-mobile')">
+                <img src="https://img2020.cnblogs.com/blog/35695/202106/35695-20210610184806729-1738888164.jpg" alt="" />
+            </a>
+            </div>
+    <div id="top_nav" class="navbar forpc">
+        <nav id="nav_main" class="navbar-main">
+            <ul id="nav_left" class="navbar-list navbar-left">
+                <li class="navbar-branding"><a href="https://www.cnblogs.com/" title="开发者的网上家园"><img src="/images/logo.svg?v=R9M0WmLAIPVydmdzE2keuvnjl-bPR7_35oHqtiBzGsM" alt="博客园Logo" /></a></li>
+                <li><a href="/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-sitehome')">首页</a></li>
+                <li><a href="https://news.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-news')">新闻</a></li>
+                <li><a href="https://q.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-q')">博问</a></li>
+                <li><a id="nav_brandzone" href="https://brands.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-brands')">专区</a></li>
+                <li><a href="https://ing.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-ing')">闪存</a></li>
+                <li><a href="https://edu.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-edu')">班级</a></li>
+            </ul>
+            <ul id="nav_right" class="navbar-list navbar-right">
+                <li>
+                    <form id="zzk_search" class="navbar-search" action="https://zzk.cnblogs.com/s" method="get">
+                        <input name="w" id="zzk_search_input" placeholder="代码改变世界" type="text" tabindex="3" />
+                        <button type="submit" id="zzk_search_button">
+                            <img src="/images/aggsite/search.svg" alt="搜索" />
+                        </button>
+                    </form>
+                </li>
+                <li id="navbar_login_status" class="navbar-list">
+                    <a class="navbar-user-info navbar-blog" href="https://i.cnblogs.com/EditPosts.aspx?opt=1" alt="写随笔" title="写随笔">
+                        <img id="new_post_icon" class="navbar-icon" src="/images/aggsite/newpost.svg" alt="写随笔" />
+                    </a>
+                    <a id="navblog-myblog-icon" class="navbar-user-info navbar-blog" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx" alt="我的博客" title="我的博客">
+                        <img id="myblog_icon" class="navbar-icon" src="/images/aggsite/myblog.svg" alt="我的博客" />
+                    </a>
+                    <a class="navbar-user-info navbar-message navbar-icon-wrapper" href="https://msg.cnblogs.com/" alt="短消息" title="短消息">
+                        <img id="msg_icon" class="navbar-icon" src="/images/aggsite/message.svg?v=J0WS2P2iPgaIVgXxcAhliw4AFZIpaTWxtdoNAv9eiCA" alt="短消息" />
+                        <span id="msg_count" style="display: none"></span>
+                    </a>
+                    <div id="user_info" class="navbar-user-info dropdown">
+                        <a class="dropdown-button" href="https://home.cnblogs.com/">
+                            <img id="user_icon" class="navbar-avatar" src="/images/aggsite/avatar-default.svg" alt="用户头像" />
+                        </a>
+                        <div class="dropdown-menu">
+                            <a id="navblog-myblog-text" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx">我的博客</a>
+                            <a href="https://home.cnblogs.com/">我的园子</a>
+                            <a href="https://account.cnblogs.com/settings/account">账号设置</a>
+                            <a href="javascript:void(0)" id="navbar_lite_mode_toggle" title="简洁模式会使用简洁款皮肤显示所有博客">
+    简洁模式 <img id="navbar_lite_mode_on" src="/images/lite-mode-check.svg" class="hide" /><span id="navbar_lite_mode_spinner" class="hide">...</span>
+</a>
+                            <a href="javascript:void(0)" onclick="account.logout();">退出登录</a>
+                        </div>
+                    </div>
+                    <a class="navbar-anonymous" href="https://account.cnblogs.com/signup/">注册</a>
+                    <a class="navbar-anonymous" href="javascript:void(0);" onclick="account.login()">登录</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    
+    <div id="main">
+    <div id="header">
+        
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/greyzeng/">Practitioner</a>
+</h1>
+<p id="tagline">需要不断努力，才能毫不费力</p>
+
+
+    </div>
+    <div id="post_detail">
+<div class="post">
+    <h2 class="postTitle">
+<a id="cb_post_title_url" class="postTitle2 vertical-middle" href="https://www.cnblogs.com/greyzeng/p/14897141.html">
+    <span>Java IO学习笔记七：多路复用从单线程到多线程</span>
+    
+
+
+
+</a>
+</h2>
+    <div class="postText"><div id="cnblogs_post_body" class="blogpost-body cnblogs-markdown">
+<p>作者：<a href="https://www.cnblogs.com/greyzeng/" target="_blank">Grey</a></p>
+<p>原文地址：<a href="https://www.cnblogs.com/greyzeng/p/14897141.html" target="_blank">Java IO学习笔记七：多路复用从单线程到多线程</a></p>
+<p>在<a href="https://www.cnblogs.com/greyzeng/p/14887156.html" target="_blank">前面提到</a>的多路复用的服务端代码中, 我们在处理读数据的同时，也处理了写事件:</p>
+<pre><code class="language-java">    public void readHandler(SelectionKey key) {
+        SocketChannel client = (SocketChannel) key.channel();
+        ByteBuffer buffer = (ByteBuffer) key.attachment();
+        buffer.clear();
+        int read;
+        try {
+            while (true) {
+                read = client.read(buffer);
+                if (read &gt; 0) {
+                    buffer.flip();
+                    while (buffer.hasRemaining()) {
+                        client.write(buffer);
+                    }
+                    buffer.clear();
+                } else if (read == 0) {
+                    break;
+                } else {
+                    client.close();
+                    break;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+</code></pre>
+<p>为了权责清晰一些，我们分开了两个事件处理：</p>
+<p>一个负责写，一个负责读</p>
+<p>读的事件处理, 如下代码</p>
+<pre><code class="language-java">    public void readHandler(SelectionKey key) {
+        System.out.println("read handler.....");
+        SocketChannel client = (SocketChannel) key.channel();
+        ByteBuffer buffer = (ByteBuffer) key.attachment();
+        buffer.clear();
+        int read = 0;
+        try {
+            while (true) {
+                read = client.read(buffer);
+                if (read &gt; 0) {
+                    client.register(key.selector(), SelectionKey.OP_WRITE, buffer);
+                } else if (read == 0) {
+                    break;
+                } else {
+                    client.close();
+                    break;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+</code></pre>
+<p>其中read &gt; 0 即从客户端读取到了数据，我们才注册一个写事件：</p>
+<pre><code class="language-java">client.register(key.selector(), SelectionKey.OP_WRITE, buffer);
+</code></pre>
+<p>其他事件不注册写事件。（PS：只要send-queue没有满，就可以注册写事件）</p>
+<p>写事件的处理逻辑如下：</p>
+<pre><code class="language-java">    private void writeHandler(SelectionKey key) {
+        System.out.println("write handler...");
+        SocketChannel client = (SocketChannel) key.channel();
+        ByteBuffer buffer = (ByteBuffer) key.attachment();
+        buffer.flip();
+        while (buffer.hasRemaining()) {
+            try {
+                client.write(buffer);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        buffer.clear();
+        key.cancel();
+        try {
+            client.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+</code></pre>
+<p>写完后，调用key.cancel() 取消注册，并关闭客户端。既然分了读和写的不同处理流程，那么在主方法里面调用的时候：</p>
+<pre><code class="language-java">                    while (iter.hasNext()) {
+                        SelectionKey key = iter.next();
+                        iter.remove();
+                        if (key.isAcceptable()) {
+                            acceptHandler(key);
+                        } else if (key.isReadable()) {
+                            readHandler(key);
+                        } else if (key.isWritable()) {  
+                            writeHandler(key);
+                        }
+                    }
+</code></pre>
+<p>增加了</p>
+<pre><code class="language-java">if (key.isWritable()) { 
+      writeHandler(key);
+}
+</code></pre>
+<p>测试一下，运行SocketMultiplexingV2.java</p>
+<p>并通过一个客户端连接进来：</p>
+<pre><code class="language-sh">nc 192.168.205.1 9090
+
+</code></pre>
+<p>客户端发送一些内容：</p>
+<pre><code class="language-sh">nc 192.168.205.1 9090
+asdfasdfasf
+asdfasdfasf
+</code></pre>
+<p>可以正常接收到数据。</p>
+<p>考虑有一个fd执行耗时，在一个线性里会阻塞后续FD的处理，同时，考虑资源利用，充分利用cpu核数。</p>
+<p>我们来实现一个基于多线程的多路复用模型。</p>
+<p>将N个FD分组（这里的FD就是Socket连接），每一组一个selector,将一个selector压到一个线程上（最好的线程数量是: cpu核数或者cpu核数*2)</p>
+<p>每个selector中的fd是线性执行的。假设有100w个连接，如果有四个线程，那么每个线程处理25w个。</p>
+<p>分组的FD和处理这堆FD的Selector我们封装到一个数据结构中，假设叫：SelectorThread，其成员变量至少有如下：</p>
+<pre><code class="language-java">public class SelectorThread  {
+    ...
+    Selector selector = null;
+	// 存Selector对应要处理的FD队列
+    LinkedBlockingQueue&lt;Channel&gt; lbq = new LinkedBlockingQueue&lt;&gt;();
+    ...
+}
+</code></pre>
+<p>由于其处理是线性的，且我们要开很多个线程来处理，所以SelectorThread本身是一个线程类(实现Runnable接口)</p>
+<pre><code class="language-java">public class SelectorThread implements Runnable {
+...
+
+}
+</code></pre>
+<p>在run方法中，我们就可以把之前单线程处理selector的常规操作代码移植过来：</p>
+<pre><code class="language-java">....
+while (true) {
+....
+ if (selector.select() &gt; 0) {
+       Iterator&lt;SelectionKey&gt; iter = selector.selectedKeys().iterator();
+       while (iter.hasNext()) {
+            SelectionKey key = iter.next();
+            iter.remove();
+            if (key.isAcceptable()) {
+                acceptHandler(key);
+            } else if (key.isReadable()) {
+                 readHandler(key);
+            } else if (key.isWritable()) {
+            }
+     }
+  }
+....
+}
+....
+</code></pre>
+<p>SelectorThread设计好以后，我们需要一个可以组织SelectorThread的类，假设叫SelectorThreadGroup，这个类的主要职责就是安排哪些FD由哪些Selector来接管，这个类里面持有两个SelectorThread数组，一个用于分配服务端，一个用于分配每次客户端的Socket请求。</p>
+<pre><code class="language-java">// 服务端，可以启动多个服务端
+SelectorThread[] bosses;
+// 客户端的Socket请求
+SelectorThread[] workers;
+</code></pre>
+<p>构造器中初始化这两个数组</p>
+<pre><code class="language-java">    SelectorThreadGroup(int bossNum, int workerNum) {
+        bosses = new SelectorThread[bossNum];
+        workers = new SelectorThread[workerNum];
+        for (int i = 0; i &lt; bossNum; i++) {
+            bosses[i] = new SelectorThread(this);
+            new Thread(bosses[i]).start();
+        }
+        for (int i = 0; i &lt; workerNum; i++) {
+            workers[i] = new SelectorThread(this);
+            new Thread(workers[i]).start();
+        }
+    }
+</code></pre>
+<p>以下代码是针对每次的请求，如何分配Selector：</p>
+<pre><code class="language-java">...
+    public void nextSelector(Channel c) {
+        try {
+            SelectorThread st;
+            if (c instanceof ServerSocketChannel) {
+                st = nextBoss();
+                st.lbq.put(c);
+                st.setWorker(workerGroup);
+            } else {
+                st = nextWork();
+                st.lbq.add(c);
+            }
+            st.selector.wakeup();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private SelectorThread nextBoss() {
+        int index = xid.incrementAndGet() % bosses.length;
+        return bosses[index];
+    }
+
+    private SelectorThread nextWork() {
+        int index = xid.incrementAndGet() % workers.length;  //动用worker的线程分配
+        return workers[index];
+    }
+
+...
+</code></pre>
+<p>这里要区分两类Channel，一类是ServerSocketChannel，即我们每次启动的服务端，另外一类就是连接服务端的Socket请求，这两类最好是分到不同的SelectorThread中的队列中去。分配的算法是朴素的轮询算法（除以数组长度取模）</p>
+<p>这样我们主函数只需要和SelectorThreadGroup交互即可：</p>
+<pre><code class="language-java">
+public class Startup {
+
+    public static void main(String[] args) {
+	 // 开辟了三个SelectorThread给服务端，开辟了三个SelectorThread给客户端去接收Socket
+        SelectorThreadGroup group = new SelectorThreadGroup(3,3);
+        group.bind(9999);
+        group.bind(8888);
+        group.bind(6666);
+        group.bind(7777);
+    }
+}
+
+</code></pre>
+<p>启动Startup，<br>
+开启一个客户端，请求服务端，测试一下：</p>
+<pre><code class="language-sh">[root@io io]# nc 192.168.205.1 7777
+sdfasdfs
+sdfasdfs
+
+</code></pre>
+<p>客户端请求的数据可以返回，服务端可以监听到客户端的请求：</p>
+<pre><code>Thread-1 register listen
+Thread-0 register listen
+Thread-2 register listen
+Thread-1 register listen
+Thread-1   acceptHandler......
+Thread-5 register client: /192.168.205.138:44152
+</code></pre>
+<p>因为我们开了四个端口的监听，但是我们只设置了三个服务端SelectorThread，所以可以看到Thread-1监听了两个服务端。</p>
+<p>新接入的客户端连接是从Thread-5开始的，不会和前面的Thread-0，Thread-1，Thread-2冲突。</p>
+<p>再次来一个新的客户端连接</p>
+<pre><code class="language-sh">[root@io io]# nc 192.168.205.1 8888
+sdfasdfas
+sdfasdfas
+</code></pre>
+<p>输入一些内容，依然可以得到服务端的响应</p>
+<p>服务端这边日志显示：</p>
+<pre><code>Thread-3 register client: /192.168.205.138:33262
+Thread-3 read......
+</code></pre>
+<p>显示是Thread-3捕获了新的连接，也不会和前面的Thread-0，Thread-1，Thread-2冲突。</p>
+<p>完整源码：<a href="https://github.com/GreyZeng/java-io" target="_blank">Github</a></p>
+
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div></div>
+    <p class="postfoot">posted on 
+<span id="post-date">2021-06-19 23:21</span>&nbsp;
+<a href="https://www.cnblogs.com/greyzeng/">Grey Zeng</a>&nbsp;
+阅读(<span id="post_view_count">0</span>)&nbsp;
+评论(<span id="post_comment_count">0</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14897141" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(14897141);return false;">收藏</a>&nbsp;
+<a href="javascript:void(0)" onclick="reportManager.report({ currentUserId: '', targetType: 'blogPost', targetId: '14897141', targetLink: 'https://www.cnblogs.com/greyzeng/p/14897141.html', title: 'Java IO学习笔记七：多路复用从单线程到多线程' })">举报</a></p>
+</div>
+
+
+<script src="https://common.cnblogs.com/highlight/10.3.1/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 201719, cb_blogApp = 'greyzeng', cb_blogUserGuid = '4babfea4-8757-e411-b908-9dcfd8948a71';
+    var cb_entryId = 14897141, cb_entryCreatedDate = '2021-06-19 23:21', cb_postType = 1;
+    updatePostStats(
+        [cb_entryId],
+        function(id, count) { $("#post_view_count").text(count) },
+        function(id, count) { $("#post_comment_count").text(count) })
+    zoomManager.apply("#cnblogs_post_body img:not(.code_img_closed):not(.code_img_opened)");
+</script>
+<a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <div id="cnblogs_c1" class="under-post-card">
+        <div id='div-gpt-ad-1592365906576-0' style='width: 300px; height: 250px;'></div>
+    </div>
+    <div id="under_post_card1"></div>
+    <div id="cnblogs_c2" class="under-post-card">
+        <div id='div-gpt-ad-1592366332455-0' style='width: 468px; height: 60px;'></div>
+    </div>
+    <div id="under_post_card2"></div>
+    <div id="HistoryToday" class="under-post-card"></div>
+    <script type="text/javascript">
+       var commentManager = new blogCommentManager();
+       commentManager.renderComments(0);
+       fixPostBody();
+       deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);       deliverT2();
+       deliverC1C2();
+       loadNewsAndKb();
+       loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);       LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+       GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+       loadOptUnderPost();
+       GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+
+</div>
+
+
+</div>
+<div id="rightmenu">
+    
+<div id="my_links">
+<h3>导航</h3>
+<ul>
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/greyzeng/">
+首页</a>
+</li>
+
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/Grey%20Zeng">
+联系</a></li>
+<li>
+</li><!--<partial name="./Shared/_XmlLink.cshtml" model="Model" />-->
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+</div>
+
+
+    <div id="calendar">
+        <div id="blog-calendar" style="display: none"></div>
+    </div>
+    <script>loadBlogDefaultCalendar();</script>
+    <div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+<div id="sidebar_c3"></div>
+    <div id="blog_stats_place_holder"><script>loadBlogStats();</script></div>
+    <div id="blog-sidecolumn"></div>
+    <script>loadBlogSideColumn();</script>
+    <div id="footer">
+	Powered by: 
+	<br />
+	
+	<a href="https://www.cnblogs.com/" id="footer_site_link">博客园</a>
+	<br />
+	Copyright &copy; 2021 Grey Zeng
+<br /><span id="poweredby">Powered by .NET 5.0 on Kubernetes</span>
+
+</div>
+
+
+</div>
+    
+
+    <input type="hidden" id="antiforgery_token" value="CfDJ8L-rpLgFVEJMgssCVvNUAjucob34a_Ywowl9xmEQsaKVJGyKXo4Lg5mc_zU_TwIWxsLHLRNGag633KxyPSfG21cLSt5q_7tUI2TKCUIpSmbRc8iUC2DGiG5P1uqWN_rhGujg4fdUi2SIkriXrslcmCY" />
+</body>
+</html>

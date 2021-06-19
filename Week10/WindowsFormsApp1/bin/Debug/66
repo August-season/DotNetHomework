@@ -1,0 +1,492 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin-when-crossorigin" />
+    <meta name="description" content="前言： 最近辞职找工作，比较有空，所以花了时间学习了一下docker，感觉这是一个有意思的技术。 我把最近的学习心得整理了一下，写了这篇文章。由于docker我也是初学，没经过项目实践，对它理解不够深" />
+    <meta property="og:description" content="前言： 最近辞职找工作，比较有空，所以花了时间学习了一下docker，感觉这是一个有意思的技术。 我把最近的学习心得整理了一下，写了这篇文章。由于docker我也是初学，没经过项目实践，对它理解不够深" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Docker入门心得（一） - 皇家救星 - 博客园</title>
+    <link id="favicon" rel="shortcut icon" href="//common.cnblogs.com/favicon.svg" type="image/svg+xml" />
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=6tvK5XC6GPbg3p_sy7wzz_2291HoYACr4440iKBzQIw" />
+    <link id="MainCss" rel="stylesheet" href="/skins/simpleblue/bundle-simpleblue.min.css?v=2hjghzSZyhYA1HxvSxKnXih3JbC120DBjeO9V9T_nSs" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/simpleblue/bundle-simpleblue-mobile.min.css?v=3tvwgOOqUo3RpS6gGzEdK0LbptOPv4Bx7M85_UAnFGs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/kingstarer/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/kingstarer/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/kingstarer/wlwmanifest.xml" />
+    <script>
+        var currentBlogId = 234136;
+        var currentBlogApp = 'kingstarer';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var isBlogOwner = false;
+        var skinName = 'SimpleBlue';
+        var visitorUserId = '';
+    </script>
+        <script>
+            var currentPostDateAdded = '2020-03-29 02:49';
+        </script>
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=ZUvfwhWs5fv-s8Nv7WofCOhwKAxiDO928zdWFzhnOPk"></script>
+    
+    
+    
+</head>
+<body class="has-navbar has-bannerbar">
+    <a name="top"></a>
+            <a target="_blank" href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:pc|pp:bokeyuan-huodong-21nianzhongdacu-neiyePCtonglanbanner|pu:21nianzhongdacu-neiyePCtonglanbanner|ci:21nzdc|kw:10224545" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-pc')">
+                <div class="bannerbar aliyun forpc" style="background-size: contain; filter: brightness(0.95); background-image: url(https://img2020.cnblogs.com/blog/35695/202106/35695-20210610183724605-1725070929.jpg)">
+                </div>
+            </a>
+            <div id="bannerbar" class="bannerbar-mobile formobile">
+            <a href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:mb|pp:bokeyuan-huodong-21nianzhongdacu-neiyeyidongduantonglanbanner|pu:21nianzhongdacu-neiyeyidongduantonglanbanner|ci:21nzdc|kw:10224547" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-mobile')">
+                <img src="https://img2020.cnblogs.com/blog/35695/202106/35695-20210610184806729-1738888164.jpg" alt="" />
+            </a>
+            </div>
+    <div id="top_nav" class="navbar forpc">
+        <nav id="nav_main" class="navbar-main">
+            <ul id="nav_left" class="navbar-list navbar-left">
+                <li class="navbar-branding"><a href="https://www.cnblogs.com/" title="开发者的网上家园"><img src="/images/logo.svg?v=R9M0WmLAIPVydmdzE2keuvnjl-bPR7_35oHqtiBzGsM" alt="博客园Logo" /></a></li>
+                <li><a href="/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-sitehome')">首页</a></li>
+                <li><a href="https://news.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-news')">新闻</a></li>
+                <li><a href="https://q.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-q')">博问</a></li>
+                <li><a id="nav_brandzone" href="https://brands.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-brands')">专区</a></li>
+                <li><a href="https://ing.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-ing')">闪存</a></li>
+                <li><a href="https://edu.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-edu')">班级</a></li>
+            </ul>
+            <ul id="nav_right" class="navbar-list navbar-right">
+                <li>
+                    <form id="zzk_search" class="navbar-search" action="https://zzk.cnblogs.com/s" method="get">
+                        <input name="w" id="zzk_search_input" placeholder="代码改变世界" type="text" tabindex="3" />
+                        <button type="submit" id="zzk_search_button">
+                            <img src="/images/aggsite/search.svg" alt="搜索" />
+                        </button>
+                    </form>
+                </li>
+                <li id="navbar_login_status" class="navbar-list">
+                    <a class="navbar-user-info navbar-blog" href="https://i.cnblogs.com/EditPosts.aspx?opt=1" alt="写随笔" title="写随笔">
+                        <img id="new_post_icon" class="navbar-icon" src="/images/aggsite/newpost.svg" alt="写随笔" />
+                    </a>
+                    <a id="navblog-myblog-icon" class="navbar-user-info navbar-blog" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx" alt="我的博客" title="我的博客">
+                        <img id="myblog_icon" class="navbar-icon" src="/images/aggsite/myblog.svg" alt="我的博客" />
+                    </a>
+                    <a class="navbar-user-info navbar-message navbar-icon-wrapper" href="https://msg.cnblogs.com/" alt="短消息" title="短消息">
+                        <img id="msg_icon" class="navbar-icon" src="/images/aggsite/message.svg?v=J0WS2P2iPgaIVgXxcAhliw4AFZIpaTWxtdoNAv9eiCA" alt="短消息" />
+                        <span id="msg_count" style="display: none"></span>
+                    </a>
+                    <div id="user_info" class="navbar-user-info dropdown">
+                        <a class="dropdown-button" href="https://home.cnblogs.com/">
+                            <img id="user_icon" class="navbar-avatar" src="/images/aggsite/avatar-default.svg" alt="用户头像" />
+                        </a>
+                        <div class="dropdown-menu">
+                            <a id="navblog-myblog-text" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx">我的博客</a>
+                            <a href="https://home.cnblogs.com/">我的园子</a>
+                            <a href="https://account.cnblogs.com/settings/account">账号设置</a>
+                            <a href="javascript:void(0)" id="navbar_lite_mode_toggle" title="简洁模式会使用简洁款皮肤显示所有博客">
+    简洁模式 <img id="navbar_lite_mode_on" src="/images/lite-mode-check.svg" class="hide" /><span id="navbar_lite_mode_spinner" class="hide">...</span>
+</a>
+                            <a href="javascript:void(0)" onclick="account.logout();">退出登录</a>
+                        </div>
+                    </div>
+                    <a class="navbar-anonymous" href="https://account.cnblogs.com/signup/">注册</a>
+                    <a class="navbar-anonymous" href="javascript:void(0);" onclick="account.login()">登录</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    
+    <div id="home">
+    <div id="header">
+        <div id="blogTitle">
+            <div class="title"><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/kingstarer/">皇家救星</a>
+</div>
+<div class="subtitle"></div>
+
+        </div>
+        <div id="navigator">
+            
+<ul id="navList">
+    <li id="nav_sitehome"><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+    <li id="nav_myhome">
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/kingstarer/">
+首页</a>
+</li>
+    <li id="nav_newpost">
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+    <li id="nav_contact">
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E7%9A%87%E5%AE%B6%E6%95%91%E6%98%9F">
+联系</a></li>
+    <li id="nav_rss">
+<a id="blog_nav_rss" class="menu" href="javascript:void(0)" data-rss="https://www.cnblogs.com/kingstarer/rss/">
+订阅</a></li>
+    <li id="nav_admin">
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+            <div class="blogStats">
+                <div id="blog_stats_place_holder"><script>loadBlogStats();</script></div>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div id="mainContent">
+            <div class="forFlow">
+                <div id="post_detail">
+    <div id="topics">
+        <div class="post">
+            <h1 class="postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2 vertical-middle" href="https://www.cnblogs.com/kingstarer/p/12592233.html">
+    <span>Docker入门心得（一）</span>
+    
+
+
+
+</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                <div id="cnblogs_post_body" class="blogpost-body blogpost-body-html">
+<h2>前言：</h2>
+<p class="MsoNormal"><span lang="EN-US">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>最近辞职找工作，比较有空，所以花了时间学习了一下<span lang="EN-US">docker</span>，感觉这是一个有意思的技术。</p>
+<p class="MsoNormal"><span lang="EN-US">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>我把最近的学习心得整理了一下，写了这篇文章。由于<span lang="EN-US">docker</span>我也是初学，没经过项目实践，对它理解不够深刻。虽然文章中的知识点，我都查阅过多篇文章或者亲身实践印证，但尽管如此，还是难免有错误的地方，如果有人发现问题，欢迎留言指正。</p>
+<h2><span lang="EN-US">docker</span>是什么：</h2>
+<p class="MsoNormal"><span lang="EN-US">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; docker</span>是一种新型的，轻量级的虚拟技术，它把软件及其依赖的环境打包起来，形成一个虚拟的整体，方便开发维护人员进行管理和调度。</p>
+<h2><span lang="EN-US">docker</span>与集装箱：</h2>
+<p class="MsoNormal"><span lang="EN-US">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; docker</span>的英文意思是<span lang="EN-US">“</span>码头工人<span lang="EN-US">”</span>，而它的图标是一艘船上面放了许多个集装箱。集装箱是一种运送的货物统一规格的箱子，工人把货物放到集装箱里面，然后将箱子放在船上或车上运输到其它地方。</p>
+<p class="MsoNormal"><span lang="EN-US">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>集团箱运输效率非常高，而且可以很方便地切换运输工具。而<span lang="EN-US">docker</span>就是<span lang="EN-US">IT</span>界的集团箱技术，它把各式各样的软件封装成一个<span lang="EN-US">“</span>箱子<span lang="EN-US">”</span>里面，称之为“镜像”。人们把方便地进行对镜像进行传输，并在各种系统（目前只支持<span lang="EN-US">linux</span>类）上运行。一个运行状态的镜像称之为“容器”。这些容器提供了统一的管理接口，让人们可以方便地运行，必要时也容易组装在一起。</p>
+<p class="MsoNormal"><span lang="EN-US">&nbsp;</span></p>
+<h2><span lang="EN-US">docker</span>和虚拟机的区别：</h2>
+<p class="MsoNormal"><span lang="EN-US">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>初学<span lang="EN-US">docker</span>，很多人会有一个疑问：<span lang="EN-US">docker</span>与虚拟机有什么区别？我在这里简单介绍一下。</p>
+<p class="MsoNormal" style="text-indent: 21pt">从下面这张图，是从网络文章《这可能是最为详细的<span lang="EN-US">Docker</span>入门总结》里面摘取出来的。</p>
+<p class="MsoNormal"><span lang="EN-US"><img src="https://img2020.cnblogs.com/blog/781609/202003/781609-20200329144149826-784524896.png" alt=""><br></span></p>
+<p class="MsoNormal"><span lang="EN-US">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>左边的是<span lang="EN-US">docker</span>虚拟技术的架构图，右边是使用<span lang="EN-US">vmware</span>虚拟技术的。从图片上看，我们可以知道<span lang="EN-US">docker</span>是在操作系统上做的虚拟层，而<span lang="EN-US">vmware</span>是在硬件层上做的虚拟层。</p>
+<p class="MsoNormal"><span lang="EN-US">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>一个<span lang="EN-US">docker</span>容器一般只包括运行软件本身及其依赖的运行库（外壳层和应用软件），而一个<span lang="EN-US">vmware</span>虚拟机则需要包括完整的操作系统（内核层和外壳层，应用程序和文件系统）。</p>
+<p class="MsoNormal"><span lang="EN-US">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>因为实现原理不同，导致<span lang="EN-US">docker</span>和虚拟机在很多方面上有差异，这里总结如下：</p>
+<p class="MsoNormal"><span lang="EN-US">&nbsp;</span></p>
+<table class="MsoTable15Grid5DarkAccent5" style="border-style: none" border="1" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td style="width: 138.25pt; border-width: 1pt initial 1pt 1pt; border-color: rgba(255, 255, 255, 1) initial rgba(255, 255, 255, 1) rgba(255, 255, 255, 1); border-right-style: none; background: rgba(91, 155, 213, 1); padding: 0 5.4pt" valign="top" width="184">
+<p class="MsoNormal"><strong><span style="color: rgba(255, 255, 255, 1); mso-themecolor: background1" lang="EN-US">&nbsp;</span></strong></p>
+
+
+</td>
+<td style="width: 138.25pt; border-width: 1pt initial; border-color: rgba(255, 255, 255, 1) initial; border-left-style: none; border-right-style: none; background: rgba(91, 155, 213, 1); padding: 0 5.4pt" valign="top" width="184">
+<p class="MsoNormal"><strong><span style="color: rgba(255, 255, 255, 1); mso-themecolor: background1" lang="EN-US">Docker</span></strong></p>
+
+
+</td>
+<td style="width: 138.3pt; border-width: 1pt 1pt 1pt initial; border-color: rgba(255, 255, 255, 1) rgba(255, 255, 255, 1) rgba(255, 255, 255, 1) initial; border-left-style: none; background: rgba(91, 155, 213, 1); padding: 0 5.4pt" valign="top" width="184">
+<p class="MsoNormal"><strong><span style="color: rgba(255, 255, 255, 1); mso-themecolor: background1">虚拟机</span></strong></p>
+
+
+</td>
+
+
+</tr>
+<tr>
+<td style="width: 138.25pt; border-width: initial 1pt 1pt; border-color: initial rgba(255, 255, 255, 1) rgba(255, 255, 255, 1); border-top-style: none; background: rgba(91, 155, 213, 1); padding: 0 5.4pt" valign="top" width="184">
+<p class="MsoNormal"><strong><span style="color: rgba(255, 255, 255, 1); mso-themecolor: background1">消耗资源</span></strong></p>
+
+
+</td>
+<td style="width: 138.25pt; border-top: none; border-left: none; border-bottom-width: 1pt; border-bottom-color: rgba(255, 255, 255, 1); border-right-width: 1pt; border-right-color: rgba(255, 255, 255, 1); background: rgba(189, 214, 238, 1); padding: 0 5.4pt" valign="top" width="184">
+<p class="MsoNormal">只消耗软件实际运行需要的资源，一台普通<span lang="EN-US">PC</span>机可以轻松启动几十到上百个容器</p>
+
+
+</td>
+<td style="width: 138.3pt; border-top: none; border-left: none; border-bottom-width: 1pt; border-bottom-color: rgba(255, 255, 255, 1); border-right-width: 1pt; border-right-color: rgba(255, 255, 255, 1); background: rgba(189, 214, 238, 1); padding: 0 5.4pt" valign="top" width="184">
+<p class="MsoNormal">需要预分配<span lang="EN-US">CPU/</span>内存<span lang="EN-US">/</span>硬盘资源，一台普通<span lang="EN-US">PC</span>机一般只能启动几个虚拟机</p>
+
+
+</td>
+
+
+</tr>
+<tr>
+<td style="width: 138.25pt; border-width: initial 1pt 1pt; border-color: initial rgba(255, 255, 255, 1) rgba(255, 255, 255, 1); border-top-style: none; background: rgba(91, 155, 213, 1); padding: 0 5.4pt" valign="top" width="184">
+<p class="MsoNormal"><strong><span style="color: rgba(255, 255, 255, 1); mso-themecolor: background1">文件大小</span></strong></p>
+
+
+</td>
+<td style="width: 138.25pt; border-top: none; border-left: none; border-bottom-width: 1pt; border-bottom-color: rgba(255, 255, 255, 1); border-right-width: 1pt; border-right-color: rgba(255, 255, 255, 1); background: rgba(222, 234, 246, 1); padding: 0 5.4pt" valign="top" width="184">
+<p class="MsoNormal"><span lang="EN-US">MB</span>级别，只包括运行必要的文件和一些元数据，一般只包含操作系统外壳不包含内核</p>
+
+
+</td>
+<td style="width: 138.3pt; border-top: none; border-left: none; border-bottom-width: 1pt; border-bottom-color: rgba(255, 255, 255, 1); border-right-width: 1pt; border-right-color: rgba(255, 255, 255, 1); background: rgba(222, 234, 246, 1); padding: 0 5.4pt" valign="top" width="184">
+<p class="MsoNormal"><span lang="EN-US">GB</span>级别，需要包括完整的操作系统以及预分配的磁盘文件</p>
+
+
+</td>
+
+
+</tr>
+<tr>
+<td style="width: 138.25pt; border-width: initial 1pt 1pt; border-color: initial rgba(255, 255, 255, 1) rgba(255, 255, 255, 1); border-top-style: none; background: rgba(91, 155, 213, 1); padding: 0 5.4pt" valign="top" width="184">
+<p class="MsoNormal"><strong><span style="color: rgba(255, 255, 255, 1); mso-themecolor: background1">隔离性</span></strong></p>
+
+
+</td>
+<td style="width: 138.25pt; border-top: none; border-left: none; border-bottom-width: 1pt; border-bottom-color: rgba(255, 255, 255, 1); border-right-width: 1pt; border-right-color: rgba(255, 255, 255, 1); background: rgba(189, 214, 238, 1); padding: 0 5.4pt" valign="top" width="184">
+<p class="MsoNormal"><span lang="EN-US">Docker</span>可以限制容器的资源消耗，但不能防止别的进程占用容器资源</p>
+
+
+</td>
+<td style="width: 138.3pt; border-top: none; border-left: none; border-bottom-width: 1pt; border-bottom-color: rgba(255, 255, 255, 1); border-right-width: 1pt; border-right-color: rgba(255, 255, 255, 1); background: rgba(189, 214, 238, 1); padding: 0 5.4pt" valign="top" width="184">
+<p class="MsoNormal">虚拟机之前相互干扰比较少</p>
+
+
+</td>
+
+
+</tr>
+<tr>
+<td style="width: 138.25pt; border-width: initial 1pt 1pt; border-color: initial rgba(255, 255, 255, 1) rgba(255, 255, 255, 1); border-top-style: none; background: rgba(91, 155, 213, 1); padding: 0 5.4pt" valign="top" width="184">
+<p class="MsoNormal"><strong><span style="color: rgba(255, 255, 255, 1); mso-themecolor: background1">启动速度</span></strong></p>
+
+
+</td>
+<td style="width: 138.25pt; border-top: none; border-left: none; border-bottom-width: 1pt; border-bottom-color: rgba(255, 255, 255, 1); border-right-width: 1pt; border-right-color: rgba(255, 255, 255, 1); background: rgba(222, 234, 246, 1); padding: 0 5.4pt" valign="top" width="184">
+<p class="MsoNormal">启动速度快，可以在秒级</p>
+
+
+</td>
+<td style="width: 138.3pt; border-top: none; border-left: none; border-bottom-width: 1pt; border-bottom-color: rgba(255, 255, 255, 1); border-right-width: 1pt; border-right-color: rgba(255, 255, 255, 1); background: rgba(222, 234, 246, 1); padding: 0 5.4pt" valign="top" width="184">
+<p class="MsoNormal">十秒级甚至分钟级</p>
+
+
+</td>
+
+
+</tr>
+<tr>
+<td style="width: 138.25pt; border-width: initial 1pt 1pt; border-color: initial rgba(255, 255, 255, 1) rgba(255, 255, 255, 1); border-top-style: none; background: rgba(91, 155, 213, 1); padding: 0 5.4pt" valign="top" width="184">
+<p class="MsoNormal"><strong><span style="color: rgba(255, 255, 255, 1); mso-themecolor: background1">安全性</span></strong></p>
+
+
+</td>
+<td style="width: 138.25pt; border-top: none; border-left: none; border-bottom-width: 1pt; border-bottom-color: rgba(255, 255, 255, 1); border-right-width: 1pt; border-right-color: rgba(255, 255, 255, 1); background: rgba(189, 214, 238, 1); padding: 0 5.4pt" valign="top" width="184">
+<p class="MsoNormal"><span lang="EN-US">Docker</span>运行环境导致开发维护人员需要使用<span lang="EN-US">root</span>权限，风险比较高。有一些黑客手段可以在容器里面对宿主机器进行破坏。</p>
+
+
+</td>
+<td style="width: 138.3pt; border-top: none; border-left: none; border-bottom-width: 1pt; border-bottom-color: rgba(255, 255, 255, 1); border-right-width: 1pt; border-right-color: rgba(255, 255, 255, 1); background: rgba(189, 214, 238, 1); padding: 0 5.4pt" valign="top" width="184">
+<p class="MsoNormal">安全性比较高</p>
+
+
+</td>
+
+
+</tr>
+<tr>
+<td style="width: 138.25pt; border-width: initial 1pt 1pt; border-color: initial rgba(255, 255, 255, 1) rgba(255, 255, 255, 1); border-top-style: none; background: rgba(91, 155, 213, 1); padding: 0 5.4pt" valign="top" width="184">
+<p class="MsoNormal"><strong><span style="color: rgba(255, 255, 255, 1); mso-themecolor: background1">稳定性</span></strong></p>
+
+
+</td>
+<td style="width: 138.25pt; border-top: none; border-left: none; border-bottom-width: 1pt; border-bottom-color: rgba(255, 255, 255, 1); border-right-width: 1pt; border-right-color: rgba(255, 255, 255, 1); background: rgba(222, 234, 246, 1); padding: 0 5.4pt" valign="top" width="184">
+<p class="MsoNormal"><span lang="EN-US">Docker</span>版本一直在快速更新，不同版本间细节差异会比较大。</p>
+
+
+</td>
+<td style="width: 138.3pt; border-top: none; border-left: none; border-bottom-width: 1pt; border-bottom-color: rgba(255, 255, 255, 1); border-right-width: 1pt; border-right-color: rgba(255, 255, 255, 1); background: rgba(222, 234, 246, 1); padding: 0 5.4pt" valign="top" width="184">
+<p class="MsoNormal">技术较稳定</p>
+
+
+</td>
+
+
+</tr>
+
+
+</tbody>
+
+
+</table>
+<p class="MsoNormal"><span lang="EN-US">&nbsp;</span></p>
+<p class="MsoNormal"><span lang="EN-US">&nbsp;</span></p>
+<p class="MsoNormal"><span lang="EN-US">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>这里补充一点操作系统的知识，有助于加深对这节内容的理解。<span lang="EN-US">Linux</span>系统一般有<span lang="EN-US">4</span>个主要部分：内核、<span lang="EN-US">shell</span>、文件系统和应用程序。如图：</p>
+<p class="MsoNormal"><span lang="EN-US"><img src="https://img2020.cnblogs.com/blog/781609/202003/781609-20200329144322522-1403615586.jpg" alt=""><br></span></p>
+<p class="MsoNormal"><span lang="EN-US">&nbsp;</span></p>
+<h2><span lang="EN-US">Docker</span>容器和虚拟机的相同点：</h2>
+<p class="MsoListParagraph" style="margin-left: 21pt; text-indent: -21pt; mso-char-indent-count: 0; mso-list: l0 level1 lfo2"><span style="font-family: Wingdings; mso-fareast-font-family: Wingdings; mso-bidi-font-family: Wingdings" lang="EN-US">Ø<span style="font-variant-numeric: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;">&nbsp; </span></span>都有和宿主机器独立的网络设置（包括主机名，<span lang="EN-US">IP</span>，<span lang="EN-US">DNS</span>等）</p>
+<p class="MsoListParagraph" style="margin-left: 21pt; text-indent: -21pt; mso-char-indent-count: 0; mso-list: l0 level1 lfo2"><span style="font-family: Wingdings; mso-fareast-font-family: Wingdings; mso-bidi-font-family: Wingdings" lang="EN-US">Ø<span style="font-variant-numeric: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;">&nbsp; </span></span>独立的目录结构</p>
+<p class="MsoListParagraph" style="margin-left: 21pt; text-indent: -21pt; mso-char-indent-count: 0; mso-list: l0 level1 lfo2"><span style="font-family: Wingdings; mso-fareast-font-family: Wingdings; mso-bidi-font-family: Wingdings" lang="EN-US">Ø<span style="font-variant-numeric: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;">&nbsp; </span></span>独立的<span lang="EN-US">PID</span>、<span lang="EN-US">IPC</span></p>
+<h2><span lang="EN-US">docker</span>使用例子：</h2>
+<p class="MsoNormal"><span lang="EN-US">&nbsp;</span></p>
+<p class="MsoNormal"><span lang="EN-US">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>俗话说百闻不如一见。这里使用<span lang="EN-US">docker</span>搭建一个<span lang="EN-US">wordpress</span>应用做为例子，演示如何使用<span lang="EN-US">docker</span>，给大家一个直观的感觉。</p>
+<p class="MsoNormal" style="text-indent: 21pt">演示过程你会看到一些陌生的名词或者命令，不过没关系，你可以忽略继续看这篇文章，后面会有解释。</p>
+<p class="MsoNormal"><span lang="EN-US">&nbsp;</span></p>
+<p class="MsoNormal"><span lang="EN-US">1 </span>首先我们用<span lang="EN-US">docker</span>创建一个虚拟的网络环境，用来部署<span lang="EN-US">wordpress</span></p>
+<p class="MsoNormal" style="background: rgba(0, 0, 0, 1); mso-background-themecolor: text1"><span style="color: rgba(112, 173, 71, 1); mso-themecolor: accent6" lang="EN-US">[huangcihui:/home/huangcihui/wordpress] docker network create wordpress-net-demo</span></p>
+<p class="MsoNormal" style="background: rgba(0, 0, 0, 1); mso-background-themecolor: text1"><span style="color: rgba(112, 173, 71, 1); mso-themecolor: accent6" lang="EN-US">fed21aad3090bc95f9a1aba14f58a64a1f9a6f7830aa60c409c0a5edca2c8937</span></p>
+<p class="MsoNormal"><span lang="EN-US">&nbsp;</span></p>
+<p class="MsoNormal">说明：新建的虚拟网络命名为<a name="_Hlk36378807"></a><span lang="EN-US">wordpress-net-demo</span>，后面需要使用到。</p>
+<p class="MsoNormal"><span lang="EN-US">&nbsp;</span></p>
+<p class="MsoNormal"><span lang="EN-US">2 wordpress</span>需要使用<span lang="EN-US">mysql</span>，所以我们先用<span lang="EN-US">docker</span>创建一个<span lang="EN-US">mysql</span>容器</p>
+<p class="MsoNormal"><span lang="EN-US">&nbsp;</span></p>
+<p class="MsoNormal" style="background: rgba(0, 0, 0, 1)" align="left"><span style="color: rgba(112, 173, 71, 1); mso-themecolor: accent6" lang="EN-US">&nbsp;[huangcihui:/home/huangcihui/wordpress] docker run -d --name wordpress-mysql-demo --network wordpress-net-demo --network-alias db -e MYSQL_ROOT_PASSWORD=somewordpress -e MYSQL_DATABASE=wordpress -e MYSQL_USER=wordpress -e MYSQL_PASSWORD=wordpress -v $PWD/db-demo:/var/lib/mysql&nbsp; mysql:5.7</span></p>
+<p class="MsoNormal" style="background: rgba(0, 0, 0, 1)" align="left"><span style="color: rgba(112, 173, 71, 1); mso-themecolor: accent6" lang="EN-US">1ce24c93292641115885c6a186a925dd77747c9a70ae0533035c76c870d640e8</span></p>
+<p class="MsoNormal"><span lang="EN-US">&nbsp;</span></p>
+<p class="MsoNormal">说明：</p>
+<p class="MsoNormal">使用镜像<span lang="EN-US">mysql:5.7</span>建立了一个容器，名称为<span lang="EN-US">wordpress-mysql-demo</span></p>
+<p class="MsoNormal"><span lang="EN-US">-e</span>参数是设置容器里面程序运行的环境变量，这里通过环境变量定义了<span lang="EN-US">mysql</span>的基本参数</p>
+<p class="MsoNormal">这里新建了一个<span lang="EN-US">mysql</span>容器，并且指定其在虚拟网络<span lang="EN-US">wordpress-net-demo</span>里面的域名为<span lang="EN-US">db</span>，后面<span lang="EN-US">wordpress</span>连接数据库时需要使用这个域名。（这里<span lang="EN-US">db</span>和容器名称都会注册到前面创建的虚拟网络<span lang="EN-US">wordpress-net-demo</span>内嵌的<span lang="EN-US">DNS</span>服务器<span lang="EN-US">127.0.0.11</span>上）</p>
+<p class="MsoNormal"><span lang="EN-US">Mysql</span>生成的数据文件默认存放在容器里面的<span lang="EN-US">/var/lib/mysq</span>目录，我们使用<span lang="EN-US">-v</span>参数，把这个目录映射到当前主机目录<span lang="EN-US">db-demo</span>下面。如果不这样设置，容器删除后数据库数据也会跟着容器一起删除。</p>
+<p class="MsoNormal"><span lang="EN-US">&nbsp;</span></p>
+<p class="MsoNormal"><span lang="EN-US">3 </span>接着我们再<span lang="EN-US">docker</span>创建一个<span lang="EN-US">wordpress</span>容器</p>
+<p class="MsoNormal"><span lang="EN-US">&nbsp;</span></p>
+<p class="MsoNormal" style="background: rgba(0, 0, 0, 1)" align="left"><span style="color: rgba(112, 173, 71, 1); mso-themecolor: accent6" lang="EN-US">[huangcihui:/home/huangcihui/wordpress] docker run -d --name wordpress-demo --network wordpress-net-demo --network-alias wordpress -e WORDPRESS_DB_HOST=db:3306 -e WORDPRESS_DB_USER=wordpress -e WORDPRESS_DB_PASSWORD=wordpress -e WORDPRESS_DB_NAME=wordpress -p 8080:80&nbsp; -v ${PWD}/wp-content-demo:/var/www/html/wp-content wordpress:latest</span></p>
+<p class="MsoNormal" style="background: rgba(0, 0, 0, 1)" align="left"><span style="color: rgba(112, 173, 71, 1); mso-themecolor: accent6" lang="EN-US">11fa9298da3e748448a5c0120a2fb5a2e65c078370807702ca68119b4810a61c</span></p>
+<p class="MsoNormal"><span lang="EN-US">&nbsp;</span></p>
+<p class="MsoNormal"><span lang="EN-US">&nbsp;</span></p>
+<p class="MsoNormal">说明：</p>
+<p class="MsoNormal">使用镜像<span lang="EN-US">wordpress:latest</span>建立了一个容器，名称为<span lang="EN-US">wordpress-demo</span></p>
+<p class="MsoNormal">通过启动时设置的环境变量指定了连接的数据库主机名称为<span lang="EN-US">db</span></p>
+<p class="MsoNormal">使用<span lang="EN-US">-v</span>把宿主机器上的<span lang="EN-US">wp-content-demo</span>目录映射给容器，这样可以留存<span lang="EN-US">wordpress</span>配置信息。</p>
+<p class="MsoNormal"><span lang="EN-US">-p 8080:80</span>参数的含义是把当前机器的<span lang="EN-US">8080</span>端口映射到容器的<span lang="EN-US">80</span>端口上面</p>
+<p class="MsoNormal">容器启动后用<span lang="EN-US">curl</span>测试是否能成功访问：<span lang="EN-US">http://192.168.2.109:8080/</span></p>
+<p class="MsoNormal">如果命令能成功访问，一般说明启动成功，如果出现异常，可以使用<span lang="EN-US">docker logs wordpress-demo</span>查看程序输出的错误信息</p>
+<p class="MsoNormal"><span lang="EN-US">&nbsp;</span></p>
+<p class="MsoNormal"><span lang="EN-US">4 </span>现在我们可以在自己机器上浏览这个新建的<span lang="EN-US">wordpress</span>平台了</p>
+<p class="MsoNormal">在浏览器输入 <span lang="EN-US"><a href="http://xn--ip-tx5di3ni80c:8080/">http://<span lang="EN-US"><span lang="EN-US">虚拟<span lang="EN-US">机IP:8080</span></span></span></a></span>即可访问（如果访问失败，请检查虚拟机网络配置或者防火墙设置）</p>
+<p class="MsoNormal"><span lang="EN-US"><img src="https://img2020.cnblogs.com/blog/781609/202003/781609-20200329144415618-390273261.png" alt=""><br></span></p>
+<p class="MsoNormal"><span lang="EN-US">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>设置好博客信息后生成的相关文件会存放在<span lang="EN-US">db-demo</span>和<span lang="EN-US">wp-content-demo</span>目录下</p>
+<p class="MsoNormal" style="text-indent: 21pt">从这个例子，我们可以看出<span lang="EN-US">docker</span>的方便之处。使用<span lang="EN-US">docker</span>你不需要先在网上找自己系统适用的<span lang="EN-US">mysql</span>和<span lang="EN-US">wordpress</span>安装包，再分别安装它们，并根据自己机器环境进行配置，最后才能启动一个<span lang="EN-US">wordpress</span>。</p>
+<p class="MsoNormal"><span lang="EN-US">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>使用<span lang="EN-US">docker</span>，你只需要执行<span lang="EN-US">docker run</span>，程序就会自动到<span lang="EN-US">docker hub</span>寻找相应的镜像，并把它下载回来运行。</p>
+<p class="MsoNormal"><span lang="EN-US">&nbsp;</span></p>
+<h2><span lang="EN-US">docker</span>应用场景：</h2>
+<p class="MsoNormal"><span lang="EN-US">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; docker</span>在以下场景下，可以有效提高我们的工作效率：</p>
+<p class="MsoNormal" style="margin-left: 21pt"><span lang="EN-US">&nbsp;</span></p>
+<p class="MsoListParagraph" style="margin-left: 21pt; text-indent: -21pt; mso-char-indent-count: 0; mso-list: l1 level1 lfo1"><span style="font-family: Wingdings; mso-fareast-font-family: Wingdings; mso-bidi-font-family: Wingdings" lang="EN-US">Ø<span style="font-variant-numeric: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;">&nbsp; </span></span>替代虚拟机的部分功能</p>
+<p class="MsoListParagraph" style="margin-left: 21pt; text-indent: 0; mso-char-indent-count: 0">使用<span lang="EN-US">docker</span>可以在一台机上模拟多机集群环境，可以让不同开发人员启动相同的程序而不互相干扰，可以方便地试验程序在不同操作系统环境运行情况。这些原来需要使用虚拟机实现的功能，现在可以使用<span lang="EN-US">docker</span>轻松代替。</p>
+<p class="MsoNormal"><span lang="EN-US">&nbsp;</span></p>
+<p class="MsoListParagraph" style="margin-left: 21pt; text-indent: -21pt; mso-char-indent-count: 0; mso-list: l1 level1 lfo1"><span style="font-family: Wingdings; mso-fareast-font-family: Wingdings; mso-bidi-font-family: Wingdings" lang="EN-US">Ø<span style="font-variant-numeric: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;">&nbsp; </span></span>简化配置，模拟生产环境</p>
+<p class="MsoNormal" style="margin-left: 21pt">由于<span lang="EN-US">docker</span>提供了网络，磁盘映射功能，使用我们不需要针对不同机器环境修改程序配置也可以运行。在开发<span lang="EN-US">/</span>测试机器环境与生产机器环境有不同的情况，这个特性显得无比有用。</p>
+<p class="MsoNormal" style="margin-left: 21pt"><span lang="EN-US">&nbsp;</span></p>
+<p class="MsoListParagraph" style="margin-left: 21pt; text-indent: -21pt; mso-char-indent-count: 0; mso-list: l1 level1 lfo1"><span style="font-family: Wingdings; mso-fareast-font-family: Wingdings; mso-bidi-font-family: Wingdings" lang="EN-US">Ø<span style="font-variant-numeric: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;">&nbsp; </span></span>使用<span lang="EN-US">docker</span>实现快速部署</p>
+<p class="MsoNormal" style="margin-left: 21pt"><span style="color: rgba(51, 51, 51, 1); background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial">大名鼎鼎的</span><span style="font-family: Arial, sans-serif; color: rgba(51, 51, 51, 1); background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial" lang="EN-US">Kubernetes</span><span style="color: rgba(51, 51, 51, 1); background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial">（</span><span style="font-family: Arial, sans-serif; color: rgba(51, 51, 51, 1); background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial" lang="EN-US">k8s</span><span style="color: rgba(51, 51, 51, 1); background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial">）就是一个基于容器技术的快速部署工具，而</span><span style="font-family: Arial, sans-serif; color: rgba(51, 51, 51, 1); background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial" lang="EN-US">docker</span><span style="color: rgba(51, 51, 51, 1); background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial">就是人们常用的容器技术之一。可以说</span><span style="font-family: Arial, sans-serif; color: rgba(51, 51, 51, 1); background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial" lang="EN-US">docker</span><span style="color: rgba(51, 51, 51, 1); background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial">实现了“一次部署，到处运行”。</span></p>
+<p class="MsoNormal"><span lang="EN-US">&nbsp;</span></p>
+<p class="MsoListParagraph" style="margin-left: 21pt; text-indent: -21pt; mso-char-indent-count: 0; mso-list: l1 level1 lfo1"><span style="font-family: Wingdings; mso-fareast-font-family: Wingdings; mso-bidi-font-family: Wingdings" lang="EN-US">Ø<span style="font-variant-numeric: normal; font-stretch: normal; font-size: 7pt; line-height: normal; font-family: &quot;Times New Roman&quot;">&nbsp; </span></span>方便地同步与共享软件</p>
+<p class="MsoNormal" style="margin-left: 21pt">人们可以轻松地将自己的软件打包上传到<span lang="EN-US">docker hub</span>，根据各人需要随时下载到其它机器运行。当软件需要更新时，只需要重新执行<span lang="EN-US">docker pull &lt;</span>镜像名<span lang="EN-US">&gt;</span>，即可自动下载最新版本。</p>
+<p class="MsoNormal" style="margin-left: 21pt"><span lang="EN-US">&nbsp;</span></p>
+<p class="MsoNormal" style="margin-left: 21pt">随着<span lang="EN-US">docker</span>的更新以及它越来越广泛地被应用，<span lang="EN-US">docker</span>还会有更多应用场景，大家可以根据<span lang="EN-US">docker</span>特性自己挖掘。</p>
+<h2>未完待续</h2>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-03-29 14:49</span>&nbsp;
+<a href="https://www.cnblogs.com/kingstarer/">皇家救星</a>&nbsp;
+阅读(<span id="post_view_count">463</span>)&nbsp;
+评论(<span id="post_comment_count">2</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12592233" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12592233);return false;">收藏</a>&nbsp;
+<a href="javascript:void(0)" onclick="reportManager.report({ currentUserId: '', targetType: 'blogPost', targetId: '12592233', targetLink: 'https://www.cnblogs.com/kingstarer/p/12592233.html', title: 'Docker入门心得（一）' })">举报</a></div>
+        </div>
+        <script src="https://common.cnblogs.com/highlight/10.3.1/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 234136, cb_blogApp = 'kingstarer', cb_blogUserGuid = '6c01f56e-ee22-e511-b908-9dcfd8948a71';
+    var cb_entryId = 12592233, cb_entryCreatedDate = '2020-03-29 14:49', cb_postType = 1;
+    updatePostStats(
+        [cb_entryId],
+        function(id, count) { $("#post_view_count").text(count) },
+        function(id, count) { $("#post_comment_count").text(count) })
+    zoomManager.apply("#cnblogs_post_body img:not(.code_img_closed):not(.code_img_opened)");
+</script>
+        <a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <div id="cnblogs_c1" class="under-post-card">
+        <div id='div-gpt-ad-1592365906576-0' style='width: 300px; height: 250px;'></div>
+    </div>
+    <div id="under_post_card1"></div>
+    <div id="cnblogs_c2" class="under-post-card">
+        <div id='div-gpt-ad-1592366332455-0' style='width: 468px; height: 60px;'></div>
+    </div>
+    <div id="under_post_card2"></div>
+    <div id="HistoryToday" class="under-post-card"></div>
+    <script type="text/javascript">
+       var commentManager = new blogCommentManager();
+       commentManager.renderComments(0);
+       fixPostBody();
+       deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);       deliverT2();
+       deliverC1C2();
+       loadNewsAndKb();
+       loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);       LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+       GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+       loadOptUnderPost();
+       GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+
+    </div>
+</div>
+            </div>
+        </div>
+
+        <div id="sideBar">
+            <div id="sideBarMain">
+                <div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+<div id="sidebar_c3"></div>
+                <div id="calendar"><div id="blog-calendar" style="display:none"></div></div>                
+                <script>loadBlogDefaultCalendar();</script>
+                <div id="leftcontentcontainer">
+                    <!-- begin:SingleColumn -->
+                    <div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+                    <!-- end:  SingleColumn -->
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div id="footer">
+        <!--done-->
+Copyright &copy; 2021 皇家救星
+<br /><span id="poweredby">Powered by .NET 5.0 on Kubernetes</span>
+
+    </div>
+</div>
+
+    
+
+    <input type="hidden" id="antiforgery_token" value="CfDJ8L-rpLgFVEJMgssCVvNUAjsDqV8XxkOYA6o9P7cPjPdyNvoSdI1RppmC_g5k-DcAnFN5ILQ4FS3o0G_TCtloMp8cbjU6ejwmFMDL0vXTXYHJpXoii8udo0YAQ0SJlsVrqM0_f72vQSNpXR-yMv6kxpQ" />
+</body>
+</html>

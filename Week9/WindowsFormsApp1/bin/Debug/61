@@ -1,0 +1,425 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin-when-crossorigin" />
+    <meta name="description" content="最近花了不少时间把项目数据库从oracle迁移到达梦8，迁移过程中碰上了不少问题，后面有时间我整理一下心得。 今天先发一下php使用dm_pdo操作达梦数据库的示例代码，里面包括了常规的绑定变量查询，" />
+    <meta property="og:description" content="最近花了不少时间把项目数据库从oracle迁移到达梦8，迁移过程中碰上了不少问题，后面有时间我整理一下心得。 今天先发一下php使用dm_pdo操作达梦数据库的示例代码，里面包括了常规的绑定变量查询，" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>php操作达梦数据库示例代码（包括绑定变量，存储过程调用，clob类型操作等） - 皇家救星 - 博客园</title>
+    <link id="favicon" rel="shortcut icon" href="//common.cnblogs.com/favicon.svg" type="image/svg+xml" />
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=6tvK5XC6GPbg3p_sy7wzz_2291HoYACr4440iKBzQIw" />
+    <link id="MainCss" rel="stylesheet" href="/skins/simpleblue/bundle-simpleblue.min.css?v=2hjghzSZyhYA1HxvSxKnXih3JbC120DBjeO9V9T_nSs" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/simpleblue/bundle-simpleblue-mobile.min.css?v=3tvwgOOqUo3RpS6gGzEdK0LbptOPv4Bx7M85_UAnFGs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/kingstarer/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/kingstarer/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/kingstarer/wlwmanifest.xml" />
+    <script>
+        var currentBlogId = 234136;
+        var currentBlogApp = 'kingstarer';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var isBlogOwner = false;
+        var skinName = 'SimpleBlue';
+        var visitorUserId = '';
+    </script>
+        <script>
+            var currentPostDateAdded = '2020-06-09 12:07';
+        </script>
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=ZUvfwhWs5fv-s8Nv7WofCOhwKAxiDO928zdWFzhnOPk"></script>
+    
+    
+    
+</head>
+<body class="has-navbar has-bannerbar">
+    <a name="top"></a>
+            <a target="_blank" href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:pc|pp:bokeyuan-huodong-21nianzhongdacu-neiyePCtonglanbanner|pu:21nianzhongdacu-neiyePCtonglanbanner|ci:21nzdc|kw:10224545" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-pc')">
+                <div class="bannerbar aliyun forpc" style="background-size: contain; filter: brightness(0.95); background-image: url(https://img2020.cnblogs.com/blog/35695/202106/35695-20210610183724605-1725070929.jpg)">
+                </div>
+            </a>
+            <div id="bannerbar" class="bannerbar-mobile formobile">
+            <a href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:mb|pp:bokeyuan-huodong-21nianzhongdacu-neiyeyidongduantonglanbanner|pu:21nianzhongdacu-neiyeyidongduantonglanbanner|ci:21nzdc|kw:10224547" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-mobile')">
+                <img src="https://img2020.cnblogs.com/blog/35695/202106/35695-20210610184806729-1738888164.jpg" alt="" />
+            </a>
+            </div>
+    <div id="top_nav" class="navbar forpc">
+        <nav id="nav_main" class="navbar-main">
+            <ul id="nav_left" class="navbar-list navbar-left">
+                <li class="navbar-branding"><a href="https://www.cnblogs.com/" title="开发者的网上家园"><img src="/images/logo.svg?v=R9M0WmLAIPVydmdzE2keuvnjl-bPR7_35oHqtiBzGsM" alt="博客园Logo" /></a></li>
+                <li><a href="/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-sitehome')">首页</a></li>
+                <li><a href="https://news.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-news')">新闻</a></li>
+                <li><a href="https://q.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-q')">博问</a></li>
+                <li><a id="nav_brandzone" href="https://brands.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-brands')">专区</a></li>
+                <li><a href="https://ing.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-ing')">闪存</a></li>
+                <li><a href="https://edu.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-edu')">班级</a></li>
+            </ul>
+            <ul id="nav_right" class="navbar-list navbar-right">
+                <li>
+                    <form id="zzk_search" class="navbar-search" action="https://zzk.cnblogs.com/s" method="get">
+                        <input name="w" id="zzk_search_input" placeholder="代码改变世界" type="text" tabindex="3" />
+                        <button type="submit" id="zzk_search_button">
+                            <img src="/images/aggsite/search.svg" alt="搜索" />
+                        </button>
+                    </form>
+                </li>
+                <li id="navbar_login_status" class="navbar-list">
+                    <a class="navbar-user-info navbar-blog" href="https://i.cnblogs.com/EditPosts.aspx?opt=1" alt="写随笔" title="写随笔">
+                        <img id="new_post_icon" class="navbar-icon" src="/images/aggsite/newpost.svg" alt="写随笔" />
+                    </a>
+                    <a id="navblog-myblog-icon" class="navbar-user-info navbar-blog" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx" alt="我的博客" title="我的博客">
+                        <img id="myblog_icon" class="navbar-icon" src="/images/aggsite/myblog.svg" alt="我的博客" />
+                    </a>
+                    <a class="navbar-user-info navbar-message navbar-icon-wrapper" href="https://msg.cnblogs.com/" alt="短消息" title="短消息">
+                        <img id="msg_icon" class="navbar-icon" src="/images/aggsite/message.svg?v=J0WS2P2iPgaIVgXxcAhliw4AFZIpaTWxtdoNAv9eiCA" alt="短消息" />
+                        <span id="msg_count" style="display: none"></span>
+                    </a>
+                    <div id="user_info" class="navbar-user-info dropdown">
+                        <a class="dropdown-button" href="https://home.cnblogs.com/">
+                            <img id="user_icon" class="navbar-avatar" src="/images/aggsite/avatar-default.svg" alt="用户头像" />
+                        </a>
+                        <div class="dropdown-menu">
+                            <a id="navblog-myblog-text" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx">我的博客</a>
+                            <a href="https://home.cnblogs.com/">我的园子</a>
+                            <a href="https://account.cnblogs.com/settings/account">账号设置</a>
+                            <a href="javascript:void(0)" id="navbar_lite_mode_toggle" title="简洁模式会使用简洁款皮肤显示所有博客">
+    简洁模式 <img id="navbar_lite_mode_on" src="/images/lite-mode-check.svg" class="hide" /><span id="navbar_lite_mode_spinner" class="hide">...</span>
+</a>
+                            <a href="javascript:void(0)" onclick="account.logout();">退出登录</a>
+                        </div>
+                    </div>
+                    <a class="navbar-anonymous" href="https://account.cnblogs.com/signup/">注册</a>
+                    <a class="navbar-anonymous" href="javascript:void(0);" onclick="account.login()">登录</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    
+    <div id="home">
+    <div id="header">
+        <div id="blogTitle">
+            <div class="title"><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/kingstarer/">皇家救星</a>
+</div>
+<div class="subtitle"></div>
+
+        </div>
+        <div id="navigator">
+            
+<ul id="navList">
+    <li id="nav_sitehome"><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+    <li id="nav_myhome">
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/kingstarer/">
+首页</a>
+</li>
+    <li id="nav_newpost">
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+    <li id="nav_contact">
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E7%9A%87%E5%AE%B6%E6%95%91%E6%98%9F">
+联系</a></li>
+    <li id="nav_rss">
+<a id="blog_nav_rss" class="menu" href="javascript:void(0)" data-rss="https://www.cnblogs.com/kingstarer/rss/">
+订阅</a></li>
+    <li id="nav_admin">
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+            <div class="blogStats">
+                <div id="blog_stats_place_holder"><script>loadBlogStats();</script></div>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div id="mainContent">
+            <div class="forFlow">
+                <div id="post_detail">
+    <div id="topics">
+        <div class="post">
+            <h1 class="postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2 vertical-middle" href="https://www.cnblogs.com/kingstarer/p/13071771.html">
+    <span>php操作达梦数据库示例代码（包括绑定变量，存储过程调用，clob类型操作等）</span>
+    
+
+
+
+</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                <div id="cnblogs_post_body" class="blogpost-body cnblogs-markdown">
+<p>最近花了不少时间把项目数据库从oracle迁移到达梦8，迁移过程中碰上了不少问题，后面有时间我整理一下心得。<br>
+今天先发一下php使用dm_pdo操作达梦数据库的示例代码，里面包括了常规的绑定变量查询，存储过程调用，clob类型操作等。<br>
+使用的是达梦提供的pdo_dm驱动，相关配置信息请参考达梦的官方帮助文档（达梦8安装时自带）</p>
+<pre><code class="language-php">ini_set("display_errors","On");
+ini_set('log_errors', 1);
+ini_set("error_log", "/usr/local/apache2/logs/dm_error.log");
+
+error_reporting(E_ALL)
+    
+//获取变量值字符串
+function strHt($var) 
+{
+	return print_r($var, true);
+}
+
+/*
+function xlog(string $lv, string $format, ...$args)
+{
+    $log = "%s\t%s:%s\t%s" . PHP_EOL;
+    $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
+    return sprintf($log, $lv, trim($backtrace[0]['file']), $backtrace[0]['line'], sprintf($format, ...$args));
+}
+echo xlog("info", "我是一条日志%s", ...["呀"]);
+————————————————
+版权声明：本文为CSDN博主「安木1991」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/weixin_42900065/article/details/83509723
+*/
+
+function mySubFile($str)
+{
+	if ($str == "")
+	{
+		return "";
+	}
+
+	return strstr($str, "inc_chk");
+}
+
+//日志打印函数
+function dbgLogHt(string $format, ...$args)
+{
+    $log = "%s:%s %s";
+    $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
+    #$strHt = sprintf($log, '[dbg]',  trim($backtrace[1]['file']), $backtrace[1]['line'], sprintf($format, ...$args));
+    #($strHt, 0);
+    error_log(sprintf($log, trim($backtrace[0]['file']), $backtrace[0]['line'], sprintf($format, ...$args)));
+	//输出调用堆栈 方便调试
+    error_log(sprintf("from %s:%s %s:%s %s:%s %s:%s %s:%s %s:%s %s:%s %s:%s" . PHP_EOL,
+			mySubFile($backtrace[1]['file']), $backtrace[1]['line'], mySubFile($backtrace[2]['file']), $backtrace[2]['line'],
+			mySubFile($backtrace[3]['file']), $backtrace[3]['line'], mySubFile($backtrace[4]['file']), $backtrace[4]['line'],
+			mySubFile($backtrace[5]['file']), $backtrace[5]['line'], mySubFile($backtrace[6]['file']), $backtrace[6]['line'],
+			mySubFile($backtrace[7]['file']), $backtrace[7]['line'], mySubFile($backtrace[8]['file']), $backtrace[8]['line'])
+    );    
+    # error_log(strHt($backtrace));
+
+}
+
+function testPdo()
+{
+	try {
+		dbgLogHt("&lt;pre&gt;"); //dm:代表使用达梦pdo驱动
+		$pdo = new PDO("dm:host=127.0.0.1", "user_hch", "pass:kingstarer");
+		//设置报错方式为抛出异常
+		$pdo-&gt;setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+
+		$rs = $pdo-&gt;query("SELECT * FROM   V\$VERSION WHERE ROWNUM = 1;");
+
+		$rs-&gt;setFetchMode(PDO::FETCH_ASSOC);
+
+		$result_arr = $rs-&gt;fetchAll();
+
+
+		error_log(strHt($result_arr));
+
+		$arr = []; //测试绑定变量 包括入参和出参
+		$arr[":iCount"] = '5';
+		$arr[":rn"] = 'hhc';
+		$strSql = "select  :rn rn, table_name from user_tables where rownum &lt; :iCount";
+		$stmt = $pdo-&gt;prepare($strSql);
+		$stmt-&gt;bindParam(":rn", $arr[":rn"]);
+		$stmt-&gt;bindParam(":iCount", $arr[":iCount"]);
+		$stmt-&gt;execute();
+		while ($row = $stmt-&gt;fetch(PDO::FETCH_ASSOC)) {           // $row是一行，使用while依次输出下一行
+			dbgLogHt("while");
+			dbgLogHt(strHt($row));
+			error_log(strHt($row));
+		}
+		dbgLogHt("&lt;pre&gt;");
+
+        // 测试存储过程调用 
+		$strSql = "begin  :ret := f_prod_demo(:num, 'UPD', 123, :o_err_code, :o_err_msg, :o_call_stack); end;";
+		$stmt = $pdo-&gt;prepare($strSql);
+
+		/*
+		//用这种 比较简洁 但实际测试发现不行
+		$arr = [];
+		$arr[':num'] = '123';
+		$arr[':ret'] = 'o_err_code';
+		$arr[':o_err_code'] = 'o_err_code';
+		$arr[':o_err_msg'] = 'o_err_msg';
+		$arr[':o_err_msg'] = 'o_call_stack';
+		$stmt-&gt;execute($arr);
+		print_r($arr);
+		*/
+
+		$arr = [];
+		$arr[':num'] = '123';
+		$arr[':ret'] = 'o_err_code';
+		$arr[':o_err_code'] = 'o_err_code';
+		$arr[':o_err_msg'] = 'o_err_msg';
+		$arr[':o_err_msg'] = 'o_call_stack';
+		$stmt-&gt;bindParam(':num', $arr[':num']);
+		$stmt-&gt;bindParam(':ret', $arr[':ret']);
+		$stmt-&gt;bindParam(':o_err_code', $arr[':o_err_code']);
+		$stmt-&gt;bindParam(':o_err_msg', $arr[':o_err_msg']);
+		$stmt-&gt;bindParam(':o_call_stack', $arr[':o_call_stack']);
+		$stmt-&gt;execute();
+		error_log(strHt($arr));
+		$stmt-&gt;closeCursor();
+
+		//测试达梦插入clob数据
+		$strSql = "INSERT into HCH_TEST values(1, '333')";
+		$stmt = $pdo-&gt;prepare($strSql);
+		$stmt-&gt;execute();
+		error_log("insert clob ok");
+		$stmt-&gt;closeCursor();
+
+		//测试使用绑定变量插入clob类型数据
+		$strSql = "INSERT into HCH_TEST values(:id, :mess)";
+		error_log("&lt;prepare&gt;");
+		$stmt = $pdo-&gt;prepare($strSql);
+		error_log("&lt;prepare ok&gt;");
+		$arr[':id'] = "123";
+		$stmt-&gt;bindParam(':id', $arr[':id']);
+		error_log("&lt;bindParam ok&gt;");
+		$arr[':mess'] = "123";
+		$stmt-&gt;bindParam(':mess', $arr[':mess']);
+		error_log("&lt;bindParam ok&gt;");
+
+		$stmt-&gt;execute();
+		error_log("&lt;execute ok&gt;");
+		$stmt-&gt;closeCursor();
+		error_log("insert clob param ok");
+
+		error_log("&lt;pre&gt;");
+
+		$pdo = null;
+		//更多达梦数据库开发经验请参考： https://www.cnblogs.com/kingstarer/
+	} catch (PDOException $e) {
+		error_log("Error: " . $e-&gt;getMessage());
+		error_log("&lt;pre&gt;");
+		//die();
+	}
+
+	//exit(1);
+}
+</code></pre>
+<p>网上关于达梦的资料比较少，希望这篇心得能起抛砖引玉的效果。</p>
+
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-06-09 12:07</span>&nbsp;
+<a href="https://www.cnblogs.com/kingstarer/">皇家救星</a>&nbsp;
+阅读(<span id="post_view_count">749</span>)&nbsp;
+评论(<span id="post_comment_count">0</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=13071771" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(13071771);return false;">收藏</a>&nbsp;
+<a href="javascript:void(0)" onclick="reportManager.report({ currentUserId: '', targetType: 'blogPost', targetId: '13071771', targetLink: 'https://www.cnblogs.com/kingstarer/p/13071771.html', title: 'php操作达梦数据库示例代码（包括绑定变量，存储过程调用，clob类型操作等）' })">举报</a></div>
+        </div>
+        <script src="https://common.cnblogs.com/highlight/10.3.1/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 234136, cb_blogApp = 'kingstarer', cb_blogUserGuid = '6c01f56e-ee22-e511-b908-9dcfd8948a71';
+    var cb_entryId = 13071771, cb_entryCreatedDate = '2020-06-09 12:07', cb_postType = 1;
+    updatePostStats(
+        [cb_entryId],
+        function(id, count) { $("#post_view_count").text(count) },
+        function(id, count) { $("#post_comment_count").text(count) })
+    zoomManager.apply("#cnblogs_post_body img:not(.code_img_closed):not(.code_img_opened)");
+</script>
+        <a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <div id="cnblogs_c1" class="under-post-card">
+        <div id='div-gpt-ad-1592365906576-0' style='width: 300px; height: 250px;'></div>
+    </div>
+    <div id="under_post_card1"></div>
+    <div id="cnblogs_c2" class="under-post-card">
+        <div id='div-gpt-ad-1592366332455-0' style='width: 468px; height: 60px;'></div>
+    </div>
+    <div id="under_post_card2"></div>
+    <div id="HistoryToday" class="under-post-card"></div>
+    <script type="text/javascript">
+       var commentManager = new blogCommentManager();
+       commentManager.renderComments(0);
+       fixPostBody();
+       deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);       deliverT2();
+       deliverC1C2();
+       loadNewsAndKb();
+       loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);       LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+       GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+       loadOptUnderPost();
+       GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+
+    </div>
+</div>
+            </div>
+        </div>
+
+        <div id="sideBar">
+            <div id="sideBarMain">
+                <div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+<div id="sidebar_c3"></div>
+                <div id="calendar"><div id="blog-calendar" style="display:none"></div></div>                
+                <script>loadBlogDefaultCalendar();</script>
+                <div id="leftcontentcontainer">
+                    <!-- begin:SingleColumn -->
+                    <div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+                    <!-- end:  SingleColumn -->
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div id="footer">
+        <!--done-->
+Copyright &copy; 2021 皇家救星
+<br /><span id="poweredby">Powered by .NET 5.0 on Kubernetes</span>
+
+    </div>
+</div>
+
+    
+
+    <input type="hidden" id="antiforgery_token" value="CfDJ8L-rpLgFVEJMgssCVvNUAjsGv4fdgYohvZ19ogaiQ3z8Kl85lRcXpEyuH3G8XbJIBLdLWXtOPuDl88K4SkN79G_tI4UHCBoC067942jeE1yoceCl9u1iqqcvmIa9GoaK4pym5C5ot8Q4phH8pWZMo0E" />
+</body>
+</html>

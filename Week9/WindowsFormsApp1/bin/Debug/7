@@ -1,0 +1,895 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin-when-crossorigin" />
+    <meta name="description" content="数据挖掘与生活 前言 写这篇文章的目的是想给公司同事介绍一下数据挖掘的入门知识，旨在增强大家对数据挖掘了解与兴趣，并将这门技术应用到工作和生活中，发挥集体智慧为公司产品增加数据挖掘应用场景。另外对于我" />
+    <meta property="og:description" content="数据挖掘与生活 前言 写这篇文章的目的是想给公司同事介绍一下数据挖掘的入门知识，旨在增强大家对数据挖掘了解与兴趣，并将这门技术应用到工作和生活中，发挥集体智慧为公司产品增加数据挖掘应用场景。另外对于我" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>数据挖掘与生活 - 皇家救星 - 博客园</title>
+    <link id="favicon" rel="shortcut icon" href="//common.cnblogs.com/favicon.svg" type="image/svg+xml" />
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=6tvK5XC6GPbg3p_sy7wzz_2291HoYACr4440iKBzQIw" />
+    <link id="MainCss" rel="stylesheet" href="/skins/simpleblue/bundle-simpleblue.min.css?v=2hjghzSZyhYA1HxvSxKnXih3JbC120DBjeO9V9T_nSs" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/simpleblue/bundle-simpleblue-mobile.min.css?v=3tvwgOOqUo3RpS6gGzEdK0LbptOPv4Bx7M85_UAnFGs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/kingstarer/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/kingstarer/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/kingstarer/wlwmanifest.xml" />
+    <script>
+        var currentBlogId = 234136;
+        var currentBlogApp = 'kingstarer';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var isBlogOwner = false;
+        var skinName = 'SimpleBlue';
+        var visitorUserId = '';
+    </script>
+        <script>
+            var currentPostDateAdded = '2021-06-14 06:52';
+        </script>
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=ZUvfwhWs5fv-s8Nv7WofCOhwKAxiDO928zdWFzhnOPk"></script>
+    
+    
+    
+</head>
+<body class="has-navbar has-bannerbar">
+    <a name="top"></a>
+            <a target="_blank" href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:pc|pp:bokeyuan-huodong-21nianzhongdacu-neiyePCtonglanbanner|pu:21nianzhongdacu-neiyePCtonglanbanner|ci:21nzdc|kw:10224545" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-pc')">
+                <div class="bannerbar aliyun forpc" style="background-size: contain; filter: brightness(0.95); background-image: url(https://img2020.cnblogs.com/blog/35695/202106/35695-20210610183724605-1725070929.jpg)">
+                </div>
+            </a>
+            <div id="bannerbar" class="bannerbar-mobile formobile">
+            <a href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:mb|pp:bokeyuan-huodong-21nianzhongdacu-neiyeyidongduantonglanbanner|pu:21nianzhongdacu-neiyeyidongduantonglanbanner|ci:21nzdc|kw:10224547" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-mobile')">
+                <img src="https://img2020.cnblogs.com/blog/35695/202106/35695-20210610184806729-1738888164.jpg" alt="" />
+            </a>
+            </div>
+    <div id="top_nav" class="navbar forpc">
+        <nav id="nav_main" class="navbar-main">
+            <ul id="nav_left" class="navbar-list navbar-left">
+                <li class="navbar-branding"><a href="https://www.cnblogs.com/" title="开发者的网上家园"><img src="/images/logo.svg?v=R9M0WmLAIPVydmdzE2keuvnjl-bPR7_35oHqtiBzGsM" alt="博客园Logo" /></a></li>
+                <li><a href="/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-sitehome')">首页</a></li>
+                <li><a href="https://news.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-news')">新闻</a></li>
+                <li><a href="https://q.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-q')">博问</a></li>
+                <li><a id="nav_brandzone" href="https://brands.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-brands')">专区</a></li>
+                <li><a href="https://ing.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-ing')">闪存</a></li>
+                <li><a href="https://edu.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-edu')">班级</a></li>
+            </ul>
+            <ul id="nav_right" class="navbar-list navbar-right">
+                <li>
+                    <form id="zzk_search" class="navbar-search" action="https://zzk.cnblogs.com/s" method="get">
+                        <input name="w" id="zzk_search_input" placeholder="代码改变世界" type="text" tabindex="3" />
+                        <button type="submit" id="zzk_search_button">
+                            <img src="/images/aggsite/search.svg" alt="搜索" />
+                        </button>
+                    </form>
+                </li>
+                <li id="navbar_login_status" class="navbar-list">
+                    <a class="navbar-user-info navbar-blog" href="https://i.cnblogs.com/EditPosts.aspx?opt=1" alt="写随笔" title="写随笔">
+                        <img id="new_post_icon" class="navbar-icon" src="/images/aggsite/newpost.svg" alt="写随笔" />
+                    </a>
+                    <a id="navblog-myblog-icon" class="navbar-user-info navbar-blog" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx" alt="我的博客" title="我的博客">
+                        <img id="myblog_icon" class="navbar-icon" src="/images/aggsite/myblog.svg" alt="我的博客" />
+                    </a>
+                    <a class="navbar-user-info navbar-message navbar-icon-wrapper" href="https://msg.cnblogs.com/" alt="短消息" title="短消息">
+                        <img id="msg_icon" class="navbar-icon" src="/images/aggsite/message.svg?v=J0WS2P2iPgaIVgXxcAhliw4AFZIpaTWxtdoNAv9eiCA" alt="短消息" />
+                        <span id="msg_count" style="display: none"></span>
+                    </a>
+                    <div id="user_info" class="navbar-user-info dropdown">
+                        <a class="dropdown-button" href="https://home.cnblogs.com/">
+                            <img id="user_icon" class="navbar-avatar" src="/images/aggsite/avatar-default.svg" alt="用户头像" />
+                        </a>
+                        <div class="dropdown-menu">
+                            <a id="navblog-myblog-text" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx">我的博客</a>
+                            <a href="https://home.cnblogs.com/">我的园子</a>
+                            <a href="https://account.cnblogs.com/settings/account">账号设置</a>
+                            <a href="javascript:void(0)" id="navbar_lite_mode_toggle" title="简洁模式会使用简洁款皮肤显示所有博客">
+    简洁模式 <img id="navbar_lite_mode_on" src="/images/lite-mode-check.svg" class="hide" /><span id="navbar_lite_mode_spinner" class="hide">...</span>
+</a>
+                            <a href="javascript:void(0)" onclick="account.logout();">退出登录</a>
+                        </div>
+                    </div>
+                    <a class="navbar-anonymous" href="https://account.cnblogs.com/signup/">注册</a>
+                    <a class="navbar-anonymous" href="javascript:void(0);" onclick="account.login()">登录</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    
+    <div id="home">
+    <div id="header">
+        <div id="blogTitle">
+            <div class="title"><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/kingstarer/">皇家救星</a>
+</div>
+<div class="subtitle"></div>
+
+        </div>
+        <div id="navigator">
+            
+<ul id="navList">
+    <li id="nav_sitehome"><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+    <li id="nav_myhome">
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/kingstarer/">
+首页</a>
+</li>
+    <li id="nav_newpost">
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+    <li id="nav_contact">
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E7%9A%87%E5%AE%B6%E6%95%91%E6%98%9F">
+联系</a></li>
+    <li id="nav_rss">
+<a id="blog_nav_rss" class="menu" href="javascript:void(0)" data-rss="https://www.cnblogs.com/kingstarer/rss/">
+订阅</a></li>
+    <li id="nav_admin">
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+            <div class="blogStats">
+                <div id="blog_stats_place_holder"><script>loadBlogStats();</script></div>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div id="mainContent">
+            <div class="forFlow">
+                <div id="post_detail">
+    <div id="topics">
+        <div class="post">
+            <h1 class="postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2 vertical-middle" href="https://www.cnblogs.com/kingstarer/p/14882821.html">
+    <span>数据挖掘与生活</span>
+    
+
+
+
+</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                <div id="cnblogs_post_body" class="blogpost-body cnblogs-markdown">
+<h1 id="数据挖掘与生活">数据挖掘与生活</h1>
+<h1 id="前言">前言</h1>
+<p>写这篇文章的目的是想给公司同事介绍一下数据挖掘的入门知识，旨在增强大家对数据挖掘了解与兴趣，并将这门技术应用到工作和生活中，发挥集体智慧为公司产品增加数据挖掘应用场景。另外对于我自己，以教代学，也可以更好发现自己知识盲点，让输出倒逼输入。</p>
+<p>本来是计划写成ppt的，但准备过程中发现ppt实在太花时间了：要找图画图，要做交互，要考虑页面布局，要背演讲稿。最终还是决定写成文章，相对来说容易点，参考性也强一些。</p>
+<p>市面上的数据挖掘资料很多，但有些专业性很强，但讲得太抽象，太深奥，有些虽然浅显易懂，但实战意义不强。当然，也有写得比较好的，但相比起来比例还是比较少。</p>
+<p>这篇文章我打算按我理解的角度来介绍数据挖掘，<strong>重点介绍数据挖掘在生活中的应用，以及非专业人士如何使用数据挖掘解决生活问题。</strong>文章中介绍了数据挖掘的一些算法，但很多只是罗列了名词，因为我也没搞清楚这些算法或者没精力详细讲解，只是写出来作为关键字，有兴趣的同学可以自行百度。</p>
+<p>写作过程中参考了很多资料文章，无法一一注明了，在此一并做感谢。</p>
+<h1 id="文章概述">文章概述</h1>
+<p>本文先举了一些生活中使用数据挖掘的案例，让读者对数据挖掘有感性认识。接着介绍了常用的数据挖掘方法，并分别介绍了这些方法的定义和应用场景。</p>
+<p>对于每种数据挖掘方法，我都举了一个生活中的小场景作为例子，说明怎么用这个方法来解决这个场景中的问题。例如使用线性回归指导我们买房选房，使用关联分析来辅助彩票选号，用决策树辅助我们阅读体检数据。</p>
+<p>另外，我将一些数据处理技巧，例如非数值数据处理方法，文本数据处理方法，算法原理等知识穿插在文章里面，大家在实践时可以参考。</p>
+<h1 id="数据挖掘案例">数据挖掘案例</h1>
+<p>数据挖掘技术在我们生活中随处可见。下面给大家介绍几个案例，让大家对数据挖掘技术有直观感受。</p>
+<p>​              <img src="https://img2020.cnblogs.com/blog/781609/202106/781609-20210614182443524-1696621414.png" alt="" loading="lazy"></p>
+<h2 id="沃尔玛通过数据挖掘发现啤酒与尿布销售关系">沃尔玛通过数据挖掘发现啤酒与尿布销售关系</h2>
+<p>20世纪90年代的美国沃尔玛超市中，沃尔玛的超市管理人员分析销售数据时发现了一个令人难于理解的现象：在某些特定的情况下，“啤酒”与“尿布”两件看上去毫无关系的商品会经常出现在同一个购物篮中。</p>
+<p>为了搞清楚具体原因，沃尔玛对这些同时购买啤酒和尿布的顾客展开了调研。最后他们发现,原来购买大部分客户是婴儿父亲。他们在下班回家的路上为孩子买尿布，然后又会顺手购买自己爱喝的啤酒。</p>
+<p>在知道这个规律后沃尔玛将这两样商品摆放在一起进行销售、并获得了很好的销售收益。这种现象就是卖场中商品之间的关联性，研究“啤酒与尿布”关联的方法就是购物篮分析。</p>
+<p>现在很多购物网站会有推荐商品的功能，在你把某些商品加入购物车后，系统会提示你“购买此商品的人多数会同时购买XXX”，其背后原理，也是依靠“购物篮分析”。</p>
+<h2 id="某打车平台通过大数据发现司机与乘客私下交易">某打车平台通过大数据发现司机与乘客私下交易</h2>
+<p>某打车平台经过数据挖掘，发现系统中存在大量司机存在相同的操作顺序：“接到订单”-&gt;"移动到乘客附近"-&gt;"取消订单"-&gt;"重新上线"。</p>
+<p>经过运营人员分析，这些司机是在借助导航接到乘客后，取消订单，绕过平台与乘客私下交易。这种行为会给乘客出行安全带来安全隐患。</p>
+<p>于是该平台新增规定，如果司机上线接单地点与前次取消的订单目的地相近时，就判定司机与乘客私下交易，对其发出警告或者限制其接单。</p>
+<h2 id="某购物平台使用数据挖掘提高优惠券营销能力">某购物平台使用数据挖掘提高优惠券营销能力</h2>
+<p>以优惠券盘活老用户或吸引新用户进店消费是一种重要营销方式。然而随机投放的优惠券对多数用户造成无意义的干扰。对商家而言，滥发的优惠券可能降低品牌声誉，同时难以估算营销成本。 个性化投放是提高优惠券核销率的重要技术，它可以让具有一定偏好的消费者得到真正的实惠，同时赋予商家更强的营销能力。</p>
+<p>该购物平台分析通过分析系统消费数据，根据得到优惠券后是否会购买商品的概率，将系统用户划分为几类。针对其中获取到优惠券后大概率会使用的顾客进行集中投放，大大提升了优惠券活动营销效果。</p>
+<h2 id="某微博网友质疑天猫双十一销售额数据造假">某微博网友质疑天猫双十一销售额数据造假</h2>
+<p>2019年天猫双十一数据公布后，有网友指出这个数字与4月份一条微博预测的数据十分接近。该博主据此怀疑天猫每年销售额数据是根据公式捏造的。</p>
+<p><img src="https://img2020.cnblogs.com/blog/781609/202106/781609-20210614182502458-1204412527.png" alt="" loading="lazy"></p>
+<p><img src="https://img2020.cnblogs.com/blog/781609/202106/781609-20210614182510502-168191063.png" alt="" loading="lazy"></p>
+<p>但其实知道数据挖掘的人会知道，世界上有很多数据都是可以用数据公式预测的。小到公司的业绩，大到全球航空客运量，甚至世界经济总额，人口数量变化，都是可以预测的。</p>
+<h2 id="某人使用yolo3辅助自己整理照片">某人使用yolo3辅助自己整理照片</h2>
+<p>某人为了存储了大量家庭成员生活照片，为了将这些照片按家庭成员分类存储（区分自己夫妻，父母，孩子的照片），他使用labelImg工具对其中一些照片做了标记（父亲，母亲，自己，妻子，孩子，总共5类），并在darknet环境下用yolo3来训练，最终训练出一个模型用于识别照片上家人信息。通过使用这个模型，他就可以很轻易地将照片分类存储。</p>
+<p><img src="https://img2020.cnblogs.com/blog/781609/202106/781609-20210614183123453-425280697.png" alt="" loading="lazy"></p>
+<p>​        图：训练识别王珞丹和白百何模型的图片打标示例</p>
+<h1 id="数据挖掘定义">数据挖掘定义</h1>
+<p>数据挖掘是指从大量的数据中通过算法找出隐藏于其中有价值的信息的过程。从宏观价值上来说，数据挖掘的价值体现在<strong>描述</strong>和<strong>预测</strong>上。</p>
+<p>描述：以简洁概要方式描述数据之间规律。例如从房产中介数据中分析影响各种因素对房价的影响。（如房子大小，位置，装修情况等）</p>
+<p>预测：是通过对所提供数据集应用特定方法分析所获得的一个或一组数据模型，并将该模型用于预测未来新数据的有关性质。例如根据历史房价信息，预测房价未来几年涨幅。</p>
+<p><img src="https://img2020.cnblogs.com/blog/781609/202106/781609-20210614183146560-2018002745.jpg" alt="" loading="lazy"></p>
+<p>数据挖掘通常与计算机科学有关，并通过统计、在线分析处理、情报检索、机器学习、专家系统（依靠过去的经验法则）和模式识别等诸多方法来实现上述目标。<br>
+<img src="https://img2020.cnblogs.com/blog/781609/202106/781609-20210614183203873-11161786.png" alt="" loading="lazy"></p>
+<h2 id="对数据挖掘的错误认识：">对数据挖掘的错误认识：</h2>
+<h3 id="1-挖掘出的结果都是正确的">1 挖掘出的结果都是正确的</h3>
+<p>实际：挖掘算法并不保证结果的完全正确，挖掘出的结果只具有概率上的意义，只具有参考价值。</p>
+<h3 id="2有数据挖掘就能自动找出系统有价值的信息">2有数据挖掘就能自动找出系统有价值的信息</h3>
+<p>实际：数据挖掘只是帮助专业人士更深入、更容易的分析数据。数据挖掘技术可以提供很多模型对数据进行挖掘，但无法告知某个模型对企业的实际价值。</p>
+<p>即使得到有用的模型，也要将其与实际生产活动结合才可以体现价值。</p>
+<p>​</p>
+<h1 id="常用数据挖掘方法简介">常用数据挖掘方法简介</h1>
+<p>数据挖掘的方法非常多，不过总的来说可以将它们归成几大类。以下是一种归类方法（数据挖掘归类方法有多种，不过大同小异）</p>
+<p><img src="https://img2020.cnblogs.com/blog/781609/202106/781609-20210614183233127-1974863867.png" alt="" loading="lazy"></p>
+<p>绿色的就是数据挖掘的方法，<strong>常见的方法共有五个：相关性分析、关联分析、分类、聚类、时序分析</strong>。</p>
+<p>每种方法都有多种算法，不同算法适用于不同类型数据，实践时我们可以多尝试几种算法，看哪种算法最适合当前场景。</p>
+<h2 id="相关性分析">相关性分析</h2>
+<h3 id="定义与应用场景">定义与应用场景</h3>
+<p>相关性分析是指对两个或多个具备相关性的变量元素进行分析，从而衡量两个变量因素的相关密切程度。<br>
+<img src="https://img2020.cnblogs.com/blog/781609/202106/781609-20210614183304560-1909939271.jpg" alt="" loading="lazy"></p>
+<p><img src="https://img2020.cnblogs.com/blog/781609/202106/781609-20210614183311756-2022515869.png" alt="" loading="lazy"></p>
+<h3 id="常用算法：">常用算法：</h3>
+<h4 id="回归">回归</h4>
+<p>回归分析是处理多变量间相关关系的一种数学方法。它是指研究一组随机变量(Y1 ，Y2 ，…，Yi)和另一组(X1，X2，…，Xk)变量之间关系的统计分析方法。</p>
+<p>通常Y1，Y2，…，Yi是<strong>因变量</strong>，X1、X2，…，Xk是<strong>自变量</strong>。一般我们会使用数学方程式来表示因变量和自变量之间的关系，用以描述自变量的变化会对因变量产生什么样的影响。</p>
+<p>根据回归分析建立的变量间的数学表达式，称为<strong>回归方程</strong>。</p>
+<h5 id="一元线性回归与多元线性回归">一元线性回归与多元线性回归</h5>
+<p>线性回归假设输出变量是若干变量的线性组合，并根据这一关系求解线性组合的最优系数。</p>
+<p>一个多变量线性回归模型表示为以下的形式：</p>
+<p><img src="https://img2020.cnblogs.com/blog/781609/202106/781609-20210614183330992-1954505715.png" alt="" loading="lazy"></p>
+<p>这种模型也称为多元线性回归方程式。如果变量只有一个，那多元线性回归，就会退化成为一元线性回归，回归方程就是我们熟悉的中学知识：直线方程式y = b x + a</p>
+<p>方程式中的b，即直线斜率，代表自变量x对y的影响程序。它的绝对值越高，说明x对y的影响越大。</p>
+<p>历史上第一个线性回归表达式是用于描述人类子代与父代身高的关系的：</p>
+<p><strong>y = 0.516x + 33.73</strong>，式中的y和x分别代表子代和父代身高，单位是英寸（一英寸= 2.54厘米）</p>
+<p>这个式子表明父代身高比较高时，子代身高大概率会低于父代。反之父代身高较矮时，子代身高有较大可能高于父代。</p>
+<p>从几何图形上理解，一元线性回归就是找到一条直线，使得每一个y值到直线的距离之和最小。（多元则是找到一个超平面）</p>
+<p>线性回归模型简约而不简单，它即能体现回归方法的基本思想，而且又能构造出功能更强大的非线性模型。<br>
+<img src="https://img2020.cnblogs.com/blog/781609/202106/781609-20210614183350623-1117082158.png" alt="" loading="lazy"></p>
+<p><img src="https://img2020.cnblogs.com/blog/781609/202106/781609-20210614183418072-2114771992.png" alt="" loading="lazy"></p>
+<p>图：一个线性回归计算过程</p>
+<h5 id="应用">应用</h5>
+<p>回归方程式，我们可以预测电影票房，计算王者排名，给法官做刑期建议。</p>
+<p>也可以根据公式系数，研究各种变量因素对结果影响大小，例如分析载重和路径分别对油耗影响。</p>
+<p>或者根据公式计算结果，寻找与结果差异较大的数据做分析，例如做房地产捡漏。之前我在网上看过一个人使用百度和高德提供的数据，分析开店选址的，也是用到回归的方法。</p>
+<h5 id="非线性回归">非线性回归</h5>
+<p>假设自变量与因变量之间关系是非线性函数的回归分析方法称为非线性回归。</p>
+<p>例如抛物线，双曲线，指数增长曲线。</p>
+<p>可以使用<strong>衍生变量</strong>的方法，借助线性回归的方法来计算非线性函数。</p>
+<p>衍生变量就是对户现有变量做组合加工，从而生成一个新的变量。通过计算出这个新变量与其它变量的线性关系，从而得出非线性函数。</p>
+<p>常见的衍生变量构造方法有分箱、相乘、平方、开方、算比例等。</p>
+<p>有了衍生变量后，一元二次回归可以看成是对因变量y与自变量x，衍生变量x*x的线性回归。</p>
+<p>举例：我们知道功率(W)，电压(U)，电流(I)之间有一个关系：功率 = 电流 乘以 电压。</p>
+<p>现在假设我们不知道这个规律，只是拿到了一组功率，电压，电流的数据。看一下怎么用衍生变量和线性回归的方法来发现这个规律。</p>
+<p>原始数据如下：</p>
+<table>
+<thead>
+<tr>
+<th><strong>U</strong></th>
+<th><strong>I</strong></th>
+<th><strong>W</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>220</td>
+<td>1</td>
+<td>220</td>
+</tr>
+<tr>
+<td>220</td>
+<td>2</td>
+<td>440</td>
+</tr>
+<tr>
+<td>220</td>
+<td>6</td>
+<td>1320</td>
+</tr>
+<tr>
+<td>220</td>
+<td>6</td>
+<td>1320</td>
+</tr>
+<tr>
+<td>220</td>
+<td>8</td>
+<td>1760</td>
+</tr>
+<tr>
+<td>220</td>
+<td>2</td>
+<td>440</td>
+</tr>
+<tr>
+<td>5</td>
+<td>1</td>
+<td>5</td>
+</tr>
+<tr>
+<td>5</td>
+<td>2</td>
+<td>10</td>
+</tr>
+<tr>
+<td>25</td>
+<td>0.8</td>
+<td>20</td>
+</tr>
+<tr>
+<td>25</td>
+<td>0.6</td>
+<td>15</td>
+</tr>
+<tr>
+<td>360</td>
+<td>34</td>
+<td>12240</td>
+</tr>
+<tr>
+<td>360</td>
+<td>7</td>
+<td>2520</td>
+</tr>
+<tr>
+<td>360</td>
+<td>23</td>
+<td>8280</td>
+</tr>
+</tbody>
+</table>
+<p>构造衍生变量后变量（尝试加了电流平方，电压平方，电压乘以电流三个变量）如下：</p>
+<table>
+<thead>
+<tr>
+<th><strong>U</strong></th>
+<th><strong>I</strong></th>
+<th><strong>UI</strong></th>
+<th><strong>I2</strong></th>
+<th><strong>U2</strong></th>
+<th><strong>W</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>220</td>
+<td>1</td>
+<td>220</td>
+<td>1</td>
+<td>48400</td>
+<td>220</td>
+</tr>
+<tr>
+<td>220</td>
+<td>2</td>
+<td>440</td>
+<td>4</td>
+<td>48400</td>
+<td>440</td>
+</tr>
+<tr>
+<td>220</td>
+<td>6</td>
+<td>1320</td>
+<td>36</td>
+<td>48400</td>
+<td>1320</td>
+</tr>
+<tr>
+<td>220</td>
+<td>6</td>
+<td>1320</td>
+<td>36</td>
+<td>48400</td>
+<td>1320</td>
+</tr>
+<tr>
+<td>220</td>
+<td>8</td>
+<td>1760</td>
+<td>64</td>
+<td>48400</td>
+<td>1760</td>
+</tr>
+<tr>
+<td>220</td>
+<td>2</td>
+<td>440</td>
+<td>4</td>
+<td>48400</td>
+<td>440</td>
+</tr>
+<tr>
+<td>5</td>
+<td>1</td>
+<td>5</td>
+<td>1</td>
+<td>25</td>
+<td>5</td>
+</tr>
+<tr>
+<td>5</td>
+<td>2</td>
+<td>10</td>
+<td>4</td>
+<td>25</td>
+<td>10</td>
+</tr>
+<tr>
+<td>25</td>
+<td>0.8</td>
+<td>20</td>
+<td>0.64</td>
+<td>625</td>
+<td>20</td>
+</tr>
+<tr>
+<td>25</td>
+<td>0.6</td>
+<td>15</td>
+<td>0.36</td>
+<td>625</td>
+<td>15</td>
+</tr>
+<tr>
+<td>360</td>
+<td>34</td>
+<td>12240</td>
+<td>1156</td>
+<td>129600</td>
+<td>12240</td>
+</tr>
+<tr>
+<td>360</td>
+<td>7</td>
+<td>2520</td>
+<td>49</td>
+<td>129600</td>
+<td>2520</td>
+</tr>
+<tr>
+<td>360</td>
+<td>23</td>
+<td>8280</td>
+<td>529</td>
+<td>129600</td>
+<td>8280</td>
+</tr>
+</tbody>
+</table>
+<p>接下来我们使用weka进行线性回归。</p>
+<p>weka是一个简易的java语言开发的数据挖掘软件，它提供了界面和API，分别方便普通用户和java程序员进行数据挖掘。在百度学术可以搜索到很多使用weka进行商业数据挖掘的论文（见下图），它的使用简介见后面附录。<br>
+<img src="https://img2020.cnblogs.com/blog/781609/202106/781609-20210614183448175-294469884.png" alt="" loading="lazy"></p>
+<p>将这些数据输入到weka，选择“Classify”（分类）下面的线性回归算法。<br>
+<img src="https://img2020.cnblogs.com/blog/781609/202106/781609-20210614183502782-1654967631.png" alt="" loading="lazy"></p>
+<p>点击执行，程序即输出一个公式<br>
+<img src="https://img2020.cnblogs.com/blog/781609/202106/781609-20210614183517516-1835628411.png" alt="" loading="lazy"></p>
+<p>根据这个方程式，我们可以知道功率与衍生变量UI有线性关系。w = 1 * UI</p>
+<p>而UI变量我们构造时是使用电压乘以电流。</p>
+<p>所以我们发现了功率，电压，电流之间存在关系：功率 = 电流 乘以 电压</p>
+<p>知道这个关系后，我们就知道电流跟电压分别对功率的影响。如果后面发现有一些数据，功率与电流和电压之间关系不满足这个方程，那很有可能是数据出了错。</p>
+<h4 id="图表相关分析">图表相关分析</h4>
+<p>将数据转换成图表，方便业务人员分析。常见的方法是将数据输出成散点图，并且画出趋势线。</p>
+<p><img src="https://img2020.cnblogs.com/blog/781609/202106/781609-20210614183537166-92375053.png" alt="" loading="lazy"></p>
+<p><img src="https://img2020.cnblogs.com/blog/781609/202106/781609-20210614183543154-384462764.png" alt="" loading="lazy"></p>
+<p><img src="https://img2020.cnblogs.com/blog/781609/202106/781609-20210614183646706-484096233.png" alt="" loading="lazy"></p>
+<h4 id="协方差及协方差矩阵">协方差及协方差矩阵</h4>
+<p><img src="https://img2020.cnblogs.com/blog/781609/202106/781609-20210614183626696-749152627.png" alt="" loading="lazy"></p>
+<h4 id="相关系数">相关系数</h4>
+<p>相关系数是最早由统计学家卡尔·皮尔逊设计的统计指标，是研究变量之间线性相关程度的量，一般用字母 r 表示。由于研究对象的不同，相关系数有多种定义方式，较为常用的是皮尔逊相关系数。</p>
+<p>相关系数是用以反映变量之间相关关系密切程度的统计指标。相关系数是按积差方法计算，同样以两变量与各自平均值的离差为基础，通过两个离差相乘来反映两变量之间相关程度；着重研究线性的单相关系数。<br>
+<img src="https://img2020.cnblogs.com/blog/781609/202106/781609-20210614183655460-827145738.png" alt="" loading="lazy"></p>
+<h3 id="实践使用weka分析影响房产价格因素">实践—使用weka分析影响房产价格因素</h3>
+<p><a href="https://blog.csdn.net/Shellerine/article/details/53200500?utm_source=blogxgwz4" target="_blank">https://blog.csdn.net/Shellerine/article/details/53200500?utm_source=blogxgwz4</a></p>
+<p><a href="https://blog.csdn.net/kestory/article/details/90521981" target="_blank">https://blog.csdn.net/kestory/article/details/90521981</a></p>
+<p><img src="https://img2020.cnblogs.com/blog/781609/202106/781609-20210614183717590-1714414366.png" alt="" loading="lazy"></p>
+<p><img src="https://img2020.cnblogs.com/blog/781609/202106/781609-20210614183726236-239237113.png" alt="" loading="lazy"></p>
+<p><img src="https://img2020.cnblogs.com/blog/781609/202106/781609-20210614183734977-1560485872.png" alt="" loading="lazy"></p>
+<h3 id="数值数据处理技巧">数值数据处理技巧</h3>
+<h4 id="标准化">标准化</h4>
+<p>数据的标准化（normalization）是将数据按比例缩放，使之落入一个小的特定区间。<br>
+<img src="https://img2020.cnblogs.com/blog/781609/202106/781609-20210614183744639-1799836737.png" alt="" loading="lazy"></p>
+<h4 id="归一化">归一化</h4>
+<p>归一化是一种简化计算的方式，即将有量纲的表达式，经过变换，化为无量纲的表达式，成为标量。 在多种计算中都经常用到这种方法。 例如将身高和体重都归一成比例小数数据。<br>
+<img src="https://img2020.cnblogs.com/blog/781609/202106/781609-20210614183753354-9399350.jpg" alt="" loading="lazy"></p>
+<h4 id="缺失值">缺失值</h4>
+<p>实际生产中业务数据往往有缺失，此时我们需要通过各种算法补齐缺失值。例如取众数，取平均值，取近邻值等。</p>
+<h3 id="非数值数据处理技巧">非数值数据处理技巧</h3>
+<h4 id="有序类别">有序类别</h4>
+<p>一些有序的类别高中低，胖瘦，可以直接使用数字代替。</p>
+<h4 id="无序类别（使用哑变量，即虚拟变量）">无序类别（使用哑变量，即虚拟变量）</h4>
+<p>没有大小关系的类别，例如东南西北，男人女人，可以使用哑变量处理。</p>
+<h4 id="文本数据">文本数据</h4>
+<p>有时候模型的输入是文本数据，例如新闻，社交媒体。我们需要把文本转化为数值矩阵。</p>
+<p>有时候模型的输入是文本数据，例如新闻，社交媒体发言等，需要把文本转化为数值矩阵。</p>
+<p>常用处理方法有两种：</p>
+<p>单词统计(word counts): 统计每个单词出现的次数。</p>
+<p>TF-IDF(Term Frequency-Inverse Document Frequency): 统计单词出现的“频率”。</p>
+<p>网上有通过数据挖掘分析红楼梦作者的例子，有兴趣的同学可以自行百度。</p>
+<h2 id="关联分析">关联分析</h2>
+<h3 id="定义与应用场景-1">定义与应用场景</h3>
+<p>关联分析是一种简单、实用的分析技术，就是发现存在于大量数据集中的关联性或相关性，从而描述了一个事物中某些属性同时出现的规律和模式。</p>
+<p>关联分析是从大量数据中发现项集之间有趣的关联和相关联系。</p>
+<p>关联分析的一个典型例子是购物篮分析。该过程通过发现顾客放入其购物篮中的不同商品之间的联系，分析顾客的购买习惯。通过了解哪些商品频繁地被顾客同时购买，这种关联的发现可以帮助零售商制定营销策略。其他的应用还包括价目表设计、商品促销、商品的排放和基于购买模式的顾客划分。</p>
+<p>可从数据库中关联分析出形如“由于某些事件的发生而引起另外一些事件的发生”之类的规则。如“67%的顾客在购买啤酒的同时也会购买尿布”，因此通过合理的啤酒和尿布的货架摆放或捆绑销售可提高超市的服务质量和效益。又如“‘C语言’课程优秀的同学，在学习‘数据结构’时为优秀的可能性达88%”，那么就可以通过强化“C语言”的学习来提高教学效果。</p>
+<h3 id="常用算法">常用算法</h3>
+<h4 id="穷举法">穷举法</h4>
+<p>穷举法不是业务常用的算法，只是我觉得使用穷举的方法来解决“购物篮问题”，比较直观，对于理解其它算法也有帮助，所以把它列出来。</p>
+<p>举个例子，假设我们经营一家小超市，里面提供了以下几种商品：面包,牛奶,奶粉,尿布,可乐,鸡蛋。我们想分析一下顾客的购物清单，看里面是否有高关联度的商品。</p>
+<p>那我们可以先对商品组合做穷举（例如面包和牛奶，面包和奶粉，面包和尿布，面包和牛奶及鸡蛋等），并分别计算出同时购买了该商品组合的清单数量。</p>
+<p>例如我们可能会得出以下数据：</p>
+<table>
+<thead>
+<tr>
+<th>商品组合</th>
+<th>清单数量</th>
+<th>占比</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>面包</td>
+<td>10</td>
+<td>有购买面包的清单数量/总数量</td>
+</tr>
+<tr>
+<td>面包和牛奶</td>
+<td>6</td>
+<td><strong>6 / 10</strong></td>
+</tr>
+<tr>
+<td>面包和尿布</td>
+<td>3</td>
+<td>3 / 10</td>
+</tr>
+<tr>
+<td>面包和奶粉</td>
+<td>0</td>
+<td>0 / 10</td>
+</tr>
+<tr>
+<td>面包和牛奶及鸡蛋</td>
+<td>3</td>
+<td><strong>3 / 6</strong></td>
+</tr>
+</tbody>
+</table>
+<p>（数据是我为说明算法随手造的，勿当真）</p>
+<p>从这个表格数据我们可以分析得出结论：购买了面包的人，有60%机率会同时买牛奶，但只有30%的人会同时买尿布。同时购买了面包和牛奶的人中，有50%的人会再买鸡蛋。</p>
+<p><img src="https://img2020.cnblogs.com/blog/781609/202106/781609-20210614183834311-1535952165.png" alt="" loading="lazy"></p>
+<p>所以我们如果要做促销，那把面包，牛奶，鸡蛋打包成一个商品打折，可能会取到不错的效果。</p>
+<h4 id="apriori先验算法">Apriori(先验)算法</h4>
+<p>在穷举法的基础上，提出了根据截枝，大大减少组合计算次数，加快计算速度。（举例：如果买牛奶面包的商品人很少，那就不需要统计同时购买了牛奶面包可乐的人有多少，因为没有意义。）</p>
+<h4 id="gsp算法">GSP算法</h4>
+<p>在Apriori算法，增加考虑频繁项顺序。可用于时序（有先后顺序的）频繁项挖掘。</p>
+<h4 id="spade算法">SPADE算法</h4>
+<p>我也没搞懂。</p>
+<h3 id="实践使用weka发现总是一起出现的彩票号码组合">实践—使用weka发现总是一起出现的彩票号码组合</h3>
+<p>经常研究彩票的彩民，可以会发现一些号码经常一起出现。（例如出现2同时出现5概率比较高）找出这些组合，有利于提高中奖机率。但由于彩票开奖数据比较大，想找出这些号码组合比较困难。我们可以使用数据挖掘的关联分析算法来解决此类问题。</p>
+<p>这里我们使用weka提供的Apriori（中文意思，先验的，推测的）算法进行数据挖掘。</p>
+<p>我从福利彩票网站抓取了最近100期的彩票记录数据，处理了一下，转换成Apriori算法需要的矩阵并使用它分析里面是否有频繁项。</p>
+<p><img src="https://img2020.cnblogs.com/blog/781609/202106/781609-20210614183854660-645174820.png" alt="" loading="lazy"></p>
+<p><img src="https://img2020.cnblogs.com/blog/781609/202106/781609-20210614183912036-865051028.png" alt="" loading="lazy"></p>
+<p>出现概率超过3%，并且支持度超过70%</p>
+<p><img src="https://img2020.cnblogs.com/blog/781609/202106/781609-20210614183929922-1846223771.png" alt="" loading="lazy"></p>
+<p>结果说明：过去100期双色球开奖结果中，1、6、11同时出现的次数是3次，并且每次出现1和6的时候，肯定会出现11，  2、10、9也是同理。我们买彩票时可以根据这个挖掘结果来指导选号，以期提高中奖率。</p>
+<h2 id="分类">分类</h2>
+<h3 id="定义与应用场景-2">定义与应用场景</h3>
+<p>分类是基于包含其类别成员资格已知的观察（或实例）的训练数据集来识别新观察所属的一组类别（子群体）中的哪一个的问题。例如，将给定的电子邮件分配给“垃圾邮件”或“非垃圾邮件”类，并根据观察到的患者特征（性别，血压，某些症状的存在或不存在等）为给定患者分配诊断。分类分析，简单地说就是把数据分成不同类别。</p>
+<p>分类算法一般使用机器学习里面属性有监督学习算法，即需要输入一些样本，根据样本确定算法参数，从而生成一个适合业务的算法模型。</p>
+<h3 id="常用算法-1">常用算法</h3>
+<h4 id="k最近邻分类（即knn）">k最近邻分类（即KNN）</h4>
+<p>有句话说：“想知道自己是什么样的人，那看看自己经常交往的十个人就知道”。KNN分类的原理就是这样，通过观察与新数据距离最近的N个数据的分类标签，数量最多的标签就是新数据的分类。（N需要根据业务人员经验确定，不宜太大）</p>
+<p>例如以下图：圆圈是新数据，假设规定根据与它最相邻的3个数据来分类，因为其中两个是三角形，一个是正方形，则会认为该数据是三角形。</p>
+<p>当N值取5时，最近的5个数据里面有3个是正方形，2个是三角形，则新数据会被认为是正方形。</p>
+<p><img src="https://img2020.cnblogs.com/blog/781609/202106/781609-20210614183938841-1838904866.png" alt="" loading="lazy"></p>
+<h5 id="距离：">距离：</h5>
+<p>数据挖掘有一个的重要概念，就是数据距离：就是。如果是单维数据，要确定距离十分方便，例如有三个人体身高数据，分别是1.6、1.7、1.8，那这三个数据相互的距离直接用数据值相减就可以计算出来。</p>
+<p>但我们实际业务数据经常是有多种维度的，例如有三个西瓜，它们数据如下：</p>
+<table>
+<thead>
+<tr>
+<th>甜度</th>
+<th>重量</th>
+<th>体积</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.8</td>
+<td>1kg</td>
+<td>8</td>
+</tr>
+<tr>
+<td>0.7</td>
+<td>1.5kg</td>
+<td>5</td>
+</tr>
+<tr>
+<td>0.5</td>
+<td>2kg</td>
+<td>12</td>
+</tr>
+</tbody>
+</table>
+<p>所以我们一般需要使用距离公式来评判数据距离。选择不同公式对分类结果可能产生不同影响。需要根据实际业务需要选择。</p>
+<p>常见距离公式有：</p>
+<p>欧式距离：</p>
+<p><img src="https://img2020.cnblogs.com/blog/781609/202106/781609-20210614183951112-496436503.jpg" alt="" loading="lazy"></p>
+<p>余弦距离：<br>
+<img src="https://img2020.cnblogs.com/blog/781609/202106/781609-20210614184000343-353013696.jpg" alt="" loading="lazy"></p>
+<p>马氏距离：<br>
+<img src="https://img2020.cnblogs.com/blog/781609/202106/781609-20210614184015475-1617383712.png" alt="" loading="lazy"></p>
+<p>杰卡德距离：</p>
+<h5 id="独热编码：">独热编码：</h5>
+<p>如果数据不是数值型，而是标签型，例如西瓜产地有本地，新疆，云南，西瓜颜色有红色、蓝色、绿色。则需要独热编码对数据进行处理。</p>
+<h4 id="决策树">决策树</h4>
+<p>决策树分类是用属性值对样本集逐级划分，直到一个节点仅含有同一类的样本为止。</p>
+<p>决策树算法的模型最直观，最易于解释，甚至可以做为普通业务人员指导。下图是判断一个瓜是好瓜还是坏瓜的决策树，其判断过程十分接近人类思维。</p>
+<p><img src="https://img2020.cnblogs.com/blog/781609/202106/781609-20210614184031987-414462695.jpg" alt="" loading="lazy"></p>
+<p>​      图：使用C45算法生成的决策树</p>
+<h4 id="神经网络">神经网络</h4>
+<p>神经网络可以认为是大量复杂的算法单元，利用仿生学知识，模拟人类神经传导机制连接起来形成的一种算法。每个算法单元里面有很多不同参数。通过调整参数，可以处理任意分类问题。我们平常总是听到的训练模型，就是在给这些算法单元找合适的参数。</p>
+<p><img src="https://img2020.cnblogs.com/blog/781609/202106/781609-20210614184103273-1804145450.png" alt="" loading="lazy"></p>
+<p>​    图：使用神经网络识别图像<br>
+<img src="https://img2020.cnblogs.com/blog/781609/202106/781609-20210614184119561-1871248753.png" alt="" loading="lazy"></p>
+<p>图：使用神经网络实现公式计算</p>
+<p>如果神经网络里面的感知器使用的算法是线性算法(类似前面介绍的多元线性回归)，则称为线性神经网络，如果使用了卷积算法，则称为卷积神经网络。</p>
+<p>阿尔法狗就是使用卷积神经网络的分类应用，它把棋盘当成一个19*19的图像，把下子当成一个分类问题，即输入现在棋盘图像，输出一个与人类高手下子后最接近的棋盘图像。（当然，它还加了其它辅助算法，例如蒙特卡洛树搜索树提高赢棋概率）</p>
+<h4 id="贝叶斯分类">贝叶斯分类</h4>
+<h4 id="支持向量机分类（support-vector-machine-svm）">支持向量机分类（Support Vector Machine, SVM）</h4>
+<p>将数据映射到高维度，并寻找一个高维平面将数据分割开来</p>
+<h4 id="逻辑回归（logistic回归）">逻辑回归（logistic回归）</h4>
+<p>在线性回归的基础上，使用函数将连续输出转换成离散输出</p>
+<h3 id="实践使用weka鉴别病人是否得了糖尿病">实践—使用weka鉴别病人是否得了糖尿病</h3>
+<p>这里我们使用weka自带的疑似糖尿病人身体指标数据和检测结果做为训练数据，使用决策树分类算法randomtree来训练模型并用于根据新的病人身体指标预测其是否患糖尿病。</p>
+<p>训练数据在data/diabetes.arff这个文件里面，我简单介绍一下：</p>
+<p>文件里面包含了一些病人身体指标，例如怀孕次数（preg），饭后2小时血糖浓度（plas），年龄(age)等。对于每个病例，最后都会标记检测结果为阴性或者阳性（tested_negative/ tested_positive），如果为阳性说明得了糖尿病。<br>
+<img src="https://img2020.cnblogs.com/blog/781609/202106/781609-20210614184159528-1814643525.png" alt="" loading="lazy"></p>
+<p>我们先使用weka导入这个文件并在Classify这个界面，点击“choose”按钮，选择算法“RandomForest”</p>
+<p><img src="https://img2020.cnblogs.com/blog/781609/202106/781609-20210614184211369-370102284.png" alt="" loading="lazy"></p>
+<p>点击"Start"，训练出模型。从输出看，模型分类准确率有75%，效果勉强还行（50%即代表瞎猜的）</p>
+<p><img src="https://img2020.cnblogs.com/blog/781609/202106/781609-20210614184251968-1633300989.png" alt="" loading="lazy"></p>
+<p>接着准备测试文件，将data/diabetes.arff复制一份，变成diabetes - test.arff</p>
+<p>只保留前两行，并把分类结果改为?，我们用这个来做为测试数据，看模型是否能正确分出结果（实际工作时不应该拿模型数据，而是拿实际未打标数据）</p>
+<p><img src="https://img2020.cnblogs.com/blog/781609/202106/781609-20210614184313436-353414855.png" alt="" loading="lazy"></p>
+<p>点击"Set…"按钮，选择diabetes - test.arff做为测试集。</p>
+<p>在ResultList窗口列表项右击，执行</p>
+<p><img src="https://img2020.cnblogs.com/blog/781609/202106/781609-20210614184340730-1779522219.png" alt="" loading="lazy"></p>
+<p>运行后输出界面会刷新，此时再右击Result List窗口<br>
+<img src="https://img2020.cnblogs.com/blog/781609/202106/781609-20210614184353827-378695401.png" alt="" loading="lazy"></p>
+<p>选择Save，将文件保存为<br>
+<img src="https://img2020.cnblogs.com/blog/781609/202106/781609-20210614184418602-690447998.png" alt="" loading="lazy"></p>
+<p>打开文件，会发现结果多了两列，最右边一列是模型分类结果。符合我们预期，一个阳性一个阴性。<br>
+<img src="https://img2020.cnblogs.com/blog/781609/202106/781609-20210614184431609-729931883.png" alt="" loading="lazy"></p>
+<h2 id="聚类">聚类</h2>
+<h3 id="定义与应用场景-3">定义与应用场景</h3>
+<p>聚类是将数据分类到不同的类或者簇这样的一个过程，所以同一个簇中的对象有很大的相似性，而不同簇间的对象有很大的相异性。</p>
+<p>聚类分析是一种探索性的分析，在分类的过程中，人们不必事先给出一个分类的标准，聚类分析能够从样本数据出发，自动进行分类。聚类分析所使用方法的不同，常常会得到不同的结论。不同研究者对于同一组数据进行聚类分析，所得到的聚类数未必一致。</p>
+<p>聚类算法一般使用机器学习里面的非监督学习算法。</p>
+<p><img src="https://img2020.cnblogs.com/blog/781609/202106/781609-20210614184445911-1793583740.png" alt="" loading="lazy"></p>
+<h3 id="常用算法-2">常用算法</h3>
+<h4 id="随机森林">随机森林</h4>
+<p>使用多个弱分类算法组合成一个强分类算法。（类似于民主投票，选谁适合当总统）</p>
+<h4 id="孤立森林">孤立森林</h4>
+<p>孤立森林算法是周志华教授（机器学习经典--西瓜书的作者）提出来的，用于发现异常数据的算法。</p>
+<p>使用随机方法将数据集进行多轮切分，在多轮切分中，经常在比较早完全分离出来的数据则认为是异常数据。</p>
+<p>下面是一个使用孤立森林算法来发现图片中异常的树木的例子：</p>
+<p><img src="https://img2020.cnblogs.com/blog/781609/202106/781609-20210614184506788-1312401890.jpg" alt="" loading="lazy"></p>
+<p>第1轮切分，第1次就发现了特别样例。（上方图片只有一棵树，无法再分割）</p>
+<p><img src="https://img2020.cnblogs.com/blog/781609/202106/781609-20210614184521242-446464106.jpg" alt="" loading="lazy"></p>
+<p>第二轮切分，第2次就发现了特别样例。（第一次切分出来的图片上下两部分都有树，第二次分出来的4个图片区域，有一块只有一棵树）</p>
+<p>这棵“树”实在太奇怪了，导致它总是能很快地跟其它树分离开来。实际上，它是联通的5G基站，伪装成树型，方便部署。</p>
+<h4 id="k-均值（k-means）">k-均值（k-means）</h4>
+<p>寻找k个中心点，将离中心点最近的数据归到一类。跟KNN有点像，特别依赖数据距离公式。</p>
+<h4 id="em最大期望算法">EM最大期望算法</h4>
+<h4 id="dbscan">DBSCAN</h4>
+<p>根据数据密度来划分数据。</p>
+<p><img src="https://img2020.cnblogs.com/blog/781609/202106/781609-20210614184545956-1015734213.jpg" alt="" loading="lazy"></p>
+<h3 id="实践使用kmeans分析中国足球队是亚洲几流球队">实践—使用kmeans分析中国足球队是亚洲几流球队</h3>
+<p><a href="https://zhuanlan.zhihu.com/p/62535727" target="_blank">https://zhuanlan.zhihu.com/p/62535727</a> 我分析了过去十年五届大赛的成绩，中国男足到底是亚洲几流？<br>
+<img src="https://img2020.cnblogs.com/blog/781609/202106/781609-20210614184602931-116357854.png" alt="" loading="lazy"></p>
+<p><img src="https://img2020.cnblogs.com/blog/781609/202106/781609-20210614184618487-954266897.png" alt="" loading="lazy"></p>
+<h3 id="聚类和分类区别联系">聚类和分类区别联系</h3>
+<p>聚类分析跟分类分析区别是分类分析需要有已有标签的数据，而聚类分析则不需要。</p>
+<p>实践中经常先使用聚类对数据进行探索，之后对有价值的数据开发分类模型用于商业应用。</p>
+<h2 id="时序分析">时序分析</h2>
+<h3 id="定义与应用场景-4">定义与应用场景</h3>
+<p>时间序列是一系列数据点，使用时间戳进行排序。例如水果的每日价格到电路提供的电压输出的读数，股票每分钟报价等。</p>
+<p>虽然在某一给定时刻预测目标的观测值是随机的，但从整个观测序列看，却呈现出某种随机过程（如平稳随机过程）的特性。</p>
+<p>随机时间序列方法正是依据这一规律性来建立和估计产生实际序列的随机过程的模型，然后用这些模型进行预测未来数据。</p>
+<p>像气温，股票，客流等这些时序数据都适合用时序序列预测技术。</p>
+<p>例如我们公司做的动态阈值组件就使用了时序分析的技术</p>
+<p><img src="https://img2020.cnblogs.com/blog/781609/202106/781609-20210614184638629-1206092950.png" alt="" loading="lazy"></p>
+<p><img src="https://img2020.cnblogs.com/blog/781609/202106/781609-20210614184646065-1523071319.png" alt="" loading="lazy"></p>
+<p>图：通过时序分析模型结合历史数据预测出当前时刻数据上下限，超出阈值的数据认为是异常数据，触发告警。</p>
+<h3 id="常用算法：-1">常用算法：</h3>
+<h4 id="指数平滑">指数平滑</h4>
+<h4 id="温特霍特曲线">温特霍特曲线</h4>
+<h4 id="移动差分自回归">移动差分自回归</h4>
+<h4 id="神经网络（rnn和lstm）">神经网络（RNN和LSTM）</h4>
+<p>RNN和LSTM是深度学习神经网络算法，深度意思是有多个中间层。</p>
+<h2 id="小结练习">小结练习</h2>
+<p>1 请分析文章开始的数据挖掘案例，分别使用的是哪种数据挖掘方法</p>
+<table>
+<thead>
+<tr>
+<th><strong>案例</strong></th>
+<th><strong>使用技术</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>沃尔玛通过数据挖掘发现啤酒与尿布销售关系</strong></td>
+<td>关联分析</td>
+</tr>
+<tr>
+<td><strong>某打车平台通过大数据发现司机与乘客私下交易</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>某购物平台使用数据挖掘提高优惠券营销能力</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>某微博网友质疑天猫双十一销售额数据造假</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>某人使用yolo3辅助自己整理照片</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>2 使用今天学习的数据挖掘知识，开发一款类似今日头条的信息流软件，实现高准确率信息推荐</p>
+<h1 id="一点鸡汤：">一点鸡汤：</h1>
+<p>数据挖掘的场景多种多样，但核心的挖掘算法却相对有限。这跟我们以前学的数学，物理有点类似，很多题目看起来十分复杂，但都是通过一些基本的定理，定律可以解决。其实在职场中，想做好工作，也有类似这样的“定理”，“定律”这样的东西。例如《高效能人士的七个习惯》里面提到的：主动积极、以终为始、要事第一、双赢思维、知彼知己、统合综效、不断更新。</p>
+<h1 id="说明：">说明：</h1>
+<p>本文大部分资料抄自网上，我自己做了点加工整理，仅供学习交流用。由于来源太多，并且资料整理时间太长，无法一一注明，请作者见谅。欢迎转载，如果有侵权地方请联系我修改。</p>
+<p>数据挖掘的知识范围很广，本文虽然只是介绍了入门知识，但限于作者水平，文章中难免出现有错漏地方，欢迎各位留言指正。</p>
+<p>数据挖掘在网上资料非常丰富，如果各位对本文介绍的知识有兴趣，可以到百度输入关键字，查找相关资料。</p>
+<p>这里介绍几个：</p>
+<p>数据挖掘技术及应用(我见过的最全面的理论+最佳案.ppt</p>
+<p>数据挖掘技术在电网企业中的应用需求分析.pdf</p>
+<p>基于数据挖掘的电力设备状态检修技术研究综述.doc</p>
+<p>面向智能电网大数据的数据挖掘算法概述.pdf</p>
+<p>数据挖掘技术及其在电力系统中的应用.pdf</p>
+<p>电力行业数据挖掘.pptx</p>
+<p>不过学技术，关键不在于掌握资料的多与少，而在于你是否去运用它。希望大家在个平时生活中多想一下，哪些例子是使用了数据挖掘，自己能用数据挖掘来解决什么问题。</p>
+<h1 id="附录1：练习题答案">附录1：练习题答案</h1>
+<p>1</p>
+<table>
+<thead>
+<tr>
+<th><strong>案例</strong></th>
+<th><strong>使用技术</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>沃尔玛通过数据挖掘发现啤酒与尿布销售关系</strong></td>
+<td>关联分析</td>
+</tr>
+<tr>
+<td><strong>某打车平台通过大数据发现司机与乘客私下交易</strong></td>
+<td>关联分析</td>
+</tr>
+<tr>
+<td><strong>某购物平台使用数据挖掘提高优惠券营销能力</strong></td>
+<td>聚类</td>
+</tr>
+<tr>
+<td><strong>某微博网友质疑天猫双十一销售额数据造假</strong></td>
+<td>相关性分析</td>
+</tr>
+<tr>
+<td><strong>某人使用yolo3辅助自己整理照片</strong></td>
+<td>分类</td>
+</tr>
+</tbody>
+</table>
+<p>2</p>
+<p>网上还有很多练习题，涉及到了很多知识点（不包括本文介绍的）：</p>
+<p>数据挖掘150道试题 测测你的专业能力过关吗？</p>
+<p><a href="https://blog.csdn.net/u010022051/article/details/44153421?utm_medium=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromMachineLearnPai2~default-1.control&amp;dist_request_id=&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromMachineLearnPai2~default-1.control" target="_blank">https://blog.csdn.net/u010022051/article/details/44153421?utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-1.control&amp;dist_request_id=&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-1.control</a></p>
+<h1 id="附录2：weka使用">附录2：weka使用</h1>
+<p>WEKA数据挖掘工具操作实验.ppt</p>
+<p><a href="https://max.book118.com/html/2017/0127/87028147.shtm" target="_blank">https://max.book118.com/html/2017/0127/87028147.shtm</a></p>
+<p>WEKA使用教程</p>
+<p><a href="https://blog.csdn.net/yangliuy/article/details/7589306" target="_blank">https://blog.csdn.net/yangliuy/article/details/7589306</a></p>
+<p>CC中英字幕 - Weka在数据挖掘中的运用（Data Mining with Weka）</p>
+<p><a href="https://www.bilibili.com/video/BV1Hb411q7Bf?from=search&amp;seid=17226336668903912022" target="_blank">https://www.bilibili.com/video/BV1Hb411q7Bf?from=search&amp;seid=17226336668903912022</a></p>
+
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2021-06-14 18:52</span>&nbsp;
+<a href="https://www.cnblogs.com/kingstarer/">皇家救星</a>&nbsp;
+阅读(<span id="post_view_count">188</span>)&nbsp;
+评论(<span id="post_comment_count">0</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14882821" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(14882821);return false;">收藏</a>&nbsp;
+<a href="javascript:void(0)" onclick="reportManager.report({ currentUserId: '', targetType: 'blogPost', targetId: '14882821', targetLink: 'https://www.cnblogs.com/kingstarer/p/14882821.html', title: '数据挖掘与生活' })">举报</a></div>
+        </div>
+        <script src="https://common.cnblogs.com/highlight/10.3.1/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 234136, cb_blogApp = 'kingstarer', cb_blogUserGuid = '6c01f56e-ee22-e511-b908-9dcfd8948a71';
+    var cb_entryId = 14882821, cb_entryCreatedDate = '2021-06-14 18:52', cb_postType = 1;
+    updatePostStats(
+        [cb_entryId],
+        function(id, count) { $("#post_view_count").text(count) },
+        function(id, count) { $("#post_comment_count").text(count) })
+    zoomManager.apply("#cnblogs_post_body img:not(.code_img_closed):not(.code_img_opened)");
+</script>
+        <a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <div id="cnblogs_c1" class="under-post-card">
+        <div id='div-gpt-ad-1592365906576-0' style='width: 300px; height: 250px;'></div>
+    </div>
+    <div id="under_post_card1"></div>
+    <div id="cnblogs_c2" class="under-post-card">
+        <div id='div-gpt-ad-1592366332455-0' style='width: 468px; height: 60px;'></div>
+    </div>
+    <div id="under_post_card2"></div>
+    <div id="HistoryToday" class="under-post-card"></div>
+    <script type="text/javascript">
+       var commentManager = new blogCommentManager();
+       commentManager.renderComments(0);
+       fixPostBody();
+       deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);       deliverT2();
+       deliverC1C2();
+       loadNewsAndKb();
+       loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);       LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+       GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+       loadOptUnderPost();
+       GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+
+    </div>
+</div>
+            </div>
+        </div>
+
+        <div id="sideBar">
+            <div id="sideBarMain">
+                <div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+<div id="sidebar_c3"></div>
+                <div id="calendar"><div id="blog-calendar" style="display:none"></div></div>                
+                <script>loadBlogDefaultCalendar();</script>
+                <div id="leftcontentcontainer">
+                    <!-- begin:SingleColumn -->
+                    <div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+                    <!-- end:  SingleColumn -->
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div id="footer">
+        <!--done-->
+Copyright &copy; 2021 皇家救星
+<br /><span id="poweredby">Powered by .NET 5.0 on Kubernetes</span>
+
+    </div>
+</div>
+
+    
+
+    <input type="hidden" id="antiforgery_token" value="CfDJ8L-rpLgFVEJMgssCVvNUAjvwWp3BCixCyXozb9ZM3zasDE3g8fAxioV07YIktFM31HoB-V3obQjJX4wb-i6qN-fy6xk06Yfu79WubkwikBLTu16wHq-1UyyUgrwj30WUWIdeEKoQTNWQmTGW5BtiUGs" />
+</body>
+</html>

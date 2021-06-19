@@ -1,0 +1,779 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin-when-crossorigin" />
+    
+    
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>yscit - 博客园</title>
+    <link id="favicon" rel="shortcut icon" href="//common.cnblogs.com/favicon.svg" type="image/svg+xml" />
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=6tvK5XC6GPbg3p_sy7wzz_2291HoYACr4440iKBzQIw" />
+    <link id="MainCss" rel="stylesheet" href="/skins/coffee/bundle-coffee.min.css?v=BgguPR_JbmA1HKLJOLqLtHq5pt8a1UlO6ibCA_xgwdI" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/coffee/bundle-coffee-mobile.min.css?v=gcYNuAuJkNMICFERxhZCtKHGitYmBYNTxm9W97H2O2g" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/yscit/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/yscit/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/yscit/wlwmanifest.xml" />
+    <script>
+        var currentBlogId = 242981;
+        var currentBlogApp = 'yscit';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var isBlogOwner = false;
+        var skinName = 'coffee';
+        var visitorUserId = '';
+    </script>
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=ZUvfwhWs5fv-s8Nv7WofCOhwKAxiDO928zdWFzhnOPk"></script>
+    
+    
+    
+</head>
+<body class="has-navbar has-bannerbar">
+    <a name="top"></a>
+            <a target="_blank" href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:pc|pp:bokeyuan-huodong-21nianzhongdacu-neiyePCtonglanbanner|pu:21nianzhongdacu-neiyePCtonglanbanner|ci:21nzdc|kw:10224545" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-pc')">
+                <div class="bannerbar aliyun forpc" style="background-size: contain; filter: brightness(0.95); background-image: url(https://img2020.cnblogs.com/blog/35695/202106/35695-20210610183724605-1725070929.jpg)">
+                </div>
+            </a>
+            <div id="bannerbar" class="bannerbar-mobile formobile">
+            <a href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:mb|pp:bokeyuan-huodong-21nianzhongdacu-neiyeyidongduantonglanbanner|pu:21nianzhongdacu-neiyeyidongduantonglanbanner|ci:21nzdc|kw:10224547" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-mobile')">
+                <img src="https://img2020.cnblogs.com/blog/35695/202106/35695-20210610184806729-1738888164.jpg" alt="" />
+            </a>
+            </div>
+    <div id="top_nav" class="navbar forpc">
+        <nav id="nav_main" class="navbar-main">
+            <ul id="nav_left" class="navbar-list navbar-left">
+                <li class="navbar-branding"><a href="https://www.cnblogs.com/" title="开发者的网上家园"><img src="/images/logo.svg?v=R9M0WmLAIPVydmdzE2keuvnjl-bPR7_35oHqtiBzGsM" alt="博客园Logo" /></a></li>
+                <li><a href="/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-sitehome')">首页</a></li>
+                <li><a href="https://news.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-news')">新闻</a></li>
+                <li><a href="https://q.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-q')">博问</a></li>
+                <li><a id="nav_brandzone" href="https://brands.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-brands')">专区</a></li>
+                <li><a href="https://ing.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-ing')">闪存</a></li>
+                <li><a href="https://edu.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-edu')">班级</a></li>
+            </ul>
+            <ul id="nav_right" class="navbar-list navbar-right">
+                <li>
+                    <form id="zzk_search" class="navbar-search" action="https://zzk.cnblogs.com/s" method="get">
+                        <input name="w" id="zzk_search_input" placeholder="代码改变世界" type="text" tabindex="3" />
+                        <button type="submit" id="zzk_search_button">
+                            <img src="/images/aggsite/search.svg" alt="搜索" />
+                        </button>
+                    </form>
+                </li>
+                <li id="navbar_login_status" class="navbar-list">
+                    <a class="navbar-user-info navbar-blog" href="https://i.cnblogs.com/EditPosts.aspx?opt=1" alt="写随笔" title="写随笔">
+                        <img id="new_post_icon" class="navbar-icon" src="/images/aggsite/newpost.svg" alt="写随笔" />
+                    </a>
+                    <a id="navblog-myblog-icon" class="navbar-user-info navbar-blog" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx" alt="我的博客" title="我的博客">
+                        <img id="myblog_icon" class="navbar-icon" src="/images/aggsite/myblog.svg" alt="我的博客" />
+                    </a>
+                    <a class="navbar-user-info navbar-message navbar-icon-wrapper" href="https://msg.cnblogs.com/" alt="短消息" title="短消息">
+                        <img id="msg_icon" class="navbar-icon" src="/images/aggsite/message.svg?v=J0WS2P2iPgaIVgXxcAhliw4AFZIpaTWxtdoNAv9eiCA" alt="短消息" />
+                        <span id="msg_count" style="display: none"></span>
+                    </a>
+                    <div id="user_info" class="navbar-user-info dropdown">
+                        <a class="dropdown-button" href="https://home.cnblogs.com/">
+                            <img id="user_icon" class="navbar-avatar" src="/images/aggsite/avatar-default.svg" alt="用户头像" />
+                        </a>
+                        <div class="dropdown-menu">
+                            <a id="navblog-myblog-text" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx">我的博客</a>
+                            <a href="https://home.cnblogs.com/">我的园子</a>
+                            <a href="https://account.cnblogs.com/settings/account">账号设置</a>
+                            <a href="javascript:void(0)" id="navbar_lite_mode_toggle" title="简洁模式会使用简洁款皮肤显示所有博客">
+    简洁模式 <img id="navbar_lite_mode_on" src="/images/lite-mode-check.svg" class="hide" /><span id="navbar_lite_mode_spinner" class="hide">...</span>
+</a>
+                            <a href="javascript:void(0)" onclick="account.logout();">退出登录</a>
+                        </div>
+                    </div>
+                    <a class="navbar-anonymous" href="https://account.cnblogs.com/signup/">注册</a>
+                    <a class="navbar-anonymous" href="javascript:void(0);" onclick="account.login()">登录</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+	<a href="https://www.cnblogs.com/yscit/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>			
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/yscit/">yscit</a>
+</h1>
+<h2>你一定要努力，可千万不要着急。所有的不一样，都是从一样过来的！</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="navigator">
+			
+<ul id="navList">
+	<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+	<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/yscit/">
+首页</a>
+</li>
+	<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+	<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/yscit">
+联系</a></li>
+	<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+	<li>
+<a id="blog_nav_rss" class="menu" href="javascript:void(0)" data-rss="https://www.cnblogs.com/yscit/rss/">
+订阅</a>
+	
+<a id="blog_nav_rss_image" href="https://www.cnblogs.com/yscit/rss/">
+    <img src="/skins/coffee/images/xml.gif" alt="订阅" />
+</a></li>
+</ul>
+
+
+
+			<div class="blogStats">
+				
+				<div id="blog_stats_place_holder"><script>loadBlogStats();</script></div>
+				
+			</div><!--end: blogStats -->
+		</div><!--end: navigator 博客导航栏 -->
+		
+
+
+
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/yscit/archive/2021/06/19.html">2021年6月19日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/yscit/p/14903911.html">
+    <span>
+            <span>[置顶]</span>
+        SVN报错“Failed to run the WC DB work queue associated with”解决办法
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：最近在check SVN上的iOS代码时，失败报错： Failed to run the WC DB work queue associated with “目录/文件”，clean up同样报错。最后在网上找到了解决方案并解决了问题，解决方法如下： 一、安装sqlite3 1 下载 我是windo        <a href="https://www.cnblogs.com/yscit/p/14903911.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-06-19 18:45
+yscit
+<span data-post-id="14903911" class="post-view-count">阅读(31)</span> 
+<span data-post-id="14903911" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14903911" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14903911" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/yscit/archive/2021/02/20.html">2021年2月20日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/yscit/p/14422240.html">
+    <span>
+            <span>[置顶]</span>
+        【Oracle学习笔记】Oralce随机数与随机取样
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：在实际开发过程中我们经常会遇到使用随机数，或对数据进行随机抽样分析的情况，这个时候我们就需要用到了Dbms_Random数据包、Sample或Sample block函数了。        <a href="https://www.cnblogs.com/yscit/p/14422240.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-02-20 17:07
+yscit
+<span data-post-id="14422240" class="post-view-count">阅读(104)</span> 
+<span data-post-id="14422240" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14422240" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14422240" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/yscit/archive/2018/11/28.html">2018年11月28日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/yscit/p/10031354.html">
+    <span>
+            <span>[置顶]</span>
+        【Oracle学习笔记】索引
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：索引是数据库对象之一，用于加快数据的检索，类似于书籍的索引。在数据库中索引可以减少数据库程序查询结果时需要读取的数据量，类似于在书籍中我们利用索引可以不用翻阅整本书即可找到想要的信息。索引是建立在表上的可选对象；索引的关键在于通过一组排序后的索引键来取代默认的全表扫描检索方式，从而提高检索效率。索引在逻辑上和物理上都与相关的表和数据无关，当创建或者删除一个索引时，不会影响基本的表。索引一旦建立，在表上进行DML操作时（例如在执行插入、修改或者删除相关操作时），oracle会自动管理索引，索引删除，不会对表产生影响。索引对用户是透明的，无论表上是否有索引，sql语句的用法不变。oracle创建主键时会自动在该列上创建索引。        <a href="https://www.cnblogs.com/yscit/p/10031354.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2018-11-28 12:10
+yscit
+<span data-post-id="10031354" class="post-view-count">阅读(337)</span> 
+<span data-post-id="10031354" class="post-comment-count">评论(0)</span> 
+<span data-post-id="10031354" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10031354" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/yscit/archive/2021/06/19.html">2021年6月19日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/yscit/p/14903911.html">
+    <span>
+        SVN报错“Failed to run the WC DB work queue associated with”解决办法
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：最近在check SVN上的iOS代码时，失败报错： Failed to run the WC DB work queue associated with “目录/文件”，clean up同样报错。最后在网上找到了解决方案并解决了问题，解决方法如下： 一、安装sqlite3 1 下载 我是windo        <a href="https://www.cnblogs.com/yscit/p/14903911.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-06-19 18:45
+yscit
+<span data-post-id="14903911" class="post-view-count">阅读(31)</span> 
+<span data-post-id="14903911" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14903911" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14903911" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/yscit/archive/2021/02/20.html">2021年2月20日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/yscit/p/14422240.html">
+    <span>
+        【Oracle学习笔记】Oralce随机数与随机取样
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：在实际开发过程中我们经常会遇到使用随机数，或对数据进行随机抽样分析的情况，这个时候我们就需要用到了Dbms_Random数据包、Sample或Sample block函数了。        <a href="https://www.cnblogs.com/yscit/p/14422240.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-02-20 17:07
+yscit
+<span data-post-id="14422240" class="post-view-count">阅读(104)</span> 
+<span data-post-id="14422240" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14422240" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14422240" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/yscit/archive/2019/12/07.html">2019年12月7日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/yscit/p/12002721.html">
+    <span>
+        Nuget Server的搭建及实践之旅
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：一、 背景 在做的一个项目使用的是Asp.Net MVC，由于缺少规范与约束，团队成员在使用类库各自为政，时常出现路径和版本不一致的问题。在一个同事建议下，开始尝试使用Nuget 管理项目或公司使用的类库。 二、 搭建Nuget.Server 2.1 新建一个Web应用程序 WebForm或MVC都        <a href="https://www.cnblogs.com/yscit/p/12002721.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2019-12-07 17:42
+yscit
+<span data-post-id="12002721" class="post-view-count">阅读(866)</span> 
+<span data-post-id="12002721" class="post-comment-count">评论(0)</span> 
+<span data-post-id="12002721" class="post-digg-count">推荐(1)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12002721" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/yscit/archive/2019/02/22.html">2019年2月22日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/yscit/p/10420586.html">
+    <span>
+        如何在元素内容前后加图标
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：大家最常用作图标的元素是i标签，为什么呢？ 用 &lt;i&gt; 元素做图标在语义上是不正确的（虽然看起来像 icon 的缩写）； &lt;i&gt; 比 &lt;span&gt; 短，但 gzip 后差异很小，不过打字可以少按三个键； 多数图标用的是空 &lt;i&gt; 元素，配合 ::before 伪元素实现，因为没有内容，读屏器不会朗读        <a href="https://www.cnblogs.com/yscit/p/10420586.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2019-02-22 20:41
+yscit
+<span data-post-id="10420586" class="post-view-count">阅读(354)</span> 
+<span data-post-id="10420586" class="post-comment-count">评论(0)</span> 
+<span data-post-id="10420586" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10420586" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+            <div class="postSeparator"></div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/yscit/p/10419057.html">
+    <span>
+        Asp.Net MVC Unobtrusive Ajax
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：1. Unobtrusive JavaScript介绍 说到Unobtrusive Ajax，就要谈谈UnobtrusiveJavaScript了，所谓Unobtrusive JavaScript即为非侵入式JavaScript（即将Js代码与html代码分离，方便阅读与维护），是目前在Web开发领        <a href="https://www.cnblogs.com/yscit/p/10419057.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2019-02-22 16:15
+yscit
+<span data-post-id="10419057" class="post-view-count">阅读(326)</span> 
+<span data-post-id="10419057" class="post-comment-count">评论(0)</span> 
+<span data-post-id="10419057" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10419057" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/yscit/archive/2019/02/21.html">2019年2月21日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/yscit/p/10411635.html">
+    <span>
+        JavaScript中的Array对象
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：1.属性 1.1 constructor 返回对创建此对象的数组函数的引用。 语法：object.constructor //object是对象或函数的名称。 说明：constructor 属性是所有具有 prototype 的对象的成员。它们包括除 Global 和 Math 对象以外的所有 JS        <a href="https://www.cnblogs.com/yscit/p/10411635.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2019-02-21 12:57
+yscit
+<span data-post-id="10411635" class="post-view-count">阅读(256)</span> 
+<span data-post-id="10411635" class="post-comment-count">评论(0)</span> 
+<span data-post-id="10411635" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10411635" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/yscit/archive/2019/02/20.html">2019年2月20日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/yscit/p/10404926.html">
+    <span>
+        Asp.Net MVC Https设置
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：1. IIS设置 1.1 创建SSL证书 点击左侧菜单栏顶部，点击“功能视图”里的“服务器证书”： 点击“创建自动签名证书”创建自动签名证书： 1.2 设置SSL证书 点开网站，在“功能视图”里点击“SSL设置”： 如图，设置SSL： 1.3 绑定SSL证书 点开网站，在右侧“操作”栏点击“绑定”：        <a href="https://www.cnblogs.com/yscit/p/10404926.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2019-02-20 10:09
+yscit
+<span data-post-id="10404926" class="post-view-count">阅读(4912)</span> 
+<span data-post-id="10404926" class="post-comment-count">评论(8)</span> 
+<span data-post-id="10404926" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10404926" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/yscit/archive/2019/02/19.html">2019年2月19日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/yscit/p/10401503.html">
+    <span>
+        泛型学习笔记
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：泛型的好处：类型安全性能高，代码重用扩展好。 泛型的使用：如果我们需要使用多个泛型来实例化一个类型，那么我们就需要使用说明性的名称，比如TId，TFirstName之类的。 泛型的约束： where T : struct -类型T必须是值类型 where T : class -类型T必须是引用类型         <a href="https://www.cnblogs.com/yscit/p/10401503.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2019-02-19 15:44
+yscit
+<span data-post-id="10401503" class="post-view-count">阅读(446)</span> 
+<span data-post-id="10401503" class="post-comment-count">评论(0)</span> 
+<span data-post-id="10401503" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10401503" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/yscit/archive/2019/02/18.html">2019年2月18日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/yscit/p/10393867.html">
+    <span>
+        Quartz.Net学习笔记
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：Quartz.NET是一个强大、开源、轻量的作业调度框架，是 OpenSymphony 的 Quartz API 的.NET移植，用C#改写，可用于winform和asp.net应用中。它灵活而不复杂。你能够用它来为执行一个作业而创建简单的或复杂的作业调度。它有很多特征，如：数据库支持，集群，插件，支持cron-like表达式等等。通俗说它的功能是：比如说我想每天晚上2点让程序或网站执行某些代码，或者每隔5秒种我想查看是否有新的任务要处理等。        <a href="https://www.cnblogs.com/yscit/p/10393867.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2019-02-18 09:37
+yscit
+<span data-post-id="10393867" class="post-view-count">阅读(709)</span> 
+<span data-post-id="10393867" class="post-comment-count">评论(4)</span> 
+<span data-post-id="10393867" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10393867" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/yscit/archive/2019/02/14.html">2019年2月14日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/yscit/p/10376005.html">
+    <span>
+        【Oracle学习笔记】定时任务(dbms_job)
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：一、概述 Oralce中的任务有2种：Job和Dbms_job，两者的区别有： 1． jobs是oracle数据库的对象， dbms_jobs只是jobs对象的一个实例， 就像对于tables， emp和dept都是表的实例。 2． 创建方式也有差异，Job是通过调用dbms_scheduler.c        <a href="https://www.cnblogs.com/yscit/p/10376005.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2019-02-14 18:03
+yscit
+<span data-post-id="10376005" class="post-view-count">阅读(6959)</span> 
+<span data-post-id="10376005" class="post-comment-count">评论(2)</span> 
+<span data-post-id="10376005" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10376005" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+
+</div>
+
+
+
+<div class="topicListFooter">
+    <div id="nav_next_page">
+        
+    <a href="https://www.cnblogs.com/yscit/default.html?page=2">
+        下一页
+    </a>
+
+    </div>    
+</div>
+
+
+
+
+
+
+<script>
+    updatePostStats(
+        $(".post-view-count").map(function () { return this.dataset.postId }).get(),
+        function(id, count) { $(".post-view-count[data-post-id=" + id + "]").text("阅读(" + count + ")") },
+        function(id, count) { $(".post-comment-count[data-post-id=" + id + "]").text("评论(" + count + ")") },
+        function(id, count) { $(".post-digg-count[data-post-id=" + id + "]").text("推荐(" + count + ")") });
+</script>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+<div id="sidebar_c3"></div>
+			<div id="calendar"><div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script></div>
+			
+			<DIV id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</DIV>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2021 yscit
+<br /><span id="poweredby">Powered by .NET 5.0 on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+
+    <input type="hidden" id="antiforgery_token" value="CfDJ8L-rpLgFVEJMgssCVvNUAju62UXMxs41rh246TALuS1ee-aI1PMhwtbrT6eAYnm0XZ0oYkSkkDR1EK9mPpHZ2ORwkwYusLgA81QN1pHzrL0g7DR9CUFrASSpqqveAvZ_rk3Q79xly9X7LHj7t5GbV-A" />
+</body>
+</html>

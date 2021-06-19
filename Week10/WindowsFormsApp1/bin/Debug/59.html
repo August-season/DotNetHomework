@@ -1,0 +1,1457 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin-when-crossorigin" />
+    
+    
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>MingsonZheng - 博客园</title>
+    <link id="favicon" rel="shortcut icon" href="//common.cnblogs.com/favicon.svg" type="image/svg+xml" />
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=6tvK5XC6GPbg3p_sy7wzz_2291HoYACr4440iKBzQIw" />
+    <link id="MainCss" rel="stylesheet" href="/skins/imetro_hd/bundle-imetro_hd.min.css?v=FftQhR2MvKTGGXxV0VXlcGGt4XBM0_1XGJmu6kYD9bg" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/MingsonZheng/custom.css?v=Bk41Urmi83TURr/3aRDSftXWFj4=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/imetro_hd/bundle-imetro_hd-mobile.min.css?v=t8lZrYXGRE8kAD_d-besbRXwkXSQmMprnkoJVYlZl-g" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/MingsonZheng/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/MingsonZheng/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/MingsonZheng/wlwmanifest.xml" />
+    <script>
+        var currentBlogId = 435783;
+        var currentBlogApp = 'MingsonZheng';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var isBlogOwner = false;
+        var skinName = 'iMetro_HD';
+        var visitorUserId = '';
+    </script>
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=ZUvfwhWs5fv-s8Nv7WofCOhwKAxiDO928zdWFzhnOPk"></script>
+    
+    
+    
+</head>
+<body class="no-navbar">
+    <a name="top"></a>
+            <div id="bannerbar" class="bannerbar-mobile formobile">
+            <a href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:mb|pp:bokeyuan-huodong-21nianzhongdacu-neiyeyidongduantonglanbanner|pu:21nianzhongdacu-neiyeyidongduantonglanbanner|ci:21nzdc|kw:10224547" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-mobile')">
+                <img src="https://img2020.cnblogs.com/blog/35695/202106/35695-20210610184806729-1738888164.jpg" alt="" />
+            </a>
+            </div>
+    <div id="top_nav" class="navbar forpc navbar-custom">
+        <nav id="nav_main" class="navbar-main">
+            <ul id="nav_left" class="navbar-list navbar-left">
+                <li class="navbar-branding"><a href="https://www.cnblogs.com/" title="开发者的网上家园"><img src="/images/logo.svg?v=R9M0WmLAIPVydmdzE2keuvnjl-bPR7_35oHqtiBzGsM" alt="博客园Logo" /></a></li>
+                <li><a href="/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-sitehome')">首页</a></li>
+                <li><a href="https://news.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-news')">新闻</a></li>
+                <li><a href="https://q.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-q')">博问</a></li>
+                <li><a id="nav_brandzone" href="https://brands.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-brands')">专区</a></li>
+                <li><a href="https://ing.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-ing')">闪存</a></li>
+                <li><a href="https://edu.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-edu')">班级</a></li>
+            </ul>
+            <ul id="nav_right" class="navbar-list navbar-right">
+                <li>
+                    <form id="zzk_search" class="navbar-search" action="https://zzk.cnblogs.com/s" method="get">
+                        <input name="w" id="zzk_search_input" placeholder="代码改变世界" type="text" tabindex="3" />
+                        <button type="submit" id="zzk_search_button">
+                            <img src="/images/aggsite/search.svg" alt="搜索" />
+                        </button>
+                    </form>
+                </li>
+                <li id="navbar_login_status" class="navbar-list">
+                    <a class="navbar-user-info navbar-blog" href="https://i.cnblogs.com/EditPosts.aspx?opt=1" alt="写随笔" title="写随笔">
+                        <img id="new_post_icon" class="navbar-icon" src="/images/aggsite/newpost.svg" alt="写随笔" />
+                    </a>
+                    <a id="navblog-myblog-icon" class="navbar-user-info navbar-blog" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx" alt="我的博客" title="我的博客">
+                        <img id="myblog_icon" class="navbar-icon" src="/images/aggsite/myblog.svg" alt="我的博客" />
+                    </a>
+                    <a class="navbar-user-info navbar-message navbar-icon-wrapper" href="https://msg.cnblogs.com/" alt="短消息" title="短消息">
+                        <img id="msg_icon" class="navbar-icon" src="/images/aggsite/message.svg?v=J0WS2P2iPgaIVgXxcAhliw4AFZIpaTWxtdoNAv9eiCA" alt="短消息" />
+                        <span id="msg_count" style="display: none"></span>
+                    </a>
+                    <div id="user_info" class="navbar-user-info dropdown">
+                        <a class="dropdown-button" href="https://home.cnblogs.com/">
+                            <img id="user_icon" class="navbar-avatar" src="/images/aggsite/avatar-default.svg" alt="用户头像" />
+                        </a>
+                        <div class="dropdown-menu">
+                            <a id="navblog-myblog-text" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx">我的博客</a>
+                            <a href="https://home.cnblogs.com/">我的园子</a>
+                            <a href="https://account.cnblogs.com/settings/account">账号设置</a>
+                            <a href="javascript:void(0)" id="navbar_lite_mode_toggle" title="简洁模式会使用简洁款皮肤显示所有博客">
+    简洁模式 <img id="navbar_lite_mode_on" src="/images/lite-mode-check.svg" class="hide" /><span id="navbar_lite_mode_spinner" class="hide">...</span>
+</a>
+                            <a href="javascript:void(0)" onclick="account.logout();">退出登录</a>
+                        </div>
+                    </div>
+                    <a class="navbar-anonymous" href="https://account.cnblogs.com/signup/">注册</a>
+                    <a class="navbar-anonymous" href="javascript:void(0);" onclick="account.login()">登录</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <div id="page_begin_html">
+        <a href="https://github.com/MINGSON666" target="_blank">
+　　<img style="position: fixed; top: 0; right: 0; border: 0; z-index: 9999" src="https://images.cnblogs.com/cnblogs_com/jackson0714/779808/o_github.png" alt="Go to my github">
+</a>
+    </div>
+    <!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/MingsonZheng/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/MingsonZheng/">MingsonZheng</a>
+</h1>
+<h2></h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/MingsonZheng/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/MingsonZheng">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="javascript:void(0)" data-rss="https://www.cnblogs.com/MingsonZheng/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			<div id="blog_stats_place_holder"><script>loadBlogStats();</script></div>
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+
+
+
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/MingsonZheng/archive/2021/06/19.html">2021年6月19日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/MingsonZheng/p/14904628.html">
+    <span>
+        DDD实战课（实战篇）--学习笔记
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：目录 DDD实践：如何用DDD重构中台业务模型？ 领域建模：如何用事件风暴构建领域模型？ 代码模型（上）：如何使用DDD设计微服务代码模型？ 代码模型（下）：如何保证领域模型与代码模型的一致性？ 边界：微服务的各种边界在架构演进中的作用？ 视图：如何实现服务和数据在微服务各层的协作？ 从后端到前端：        <a href="https://www.cnblogs.com/MingsonZheng/p/14904628.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-06-19 19:22
+MingsonZheng
+<span data-post-id="14904628" class="post-view-count">阅读(50)</span> 
+<span data-post-id="14904628" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14904628" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14904628" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/MingsonZheng/archive/2021/03/12.html">2021年3月12日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/MingsonZheng/p/14521710.html">
+    <span>
+        DDD实战课--学习笔记
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：目录 学好了DDD，你能做什么？ 领域驱动设计：微服务设计为什么要选择DDD？ 领域、子域、核心域、通用域和支撑域：傻傻分不清？ 限界上下文：定义领域边界的利器 实体和值对象：从领域模型的基础单元看系统设计 聚合和聚合根：怎样设计聚合？ 领域事件：解耦微服务的关键 DDD分层架构：有效降低层与层之间        <a href="https://www.cnblogs.com/MingsonZheng/p/14521710.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-03-12 08:15
+MingsonZheng
+<span data-post-id="14521710" class="post-view-count">阅读(388)</span> 
+<span data-post-id="14521710" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14521710" class="post-digg-count">推荐(4)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14521710" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/MingsonZheng/archive/2021/02/22.html">2021年2月22日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/MingsonZheng/p/14433627.html">
+    <span>
+        .NET 云原生架构师训练营（模块二 基础巩固 安全）--学习笔记
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：2.8 安全 认证 VS 授权 ASP .NET Core 认证授权中间件 认证 JWT 认证 授权 认证 VS 授权 认证是一个识别用户是谁的过程 授权是一个决定用户可以干什么的过程 401 Unauthorized 未授权 403 Forbidden 禁止访问 ASP .NET Core 认证授        <a href="https://www.cnblogs.com/MingsonZheng/p/14433627.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-02-22 23:38
+MingsonZheng
+<span data-post-id="14433627" class="post-view-count">阅读(487)</span> 
+<span data-post-id="14433627" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14433627" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14433627" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/MingsonZheng/archive/2021/01/19.html">2021年1月19日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/MingsonZheng/p/14300665.html">
+    <span>
+        .NET 云原生架构师训练营（模块二 基础巩固 Scrum 团队）--学习笔记
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：2.7.3 Scrum 团队 理想的环境 团队章程 如何组建 Scrum 团队 产品待办事项列表 用户故事 敏捷开发流程 理想的环境 5-9人 100% 跨职能 在一起 自组织 自组织 目标 授权 沟通 可视化 辅导 奖励 要我做 ⇒ 我想做，我要做，我要做好 团队章程 团队价值观：速度与工作时间         <a href="https://www.cnblogs.com/MingsonZheng/p/14300665.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-01-19 23:24
+MingsonZheng
+<span data-post-id="14300665" class="post-view-count">阅读(107)</span> 
+<span data-post-id="14300665" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14300665" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14300665" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/MingsonZheng/archive/2021/01/18.html">2021年1月18日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/MingsonZheng/p/14290878.html">
+    <span>
+        .NET 云原生架构师训练营（模块二 基础巩固 Scrum 核心）--学习笔记
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：2.7.2 Scrum 核心 3个工件 5个会议 5个价值观 3个工件 产品待办列表（Product Backlog） Sprint 待办列表（Sprint Backlog） 产品增量（Product Increment） 5个会议 产品 Backlog 梳理会议（product backlog r        <a href="https://www.cnblogs.com/MingsonZheng/p/14290878.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-01-18 00:10
+MingsonZheng
+<span data-post-id="14290878" class="post-view-count">阅读(211)</span> 
+<span data-post-id="14290878" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14290878" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14290878" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/MingsonZheng/archive/2021/01/16.html">2021年1月16日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/MingsonZheng/p/14284812.html">
+    <span>
+        .NET 云原生架构师训练营（模块二 基础巩固 Scrum 简介）--学习笔记
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：2.7.2 Scrum 简介 SCRUM 是什么 SCRUM 精髓 SCRUM 框架 角色 SCRUM 是什么 SCRUM 是迄今为止最著名的敏捷方法，主要用于开发、交付和持续支持复杂产品的一个框架，是一个增量的、迭代式的开发过程 SCRUM 精髓 两个优化 三个拆分 两个优化 优化商业价值 优化过        <a href="https://www.cnblogs.com/MingsonZheng/p/14284812.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-01-16 00:46
+MingsonZheng
+<span data-post-id="14284812" class="post-view-count">阅读(98)</span> 
+<span data-post-id="14284812" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14284812" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14284812" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/MingsonZheng/archive/2021/01/15.html">2021年1月15日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/MingsonZheng/p/14284703.html">
+    <span>
+        .NET 云原生架构师训练营（模块二 基础巩固 敏捷开发）--学习笔记
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：2.7.1 敏捷开发 敏捷介绍 敏捷的起源 敏捷软件开发宣言 敏捷开发十二原则 生命周期对比 敏捷开发的特点 敏捷的发展 敏捷的核心 敏捷的起源 2001年，17个老头子在一起一边滑雪，一边讨论工作，制定了《敏捷软件开发宣言》 从60年代中期开始到20世纪末，软件行业得到了非常迅猛的发展，软件系统的        <a href="https://www.cnblogs.com/MingsonZheng/p/14284703.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-01-15 23:32
+MingsonZheng
+<span data-post-id="14284703" class="post-view-count">阅读(256)</span> 
+<span data-post-id="14284703" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14284703" class="post-digg-count">推荐(1)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14284703" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+            <div class="postSeparator"></div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/MingsonZheng/p/14280129.html">
+    <span>
+        .NET 云原生架构师训练营（模块二 基础巩固 RabbitMQ Masstransit 异常处理）--学习笔记
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：2.6.8 RabbitMQ -- Masstransit 异常处理 异常处理 其他 高级功能 异常处理 异常与重试 重试配置 重试条件 重新投递信息 信箱 异常与重试 Exception public class SubmitOrderConsumer : IConsumer&lt;SubmitOrde        <a href="https://www.cnblogs.com/MingsonZheng/p/14280129.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-01-15 00:09
+MingsonZheng
+<span data-post-id="14280129" class="post-view-count">阅读(271)</span> 
+<span data-post-id="14280129" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14280129" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14280129" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/MingsonZheng/archive/2021/01/13.html">2021年1月13日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/MingsonZheng/p/14274903.html">
+    <span>
+        .NET 云原生架构师训练营（模块二 基础巩固 RabbitMQ Masstransit 详解）--学习笔记
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：2.6.7 RabbitMQ -- Masstransit 详解 Consumer 消费者 Producer 生产者 Request-Response 请求-响应 Consumer 消费者 在 MassTransit 中，一个消费者可以消费一种或多种消息 消费者的类型包括：普通消费者，saga，sa        <a href="https://www.cnblogs.com/MingsonZheng/p/14274903.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-01-13 22:52
+MingsonZheng
+<span data-post-id="14274903" class="post-view-count">阅读(339)</span> 
+<span data-post-id="14274903" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14274903" class="post-digg-count">推荐(2)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14274903" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/MingsonZheng/archive/2021/01/12.html">2021年1月12日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/MingsonZheng/p/14269509.html">
+    <span>
+        .NET 云原生架构师训练营（模块二 基础巩固 RabbitMQ Masstransit 介绍）--学习笔记
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：2.6.6 RabbitMQ -- Masstransit 介绍 Masstransit 是什么 Quickstart 消息 Message Masstransit 是什么 Masstransit 是一个 .NET 免费开源的分布式应用框架 集成多种消息中间件（Rabbitmq, Azure, Se        <a href="https://www.cnblogs.com/MingsonZheng/p/14269509.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-01-12 22:02
+MingsonZheng
+<span data-post-id="14269509" class="post-view-count">阅读(418)</span> 
+<span data-post-id="14269509" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14269509" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14269509" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/MingsonZheng/archive/2021/01/11.html">2021年1月11日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/MingsonZheng/p/14264537.html">
+    <span>
+        .NET 云原生架构师训练营（模块二 基础巩固 RabbitMQ 业务场景详解）--学习笔记
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：2.6.5 RabbitMQ -- 业务场景详解 异步处理 应用解耦 流量削锋 日志处理 异步处理 串行方式 并行方式 异步方式 串行方式 _userRepo.Add(user); _emailService.Send(user); _smsService.Send(user); 并行方式 _use        <a href="https://www.cnblogs.com/MingsonZheng/p/14264537.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-01-11 21:41
+MingsonZheng
+<span data-post-id="14264537" class="post-view-count">阅读(129)</span> 
+<span data-post-id="14264537" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14264537" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14264537" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/MingsonZheng/archive/2021/01/10.html">2021年1月10日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/MingsonZheng/p/14260144.html">
+    <span>
+        .NET 云原生架构师训练营（模块二 基础巩固 RabbitMQ 工作队列和交换机）--学习笔记
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：2.6.4 RabbitMQ -- 工作队列和交换机 WorkQueue Publish/Subscribe Routing EmitLog WorkQueue WorkQueue：https://www.rabbitmq.com/tutorials/tutorial-two-dotnet.html        <a href="https://www.cnblogs.com/MingsonZheng/p/14260144.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-01-10 23:20
+MingsonZheng
+<span data-post-id="14260144" class="post-view-count">阅读(147)</span> 
+<span data-post-id="14260144" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14260144" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14260144" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/MingsonZheng/archive/2021/01/09.html">2021年1月9日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/MingsonZheng/p/14256745.html">
+    <span>
+        .NET 云原生架构师训练营（模块二 基础巩固 RabbitMQ HelloWorld）--学习笔记
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：2.6.3 RabbitMQ -- HelloWorld 发送端 接收端 rabbitmq container 发送信息 https://www.rabbitmq.com/tutorials/tutorial-one-dotnet.html 新建控制台项目 Sender，Receiver 添加 nu        <a href="https://www.cnblogs.com/MingsonZheng/p/14256745.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-01-09 22:12
+MingsonZheng
+<span data-post-id="14256745" class="post-view-count">阅读(153)</span> 
+<span data-post-id="14256745" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14256745" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14256745" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/MingsonZheng/archive/2021/01/08.html">2021年1月8日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/MingsonZheng/p/14253604.html">
+    <span>
+        .NET 云原生架构师训练营（模块二 基础巩固 消息队列 介绍与基础）--学习笔记
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：2.6.1 消息队列 -- 介绍 主要使用场景 队列的三种形式 消息队列的优点 主要使用场景 典型的异步处理 流量削锋 应用解耦 队列的三种形式 点对点 工作队列 发布与订阅 消息队列的优点 1、屏蔽异构平台的细节：发送方、接收方系统之间不需要了解双方，只需认识消息。 2、异步：消息堆积能力；发送方        <a href="https://www.cnblogs.com/MingsonZheng/p/14253604.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-01-08 22:28
+MingsonZheng
+<span data-post-id="14253604" class="post-view-count">阅读(120)</span> 
+<span data-post-id="14253604" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14253604" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14253604" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/MingsonZheng/archive/2021/01/07.html">2021年1月7日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/MingsonZheng/p/14249227.html">
+    <span>
+        .NET 云原生架构师训练营（模块二 基础巩固 MongoDB API重构）--学习笔记
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：2.5.8 MongoDB -- API重构 Lighter.Domain Lighter.Application.Contract Lighter.Application LighterApi Lighter.Application.Tests Lighter.Domain 将数据实体转移到 Li        <a href="https://www.cnblogs.com/MingsonZheng/p/14249227.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-01-07 22:58
+MingsonZheng
+<span data-post-id="14249227" class="post-view-count">阅读(209)</span> 
+<span data-post-id="14249227" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14249227" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14249227" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/MingsonZheng/archive/2021/01/06.html">2021年1月6日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/MingsonZheng/p/14243845.html">
+    <span>
+        .NET 云原生架构师训练营（模块二 基础巩固 MongoDB API实现）--学习笔记
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：2.5.7 MongoDB -- API实现 问题查询单个实现 问题查询列表实现 问题跨集合查询实现 问题创建实现 问题更新实现 问题回答实现 问题评论实现 问题投票实现 回答实现 QuestionController namespace LighterApi.Controller { [ApiCo        <a href="https://www.cnblogs.com/MingsonZheng/p/14243845.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-01-06 22:33
+MingsonZheng
+<span data-post-id="14243845" class="post-view-count">阅读(92)</span> 
+<span data-post-id="14243845" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14243845" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14243845" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/MingsonZheng/archive/2021/01/05.html">2021年1月5日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/MingsonZheng/p/14238544.html">
+    <span>
+        .NET 云原生架构师训练营（模块二 基础巩固 MongoDB 问答系统）--学习笔记
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：2.5.6 MongoDB -- 问答系统 MongoDB 数据库设计 API 实现概述 MongoDB 数据库设计 设计优化 内嵌（mongo）还是引用（mysql） 数据一致性 范式：将数据分散到不同的集合；反范式：使用内嵌文档 在范式化的情况下需要在进行多次查询再拼装数据，或者使用 looku        <a href="https://www.cnblogs.com/MingsonZheng/p/14238544.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-01-05 22:52
+MingsonZheng
+<span data-post-id="14238544" class="post-view-count">阅读(117)</span> 
+<span data-post-id="14238544" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14238544" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14238544" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/MingsonZheng/archive/2021/01/04.html">2021年1月4日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/MingsonZheng/p/14233212.html">
+    <span>
+        .NET 云原生架构师训练营（模块二 基础巩固 MongoDB 聚合）--学习笔记
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：2.5.5 MongoDB -- 聚合 排序 索引类型 创建索引 排序 // 升序 db.getCollection(&#39;author&#39;).find({}).sort({&quot;age&quot;: 1}).limit(20) // 降序 db.getCollection(&#39;author&#39;).find({}).sor        <a href="https://www.cnblogs.com/MingsonZheng/p/14233212.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-01-04 23:50
+MingsonZheng
+<span data-post-id="14233212" class="post-view-count">阅读(106)</span> 
+<span data-post-id="14233212" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14233212" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14233212" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/MingsonZheng/archive/2021/01/03.html">2021年1月3日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/MingsonZheng/p/14227529.html">
+    <span>
+        .NET 云原生架构师训练营（模块二 基础巩固 MongoDB 更新和删除）--学习笔记
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：2.5.4 MongoDB -- 更新和删除 整体更新 更新字段 字段操作 数组操作 删除 https://docs.mongodb.com/manual/reference/operator/update/ updateOne updateMany replaceOne 整体更新 db.quest        <a href="https://www.cnblogs.com/MingsonZheng/p/14227529.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-01-03 23:38
+MingsonZheng
+<span data-post-id="14227529" class="post-view-count">阅读(98)</span> 
+<span data-post-id="14227529" class="post-comment-count">评论(1)</span> 
+<span data-post-id="14227529" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14227529" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/MingsonZheng/archive/2021/01/02.html">2021年1月2日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/MingsonZheng/p/14224071.html">
+    <span>
+        .NET 云原生架构师训练营（模块二 基础巩固 MongoDB 写入和查询）--学习笔记
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：2.5.3 MongoDB -- 写入和查询 写入 查询 查找操作符 逻辑操作符 其他 嵌套对象 数组 游标方法 写入 https://docs.mongodb.com/manual/tutorial/insert-documents/ insertOne insertMany db.questio        <a href="https://www.cnblogs.com/MingsonZheng/p/14224071.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-01-02 21:43
+MingsonZheng
+<span data-post-id="14224071" class="post-view-count">阅读(227)</span> 
+<span data-post-id="14224071" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14224071" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14224071" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+            <div class="postSeparator"></div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/MingsonZheng/p/14221398.html">
+    <span>
+        .NET 云原生架构师训练营（模块二 基础巩固 MongoDB 介绍和基础）--学习笔记
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：2.5.1 MongoDB -- 介绍 mysql vs mongo 快速开始 mysql vs mongo 对比 mysql mongo 数据存储 table 二维表结构，需要预先定义结构 json 类文档，不需要预先定义结构。可随意新增或删除字段，新增字段不会对已存在的字段产生影响 查询语法 s        <a href="https://www.cnblogs.com/MingsonZheng/p/14221398.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-01-02 00:35
+MingsonZheng
+<span data-post-id="14221398" class="post-view-count">阅读(141)</span> 
+<span data-post-id="14221398" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14221398" class="post-digg-count">推荐(2)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14221398" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/MingsonZheng/archive/2020/12/31.html">2020年12月31日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/MingsonZheng/p/14218950.html">
+    <span>
+        .NET 云原生架构师训练营（模块二 基础巩固 EF Core 更新和迁移）--学习笔记
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：2.4.6 EF Core -- 更新 状态 自动变更检测 不查询删除和更新 并发 状态 Entity State Property State Entity State Added 添加 Unchanged 没有变化 Modified 已修改 Deleted 已删除 Detached 未跟踪 Pr        <a href="https://www.cnblogs.com/MingsonZheng/p/14218950.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2020-12-31 22:57
+MingsonZheng
+<span data-post-id="14218950" class="post-view-count">阅读(277)</span> 
+<span data-post-id="14218950" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14218950" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14218950" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/MingsonZheng/archive/2020/12/30.html">2020年12月30日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/MingsonZheng/p/14213770.html">
+    <span>
+        .NET 云原生架构师训练营（模块二 基础巩固 EF Core 查询）--学习笔记
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：2.4.5 EF Core -- 查询 关联数据加载 客户端与服务端运算 跟踪与不跟踪 复杂查询运算 原生 SQL 查询 全局查询筛选器 关联数据加载 学员和助教都在项目分组中，调整模型，删除 Assistant ProjectGroup 添加 Member 列表 public List&lt;Membe        <a href="https://www.cnblogs.com/MingsonZheng/p/14213770.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2020-12-30 22:04
+MingsonZheng
+<span data-post-id="14213770" class="post-view-count">阅读(114)</span> 
+<span data-post-id="14213770" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14213770" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14213770" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/MingsonZheng/archive/2020/12/29.html">2020年12月29日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/MingsonZheng/p/14209347.html">
+    <span>
+        .NET 云原生架构师训练营（模块二 基础巩固 EF Core 关系）--学习笔记
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：2.4.4 EF Core -- 关系 一对多 一对一 多对多 示例 关系：https://docs.microsoft.com/zh-cn/ef/core/modeling/relationships?tabs=fluent-api%2Cfluent-api-simple-key%2Csimple        <a href="https://www.cnblogs.com/MingsonZheng/p/14209347.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2020-12-29 23:34
+MingsonZheng
+<span data-post-id="14209347" class="post-view-count">阅读(120)</span> 
+<span data-post-id="14209347" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14209347" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14209347" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/MingsonZheng/archive/2020/12/28.html">2020年12月28日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/MingsonZheng/p/14203821.html">
+    <span>
+        .NET 云原生架构师训练营（模块二 基础巩固 EF Core 基础与配置）--学习笔记
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：2.4.3 EF Core -- 基础与配置 连接字符串 异步编程 日志 DbContext池 类和配置表 属性和列配置 并发token 索引 Entity Framework Core：https://docs.microsoft.com/zh-cn/ef/core/ 连接字符串 连接字符串：ht        <a href="https://www.cnblogs.com/MingsonZheng/p/14203821.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2020-12-28 21:46
+MingsonZheng
+<span data-post-id="14203821" class="post-view-count">阅读(95)</span> 
+<span data-post-id="14203821" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14203821" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14203821" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/MingsonZheng/archive/2020/12/27.html">2020年12月27日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/MingsonZheng/p/14198549.html">
+    <span>
+        .NET 云原生架构师训练营（模块二 基础巩固 EF Core 介绍）--学习笔记
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：2.4.2 EF Core -- 介绍 ORM Repository 仓储 UnitOfWork 工作单元 DB Context 与 DB Set EF Core快速开始示例 ORM ORM：object-rational mapping 对 SQL 语言进行封装，降低使用难度，多种 SQL 语言的        <a href="https://www.cnblogs.com/MingsonZheng/p/14198549.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2020-12-27 20:33
+MingsonZheng
+<span data-post-id="14198549" class="post-view-count">阅读(80)</span> 
+<span data-post-id="14198549" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14198549" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14198549" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/MingsonZheng/archive/2020/12/24.html">2020年12月24日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/MingsonZheng/p/14186670.html">
+    <span>
+        .NET 云原生架构师训练营（模块二 基础巩固 MySQL环境准备）--学习笔记
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：2.4.1 EF Core -- MySQL环境准备 安装 Docker 配置 docker 镜像仓库国内镜像地址 运行 mysql docker container 通过 Navicate 连接 安装 Docker Install Docker Engine on CentOS：https://d        <a href="https://www.cnblogs.com/MingsonZheng/p/14186670.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2020-12-24 22:15
+MingsonZheng
+<span data-post-id="14186670" class="post-view-count">阅读(92)</span> 
+<span data-post-id="14186670" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14186670" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14186670" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/MingsonZheng/archive/2020/12/23.html">2020年12月23日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/MingsonZheng/p/14181830.html">
+    <span>
+        .NET 云原生架构师训练营（模块二 基础巩固 MVC终结点）--学习笔记
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：2.3.4 Web API -- MVC终结点 MVC与MVVM 模型绑定 自定义模型绑定器 模型验证 返回数据处理 MVC与MVVM MVC ASP.NET Core MVC 概述：https://docs.microsoft.com/zh-cn/aspnet/core/mvc/overview?        <a href="https://www.cnblogs.com/MingsonZheng/p/14181830.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2020-12-23 22:37
+MingsonZheng
+<span data-post-id="14181830" class="post-view-count">阅读(77)</span> 
+<span data-post-id="14181830" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14181830" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14181830" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/MingsonZheng/archive/2020/12/22.html">2020年12月22日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/MingsonZheng/p/14175687.html">
+    <span>
+        .NET 云原生架构师训练营（模块二 基础巩固 路由与终结点）--学习笔记
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：2.3.3 Web API -- 路由与终结点 路由模板 约定路由 特性路由 路由冲突 终结点 ASP.NET Core 中的路由：https://docs.microsoft.com/zh-cn/aspnet/core/fundamentals/routing?view=aspnetcore-5.        <a href="https://www.cnblogs.com/MingsonZheng/p/14175687.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2020-12-22 21:59
+MingsonZheng
+<span data-post-id="14175687" class="post-view-count">阅读(116)</span> 
+<span data-post-id="14175687" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14175687" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14175687" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/MingsonZheng/archive/2020/12/21.html">2020年12月21日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/MingsonZheng/p/14170708.html">
+    <span>
+        .NET 云原生架构师训练营（模块二 基础巩固 HTTP管道与中间件）--学习笔记
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：2.3.2 Web API -- HTTP管道与中间件 管道 中间件 ASP.NET Core 中间件：https://docs.microsoft.com/zh-cn/aspnet/core/fundamentals/middleware/?view=aspnetcore-5.0 中间件是一种装配        <a href="https://www.cnblogs.com/MingsonZheng/p/14170708.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2020-12-21 23:11
+MingsonZheng
+<span data-post-id="14170708" class="post-view-count">阅读(77)</span> 
+<span data-post-id="14170708" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14170708" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14170708" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+
+<div class="topicListFooter">
+    <div id="nav_next_page">
+        
+    <a href="https://www.cnblogs.com/MingsonZheng/default.html?page=2">
+        下一页
+    </a>
+
+    </div>    
+</div>
+
+
+
+
+
+
+<script>
+    updatePostStats(
+        $(".post-view-count").map(function () { return this.dataset.postId }).get(),
+        function(id, count) { $(".post-view-count[data-post-id=" + id + "]").text("阅读(" + count + ")") },
+        function(id, count) { $(".post-comment-count[data-post-id=" + id + "]").text("评论(" + count + ")") },
+        function(id, count) { $(".post-digg-count[data-post-id=" + id + "]").text("推荐(" + count + ")") });
+</script>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+	<div id="sideBar">
+		<div id="sideBarMain">
+			<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+<div id="sidebar_c3"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2021 MingsonZheng
+<br /><span id="poweredby">Powered by .NET 5.0 on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+
+    <input type="hidden" id="antiforgery_token" value="CfDJ8L-rpLgFVEJMgssCVvNUAjvPSn7b6woa8-N_8YKXYuDEANim3RVgzUqSCR76hhshDtxJI8BcbVNrEAlBa3oFKV9CaU7dVapvHatMih70LEV8xa-yGDe7GjI2nTV5oRuvOu4giQgD7nLA3O22AlOzgwo" />
+</body>
+</html>

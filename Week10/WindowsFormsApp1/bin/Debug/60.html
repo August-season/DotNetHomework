@@ -1,0 +1,353 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin-when-crossorigin" />
+    <meta name="description" content="最近在check SVN上的iOS代码时，失败报错： Failed to run the WC DB work queue associated with “目录/文件”，clean up同样报错。最" />
+    <meta property="og:description" content="最近在check SVN上的iOS代码时，失败报错： Failed to run the WC DB work queue associated with “目录/文件”，clean up同样报错。最" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>SVN报错“Failed to run the WC DB work queue associated with”解决办法 - yscit - 博客园</title>
+    <link id="favicon" rel="shortcut icon" href="//common.cnblogs.com/favicon.svg" type="image/svg+xml" />
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=6tvK5XC6GPbg3p_sy7wzz_2291HoYACr4440iKBzQIw" />
+    <link id="MainCss" rel="stylesheet" href="/skins/coffee/bundle-coffee.min.css?v=BgguPR_JbmA1HKLJOLqLtHq5pt8a1UlO6ibCA_xgwdI" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/coffee/bundle-coffee-mobile.min.css?v=gcYNuAuJkNMICFERxhZCtKHGitYmBYNTxm9W97H2O2g" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/yscit/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/yscit/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/yscit/wlwmanifest.xml" />
+    <script>
+        var currentBlogId = 242981;
+        var currentBlogApp = 'yscit';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var isBlogOwner = false;
+        var skinName = 'coffee';
+        var visitorUserId = '';
+    </script>
+        <script>
+            var currentPostDateAdded = '2021-06-19 06:45';
+        </script>
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=ZUvfwhWs5fv-s8Nv7WofCOhwKAxiDO928zdWFzhnOPk"></script>
+    
+    
+    
+</head>
+<body class="has-navbar has-bannerbar">
+    <a name="top"></a>
+            <a target="_blank" href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:pc|pp:bokeyuan-huodong-21nianzhongdacu-neiyePCtonglanbanner|pu:21nianzhongdacu-neiyePCtonglanbanner|ci:21nzdc|kw:10224545" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-pc')">
+                <div class="bannerbar aliyun forpc" style="background-size: contain; filter: brightness(0.95); background-image: url(https://img2020.cnblogs.com/blog/35695/202106/35695-20210610183724605-1725070929.jpg)">
+                </div>
+            </a>
+            <div id="bannerbar" class="bannerbar-mobile formobile">
+            <a href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:mb|pp:bokeyuan-huodong-21nianzhongdacu-neiyeyidongduantonglanbanner|pu:21nianzhongdacu-neiyeyidongduantonglanbanner|ci:21nzdc|kw:10224547" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-mobile')">
+                <img src="https://img2020.cnblogs.com/blog/35695/202106/35695-20210610184806729-1738888164.jpg" alt="" />
+            </a>
+            </div>
+    <div id="top_nav" class="navbar forpc">
+        <nav id="nav_main" class="navbar-main">
+            <ul id="nav_left" class="navbar-list navbar-left">
+                <li class="navbar-branding"><a href="https://www.cnblogs.com/" title="开发者的网上家园"><img src="/images/logo.svg?v=R9M0WmLAIPVydmdzE2keuvnjl-bPR7_35oHqtiBzGsM" alt="博客园Logo" /></a></li>
+                <li><a href="/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-sitehome')">首页</a></li>
+                <li><a href="https://news.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-news')">新闻</a></li>
+                <li><a href="https://q.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-q')">博问</a></li>
+                <li><a id="nav_brandzone" href="https://brands.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-brands')">专区</a></li>
+                <li><a href="https://ing.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-ing')">闪存</a></li>
+                <li><a href="https://edu.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-edu')">班级</a></li>
+            </ul>
+            <ul id="nav_right" class="navbar-list navbar-right">
+                <li>
+                    <form id="zzk_search" class="navbar-search" action="https://zzk.cnblogs.com/s" method="get">
+                        <input name="w" id="zzk_search_input" placeholder="代码改变世界" type="text" tabindex="3" />
+                        <button type="submit" id="zzk_search_button">
+                            <img src="/images/aggsite/search.svg" alt="搜索" />
+                        </button>
+                    </form>
+                </li>
+                <li id="navbar_login_status" class="navbar-list">
+                    <a class="navbar-user-info navbar-blog" href="https://i.cnblogs.com/EditPosts.aspx?opt=1" alt="写随笔" title="写随笔">
+                        <img id="new_post_icon" class="navbar-icon" src="/images/aggsite/newpost.svg" alt="写随笔" />
+                    </a>
+                    <a id="navblog-myblog-icon" class="navbar-user-info navbar-blog" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx" alt="我的博客" title="我的博客">
+                        <img id="myblog_icon" class="navbar-icon" src="/images/aggsite/myblog.svg" alt="我的博客" />
+                    </a>
+                    <a class="navbar-user-info navbar-message navbar-icon-wrapper" href="https://msg.cnblogs.com/" alt="短消息" title="短消息">
+                        <img id="msg_icon" class="navbar-icon" src="/images/aggsite/message.svg?v=J0WS2P2iPgaIVgXxcAhliw4AFZIpaTWxtdoNAv9eiCA" alt="短消息" />
+                        <span id="msg_count" style="display: none"></span>
+                    </a>
+                    <div id="user_info" class="navbar-user-info dropdown">
+                        <a class="dropdown-button" href="https://home.cnblogs.com/">
+                            <img id="user_icon" class="navbar-avatar" src="/images/aggsite/avatar-default.svg" alt="用户头像" />
+                        </a>
+                        <div class="dropdown-menu">
+                            <a id="navblog-myblog-text" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx">我的博客</a>
+                            <a href="https://home.cnblogs.com/">我的园子</a>
+                            <a href="https://account.cnblogs.com/settings/account">账号设置</a>
+                            <a href="javascript:void(0)" id="navbar_lite_mode_toggle" title="简洁模式会使用简洁款皮肤显示所有博客">
+    简洁模式 <img id="navbar_lite_mode_on" src="/images/lite-mode-check.svg" class="hide" /><span id="navbar_lite_mode_spinner" class="hide">...</span>
+</a>
+                            <a href="javascript:void(0)" onclick="account.logout();">退出登录</a>
+                        </div>
+                    </div>
+                    <a class="navbar-anonymous" href="https://account.cnblogs.com/signup/">注册</a>
+                    <a class="navbar-anonymous" href="javascript:void(0);" onclick="account.login()">登录</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+	<a href="https://www.cnblogs.com/yscit/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>			
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/yscit/">yscit</a>
+</h1>
+<h2>你一定要努力，可千万不要着急。所有的不一样，都是从一样过来的！</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="navigator">
+			
+<ul id="navList">
+	<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+	<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/yscit/">
+首页</a>
+</li>
+	<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+	<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/yscit">
+联系</a></li>
+	<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+	<li>
+<a id="blog_nav_rss" class="menu" href="javascript:void(0)" data-rss="https://www.cnblogs.com/yscit/rss/">
+订阅</a>
+	
+<a id="blog_nav_rss_image" href="https://www.cnblogs.com/yscit/rss/">
+    <img src="/skins/coffee/images/xml.gif" alt="订阅" />
+</a></li>
+</ul>
+
+
+
+			<div class="blogStats">
+				
+				<div id="blog_stats_place_holder"><script>loadBlogStats();</script></div>
+				
+			</div><!--end: blogStats -->
+		</div><!--end: navigator 博客导航栏 -->
+		<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class="post">
+		<h1 class = "postTitle">
+			
+<a id="cb_post_title_url" class="postTitle2 vertical-middle" href="https://www.cnblogs.com/yscit/p/14903911.html">
+    <span>SVN报错“Failed to run the WC DB work queue associated with”解决办法</span>
+    
+
+
+
+</a>
+
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body" class="blogpost-body blogpost-body-html">
+<p>　　最近在check SVN上的iOS代码时，失败报错：&nbsp;&nbsp;Failed to run the WC DB work queue associated with “目录/文件”，clean up同样报错。最后在网上找到了解决方案并解决了问题，解决方法如下：</p>
+<h2>一、安装sqlite3</h2>
+<h3>1 下载</h3>
+<p>　　我是window10 32位，下载以下文件：</p>
+<p style="margin-left: 30px"><span style="color: rgba(128, 128, 128, 1); background-color: rgba(255, 255, 255, 1)">1.下载&nbsp;sqlite-dll-win32-x86-3140100</span></p>
+<p style="margin-left: 30px"><span style="color: rgba(128, 128, 128, 1); background-color: rgba(255, 255, 255, 1)">2.下载&nbsp;sqlite-tools-win32-x86-3140100</span></p>
+<p>&nbsp; &nbsp; &nbsp; 官方下载地址：https://www.sqlite.org/download.html</p>
+<h3>2 安装</h3>
+<p>（1）先在C盘建一个文件夹 sqlite</p>
+<p>（2）把&nbsp;sqlite-dll-win32-x86-3140100 中解压出来的两个文件（sqlite3.def 和&nbsp;sqlite3.dll）复制到刚才新建的目录（C:\sqlite）中</p>
+<p>（3）把&nbsp;sqlite-tools-win32-x86-3140100 中解压出来的文件&nbsp;sqlite3.exe 复制到C:\sqlite 目录中</p>
+<p><img src="https://img2020.cnblogs.com/blog/792405/202106/792405-20210619181942909-554777713.png" alt="" loading="lazy" style="display: block; margin-left: auto; margin-right: auto"></p>
+<p>（4）添加系统环境变量， 在Path变量值后面添加 C:\sqlite（windows7系统不要忘记分号），如下图所示：</p>
+<p><img src="https://img2020.cnblogs.com/blog/792405/202106/792405-20210619182015851-375285174.png" alt="" loading="lazy" style="display: block; margin-left: auto; margin-right: auto"></p>
+<p>（5）验证是否安装完成。运行cmd，切换到C盘根目录，输入sqlite3，然后回车，如果安装成功的话，会显示sqlite版本号，如下图所示：</p>
+<p align="center"><img src="https://img2020.cnblogs.com/blog/792405/202106/792405-20210619182717300-804382496.png" alt="" loading="lazy"></p>
+<p>&nbsp;</p>
+<p>&nbsp;　　OK，Sqlite3已经安装完成了。</p>
+<h2>二、解决过程</h2>
+<ol>
+<li>打开cmd，进入到需要清理目录的.svn目录中，查看是否存在wc.db文件</li>
+</ol>
+<p style="margin-left: 30px"><span style="color: rgba(128, 128, 128, 1)">C:\WINDOWS\system32&gt;e:</span></p>
+<p style="margin-left: 30px"><span style="color: rgba(128, 128, 128, 1)">E:\&gt;cd E:\yscit\workspace\coding\96_IOS\.svn</span></p>
+<p style="margin-left: 30px"><span style="color: rgba(128, 128, 128, 1)">E:\yscit\workspace\coding\96_IOS\.svn&gt;dir</span></p>
+<p style="margin-left: 30px"><span style="color: rgba(128, 128, 128, 1)">&nbsp;驱动器 E 中的卷没有标签。</span></p>
+<p style="margin-left: 30px"><span style="color: rgba(128, 128, 128, 1)">&nbsp;卷的序列号是 A05F-0B3D</span></p>
+<p style="margin-left: 30px"><span style="color: rgba(128, 128, 128, 1)">&nbsp;E:\yscit\workspace\coding\96_IOS\.svn 的目录</span></p>
+<p style="margin-left: 30px"><span style="color: rgba(128, 128, 128, 1)">2021/06/15 &nbsp;14:26 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3 entries</span></p>
+<p style="margin-left: 30px"><span style="color: rgba(128, 128, 128, 1)">2021/06/15 &nbsp;14:26 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3 format</span></p>
+<p style="margin-left: 30px"><span style="color: rgba(128, 128, 128, 1)">2021/06/15 &nbsp;14:26 &nbsp;&nbsp;&nbsp;&lt;DIR&gt; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pristine</span></p>
+<p style="margin-left: 30px"><span style="color: rgba(128, 128, 128, 1)">2021/06/15 &nbsp;14:31 &nbsp;&nbsp;&nbsp;&lt;DIR&gt; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tmp</span></p>
+<p style="margin-left: 30px"><span style="color: rgba(128, 128, 128, 1)">2021/06/15 &nbsp;14:31 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;671,744 wc.db</span></p>
+<p style="margin-left: 30px"><span style="color: rgba(128, 128, 128, 1)">2021/06/15 &nbsp;14:31 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0 wc.db-journal</span></p>
+<p style="margin-left: 30px"><span style="color: rgba(128, 128, 128, 1)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4 个文件 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;671,750 字节</span></p>
+<p style="margin-left: 30px"><span style="color: rgba(128, 128, 128, 1)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2 个目录 47,469,176,320 可用字节</span></p>
+<p>　　2.用sqlite3打开wc.db文件</p>
+<p style="margin-left: 30px"><span style="color: rgba(128, 128, 128, 1)">E:\yscit\workspace\coding\96_IOS\.svn&gt;sqlite3 wc.db</span></p>
+<p style="margin-left: 30px"><span style="color: rgba(128, 128, 128, 1)">SQLite version 3.7.15.2 2013-01-09 11:53:05</span></p>
+<p style="margin-left: 30px"><span style="color: rgba(128, 128, 128, 1)">Enter ".help" for instructions</span></p>
+<p style="margin-left: 30px"><span style="color: rgba(128, 128, 128, 1)">Enter SQL statements terminated with a ";"</span></p>
+<p style="margin-left: 30px"><span style="color: rgba(128, 128, 128, 1)">sqlite&gt;</span></p>
+<p>　　3.看看wc.db里面都有哪些表（非必要）：</p>
+<p style="margin-left: 30px"><span style="color: rgba(128, 128, 128, 1)">sqlite&gt; .table</span></p>
+<p style="margin-left: 30px"><span style="color: rgba(128, 128, 128, 1)">ACTUAL_NODE &nbsp;&nbsp;&nbsp;NODES &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PRISTINE &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WC_LOCK</span></p>
+<p style="margin-left: 30px"><span style="color: rgba(128, 128, 128, 1)">EXTERNALS &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NODES_BASE &nbsp;&nbsp;&nbsp;&nbsp;REPOSITORY &nbsp;&nbsp;&nbsp;&nbsp;WORK_QUEUE</span></p>
+<p style="margin-left: 30px"><span style="color: rgba(128, 128, 128, 1)">LOCK &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NODES_CURRENT &nbsp;WCROOT</span></p>
+<p style="margin-left: 30px"><span style="color: rgba(128, 128, 128, 1)">sqlite&gt;</span></p>
+<p>　　4.接下来我们要做的就是对NODES、WORK_QUEUE、WC_LOCK进行清理。</p>
+<p style="margin-left: 30px"><span style="color: rgba(128, 128, 128, 1)"># 看看有啥，非必要</span></p>
+<p style="margin-left: 30px"><span style="color: rgba(128, 128, 128, 1)">sqlite&gt;&nbsp;select * from NODES where local_relpath like '%*%';</span></p>
+<p style="margin-left: 30px"><span style="color: rgba(128, 128, 128, 1)"># 1|src/path/to/136*12.png|0|src/path/to|1|dpath/to/136*12.png|12487|normal|||file|(svn:mime-type application/octet-stream)||$sha1$a6ab08429621146c6f3d2aeb3b246b7daa2e1c5f||10739|1563264828707442|提交人帐号|||||</span></p>
+<p style="margin-left: 30px"><span style="color: rgba(128, 128, 128, 1)"># 1|src/path/to/136*12-hover.png|0|src/path/to|1|path/to/136*12-hover.png|12487|normal|||file|(svn:mime-type application/octet-stream)||$sha1$42fa4db5041d07f474d15c6b426e08de87f32d61||10739|1563264828707442|提交人帐号|||||</span></p>
+<p style="margin-left: 30px"><span style="color: rgba(128, 128, 128, 1)"><strong># 清理它，必要</strong></span></p>
+<p style="margin-left: 30px"><span style="color: rgba(128, 128, 128, 1)"><strong>sqlite&gt;&nbsp;delete from NODES where local_relpath like '%*%';</strong></span></p>
+<p style="margin-left: 30px"><span style="color: rgba(128, 128, 128, 1)"><strong>sqlite&gt;&nbsp;delete from WORK_QUEUE;</strong></span></p>
+<p style="margin-left: 30px"><span style="color: rgba(128, 128, 128, 1)"><strong>sqlite&gt;&nbsp;delete from WC_LOCK;</strong></span></p>
+<p>　　执行完上面三条清理命令后再svn update检出就ok了，<strong>有多少个这类文件上面步骤就要重复多少次</strong>（裂开.jpg）。大家如有什么更好的解决方法，欢迎评论区留言交流。</p>
+<blockquote>
+<p>参考资料：</p>
+<p>1.<a href="https://www.cnblogs.com/nnnnnn/p/10754888.html" target="_blank">解决SVN Cleanup错误： Failed to run the WC DB work queue associated with</a></p>
+<p>2.<a href="https://zhuanlan.zhihu.com/p/332299111" target="_blank">SVN：文件名、目录名或者卷标语法不正确</a></p>
+</blockquote>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+		</div>
+		<div class="postDesc">posted @ 
+<span id="post-date">2021-06-19 18:45</span>&nbsp;
+<a href="https://www.cnblogs.com/yscit/">yscit</a>&nbsp;
+阅读(<span id="post_view_count">27</span>)&nbsp;
+评论(<span id="post_comment_count">0</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14903911" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(14903911);return false;">收藏</a>&nbsp;
+<a href="javascript:void(0)" onclick="reportManager.report({ currentUserId: '', targetType: 'blogPost', targetId: '14903911', targetLink: 'https://www.cnblogs.com/yscit/p/14903911.html', title: 'SVN报错“Failed to run the WC DB work queue associated with”解决办法' })">举报</a></div>
+	</div>
+	
+	
+</div><!--end: topics 文章、评论容器-->
+<script src="https://common.cnblogs.com/highlight/10.3.1/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 242981, cb_blogApp = 'yscit', cb_blogUserGuid = '1e08a441-be36-e511-b908-9dcfd8948a71';
+    var cb_entryId = 14903911, cb_entryCreatedDate = '2021-06-19 18:45', cb_postType = 1;
+    updatePostStats(
+        [cb_entryId],
+        function(id, count) { $("#post_view_count").text(count) },
+        function(id, count) { $("#post_comment_count").text(count) })
+    zoomManager.apply("#cnblogs_post_body img:not(.code_img_closed):not(.code_img_opened)");
+</script>
+<a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <div id="cnblogs_c1" class="under-post-card">
+        <div id='div-gpt-ad-1592365906576-0' style='width: 300px; height: 250px;'></div>
+    </div>
+    <div id="under_post_card1"></div>
+    <div id="cnblogs_c2" class="under-post-card">
+        <div id='div-gpt-ad-1592366332455-0' style='width: 468px; height: 60px;'></div>
+    </div>
+    <div id="under_post_card2"></div>
+    <div id="HistoryToday" class="under-post-card"></div>
+    <script type="text/javascript">
+       var commentManager = new blogCommentManager();
+       commentManager.renderComments(0);
+       fixPostBody();
+       deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);       deliverT2();
+       deliverC1C2();
+       loadNewsAndKb();
+       loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);       LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+       GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+       loadOptUnderPost();
+       GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+
+</div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+<div id="sidebar_c3"></div>
+			<div id="calendar"><div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script></div>
+			
+			<DIV id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</DIV>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2021 yscit
+<br /><span id="poweredby">Powered by .NET 5.0 on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+
+    <input type="hidden" id="antiforgery_token" value="CfDJ8L-rpLgFVEJMgssCVvNUAjuDwHKRzJIWDRe7oGR71PDDp2nakPnIF-QoXFic_RTpfWjEsW6C0CCbZDL-3bxYV_sQRZoahKZSOuskLbz70ZX02p5YBILqSPunqtFTMIpPIzF2xGyXR35R_toaCo8SQIY" />
+</body>
+</html>

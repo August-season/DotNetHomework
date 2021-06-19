@@ -1,0 +1,5 @@
+C:\Users\10987\source\repos\Week12\OrderWebApi\obj\Debug\netcoreapp3.1\OrderWebApi.csprojAssemblyReference.cache
+C:\Users\10987\source\repos\Week12\OrderWebApi\obj\Debug\netcoreapp3.1\OrderWebApi.AssemblyInfoInputs.cache
+C:\Users\10987\source\repos\Week12\OrderWebApi\obj\Debug\netcoreapp3.1\OrderWebApi.AssemblyInfo.cs
+C:\Users\10987\source\repos\Week12\OrderWebApi\obj\Debug\netcoreapp3.1\OrderWebApi.csproj.CoreCompileInputs.cache
+C:\Users\10987\source\repos\Week12\OrderWebApi\obj\Debug\netcoreapp3.1\OrderWebApi.MvcApplicationPartsAssemblyInfo.cache

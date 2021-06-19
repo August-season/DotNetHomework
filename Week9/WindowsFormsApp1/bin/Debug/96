@@ -1,0 +1,1117 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin-when-crossorigin" />
+    <meta name="description" content="需求很简单： 有一堆关键词（短句），需要给它们分组。分组逻辑很简单：给出一些归类词语，把包含这些归类词语的关键词归到一类。 归类词语需要支持简单的与或算术逻辑，例如“日记|博客”，意思就是把包含日记或" />
+    <meta property="og:description" content="需求很简单： 有一堆关键词（短句），需要给它们分组。分组逻辑很简单：给出一些归类词语，把包含这些归类词语的关键词归到一类。 归类词语需要支持简单的与或算术逻辑，例如“日记|博客”，意思就是把包含日记或" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>最近帮朋友写了一个百度竞价关键词快速分词（分组）工具，支持与或逻辑分组，附源码和工具下载链接 - 皇家救星 - 博客园</title>
+    <link id="favicon" rel="shortcut icon" href="//common.cnblogs.com/favicon.svg" type="image/svg+xml" />
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=6tvK5XC6GPbg3p_sy7wzz_2291HoYACr4440iKBzQIw" />
+    <link id="MainCss" rel="stylesheet" href="/skins/simpleblue/bundle-simpleblue.min.css?v=2hjghzSZyhYA1HxvSxKnXih3JbC120DBjeO9V9T_nSs" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/simpleblue/bundle-simpleblue-mobile.min.css?v=3tvwgOOqUo3RpS6gGzEdK0LbptOPv4Bx7M85_UAnFGs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/kingstarer/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/kingstarer/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/kingstarer/wlwmanifest.xml" />
+    <script>
+        var currentBlogId = 234136;
+        var currentBlogApp = 'kingstarer';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var isBlogOwner = false;
+        var skinName = 'SimpleBlue';
+        var visitorUserId = '';
+    </script>
+        <script>
+            var currentPostDateAdded = '2019-05-18 06:37';
+        </script>
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=ZUvfwhWs5fv-s8Nv7WofCOhwKAxiDO928zdWFzhnOPk"></script>
+    
+    
+    
+</head>
+<body class="has-navbar has-bannerbar">
+    <a name="top"></a>
+            <a target="_blank" href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:pc|pp:bokeyuan-huodong-21nianzhongdacu-neiyePCtonglanbanner|pu:21nianzhongdacu-neiyePCtonglanbanner|ci:21nzdc|kw:10224545" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-pc')">
+                <div class="bannerbar aliyun forpc" style="background-size: contain; filter: brightness(0.95); background-image: url(https://img2020.cnblogs.com/blog/35695/202106/35695-20210610183724605-1725070929.jpg)">
+                </div>
+            </a>
+            <div id="bannerbar" class="bannerbar-mobile formobile">
+            <a href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:mb|pp:bokeyuan-huodong-21nianzhongdacu-neiyeyidongduantonglanbanner|pu:21nianzhongdacu-neiyeyidongduantonglanbanner|ci:21nzdc|kw:10224547" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-mobile')">
+                <img src="https://img2020.cnblogs.com/blog/35695/202106/35695-20210610184806729-1738888164.jpg" alt="" />
+            </a>
+            </div>
+    <div id="top_nav" class="navbar forpc">
+        <nav id="nav_main" class="navbar-main">
+            <ul id="nav_left" class="navbar-list navbar-left">
+                <li class="navbar-branding"><a href="https://www.cnblogs.com/" title="开发者的网上家园"><img src="/images/logo.svg?v=R9M0WmLAIPVydmdzE2keuvnjl-bPR7_35oHqtiBzGsM" alt="博客园Logo" /></a></li>
+                <li><a href="/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-sitehome')">首页</a></li>
+                <li><a href="https://news.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-news')">新闻</a></li>
+                <li><a href="https://q.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-q')">博问</a></li>
+                <li><a id="nav_brandzone" href="https://brands.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-brands')">专区</a></li>
+                <li><a href="https://ing.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-ing')">闪存</a></li>
+                <li><a href="https://edu.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-edu')">班级</a></li>
+            </ul>
+            <ul id="nav_right" class="navbar-list navbar-right">
+                <li>
+                    <form id="zzk_search" class="navbar-search" action="https://zzk.cnblogs.com/s" method="get">
+                        <input name="w" id="zzk_search_input" placeholder="代码改变世界" type="text" tabindex="3" />
+                        <button type="submit" id="zzk_search_button">
+                            <img src="/images/aggsite/search.svg" alt="搜索" />
+                        </button>
+                    </form>
+                </li>
+                <li id="navbar_login_status" class="navbar-list">
+                    <a class="navbar-user-info navbar-blog" href="https://i.cnblogs.com/EditPosts.aspx?opt=1" alt="写随笔" title="写随笔">
+                        <img id="new_post_icon" class="navbar-icon" src="/images/aggsite/newpost.svg" alt="写随笔" />
+                    </a>
+                    <a id="navblog-myblog-icon" class="navbar-user-info navbar-blog" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx" alt="我的博客" title="我的博客">
+                        <img id="myblog_icon" class="navbar-icon" src="/images/aggsite/myblog.svg" alt="我的博客" />
+                    </a>
+                    <a class="navbar-user-info navbar-message navbar-icon-wrapper" href="https://msg.cnblogs.com/" alt="短消息" title="短消息">
+                        <img id="msg_icon" class="navbar-icon" src="/images/aggsite/message.svg?v=J0WS2P2iPgaIVgXxcAhliw4AFZIpaTWxtdoNAv9eiCA" alt="短消息" />
+                        <span id="msg_count" style="display: none"></span>
+                    </a>
+                    <div id="user_info" class="navbar-user-info dropdown">
+                        <a class="dropdown-button" href="https://home.cnblogs.com/">
+                            <img id="user_icon" class="navbar-avatar" src="/images/aggsite/avatar-default.svg" alt="用户头像" />
+                        </a>
+                        <div class="dropdown-menu">
+                            <a id="navblog-myblog-text" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx">我的博客</a>
+                            <a href="https://home.cnblogs.com/">我的园子</a>
+                            <a href="https://account.cnblogs.com/settings/account">账号设置</a>
+                            <a href="javascript:void(0)" id="navbar_lite_mode_toggle" title="简洁模式会使用简洁款皮肤显示所有博客">
+    简洁模式 <img id="navbar_lite_mode_on" src="/images/lite-mode-check.svg" class="hide" /><span id="navbar_lite_mode_spinner" class="hide">...</span>
+</a>
+                            <a href="javascript:void(0)" onclick="account.logout();">退出登录</a>
+                        </div>
+                    </div>
+                    <a class="navbar-anonymous" href="https://account.cnblogs.com/signup/">注册</a>
+                    <a class="navbar-anonymous" href="javascript:void(0);" onclick="account.login()">登录</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    
+    <div id="home">
+    <div id="header">
+        <div id="blogTitle">
+            <div class="title"><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/kingstarer/">皇家救星</a>
+</div>
+<div class="subtitle"></div>
+
+        </div>
+        <div id="navigator">
+            
+<ul id="navList">
+    <li id="nav_sitehome"><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+    <li id="nav_myhome">
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/kingstarer/">
+首页</a>
+</li>
+    <li id="nav_newpost">
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+    <li id="nav_contact">
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E7%9A%87%E5%AE%B6%E6%95%91%E6%98%9F">
+联系</a></li>
+    <li id="nav_rss">
+<a id="blog_nav_rss" class="menu" href="javascript:void(0)" data-rss="https://www.cnblogs.com/kingstarer/rss/">
+订阅</a></li>
+    <li id="nav_admin">
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+            <div class="blogStats">
+                <div id="blog_stats_place_holder"><script>loadBlogStats();</script></div>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div id="mainContent">
+            <div class="forFlow">
+                <div id="post_detail">
+    <div id="topics">
+        <div class="post">
+            <h1 class="postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2 vertical-middle" href="https://www.cnblogs.com/kingstarer/p/10886607.html">
+    <span>最近帮朋友写了一个百度竞价关键词快速分词（分组）工具，支持与或逻辑分组，附源码和工具下载链接</span>
+    
+
+
+
+</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                <div id="cnblogs_post_body" class="blogpost-body blogpost-body-html">
+<p>需求很简单：</p>
+<p>有一堆关键词（短句），需要给它们分组。分组逻辑很简单：给出一些归类词语，把包含这些归类词语的关键词归到一类。</p>
+<p>归类词语需要支持简单的与或算术逻辑，例如“日记|博客”，意思就是把包含日记或者博客关键词归到一类。</p>
+<p>例如这两个关键词都符合归类要求：日记软件，博客工具</p>
+<p>又如：“社保&amp;药店”，意思是把包含社保又包含药店的关键词归到一类。</p>
+<p>例如：北京的社保药店就符合归类要求，但如果只是北京社保局就不符合归类要求</p>
+<p>再如：“(日记|博客)&amp;(社保&amp;药店)”，意思是把即符合“日记|博客”归类要求，又符合“社保&amp;药店”归类要求的关键词归到一类。</p>
+<p>&nbsp;</p>
+<p>一个实际例子：</p>
+<p>现在有下面的关键词：</p>
+<div class="cnblogs_code">
+<pre><span style="color: rgba(0, 0, 0, 1)">附近专业保洁公司
+
+北京清洁公司
+
+家政公司
+
+北京好的家政公司
+
+保姆
+
+家教公司
+
+有名的家政
+
+口碑好的保姆</span></pre>
+</div>
+<p><br>归类词语如下：</p>
+<p>(专业|好的|有名)&amp;(清洁|家政)&amp;公司</p>
+<p>北京&amp;家政</p>
+<p>附近</p>
+<p>保姆</p>
+<p>家政|清洁</p>
+<p>分类结果如下：</p>
+<p>&nbsp;<img src="https://img2018.cnblogs.com/blog/781609/201905/781609-20190518181314456-675060943.png" alt=""></p>
+<p>&nbsp;这是另一个案例分词结果截图：</p>
+<p><img src="https://img2018.cnblogs.com/blog/781609/201905/781609-20190529015442334-412784038.png" alt=""></p>
+<p>&nbsp;</p>
+<p>其实这个需求在linux下直接用grep工具加上简单的shell还是很容易做的，但让我朋友为了这个从头学shell和linux不太现实，所以我帮他做了这个工具。如果有人有兴趣也可以去下载：</p>
+<p>下载地址：</p>
+<p>链接：https://pan.baidu.com/s/1r6YR8qJGOBxvA9GDPsevzw <br>提取码：8dmn </p>
+<p>===============================================</p>
+<p>下面是相关代码，里面用到了中序表达式转成后序表达式计算的技巧</p>
+<p>stdafx.h</p>
+<div class="cnblogs_code">
+<pre><span style="color: rgba(0, 128, 128, 1)"> 1</span> <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)"> stdafx.h : 标准系统包含文件的包含文件，
+</span><span style="color: rgba(0, 128, 128, 1)"> 2</span> <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)"> 或是经常使用但不常更改的
+</span><span style="color: rgba(0, 128, 128, 1)"> 3</span> <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)"> 特定于项目的包含文件
+</span><span style="color: rgba(0, 128, 128, 1)"> 4</span> <span style="color: rgba(0, 128, 0, 1)">//
+</span><span style="color: rgba(0, 128, 128, 1)"> 5</span> 
+<span style="color: rgba(0, 128, 128, 1)"> 6</span> <span style="color: rgba(0, 0, 255, 1)">#pragma</span> once
+<span style="color: rgba(0, 128, 128, 1)"> 7</span> 
+<span style="color: rgba(0, 128, 128, 1)"> 8</span> #include <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">targetver.h</span><span style="color: rgba(128, 0, 0, 1)">"</span>
+<span style="color: rgba(0, 128, 128, 1)"> 9</span> 
+<span style="color: rgba(0, 128, 128, 1)">10</span> #include &lt;stdio.h&gt;
+<span style="color: rgba(0, 128, 128, 1)">11</span> #include &lt;tchar.h&gt;
+<span style="color: rgba(0, 128, 128, 1)">12</span> 
+<span style="color: rgba(0, 128, 128, 1)">13</span> <span style="color: rgba(0, 0, 255, 1)">#define</span> NUMOF(arr) (sizeof(arr)/sizeof(arr[0]))
+<span style="color: rgba(0, 128, 128, 1)">14</span> 
+<span style="color: rgba(0, 128, 128, 1)">15</span> 
+<span style="color: rgba(0, 128, 128, 1)">16</span> <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)"> TODO: 在此处引用程序需要的其他头文件</span>
+<span style="color: rgba(0, 128, 128, 1)">17</span> #include &lt;<span style="color: rgba(0, 0, 255, 1)">string</span>&gt;
+<span style="color: rgba(0, 128, 128, 1)">18</span> #include &lt;vector&gt;
+<span style="color: rgba(0, 128, 128, 1)">19</span> #include &lt;iostream&gt;
+<span style="color: rgba(0, 128, 128, 1)">20</span> #include &lt;stack&gt;
+<span style="color: rgba(0, 128, 128, 1)">21</span> <span style="color: rgba(0, 0, 255, 1)">using</span> <span style="color: rgba(0, 0, 255, 1)">namespace</span> std;</pre>
+</div>
+<p>&nbsp;</p>
+<p>GetWord.h</p>
+<div class="cnblogs_code">
+<pre><span style="color: rgba(0, 128, 128, 1)"> 1</span> <span style="color: rgba(0, 0, 255, 1)">#pragma</span> once
+<span style="color: rgba(0, 128, 128, 1)"> 2</span> #include <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">stdafx.h</span><span style="color: rgba(128, 0, 0, 1)">"</span>
+<span style="color: rgba(0, 128, 128, 1)"> 3</span> 
+<span style="color: rgba(0, 128, 128, 1)"> 4</span> <span style="color: rgba(0, 0, 255, 1)">#define</span> TYPE_WORD 0
+<span style="color: rgba(0, 128, 128, 1)"> 5</span> <span style="color: rgba(0, 0, 255, 1)">#define</span> TYPE_AND 1
+<span style="color: rgba(0, 128, 128, 1)"> 6</span> <span style="color: rgba(0, 0, 255, 1)">#define</span> TYPE_OR 2
+<span style="color: rgba(0, 128, 128, 1)"> 7</span> <span style="color: rgba(0, 0, 255, 1)">#define</span> TYPE_BOOL 3
+<span style="color: rgba(0, 128, 128, 1)"> 8</span> <span style="color: rgba(0, 0, 255, 1)">#define</span> TYPE_LEFT 4
+<span style="color: rgba(0, 128, 128, 1)"> 9</span> <span style="color: rgba(0, 0, 255, 1)">#define</span> TYPE_RIGHT 5
+<span style="color: rgba(0, 128, 128, 1)">10</span> 
+<span style="color: rgba(0, 128, 128, 1)">11</span> typedef <span style="color: rgba(0, 0, 255, 1)">struct</span> 
+<span style="color: rgba(0, 128, 128, 1)">12</span> <span style="color: rgba(0, 0, 0, 1)">{
+</span><span style="color: rgba(0, 128, 128, 1)">13</span>     <span style="color: rgba(0, 0, 255, 1)">int</span><span style="color: rgba(0, 0, 0, 1)"> nWordType;
+</span><span style="color: rgba(0, 128, 128, 1)">14</span>     <span style="color: rgba(0, 0, 255, 1)">string</span><span style="color: rgba(0, 0, 0, 1)"> sValue;
+</span><span style="color: rgba(0, 128, 128, 1)">15</span> 
+<span style="color: rgba(0, 128, 128, 1)">16</span>     <span style="color: rgba(0, 0, 255, 1)">void</span><span style="color: rgba(0, 0, 0, 1)"> output()
+</span><span style="color: rgba(0, 128, 128, 1)">17</span> <span style="color: rgba(0, 0, 0, 1)">    {
+</span><span style="color: rgba(0, 128, 128, 1)">18</span>         <span style="color: rgba(0, 0, 255, 1)">switch</span><span style="color: rgba(0, 0, 0, 1)"> (nWordType)
+</span><span style="color: rgba(0, 128, 128, 1)">19</span> <span style="color: rgba(0, 0, 0, 1)">        {
+</span><span style="color: rgba(0, 128, 128, 1)">20</span>         <span style="color: rgba(0, 0, 255, 1)">case</span><span style="color: rgba(0, 0, 0, 1)"> TYPE_WORD:
+</span><span style="color: rgba(0, 128, 128, 1)">21</span>             cout &lt;&lt; <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">TYPE_WORD </span><span style="color: rgba(128, 0, 0, 1)">"</span> &lt;&lt;sValue &lt;&lt;<span style="color: rgba(0, 0, 0, 1)"> endl;
+</span><span style="color: rgba(0, 128, 128, 1)">22</span>             <span style="color: rgba(0, 0, 255, 1)">break</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)">23</span>         <span style="color: rgba(0, 0, 255, 1)">case</span><span style="color: rgba(0, 0, 0, 1)"> TYPE_AND:
+</span><span style="color: rgba(0, 128, 128, 1)">24</span>             cout &lt;&lt; <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">TYPE_AND</span><span style="color: rgba(128, 0, 0, 1)">"</span> &lt;&lt;<span style="color: rgba(0, 0, 0, 1)"> endl;
+</span><span style="color: rgba(0, 128, 128, 1)">25</span>             <span style="color: rgba(0, 0, 255, 1)">break</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)">26</span>         <span style="color: rgba(0, 0, 255, 1)">case</span><span style="color: rgba(0, 0, 0, 1)"> TYPE_OR:
+</span><span style="color: rgba(0, 128, 128, 1)">27</span>             cout &lt;&lt; <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">TYPE_OR</span><span style="color: rgba(128, 0, 0, 1)">"</span> &lt;&lt;<span style="color: rgba(0, 0, 0, 1)"> endl;
+</span><span style="color: rgba(0, 128, 128, 1)">28</span>             <span style="color: rgba(0, 0, 255, 1)">break</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)">29</span>         <span style="color: rgba(0, 0, 255, 1)">case</span><span style="color: rgba(0, 0, 0, 1)"> TYPE_BOOL:
+</span><span style="color: rgba(0, 128, 128, 1)">30</span>             cout &lt;&lt; <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">TYPE_BOOL</span><span style="color: rgba(128, 0, 0, 1)">"</span> &lt;&lt;<span style="color: rgba(0, 0, 0, 1)"> endl;
+</span><span style="color: rgba(0, 128, 128, 1)">31</span>             <span style="color: rgba(0, 0, 255, 1)">break</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)">32</span>         <span style="color: rgba(0, 0, 255, 1)">case</span><span style="color: rgba(0, 0, 0, 1)"> TYPE_LEFT:
+</span><span style="color: rgba(0, 128, 128, 1)">33</span>             cout &lt;&lt; <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">TYPE_LEFT</span><span style="color: rgba(128, 0, 0, 1)">"</span> &lt;&lt;<span style="color: rgba(0, 0, 0, 1)"> endl;
+</span><span style="color: rgba(0, 128, 128, 1)">34</span>             <span style="color: rgba(0, 0, 255, 1)">break</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)">35</span>         <span style="color: rgba(0, 0, 255, 1)">case</span><span style="color: rgba(0, 0, 0, 1)"> TYPE_RIGHT:
+</span><span style="color: rgba(0, 128, 128, 1)">36</span>             cout &lt;&lt; <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">TYPE_RIGHT</span><span style="color: rgba(128, 0, 0, 1)">"</span> &lt;&lt;<span style="color: rgba(0, 0, 0, 1)"> endl;
+</span><span style="color: rgba(0, 128, 128, 1)">37</span>             <span style="color: rgba(0, 0, 255, 1)">break</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)">38</span>         <span style="color: rgba(0, 0, 255, 1)">default</span><span style="color: rgba(0, 0, 0, 1)">:
+</span><span style="color: rgba(0, 128, 128, 1)">39</span>             cout &lt;&lt; <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">unknow</span><span style="color: rgba(128, 0, 0, 1)">"</span> &lt;&lt;<span style="color: rgba(0, 0, 0, 1)"> endl;
+</span><span style="color: rgba(0, 128, 128, 1)">40</span>             <span style="color: rgba(0, 0, 255, 1)">break</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)">41</span> <span style="color: rgba(0, 0, 0, 1)">        }
+</span><span style="color: rgba(0, 128, 128, 1)">42</span> <span style="color: rgba(0, 0, 0, 1)">    }
+</span><span style="color: rgba(0, 128, 128, 1)">43</span> <span style="color: rgba(0, 0, 0, 1)">}ST_WORD;
+</span><span style="color: rgba(0, 128, 128, 1)">44</span> 
+<span style="color: rgba(0, 128, 128, 1)">45</span> <span style="color: rgba(0, 0, 255, 1)">class</span><span style="color: rgba(0, 0, 0, 1)"> CGetWord
+</span><span style="color: rgba(0, 128, 128, 1)">46</span> <span style="color: rgba(0, 0, 0, 1)">{
+</span><span style="color: rgba(0, 128, 128, 1)">47</span> <span style="color: rgba(0, 0, 255, 1)">public</span><span style="color: rgba(0, 0, 0, 1)">:
+</span><span style="color: rgba(0, 128, 128, 1)">48</span>     CGetWord(<span style="color: rgba(0, 0, 255, 1)">const</span> <span style="color: rgba(0, 0, 255, 1)">char</span> *<span style="color: rgba(0, 0, 0, 1)">str);
+</span><span style="color: rgba(0, 128, 128, 1)">49</span>     ~CGetWord(<span style="color: rgba(0, 0, 255, 1)">void</span><span style="color: rgba(0, 0, 0, 1)">);
+</span><span style="color: rgba(0, 128, 128, 1)">50</span>     <span style="color: rgba(0, 0, 255, 1)">void</span> rewrind(); <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">重置到开头</span>
+<span style="color: rgba(0, 128, 128, 1)">51</span>     <span style="color: rgba(0, 0, 255, 1)">bool</span> getWord(ST_WORD &amp;opr); <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">读取一个单词</span>
+<span style="color: rgba(0, 128, 128, 1)">52</span> 
+<span style="color: rgba(0, 128, 128, 1)">53</span> <span style="color: rgba(0, 0, 255, 1)">private</span><span style="color: rgba(0, 0, 0, 1)">:
+</span><span style="color: rgba(0, 128, 128, 1)">54</span>     <span style="color: rgba(0, 0, 255, 1)">char</span> *<span style="color: rgba(0, 0, 0, 1)">m_strInput;
+</span><span style="color: rgba(0, 128, 128, 1)">55</span>     <span style="color: rgba(0, 0, 255, 1)">int</span><span style="color: rgba(0, 0, 0, 1)"> m_nPos;
+</span><span style="color: rgba(0, 128, 128, 1)">56</span> };</pre>
+</div>
+<p>PostfixExpressions.h</p>
+<div class="cnblogs_code">
+<pre><span style="color: rgba(0, 128, 128, 1)"> 1</span> <span style="color: rgba(0, 0, 255, 1)">#pragma</span> once
+<span style="color: rgba(0, 128, 128, 1)"> 2</span> #include <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">GetWord.h</span><span style="color: rgba(128, 0, 0, 1)">"</span>
+<span style="color: rgba(0, 128, 128, 1)"> 3</span> 
+<span style="color: rgba(0, 128, 128, 1)"> 4</span> <span style="color: rgba(0, 0, 255, 1)">class</span><span style="color: rgba(0, 0, 0, 1)"> CPostfixExpressions
+</span><span style="color: rgba(0, 128, 128, 1)"> 5</span> <span style="color: rgba(0, 0, 0, 1)">{
+</span><span style="color: rgba(0, 128, 128, 1)"> 6</span> <span style="color: rgba(0, 0, 255, 1)">public</span><span style="color: rgba(0, 0, 0, 1)">:
+</span><span style="color: rgba(0, 128, 128, 1)"> 7</span>     CPostfixExpressions(<span style="color: rgba(0, 0, 255, 1)">void</span><span style="color: rgba(0, 0, 0, 1)">);
+</span><span style="color: rgba(0, 128, 128, 1)"> 8</span>     <span style="color: rgba(0, 0, 255, 1)">bool</span> parse(<span style="color: rgba(0, 0, 255, 1)">const</span> <span style="color: rgba(0, 0, 255, 1)">char</span> *strIntermediateOrerExpressions); <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">输入中序 转换成后缀表达式 方便计算</span>
+<span style="color: rgba(0, 128, 128, 1)"> 9</span>     <span style="color: rgba(0, 0, 255, 1)">bool</span> grep(<span style="color: rgba(0, 0, 255, 1)">const</span> <span style="color: rgba(0, 0, 255, 1)">char</span> *<span style="color: rgba(0, 0, 0, 1)">str); 
+</span><span style="color: rgba(0, 128, 128, 1)">10</span>     ~CPostfixExpressions(<span style="color: rgba(0, 0, 255, 1)">void</span><span style="color: rgba(0, 0, 0, 1)">);
+</span><span style="color: rgba(0, 128, 128, 1)">11</span>     <span style="color: rgba(0, 0, 255, 1)">void</span><span style="color: rgba(0, 0, 0, 1)"> showExpr()
+</span><span style="color: rgba(0, 128, 128, 1)">12</span> <span style="color: rgba(0, 0, 0, 1)">    {
+</span><span style="color: rgba(0, 128, 128, 1)">13</span>         cout &lt;&lt; <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">m_expr.size() = </span><span style="color: rgba(128, 0, 0, 1)">"</span> &lt;&lt; m_expr.size() &lt;&lt;<span style="color: rgba(0, 0, 0, 1)"> endl;
+</span><span style="color: rgba(0, 128, 128, 1)">14</span>         <span style="color: rgba(0, 0, 255, 1)">for</span> (size_t i = <span style="color: rgba(128, 0, 128, 1)">0</span>; i &lt; m_expr.size(); ++<span style="color: rgba(0, 0, 0, 1)">i)
+</span><span style="color: rgba(0, 128, 128, 1)">15</span> <span style="color: rgba(0, 0, 0, 1)">        {
+</span><span style="color: rgba(0, 128, 128, 1)">16</span> <span style="color: rgba(0, 0, 0, 1)">            m_expr[i].output();
+</span><span style="color: rgba(0, 128, 128, 1)">17</span> <span style="color: rgba(0, 0, 0, 1)">        }
+</span><span style="color: rgba(0, 128, 128, 1)">18</span> <span style="color: rgba(0, 0, 0, 1)">    }
+</span><span style="color: rgba(0, 128, 128, 1)">19</span> <span style="color: rgba(0, 0, 255, 1)">private</span><span style="color: rgba(0, 0, 0, 1)">:
+</span><span style="color: rgba(0, 128, 128, 1)">20</span>     vector&lt;ST_WORD&gt;<span style="color: rgba(0, 0, 0, 1)"> m_expr;
+</span><span style="color: rgba(0, 128, 128, 1)">21</span> };</pre>
+</div>
+<p>targetver.h</p>
+<div class="cnblogs_code">
+<pre><span style="color: rgba(0, 128, 128, 1)">1</span> <span style="color: rgba(0, 0, 255, 1)">#pragma</span> once
+<span style="color: rgba(0, 128, 128, 1)">2</span> 
+<span style="color: rgba(0, 128, 128, 1)">3</span> <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)"> 包括 SDKDDKVer.h 将定义可用的最高版本的 Windows 平台。
+</span><span style="color: rgba(0, 128, 128, 1)">4</span> 
+<span style="color: rgba(0, 128, 128, 1)">5</span> <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)"> 如果要为以前的 Windows 平台生成应用程序，请包括 WinSDKVer.h，并将
+</span><span style="color: rgba(0, 128, 128, 1)">6</span> <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)"> WIN32_WINNT 宏设置为要支持的平台，然后再包括 SDKDDKVer.h。</span>
+<span style="color: rgba(0, 128, 128, 1)">7</span> 
+<span style="color: rgba(0, 128, 128, 1)">8</span> #include &lt;SDKDDKVer.h&gt;</pre>
+</div>
+<p>divide_group.cpp</p>
+<div class="cnblogs_code">
+<pre><span style="color: rgba(0, 128, 128, 1)">  1</span> <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)"> divide_group.cpp : 定义控制台应用程序的入口点。
+</span><span style="color: rgba(0, 128, 128, 1)">  2</span> <span style="color: rgba(0, 128, 0, 1)">//
+</span><span style="color: rgba(0, 128, 128, 1)">  3</span> 
+<span style="color: rgba(0, 128, 128, 1)">  4</span> #include <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">stdafx.h</span><span style="color: rgba(128, 0, 0, 1)">"</span>
+<span style="color: rgba(0, 128, 128, 1)">  5</span> #include <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">GetWord.h</span><span style="color: rgba(128, 0, 0, 1)">"</span>
+<span style="color: rgba(0, 128, 128, 1)">  6</span> #include <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">PostfixExpressions.h</span><span style="color: rgba(128, 0, 0, 1)">"</span>
+<span style="color: rgba(0, 128, 128, 1)">  7</span> 
+<span style="color: rgba(0, 128, 128, 1)">  8</span> <span style="color: rgba(0, 0, 255, 1)">bool</span> checkHaveNotGbk(<span style="color: rgba(0, 0, 255, 1)">const</span> <span style="color: rgba(0, 0, 255, 1)">char</span> *buf, <span style="color: rgba(0, 0, 255, 1)">const</span><span style="color: rgba(0, 0, 0, 1)"> size_t nLen)
+</span><span style="color: rgba(0, 128, 128, 1)">  9</span> <span style="color: rgba(0, 0, 0, 1)">{
+</span><span style="color: rgba(0, 128, 128, 1)"> 10</span>     <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">检查是否有非GBK字符（不严谨）
+</span><span style="color: rgba(0, 128, 128, 1)"> 11</span>     <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">碰到非英文字符</span>
+<span style="color: rgba(0, 128, 128, 1)"> 12</span>     <span style="color: rgba(0, 0, 255, 1)">bool</span> bHaveNotGbk = <span style="color: rgba(0, 0, 255, 1)">false</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)"> 13</span>     <span style="color: rgba(0, 0, 255, 1)">for</span> (size_t i = <span style="color: rgba(128, 0, 128, 1)">0</span>; i &lt; nLen; ++<span style="color: rgba(0, 0, 0, 1)">i)
+</span><span style="color: rgba(0, 128, 128, 1)"> 14</span> <span style="color: rgba(0, 0, 0, 1)">    {
+</span><span style="color: rgba(0, 128, 128, 1)"> 15</span>         <span style="color: rgba(0, 128, 0, 1)">/*</span>
+<span style="color: rgba(0, 128, 128, 1)"> 16</span> <span style="color: rgba(0, 128, 0, 1)">        GBK 亦采用双字节表示，总体编码范围为 8140-FEFE，首字节在 81-FE 之间，尾字节在 40-FE 之间，剔除 xx7F 一条线。
+</span><span style="color: rgba(0, 128, 128, 1)"> 17</span> <span style="color: rgba(0, 128, 0, 1)">        总计 23940 个码位，共收入 21886 个汉字和图形符号，其中汉字（包括部首和构件）21003 个，图形符号 883 个。
+</span><span style="color: rgba(0, 128, 128, 1)"> 18</span>         <span style="color: rgba(0, 128, 0, 1)">*/</span>
+<span style="color: rgba(0, 128, 128, 1)"> 19</span>         unsigned <span style="color: rgba(0, 0, 255, 1)">char</span> ch =<span style="color: rgba(0, 0, 0, 1)"> buf[i];
+</span><span style="color: rgba(0, 128, 128, 1)"> 20</span>         <span style="color: rgba(0, 0, 255, 1)">if</span> ((ch &amp; <span style="color: rgba(128, 0, 128, 1)">0x80</span>) != <span style="color: rgba(128, 0, 128, 1)">0</span><span style="color: rgba(0, 0, 0, 1)">)
+</span><span style="color: rgba(0, 128, 128, 1)"> 21</span> <span style="color: rgba(0, 0, 0, 1)">        {
+</span><span style="color: rgba(0, 128, 128, 1)"> 22</span>             <span style="color: rgba(0, 0, 255, 1)">if</span> (ch &gt;= <span style="color: rgba(128, 0, 128, 1)">0x81</span> &amp;&amp; ch &lt;= <span style="color: rgba(128, 0, 128, 1)">0xfe</span><span style="color: rgba(0, 0, 0, 1)">)
+</span><span style="color: rgba(0, 128, 128, 1)"> 23</span> <span style="color: rgba(0, 0, 0, 1)">            {
+</span><span style="color: rgba(0, 128, 128, 1)"> 24</span>                 ch = buf[++<span style="color: rgba(0, 0, 0, 1)">i];
+</span><span style="color: rgba(0, 128, 128, 1)"> 25</span>                 <span style="color: rgba(0, 0, 255, 1)">if</span> (!(ch &gt;= <span style="color: rgba(128, 0, 128, 1)">0x40</span> &amp;&amp; ch &lt;= <span style="color: rgba(128, 0, 128, 1)">0xFe</span> &amp;&amp; ch != <span style="color: rgba(128, 0, 128, 1)">0x7F</span><span style="color: rgba(0, 0, 0, 1)">))
+</span><span style="color: rgba(0, 128, 128, 1)"> 26</span> <span style="color: rgba(0, 0, 0, 1)">                {
+</span><span style="color: rgba(0, 128, 128, 1)"> 27</span>                     bHaveNotGbk = <span style="color: rgba(0, 0, 255, 1)">true</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)"> 28</span>                     <span style="color: rgba(0, 0, 255, 1)">break</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)"> 29</span> <span style="color: rgba(0, 0, 0, 1)">                }
+</span><span style="color: rgba(0, 128, 128, 1)"> 30</span> <span style="color: rgba(0, 0, 0, 1)">            }
+</span><span style="color: rgba(0, 128, 128, 1)"> 31</span>             <span style="color: rgba(0, 0, 255, 1)">else</span>
+<span style="color: rgba(0, 128, 128, 1)"> 32</span> <span style="color: rgba(0, 0, 0, 1)">            {
+</span><span style="color: rgba(0, 128, 128, 1)"> 33</span>                 bHaveNotGbk = <span style="color: rgba(0, 0, 255, 1)">true</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)"> 34</span>                 <span style="color: rgba(0, 0, 255, 1)">break</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)"> 35</span> <span style="color: rgba(0, 0, 0, 1)">            }
+</span><span style="color: rgba(0, 128, 128, 1)"> 36</span> <span style="color: rgba(0, 0, 0, 1)">        }
+</span><span style="color: rgba(0, 128, 128, 1)"> 37</span> <span style="color: rgba(0, 0, 0, 1)">    }
+</span><span style="color: rgba(0, 128, 128, 1)"> 38</span> 
+<span style="color: rgba(0, 128, 128, 1)"> 39</span>     <span style="color: rgba(0, 0, 255, 1)">return</span><span style="color: rgba(0, 0, 0, 1)"> bHaveNotGbk;
+</span><span style="color: rgba(0, 128, 128, 1)"> 40</span> <span style="color: rgba(0, 0, 0, 1)">}
+</span><span style="color: rgba(0, 128, 128, 1)"> 41</span> 
+<span style="color: rgba(0, 128, 128, 1)"> 42</span> <span style="color: rgba(0, 0, 255, 1)">char</span> *getline(<span style="color: rgba(0, 0, 255, 1)">char</span> *buf, size_t nBufSize, FILE *<span style="color: rgba(0, 0, 0, 1)">fp)
+</span><span style="color: rgba(0, 128, 128, 1)"> 43</span> <span style="color: rgba(0, 0, 0, 1)">{
+</span><span style="color: rgba(0, 128, 128, 1)"> 44</span>     <span style="color: rgba(0, 0, 255, 1)">if</span> ( fgets(buf, nBufSize, fp) ==<span style="color: rgba(0, 0, 0, 1)"> NULL)
+</span><span style="color: rgba(0, 128, 128, 1)"> 45</span> <span style="color: rgba(0, 0, 0, 1)">    {
+</span><span style="color: rgba(0, 128, 128, 1)"> 46</span>         <span style="color: rgba(0, 0, 255, 1)">return</span><span style="color: rgba(0, 0, 0, 1)"> NULL;
+</span><span style="color: rgba(0, 128, 128, 1)"> 47</span> <span style="color: rgba(0, 0, 0, 1)">    }
+</span><span style="color: rgba(0, 128, 128, 1)"> 48</span> 
+<span style="color: rgba(0, 128, 128, 1)"> 49</span>     size_t nLen =<span style="color: rgba(0, 0, 0, 1)"> strlen(buf);
+</span><span style="color: rgba(0, 128, 128, 1)"> 50</span>     <span style="color: rgba(0, 0, 255, 1)">if</span> (nLen &gt; <span style="color: rgba(128, 0, 128, 1)">0</span> &amp;&amp; buf[nLen - <span style="color: rgba(128, 0, 128, 1)">1</span>] == <span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">\n</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">)
+</span><span style="color: rgba(0, 128, 128, 1)"> 51</span> <span style="color: rgba(0, 0, 0, 1)">    {
+</span><span style="color: rgba(0, 128, 128, 1)"> 52</span>         buf[--nLen] = <span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">\0</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)"> 53</span> <span style="color: rgba(0, 0, 0, 1)">    }
+</span><span style="color: rgba(0, 128, 128, 1)"> 54</span> 
+<span style="color: rgba(0, 128, 128, 1)"> 55</span>     <span style="color: rgba(0, 0, 255, 1)">if</span><span style="color: rgba(0, 0, 0, 1)"> (checkHaveNotGbk(buf, nLen))
+</span><span style="color: rgba(0, 128, 128, 1)"> 56</span> <span style="color: rgba(0, 0, 0, 1)">    {
+</span><span style="color: rgba(0, 128, 128, 1)"> 57</span>         cerr &lt;&lt; <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">疑似有非GBK编码字符[</span><span style="color: rgba(128, 0, 0, 1)">"</span> &lt;&lt; buf &lt;&lt; <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">]</span><span style="color: rgba(128, 0, 0, 1)">"</span> &lt;&lt;<span style="color: rgba(0, 0, 0, 1)"> endl;
+</span><span style="color: rgba(0, 128, 128, 1)"> 58</span>         buf[<span style="color: rgba(128, 0, 128, 1)">0</span>] = <span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">\0</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)"> 59</span> <span style="color: rgba(0, 0, 0, 1)">    }
+</span><span style="color: rgba(0, 128, 128, 1)"> 60</span>     <span style="color: rgba(0, 0, 255, 1)">return</span><span style="color: rgba(0, 0, 0, 1)"> buf;
+</span><span style="color: rgba(0, 128, 128, 1)"> 61</span> <span style="color: rgba(0, 0, 0, 1)">}
+</span><span style="color: rgba(0, 128, 128, 1)"> 62</span> 
+<span style="color: rgba(0, 128, 128, 1)"> 63</span> <span style="color: rgba(0, 0, 255, 1)">void</span> outputResult(vector&lt; vector&lt;<span style="color: rgba(0, 0, 255, 1)">string</span>&gt; &gt;&amp;<span style="color: rgba(0, 0, 0, 1)"> vecExprGrepSentence)
+</span><span style="color: rgba(0, 128, 128, 1)"> 64</span> <span style="color: rgba(0, 0, 0, 1)">{
+</span><span style="color: rgba(0, 128, 128, 1)"> 65</span>     size_t nMaxJ = <span style="color: rgba(128, 0, 128, 1)">0</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)"> 66</span> 
+<span style="color: rgba(0, 128, 128, 1)"> 67</span>     <span style="color: rgba(0, 0, 255, 1)">for</span> (size_t i = <span style="color: rgba(128, 0, 128, 1)">0</span>; i &lt; vecExprGrepSentence.size(); ++<span style="color: rgba(0, 0, 0, 1)">i)
+</span><span style="color: rgba(0, 128, 128, 1)"> 68</span> <span style="color: rgba(0, 0, 0, 1)">    {
+</span><span style="color: rgba(0, 128, 128, 1)"> 69</span>         <span style="color: rgba(0, 0, 255, 1)">if</span> (nMaxJ &lt;<span style="color: rgba(0, 0, 0, 1)"> vecExprGrepSentence[i].size())
+</span><span style="color: rgba(0, 128, 128, 1)"> 70</span> <span style="color: rgba(0, 0, 0, 1)">        {
+</span><span style="color: rgba(0, 128, 128, 1)"> 71</span>             nMaxJ =<span style="color: rgba(0, 0, 0, 1)"> vecExprGrepSentence[i].size();
+</span><span style="color: rgba(0, 128, 128, 1)"> 72</span> <span style="color: rgba(0, 0, 0, 1)">        }
+</span><span style="color: rgba(0, 128, 128, 1)"> 73</span> <span style="color: rgba(0, 0, 0, 1)">    }
+</span><span style="color: rgba(0, 128, 128, 1)"> 74</span> 
+<span style="color: rgba(0, 128, 128, 1)"> 75</span>     <span style="color: rgba(0, 0, 255, 1)">for</span> (size_t j = <span style="color: rgba(128, 0, 128, 1)">0</span>; j &lt; nMaxJ; ++<span style="color: rgba(0, 0, 0, 1)">j)
+</span><span style="color: rgba(0, 128, 128, 1)"> 76</span> <span style="color: rgba(0, 0, 0, 1)">    {
+</span><span style="color: rgba(0, 128, 128, 1)"> 77</span>         <span style="color: rgba(0, 0, 255, 1)">for</span> (size_t i = <span style="color: rgba(128, 0, 128, 1)">0</span>; i &lt; vecExprGrepSentence.size(); ++<span style="color: rgba(0, 0, 0, 1)">i)
+</span><span style="color: rgba(0, 128, 128, 1)"> 78</span> <span style="color: rgba(0, 0, 0, 1)">        {
+</span><span style="color: rgba(0, 128, 128, 1)"> 79</span>             <span style="color: rgba(0, 0, 255, 1)">if</span> (j &lt;<span style="color: rgba(0, 0, 0, 1)"> vecExprGrepSentence[i].size())
+</span><span style="color: rgba(0, 128, 128, 1)"> 80</span> <span style="color: rgba(0, 0, 0, 1)">            {
+</span><span style="color: rgba(0, 128, 128, 1)"> 81</span>                 cout &lt;&lt; vecExprGrepSentence[i][j] &lt;&lt; <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">,</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)"> 82</span> <span style="color: rgba(0, 0, 0, 1)">            }
+</span><span style="color: rgba(0, 128, 128, 1)"> 83</span>             <span style="color: rgba(0, 0, 255, 1)">else</span>
+<span style="color: rgba(0, 128, 128, 1)"> 84</span> <span style="color: rgba(0, 0, 0, 1)">            {
+</span><span style="color: rgba(0, 128, 128, 1)"> 85</span>                 cout &lt;&lt; <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">,</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)"> 86</span> <span style="color: rgba(0, 0, 0, 1)">            }
+</span><span style="color: rgba(0, 128, 128, 1)"> 87</span> <span style="color: rgba(0, 0, 0, 1)">        }
+</span><span style="color: rgba(0, 128, 128, 1)"> 88</span> 
+<span style="color: rgba(0, 128, 128, 1)"> 89</span>         cout &lt;&lt;<span style="color: rgba(0, 0, 0, 1)"> endl;
+</span><span style="color: rgba(0, 128, 128, 1)"> 90</span> <span style="color: rgba(0, 0, 0, 1)">    }
+</span><span style="color: rgba(0, 128, 128, 1)"> 91</span> <span style="color: rgba(0, 0, 0, 1)">}
+</span><span style="color: rgba(0, 128, 128, 1)"> 92</span> 
+<span style="color: rgba(0, 128, 128, 1)"> 93</span> <span style="color: rgba(0, 0, 255, 1)">int</span> _tmain(<span style="color: rgba(0, 0, 255, 1)">int</span> argc, _TCHAR*<span style="color: rgba(0, 0, 0, 1)"> argv[])
+</span><span style="color: rgba(0, 128, 128, 1)"> 94</span> <span style="color: rgba(0, 0, 0, 1)">{
+</span><span style="color: rgba(0, 128, 128, 1)"> 95</span>     <span style="color: rgba(0, 0, 255, 1)">if</span> (argc &lt; <span style="color: rgba(128, 0, 128, 1)">3</span><span style="color: rgba(0, 0, 0, 1)">)
+</span><span style="color: rgba(0, 128, 128, 1)"> 96</span> <span style="color: rgba(0, 0, 0, 1)">    {
+</span><span style="color: rgba(0, 128, 128, 1)"> 97</span>         printf(<span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">usage:divide_group 词根文件 关键词文件\n</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">);
+</span><span style="color: rgba(0, 128, 128, 1)"> 98</span>         <span style="color: rgba(0, 0, 255, 1)">return</span> <span style="color: rgba(128, 0, 128, 1)">0</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)"> 99</span> <span style="color: rgba(0, 0, 0, 1)">    }
+</span><span style="color: rgba(0, 128, 128, 1)">100</span> 
+<span style="color: rgba(0, 128, 128, 1)">101</span>     <span style="color: rgba(0, 0, 255, 1)">bool</span> bSplitMoreFlag = <span style="color: rgba(0, 0, 255, 1)">false</span>; <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">标记一个关键词是否可以被多个词根匹配</span>
+<span style="color: rgba(0, 128, 128, 1)">102</span>     <span style="color: rgba(0, 0, 255, 1)">if</span> (argc &gt; <span style="color: rgba(128, 0, 128, 1)">3</span> &amp;&amp; argv[<span style="color: rgba(128, 0, 128, 1)">3</span>][<span style="color: rgba(128, 0, 128, 1)">0</span>] == <span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">1</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">)
+</span><span style="color: rgba(0, 128, 128, 1)">103</span> <span style="color: rgba(0, 0, 0, 1)">    {
+</span><span style="color: rgba(0, 128, 128, 1)">104</span>         bSplitMoreFlag = <span style="color: rgba(0, 0, 255, 1)">true</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)">105</span> <span style="color: rgba(0, 0, 0, 1)">    }
+</span><span style="color: rgba(0, 128, 128, 1)">106</span> 
+<span style="color: rgba(0, 128, 128, 1)">107</span>     vector&lt;CPostfixExpressions&gt;<span style="color: rgba(0, 0, 0, 1)"> vecExprs;
+</span><span style="color: rgba(0, 128, 128, 1)">108</span>     vector&lt; vector&lt;<span style="color: rgba(0, 0, 255, 1)">string</span>&gt; &gt;<span style="color: rgba(0, 0, 0, 1)"> vecExprGrepSentence;
+</span><span style="color: rgba(0, 128, 128, 1)">109</span> 
+<span style="color: rgba(0, 128, 128, 1)">110</span>     FILE *fpKey = fopen(argv[<span style="color: rgba(128, 0, 128, 1)">1</span>], <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">r</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">);
+</span><span style="color: rgba(0, 128, 128, 1)">111</span>     <span style="color: rgba(0, 0, 255, 1)">if</span> (fpKey ==<span style="color: rgba(0, 0, 0, 1)"> NULL)
+</span><span style="color: rgba(0, 128, 128, 1)">112</span> <span style="color: rgba(0, 0, 0, 1)">    {
+</span><span style="color: rgba(0, 128, 128, 1)">113</span>         cout &lt;&lt; <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">词根文件打不开</span><span style="color: rgba(128, 0, 0, 1)">"</span> &lt;&lt;<span style="color: rgba(0, 0, 0, 1)"> endl;
+</span><span style="color: rgba(0, 128, 128, 1)">114</span>         <span style="color: rgba(0, 0, 255, 1)">return</span> -<span style="color: rgba(128, 0, 128, 1)">1</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)">115</span> <span style="color: rgba(0, 0, 0, 1)">    }
+</span><span style="color: rgba(0, 128, 128, 1)">116</span> 
+<span style="color: rgba(0, 128, 128, 1)">117</span> 
+<span style="color: rgba(0, 128, 128, 1)">118</span>     FILE *fpSentence = fopen(argv[<span style="color: rgba(128, 0, 128, 1)">2</span>], <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">r</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">);
+</span><span style="color: rgba(0, 128, 128, 1)">119</span>     <span style="color: rgba(0, 0, 255, 1)">if</span> (fpSentence ==<span style="color: rgba(0, 0, 0, 1)"> NULL)
+</span><span style="color: rgba(0, 128, 128, 1)">120</span> <span style="color: rgba(0, 0, 0, 1)">    {
+</span><span style="color: rgba(0, 128, 128, 1)">121</span>         cout &lt;&lt; <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">关键词文件打不开</span><span style="color: rgba(128, 0, 0, 1)">"</span> &lt;&lt;<span style="color: rgba(0, 0, 0, 1)"> endl;
+</span><span style="color: rgba(0, 128, 128, 1)">122</span> <span style="color: rgba(0, 0, 0, 1)">        fclose(fpKey);
+</span><span style="color: rgba(0, 128, 128, 1)">123</span>         <span style="color: rgba(0, 0, 255, 1)">return</span> -<span style="color: rgba(128, 0, 128, 1)">10</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)">124</span> <span style="color: rgba(0, 0, 0, 1)">    }
+</span><span style="color: rgba(0, 128, 128, 1)">125</span> 
+<span style="color: rgba(0, 128, 128, 1)">126</span> <span style="color: rgba(0, 0, 0, 1)">    CPostfixExpressions expr;
+</span><span style="color: rgba(0, 128, 128, 1)">127</span>     vector&lt;<span style="color: rgba(0, 0, 255, 1)">string</span>&gt;<span style="color: rgba(0, 0, 0, 1)"> vecGroup;
+</span><span style="color: rgba(0, 128, 128, 1)">128</span>     <span style="color: rgba(0, 0, 255, 1)">char</span> buf[<span style="color: rgba(128, 0, 128, 1)">1024</span><span style="color: rgba(0, 0, 0, 1)">];
+</span><span style="color: rgba(0, 128, 128, 1)">129</span>     vecExprs.reserve(<span style="color: rgba(128, 0, 128, 1)">100</span><span style="color: rgba(0, 0, 0, 1)">);
+</span><span style="color: rgba(0, 128, 128, 1)">130</span>     vecGroup.resize(<span style="color: rgba(128, 0, 128, 1)">1</span><span style="color: rgba(0, 0, 0, 1)">);
+</span><span style="color: rgba(0, 128, 128, 1)">131</span> 
+<span style="color: rgba(0, 128, 128, 1)">132</span>     <span style="color: rgba(0, 0, 255, 1)">while</span> (getline(buf, <span style="color: rgba(0, 0, 255, 1)">sizeof</span><span style="color: rgba(0, 0, 0, 1)">(buf), fpKey))
+</span><span style="color: rgba(0, 128, 128, 1)">133</span> <span style="color: rgba(0, 0, 0, 1)">    {
+</span><span style="color: rgba(0, 128, 128, 1)">134</span>         <span style="color: rgba(0, 0, 255, 1)">if</span> (buf[<span style="color: rgba(128, 0, 128, 1)">0</span>] == <span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">\0</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">)
+</span><span style="color: rgba(0, 128, 128, 1)">135</span> <span style="color: rgba(0, 0, 0, 1)">        {
+</span><span style="color: rgba(0, 128, 128, 1)">136</span>             <span style="color: rgba(0, 0, 255, 1)">continue</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)">137</span> <span style="color: rgba(0, 0, 0, 1)">        }
+</span><span style="color: rgba(0, 128, 128, 1)">138</span> 
+<span style="color: rgba(0, 128, 128, 1)">139</span>         <span style="color: rgba(0, 0, 255, 1)">if</span><span style="color: rgba(0, 0, 0, 1)"> (expr.parse(buf))
+</span><span style="color: rgba(0, 128, 128, 1)">140</span> <span style="color: rgba(0, 0, 0, 1)">        {
+</span><span style="color: rgba(0, 128, 128, 1)">141</span>             <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">暂时不处理</span>
+<span style="color: rgba(0, 128, 128, 1)">142</span> <span style="color: rgba(0, 0, 0, 1)">        }
+</span><span style="color: rgba(0, 128, 128, 1)">143</span>         <span style="color: rgba(0, 0, 255, 1)">else</span>
+<span style="color: rgba(0, 128, 128, 1)">144</span> <span style="color: rgba(0, 0, 0, 1)">        {
+</span><span style="color: rgba(0, 128, 128, 1)">145</span>             cerr &lt;&lt; <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">词根[</span><span style="color: rgba(128, 0, 0, 1)">"</span> &lt;&lt; buf &lt;&lt; <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">]异常 忽略</span><span style="color: rgba(128, 0, 0, 1)">"</span> &lt;&lt;<span style="color: rgba(0, 0, 0, 1)"> endl;
+</span><span style="color: rgba(0, 128, 128, 1)">146</span> <span style="color: rgba(0, 0, 0, 1)">        }
+</span><span style="color: rgba(0, 128, 128, 1)">147</span> 
+<span style="color: rgba(0, 128, 128, 1)">148</span> <span style="color: rgba(0, 0, 0, 1)">        vecExprs.push_back(expr);
+</span><span style="color: rgba(0, 128, 128, 1)">149</span>         vecGroup[<span style="color: rgba(128, 0, 128, 1)">0</span>] =<span style="color: rgba(0, 0, 0, 1)"> buf;
+</span><span style="color: rgba(0, 128, 128, 1)">150</span> <span style="color: rgba(0, 0, 0, 1)">        vecExprGrepSentence.push_back(vecGroup);
+</span><span style="color: rgba(0, 128, 128, 1)">151</span> <span style="color: rgba(0, 0, 0, 1)">    }
+</span><span style="color: rgba(0, 128, 128, 1)">152</span> 
+<span style="color: rgba(0, 128, 128, 1)">153</span>     <span style="color: rgba(0, 0, 255, 1)">if</span> (vecExprs.size() == <span style="color: rgba(128, 0, 128, 1)">0</span><span style="color: rgba(0, 0, 0, 1)">)
+</span><span style="color: rgba(0, 128, 128, 1)">154</span> <span style="color: rgba(0, 0, 0, 1)">    {
+</span><span style="color: rgba(0, 128, 128, 1)">155</span>         cerr &lt;&lt; <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">词根[</span><span style="color: rgba(128, 0, 0, 1)">"</span> &lt;&lt; buf &lt;&lt; <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">]文件异常</span><span style="color: rgba(128, 0, 0, 1)">"</span> &lt;&lt;<span style="color: rgba(0, 0, 0, 1)"> endl;
+</span><span style="color: rgba(0, 128, 128, 1)">156</span>         <span style="color: rgba(0, 0, 255, 1)">return</span> -<span style="color: rgba(128, 0, 128, 1)">20</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)">157</span> <span style="color: rgba(0, 0, 0, 1)">    }
+</span><span style="color: rgba(0, 128, 128, 1)">158</span> 
+<span style="color: rgba(0, 128, 128, 1)">159</span>     size_t nNoGrep =<span style="color: rgba(0, 0, 0, 1)"> vecExprs.size();
+</span><span style="color: rgba(0, 128, 128, 1)">160</span>     vecGroup[<span style="color: rgba(128, 0, 128, 1)">0</span>] = <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">未分组</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)">161</span> <span style="color: rgba(0, 0, 0, 1)">    vecExprGrepSentence.push_back(vecGroup);
+</span><span style="color: rgba(0, 128, 128, 1)">162</span> 
+<span style="color: rgba(0, 128, 128, 1)">163</span>     <span style="color: rgba(0, 0, 255, 1)">while</span> (getline(buf, <span style="color: rgba(0, 0, 255, 1)">sizeof</span><span style="color: rgba(0, 0, 0, 1)">(buf), fpSentence))
+</span><span style="color: rgba(0, 128, 128, 1)">164</span> <span style="color: rgba(0, 0, 0, 1)">    {
+</span><span style="color: rgba(0, 128, 128, 1)">165</span>         <span style="color: rgba(0, 0, 255, 1)">if</span> (buf[<span style="color: rgba(128, 0, 128, 1)">0</span>] == <span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">\0</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">)
+</span><span style="color: rgba(0, 128, 128, 1)">166</span> <span style="color: rgba(0, 0, 0, 1)">        {
+</span><span style="color: rgba(0, 128, 128, 1)">167</span>             <span style="color: rgba(0, 0, 255, 1)">continue</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)">168</span> <span style="color: rgba(0, 0, 0, 1)">        }
+</span><span style="color: rgba(0, 128, 128, 1)">169</span> 
+<span style="color: rgba(0, 128, 128, 1)">170</span>         <span style="color: rgba(0, 0, 255, 1)">bool</span> bGrepFlag = <span style="color: rgba(0, 0, 255, 1)">false</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)">171</span>         <span style="color: rgba(0, 0, 255, 1)">for</span> (size_t i = <span style="color: rgba(128, 0, 128, 1)">0</span>; i &lt; vecExprs.size(); ++<span style="color: rgba(0, 0, 0, 1)">i)
+</span><span style="color: rgba(0, 128, 128, 1)">172</span> <span style="color: rgba(0, 0, 0, 1)">        {
+</span><span style="color: rgba(0, 128, 128, 1)">173</span>             <span style="color: rgba(0, 0, 255, 1)">if</span><span style="color: rgba(0, 0, 0, 1)"> (vecExprs[i].grep(buf))
+</span><span style="color: rgba(0, 128, 128, 1)">174</span> <span style="color: rgba(0, 0, 0, 1)">            {
+</span><span style="color: rgba(0, 128, 128, 1)">175</span> <span style="color: rgba(0, 0, 0, 1)">                vecExprGrepSentence[i].push_back(buf);
+</span><span style="color: rgba(0, 128, 128, 1)">176</span>                 bGrepFlag = <span style="color: rgba(0, 0, 255, 1)">true</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)">177</span> 
+<span style="color: rgba(0, 128, 128, 1)">178</span>                 <span style="color: rgba(0, 0, 255, 1)">if</span> (!<span style="color: rgba(0, 0, 0, 1)">bSplitMoreFlag)
+</span><span style="color: rgba(0, 128, 128, 1)">179</span> <span style="color: rgba(0, 0, 0, 1)">                {
+</span><span style="color: rgba(0, 128, 128, 1)">180</span>                     <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">关键字匹配到一个词根后就不再继续匹配</span>
+<span style="color: rgba(0, 128, 128, 1)">181</span>                     <span style="color: rgba(0, 0, 255, 1)">break</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)">182</span> <span style="color: rgba(0, 0, 0, 1)">                }
+</span><span style="color: rgba(0, 128, 128, 1)">183</span> <span style="color: rgba(0, 0, 0, 1)">            }
+</span><span style="color: rgba(0, 128, 128, 1)">184</span> <span style="color: rgba(0, 0, 0, 1)">        }
+</span><span style="color: rgba(0, 128, 128, 1)">185</span> 
+<span style="color: rgba(0, 128, 128, 1)">186</span>         <span style="color: rgba(0, 0, 255, 1)">if</span> (!<span style="color: rgba(0, 0, 0, 1)">bGrepFlag)
+</span><span style="color: rgba(0, 128, 128, 1)">187</span> <span style="color: rgba(0, 0, 0, 1)">        {
+</span><span style="color: rgba(0, 128, 128, 1)">188</span> <span style="color: rgba(0, 0, 0, 1)">            vecExprGrepSentence[nNoGrep].push_back(buf);
+</span><span style="color: rgba(0, 128, 128, 1)">189</span> <span style="color: rgba(0, 0, 0, 1)">        }
+</span><span style="color: rgba(0, 128, 128, 1)">190</span> <span style="color: rgba(0, 0, 0, 1)">    }
+</span><span style="color: rgba(0, 128, 128, 1)">191</span> 
+<span style="color: rgba(0, 128, 128, 1)">192</span> <span style="color: rgba(0, 0, 0, 1)">    outputResult(vecExprGrepSentence);
+</span><span style="color: rgba(0, 128, 128, 1)">193</span> <span style="color: rgba(0, 0, 0, 1)">    fclose(fpKey);
+</span><span style="color: rgba(0, 128, 128, 1)">194</span> <span style="color: rgba(0, 0, 0, 1)">    fclose(fpSentence);
+</span><span style="color: rgba(0, 128, 128, 1)">195</span>     <span style="color: rgba(0, 0, 255, 1)">return</span> <span style="color: rgba(128, 0, 128, 1)">0</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)">196</span> }</pre>
+</div>
+<p>GetWord.cpp</p>
+<div class="cnblogs_code">
+<pre><span style="color: rgba(0, 128, 128, 1)">  1</span> #include <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">StdAfx.h</span><span style="color: rgba(128, 0, 0, 1)">"</span>
+<span style="color: rgba(0, 128, 128, 1)">  2</span> #include <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">GetWord.h</span><span style="color: rgba(128, 0, 0, 1)">"</span>
+<span style="color: rgba(0, 128, 128, 1)">  3</span> 
+<span style="color: rgba(0, 128, 128, 1)">  4</span> 
+<span style="color: rgba(0, 128, 128, 1)">  5</span> CGetWord::CGetWord(<span style="color: rgba(0, 0, 255, 1)">const</span> <span style="color: rgba(0, 0, 255, 1)">char</span> *<span style="color: rgba(0, 0, 0, 1)">str)
+</span><span style="color: rgba(0, 128, 128, 1)">  6</span> <span style="color: rgba(0, 0, 0, 1)">{
+</span><span style="color: rgba(0, 128, 128, 1)">  7</span>     size_t nLen = strlen(str) + <span style="color: rgba(128, 0, 128, 1)">1</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)">  8</span> 
+<span style="color: rgba(0, 128, 128, 1)">  9</span>     m_strInput = <span style="color: rgba(0, 0, 255, 1)">new</span> <span style="color: rgba(0, 0, 255, 1)">char</span><span style="color: rgba(0, 0, 0, 1)">[nLen];
+</span><span style="color: rgba(0, 128, 128, 1)"> 10</span> <span style="color: rgba(0, 0, 0, 1)">    strcpy(m_strInput, str);
+</span><span style="color: rgba(0, 128, 128, 1)"> 11</span>     m_nPos = <span style="color: rgba(128, 0, 128, 1)">0</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)"> 12</span> <span style="color: rgba(0, 0, 0, 1)">}
+</span><span style="color: rgba(0, 128, 128, 1)"> 13</span> 
+<span style="color: rgba(0, 128, 128, 1)"> 14</span> 
+<span style="color: rgba(0, 128, 128, 1)"> 15</span> CGetWord::~CGetWord(<span style="color: rgba(0, 0, 255, 1)">void</span><span style="color: rgba(0, 0, 0, 1)">)
+</span><span style="color: rgba(0, 128, 128, 1)"> 16</span> <span style="color: rgba(0, 0, 0, 1)">{
+</span><span style="color: rgba(0, 128, 128, 1)"> 17</span>     <span style="color: rgba(0, 0, 255, 1)">delete</span><span style="color: rgba(0, 0, 0, 1)"> []m_strInput;
+</span><span style="color: rgba(0, 128, 128, 1)"> 18</span>     m_strInput =<span style="color: rgba(0, 0, 0, 1)"> NULL;
+</span><span style="color: rgba(0, 128, 128, 1)"> 19</span>     m_nPos = <span style="color: rgba(128, 0, 128, 1)">0</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)"> 20</span> <span style="color: rgba(0, 0, 0, 1)">}
+</span><span style="color: rgba(0, 128, 128, 1)"> 21</span> 
+<span style="color: rgba(0, 128, 128, 1)"> 22</span> <span style="color: rgba(0, 0, 255, 1)">void</span><span style="color: rgba(0, 0, 0, 1)"> CGetWord::rewrind()
+</span><span style="color: rgba(0, 128, 128, 1)"> 23</span> <span style="color: rgba(0, 0, 0, 1)">{
+</span><span style="color: rgba(0, 128, 128, 1)"> 24</span>     m_nPos = <span style="color: rgba(128, 0, 128, 1)">0</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)"> 25</span> <span style="color: rgba(0, 0, 0, 1)">}
+</span><span style="color: rgba(0, 128, 128, 1)"> 26</span> 
+<span style="color: rgba(0, 128, 128, 1)"> 27</span> <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">获取一个单词</span>
+<span style="color: rgba(0, 128, 128, 1)"> 28</span> <span style="color: rgba(0, 0, 255, 1)">bool</span> CGetWord::getWord(ST_WORD &amp;<span style="color: rgba(0, 0, 0, 1)">opr)
+</span><span style="color: rgba(0, 128, 128, 1)"> 29</span> <span style="color: rgba(0, 0, 0, 1)">{
+</span><span style="color: rgba(0, 128, 128, 1)"> 30</span>     <span style="color: rgba(0, 0, 255, 1)">char</span> ch =<span style="color: rgba(0, 0, 0, 1)"> m_strInput[m_nPos];
+</span><span style="color: rgba(0, 128, 128, 1)"> 31</span>     <span style="color: rgba(0, 0, 255, 1)">if</span> (ch == <span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">\0</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">)
+</span><span style="color: rgba(0, 128, 128, 1)"> 32</span> <span style="color: rgba(0, 0, 0, 1)">    {
+</span><span style="color: rgba(0, 128, 128, 1)"> 33</span>         <span style="color: rgba(0, 0, 255, 1)">return</span> <span style="color: rgba(0, 0, 255, 1)">false</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)"> 34</span> <span style="color: rgba(0, 0, 0, 1)">    }
+</span><span style="color: rgba(0, 128, 128, 1)"> 35</span> 
+<span style="color: rgba(0, 128, 128, 1)"> 36</span>     opr.sValue = <span style="color: rgba(128, 0, 0, 1)">""</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)"> 37</span>     <span style="color: rgba(0, 0, 255, 1)">switch</span><span style="color: rgba(0, 0, 0, 1)"> (ch)
+</span><span style="color: rgba(0, 128, 128, 1)"> 38</span> <span style="color: rgba(0, 0, 0, 1)">    {
+</span><span style="color: rgba(0, 128, 128, 1)"> 39</span>     <span style="color: rgba(0, 0, 255, 1)">case</span> <span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">&amp;</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">:
+</span><span style="color: rgba(0, 128, 128, 1)"> 40</span>         opr.nWordType =<span style="color: rgba(0, 0, 0, 1)"> TYPE_AND;
+</span><span style="color: rgba(0, 128, 128, 1)"> 41</span>         ++<span style="color: rgba(0, 0, 0, 1)">m_nPos;
+</span><span style="color: rgba(0, 128, 128, 1)"> 42</span>         <span style="color: rgba(0, 0, 255, 1)">break</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)"> 43</span>     <span style="color: rgba(0, 0, 255, 1)">case</span> <span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">|</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">:
+</span><span style="color: rgba(0, 128, 128, 1)"> 44</span>         opr.nWordType =<span style="color: rgba(0, 0, 0, 1)"> TYPE_OR;
+</span><span style="color: rgba(0, 128, 128, 1)"> 45</span>         ++<span style="color: rgba(0, 0, 0, 1)">m_nPos;
+</span><span style="color: rgba(0, 128, 128, 1)"> 46</span>         <span style="color: rgba(0, 0, 255, 1)">break</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)"> 47</span>     <span style="color: rgba(0, 0, 255, 1)">case</span> <span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">(</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">:
+</span><span style="color: rgba(0, 128, 128, 1)"> 48</span>         opr.nWordType =<span style="color: rgba(0, 0, 0, 1)"> TYPE_LEFT;
+</span><span style="color: rgba(0, 128, 128, 1)"> 49</span>         ++<span style="color: rgba(0, 0, 0, 1)">m_nPos;
+</span><span style="color: rgba(0, 128, 128, 1)"> 50</span>         <span style="color: rgba(0, 0, 255, 1)">break</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)"> 51</span>     <span style="color: rgba(0, 0, 255, 1)">case</span> <span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">)</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">:
+</span><span style="color: rgba(0, 128, 128, 1)"> 52</span>         opr.nWordType =<span style="color: rgba(0, 0, 0, 1)"> TYPE_RIGHT;
+</span><span style="color: rgba(0, 128, 128, 1)"> 53</span>         ++<span style="color: rgba(0, 0, 0, 1)">m_nPos;
+</span><span style="color: rgba(0, 128, 128, 1)"> 54</span>         <span style="color: rgba(0, 0, 255, 1)">break</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)"> 55</span>     <span style="color: rgba(0, 0, 255, 1)">default</span><span style="color: rgba(0, 0, 0, 1)">:
+</span><span style="color: rgba(0, 128, 128, 1)"> 56</span>         <span style="color: rgba(0, 0, 255, 1)">int</span> i = <span style="color: rgba(128, 0, 128, 1)">0</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)"> 57</span>         opr.nWordType =<span style="color: rgba(0, 0, 0, 1)"> TYPE_WORD;
+</span><span style="color: rgba(0, 128, 128, 1)"> 58</span>         <span style="color: rgba(0, 0, 255, 1)">for</span> (i = m_nPos; m_strInput[i] != <span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">\0</span><span style="color: rgba(128, 0, 0, 1)">'</span>; ++<span style="color: rgba(0, 0, 0, 1)">i)
+</span><span style="color: rgba(0, 128, 128, 1)"> 59</span> <span style="color: rgba(0, 0, 0, 1)">        {
+</span><span style="color: rgba(0, 128, 128, 1)"> 60</span>             ch =<span style="color: rgba(0, 0, 0, 1)"> m_strInput[i];
+</span><span style="color: rgba(0, 128, 128, 1)"> 61</span> 
+<span style="color: rgba(0, 128, 128, 1)"> 62</span>             <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">碰到操作符，说明关键字结束了</span>
+<span style="color: rgba(0, 128, 128, 1)"> 63</span>             <span style="color: rgba(0, 0, 255, 1)">if</span> (ch == <span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">&amp;</span><span style="color: rgba(128, 0, 0, 1)">'</span> || ch == <span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">|</span><span style="color: rgba(128, 0, 0, 1)">'</span> || ch == <span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">(</span><span style="color: rgba(128, 0, 0, 1)">'</span> || ch == <span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">)</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">)
+</span><span style="color: rgba(0, 128, 128, 1)"> 64</span> <span style="color: rgba(0, 0, 0, 1)">            {
+</span><span style="color: rgba(0, 128, 128, 1)"> 65</span>                 <span style="color: rgba(0, 0, 255, 1)">break</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)"> 66</span> <span style="color: rgba(0, 0, 0, 1)">            }
+</span><span style="color: rgba(0, 128, 128, 1)"> 67</span>             <span style="color: rgba(0, 0, 255, 1)">else</span>
+<span style="color: rgba(0, 128, 128, 1)"> 68</span> <span style="color: rgba(0, 0, 0, 1)">            {
+</span><span style="color: rgba(0, 128, 128, 1)"> 69</span>                 opr.sValue +=<span style="color: rgba(0, 0, 0, 1)"> ch;
+</span><span style="color: rgba(0, 128, 128, 1)"> 70</span> 
+<span style="color: rgba(0, 128, 128, 1)"> 71</span>                 <span style="color: rgba(0, 0, 255, 1)">if</span> (ch &amp; <span style="color: rgba(128, 0, 128, 1)">0x80</span><span style="color: rgba(0, 0, 0, 1)">)
+</span><span style="color: rgba(0, 128, 128, 1)"> 72</span> <span style="color: rgba(0, 0, 0, 1)">                {
+</span><span style="color: rgba(0, 128, 128, 1)"> 73</span>                     <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">中文 两个字符</span>
+<span style="color: rgba(0, 128, 128, 1)"> 74</span>                     ++<span style="color: rgba(0, 0, 0, 1)">i;
+</span><span style="color: rgba(0, 128, 128, 1)"> 75</span>                     opr.sValue +=<span style="color: rgba(0, 0, 0, 1)"> m_strInput[i];
+</span><span style="color: rgba(0, 128, 128, 1)"> 76</span>                     <span style="color: rgba(0, 0, 255, 1)">continue</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)"> 77</span> <span style="color: rgba(0, 0, 0, 1)">                }
+</span><span style="color: rgba(0, 128, 128, 1)"> 78</span> <span style="color: rgba(0, 0, 0, 1)">            }
+</span><span style="color: rgba(0, 128, 128, 1)"> 79</span> <span style="color: rgba(0, 0, 0, 1)">        }
+</span><span style="color: rgba(0, 128, 128, 1)"> 80</span>         m_nPos =<span style="color: rgba(0, 0, 0, 1)"> i;
+</span><span style="color: rgba(0, 128, 128, 1)"> 81</span>         <span style="color: rgba(0, 0, 255, 1)">break</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)"> 82</span> <span style="color: rgba(0, 0, 0, 1)">    }
+</span><span style="color: rgba(0, 128, 128, 1)"> 83</span> 
+<span style="color: rgba(0, 128, 128, 1)"> 84</span>     <span style="color: rgba(0, 0, 255, 1)">return</span> <span style="color: rgba(0, 0, 255, 1)">true</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)"> 85</span> <span style="color: rgba(0, 0, 0, 1)">}
+</span><span style="color: rgba(0, 128, 128, 1)"> 86</span> 
+<span style="color: rgba(0, 128, 128, 1)"> 87</span> 
+<span style="color: rgba(0, 128, 128, 1)"> 88</span> <span style="color: rgba(0, 0, 255, 1)">int</span><span style="color: rgba(0, 0, 0, 1)"> testCGetWord()
+</span><span style="color: rgba(0, 128, 128, 1)"> 89</span> <span style="color: rgba(0, 0, 0, 1)">{
+</span><span style="color: rgba(0, 128, 128, 1)"> 90</span>     <span style="color: rgba(0, 0, 255, 1)">char</span> *strExpr[] = {<span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">(计算机&amp;专业)|广工</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">,
+</span><span style="color: rgba(0, 128, 128, 1)"> 91</span>         <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">计算机&amp;广东</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">,
+</span><span style="color: rgba(0, 128, 128, 1)"> 92</span>         <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">计算机|好的|专业</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">};
+</span><span style="color: rgba(0, 128, 128, 1)"> 93</span> 
+<span style="color: rgba(0, 128, 128, 1)"> 94</span>     <span style="color: rgba(0, 0, 255, 1)">for</span> (<span style="color: rgba(0, 0, 255, 1)">int</span> i = <span style="color: rgba(128, 0, 128, 1)">0</span>; i &lt; NUMOF(strExpr); ++<span style="color: rgba(0, 0, 0, 1)">i)
+</span><span style="color: rgba(0, 128, 128, 1)"> 95</span> <span style="color: rgba(0, 0, 0, 1)">    {
+</span><span style="color: rgba(0, 128, 128, 1)"> 96</span> <span style="color: rgba(0, 0, 0, 1)">        CGetWord expr(strExpr[i]);
+</span><span style="color: rgba(0, 128, 128, 1)"> 97</span> <span style="color: rgba(0, 0, 0, 1)">        ST_WORD opr;
+</span><span style="color: rgba(0, 128, 128, 1)"> 98</span> 
+<span style="color: rgba(0, 128, 128, 1)"> 99</span> 
+<span style="color: rgba(0, 128, 128, 1)">100</span>         cout &lt;&lt; strExpr[i] &lt;&lt;<span style="color: rgba(0, 0, 0, 1)"> endl;
+</span><span style="color: rgba(0, 128, 128, 1)">101</span> 
+<span style="color: rgba(0, 128, 128, 1)">102</span>         <span style="color: rgba(0, 0, 255, 1)">while</span><span style="color: rgba(0, 0, 0, 1)"> (expr.getWord(opr))
+</span><span style="color: rgba(0, 128, 128, 1)">103</span> <span style="color: rgba(0, 0, 0, 1)">        {
+</span><span style="color: rgba(0, 128, 128, 1)">104</span> <span style="color: rgba(0, 0, 0, 1)">            opr.output();
+</span><span style="color: rgba(0, 128, 128, 1)">105</span> <span style="color: rgba(0, 0, 0, 1)">        }
+</span><span style="color: rgba(0, 128, 128, 1)">106</span> 
+<span style="color: rgba(0, 128, 128, 1)">107</span>         cout &lt;&lt; <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">------------</span><span style="color: rgba(128, 0, 0, 1)">"</span> &lt;&lt;<span style="color: rgba(0, 0, 0, 1)"> endl;
+</span><span style="color: rgba(0, 128, 128, 1)">108</span> <span style="color: rgba(0, 0, 0, 1)">    }
+</span><span style="color: rgba(0, 128, 128, 1)">109</span>     <span style="color: rgba(0, 0, 255, 1)">return</span> <span style="color: rgba(128, 0, 128, 1)">0</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)">110</span> }</pre>
+</div>
+<p>PostfixExpressions.cpp</p>
+<div class="cnblogs_code">
+<pre><span style="color: rgba(0, 128, 128, 1)">  1</span> #include <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">StdAfx.h</span><span style="color: rgba(128, 0, 0, 1)">"</span>
+<span style="color: rgba(0, 128, 128, 1)">  2</span> #include <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">PostfixExpressions.h</span><span style="color: rgba(128, 0, 0, 1)">"</span>
+<span style="color: rgba(0, 128, 128, 1)">  3</span> 
+<span style="color: rgba(0, 128, 128, 1)">  4</span> <span style="color: rgba(0, 128, 0, 1)">/*</span>
+<span style="color: rgba(0, 128, 128, 1)">  5</span> <span style="color: rgba(0, 128, 0, 1)">#define TYPE_WORD 0
+</span><span style="color: rgba(0, 128, 128, 1)">  6</span> <span style="color: rgba(0, 128, 0, 1)">#define TYPE_AND 1
+</span><span style="color: rgba(0, 128, 128, 1)">  7</span> <span style="color: rgba(0, 128, 0, 1)">#define TYPE_OR 2
+</span><span style="color: rgba(0, 128, 128, 1)">  8</span> <span style="color: rgba(0, 128, 0, 1)">#define TYPE_BOOL 3
+</span><span style="color: rgba(0, 128, 128, 1)">  9</span> <span style="color: rgba(0, 128, 0, 1)">#define TYPE_LEFT 4
+</span><span style="color: rgba(0, 128, 128, 1)"> 10</span> <span style="color: rgba(0, 128, 0, 1)">#define TYPE_RIGHT 5
+</span><span style="color: rgba(0, 128, 128, 1)"> 11</span> <span style="color: rgba(0, 128, 0, 1)">*/</span>
+<span style="color: rgba(0, 128, 128, 1)"> 12</span> 
+<span style="color: rgba(0, 128, 128, 1)"> 13</span> <span style="color: rgba(0, 0, 255, 1)">const</span> <span style="color: rgba(0, 0, 255, 1)">static</span> <span style="color: rgba(0, 0, 255, 1)">int</span> compare[<span style="color: rgba(128, 0, 128, 1)">6</span>][<span style="color: rgba(128, 0, 128, 1)">6</span>] =
+<span style="color: rgba(0, 128, 128, 1)"> 14</span> <span style="color: rgba(0, 0, 0, 1)">{
+</span><span style="color: rgba(0, 128, 128, 1)"> 15</span>     <span style="color: rgba(128, 0, 128, 1)">0</span>, <span style="color: rgba(128, 0, 128, 1)">0</span>, <span style="color: rgba(128, 0, 128, 1)">0</span>, <span style="color: rgba(128, 0, 128, 1)">0</span>, <span style="color: rgba(128, 0, 128, 1)">0</span>, <span style="color: rgba(128, 0, 128, 1)">0</span><span style="color: rgba(0, 0, 0, 1)">,
+</span><span style="color: rgba(0, 128, 128, 1)"> 16</span>     <span style="color: rgba(128, 0, 128, 1)">0</span>, <span style="color: rgba(128, 0, 128, 1)">1</span>, -<span style="color: rgba(128, 0, 128, 1)">1</span>, <span style="color: rgba(128, 0, 128, 1)">0</span>, -<span style="color: rgba(128, 0, 128, 1)">1</span>, <span style="color: rgba(128, 0, 128, 1)">0</span><span style="color: rgba(0, 0, 0, 1)">,
+</span><span style="color: rgba(0, 128, 128, 1)"> 17</span>     <span style="color: rgba(128, 0, 128, 1)">0</span>, <span style="color: rgba(128, 0, 128, 1)">1</span>, <span style="color: rgba(128, 0, 128, 1)">1</span>, <span style="color: rgba(128, 0, 128, 1)">0</span>, -<span style="color: rgba(128, 0, 128, 1)">1</span>, <span style="color: rgba(128, 0, 128, 1)">0</span>, <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">TYPE_OR</span>
+<span style="color: rgba(0, 128, 128, 1)"> 18</span>     <span style="color: rgba(128, 0, 128, 1)">0</span>, <span style="color: rgba(128, 0, 128, 1)">0</span>, <span style="color: rgba(128, 0, 128, 1)">0</span>, <span style="color: rgba(128, 0, 128, 1)">0</span>, <span style="color: rgba(128, 0, 128, 1)">0</span>, <span style="color: rgba(128, 0, 128, 1)">0</span><span style="color: rgba(0, 0, 0, 1)">,
+</span><span style="color: rgba(0, 128, 128, 1)"> 19</span>     <span style="color: rgba(128, 0, 128, 1)">0</span>, -<span style="color: rgba(128, 0, 128, 1)">1</span>, -<span style="color: rgba(128, 0, 128, 1)">1</span>, <span style="color: rgba(128, 0, 128, 1)">0</span>, -<span style="color: rgba(128, 0, 128, 1)">1</span>, <span style="color: rgba(128, 0, 128, 1)">0</span>, <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">TYPE_LEFT</span>
+<span style="color: rgba(0, 128, 128, 1)"> 20</span>     <span style="color: rgba(128, 0, 128, 1)">0</span>, <span style="color: rgba(128, 0, 128, 1)">1</span>, <span style="color: rgba(128, 0, 128, 1)">1</span>, <span style="color: rgba(128, 0, 128, 1)">0</span>, <span style="color: rgba(128, 0, 128, 1)">0</span>, <span style="color: rgba(128, 0, 128, 1)">0</span>
+<span style="color: rgba(0, 128, 128, 1)"> 21</span> <span style="color: rgba(0, 0, 0, 1)">};
+</span><span style="color: rgba(0, 128, 128, 1)"> 22</span> 
+<span style="color: rgba(0, 128, 128, 1)"> 23</span> CPostfixExpressions::CPostfixExpressions(<span style="color: rgba(0, 0, 255, 1)">void</span><span style="color: rgba(0, 0, 0, 1)">)
+</span><span style="color: rgba(0, 128, 128, 1)"> 24</span> <span style="color: rgba(0, 0, 0, 1)">{
+</span><span style="color: rgba(0, 128, 128, 1)"> 25</span> <span style="color: rgba(0, 0, 0, 1)">}
+</span><span style="color: rgba(0, 128, 128, 1)"> 26</span> 
+<span style="color: rgba(0, 128, 128, 1)"> 27</span> 
+<span style="color: rgba(0, 128, 128, 1)"> 28</span> CPostfixExpressions::~CPostfixExpressions(<span style="color: rgba(0, 0, 255, 1)">void</span><span style="color: rgba(0, 0, 0, 1)">)
+</span><span style="color: rgba(0, 128, 128, 1)"> 29</span> <span style="color: rgba(0, 0, 0, 1)">{
+</span><span style="color: rgba(0, 128, 128, 1)"> 30</span> <span style="color: rgba(0, 0, 0, 1)">}
+</span><span style="color: rgba(0, 128, 128, 1)"> 31</span> 
+<span style="color: rgba(0, 128, 128, 1)"> 32</span> 
+<span style="color: rgba(0, 128, 128, 1)"> 33</span> <span style="color: rgba(0, 0, 255, 1)">bool</span> CPostfixExpressions::parse(<span style="color: rgba(0, 0, 255, 1)">const</span> <span style="color: rgba(0, 0, 255, 1)">char</span> *<span style="color: rgba(0, 0, 0, 1)">strIntermediateOrerExpressions)
+</span><span style="color: rgba(0, 128, 128, 1)"> 34</span> <span style="color: rgba(0, 0, 0, 1)">{
+</span><span style="color: rgba(0, 128, 128, 1)"> 35</span>     <span style="color: rgba(0, 128, 0, 1)">/*</span>
+<span style="color: rgba(0, 128, 128, 1)"> 36</span> <span style="color: rgba(0, 128, 0, 1)">    InfixExp(中序表达式)转换PostfixExp(后序表达式)算法：
+</span><span style="color: rgba(0, 128, 128, 1)"> 37</span> 
+<span style="color: rgba(0, 128, 128, 1)"> 38</span> <span style="color: rgba(0, 128, 0, 1)">    1）当输入的是操作数时候，直接输出到后序表达式PostfixExp序列中
+</span><span style="color: rgba(0, 128, 128, 1)"> 39</span> 
+<span style="color: rgba(0, 128, 128, 1)"> 40</span> <span style="color: rgba(0, 128, 0, 1)">    2）当输入开括号时候，把它压栈
+</span><span style="color: rgba(0, 128, 128, 1)"> 41</span> 
+<span style="color: rgba(0, 128, 128, 1)"> 42</span> <span style="color: rgba(0, 128, 0, 1)">    3）当输入的是闭括号时候，先判断栈是否为空，若为空，则发生错误并进行相关处理。若非空，把栈中元素依次弹出并输出到Postfix中，知道遇到第一个开括号，若没有遇到开括号，也发生错误，进行相关处理
+</span><span style="color: rgba(0, 128, 128, 1)"> 43</span> 
+<span style="color: rgba(0, 128, 128, 1)"> 44</span> <span style="color: rgba(0, 128, 0, 1)">    4）当输入是运算符op（+、- 、×、/）时候
+</span><span style="color: rgba(0, 128, 128, 1)"> 45</span> 
+<span style="color: rgba(0, 128, 128, 1)"> 46</span> <span style="color: rgba(0, 128, 0, 1)">    a)循环，当（栈非空and栈顶不是开括号and栈顶运算符的优先级不低于输入的运算符的优先级）时，反复操作：将栈顶元素弹出并添加到Postfix中
+</span><span style="color: rgba(0, 128, 128, 1)"> 47</span> 
+<span style="color: rgba(0, 128, 128, 1)"> 48</span> <span style="color: rgba(0, 128, 0, 1)">    b)把输入的运算符op压栈
+</span><span style="color: rgba(0, 128, 128, 1)"> 49</span> 
+<span style="color: rgba(0, 128, 128, 1)"> 50</span> <span style="color: rgba(0, 128, 0, 1)">    5）当中序表达式InfixExp的符号序列全部读入后，若栈内扔有元素，把他们依次弹出并放到后序表达式PostfixExp序列尾部。若弹出的元素遇到空括号，则说明不匹配，发生错误，并进行相关处理
+</span><span style="color: rgba(0, 128, 128, 1)"> 51</span>     <span style="color: rgba(0, 128, 0, 1)">*/</span>
+<span style="color: rgba(0, 128, 128, 1)"> 52</span>     
+<span style="color: rgba(0, 128, 128, 1)"> 53</span> <span style="color: rgba(0, 0, 0, 1)">    m_expr.clear();
+</span><span style="color: rgba(0, 128, 128, 1)"> 54</span>     m_expr.reserve(<span style="color: rgba(128, 0, 128, 1)">100</span><span style="color: rgba(0, 0, 0, 1)">);
+</span><span style="color: rgba(0, 128, 128, 1)"> 55</span> 
+<span style="color: rgba(0, 128, 128, 1)"> 56</span> <span style="color: rgba(0, 0, 0, 1)">    CGetWord expr(strIntermediateOrerExpressions);
+</span><span style="color: rgba(0, 128, 128, 1)"> 57</span> <span style="color: rgba(0, 0, 0, 1)">    ST_WORD opr;
+</span><span style="color: rgba(0, 128, 128, 1)"> 58</span>     <span style="color: rgba(0, 0, 255, 1)">const</span> ST_WORD *<span style="color: rgba(0, 0, 0, 1)">pOprTop;
+</span><span style="color: rgba(0, 128, 128, 1)"> 59</span> 
+<span style="color: rgba(0, 128, 128, 1)"> 60</span>     stack&lt;ST_WORD&gt;<span style="color: rgba(0, 0, 0, 1)"> stackOperators;
+</span><span style="color: rgba(0, 128, 128, 1)"> 61</span>     <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">vector&lt;ST_WORD&gt; vecSymbol;</span>
+<span style="color: rgba(0, 128, 128, 1)"> 62</span> 
+<span style="color: rgba(0, 128, 128, 1)"> 63</span>     <span style="color: rgba(0, 0, 255, 1)">bool</span> bExpectWord = <span style="color: rgba(0, 0, 255, 1)">true</span>; <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">第一个元素必须是关键字</span>
+<span style="color: rgba(0, 128, 128, 1)"> 64</span>     <span style="color: rgba(0, 0, 255, 1)">while</span><span style="color: rgba(0, 0, 0, 1)"> (expr.getWord(opr))
+</span><span style="color: rgba(0, 128, 128, 1)"> 65</span> <span style="color: rgba(0, 0, 0, 1)">    {
+</span><span style="color: rgba(0, 128, 128, 1)"> 66</span>         <span style="color: rgba(0, 0, 255, 1)">switch</span><span style="color: rgba(0, 0, 0, 1)"> (opr.nWordType)
+</span><span style="color: rgba(0, 128, 128, 1)"> 67</span> <span style="color: rgba(0, 0, 0, 1)">        {
+</span><span style="color: rgba(0, 128, 128, 1)"> 68</span>         <span style="color: rgba(0, 0, 255, 1)">case</span><span style="color: rgba(0, 0, 0, 1)"> TYPE_WORD:
+</span><span style="color: rgba(0, 128, 128, 1)"> 69</span>             <span style="color: rgba(0, 0, 255, 1)">if</span> (!<span style="color: rgba(0, 0, 0, 1)">bExpectWord)
+</span><span style="color: rgba(0, 128, 128, 1)"> 70</span> <span style="color: rgba(0, 0, 0, 1)">            {
+</span><span style="color: rgba(0, 128, 128, 1)"> 71</span>                 cerr &lt;&lt; <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">语法错误1：不期望的关键字</span><span style="color: rgba(128, 0, 0, 1)">"</span> &lt;&lt;<span style="color: rgba(0, 0, 0, 1)"> endl;
+</span><span style="color: rgba(0, 128, 128, 1)"> 72</span> <span style="color: rgba(0, 0, 0, 1)">                m_expr.clear();
+</span><span style="color: rgba(0, 128, 128, 1)"> 73</span>                 <span style="color: rgba(0, 0, 255, 1)">return</span> <span style="color: rgba(0, 0, 255, 1)">false</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)"> 74</span> <span style="color: rgba(0, 0, 0, 1)">            }
+</span><span style="color: rgba(0, 128, 128, 1)"> 75</span> <span style="color: rgba(0, 0, 0, 1)">            m_expr.push_back(opr);
+</span><span style="color: rgba(0, 128, 128, 1)"> 76</span>             bExpectWord = <span style="color: rgba(0, 0, 255, 1)">false</span>; <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">不能出现连续关键字</span>
+<span style="color: rgba(0, 128, 128, 1)"> 77</span>             <span style="color: rgba(0, 0, 255, 1)">break</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)"> 78</span>         <span style="color: rgba(0, 0, 255, 1)">case</span><span style="color: rgba(0, 0, 0, 1)"> TYPE_AND:
+</span><span style="color: rgba(0, 128, 128, 1)"> 79</span>         <span style="color: rgba(0, 0, 255, 1)">case</span><span style="color: rgba(0, 0, 0, 1)"> TYPE_OR:
+</span><span style="color: rgba(0, 128, 128, 1)"> 80</span>             <span style="color: rgba(0, 0, 255, 1)">if</span><span style="color: rgba(0, 0, 0, 1)"> (bExpectWord)
+</span><span style="color: rgba(0, 128, 128, 1)"> 81</span> <span style="color: rgba(0, 0, 0, 1)">            {
+</span><span style="color: rgba(0, 128, 128, 1)"> 82</span>                 cerr &lt;&lt; <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">语法错误2：不期望的操作符</span><span style="color: rgba(128, 0, 0, 1)">"</span> &lt;&lt;<span style="color: rgba(0, 0, 0, 1)"> endl;
+</span><span style="color: rgba(0, 128, 128, 1)"> 83</span> <span style="color: rgba(0, 0, 0, 1)">                m_expr.clear();
+</span><span style="color: rgba(0, 128, 128, 1)"> 84</span>                 <span style="color: rgba(0, 0, 255, 1)">return</span> <span style="color: rgba(0, 0, 255, 1)">false</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)"> 85</span> <span style="color: rgba(0, 0, 0, 1)">            }
+</span><span style="color: rgba(0, 128, 128, 1)"> 86</span>             bExpectWord = <span style="color: rgba(0, 0, 255, 1)">true</span>; <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">不能出现连续操作符</span>
+<span style="color: rgba(0, 128, 128, 1)"> 87</span>         <span style="color: rgba(0, 0, 255, 1)">case</span><span style="color: rgba(0, 0, 0, 1)"> TYPE_LEFT:
+</span><span style="color: rgba(0, 128, 128, 1)"> 88</span>             <span style="color: rgba(0, 0, 255, 1)">if</span> (stackOperators.size() == <span style="color: rgba(128, 0, 128, 1)">0</span><span style="color: rgba(0, 0, 0, 1)">)
+</span><span style="color: rgba(0, 128, 128, 1)"> 89</span> <span style="color: rgba(0, 0, 0, 1)">            {
+</span><span style="color: rgba(0, 128, 128, 1)"> 90</span> <span style="color: rgba(0, 0, 0, 1)">                stackOperators.push(opr);
+</span><span style="color: rgba(0, 128, 128, 1)"> 91</span> <span style="color: rgba(0, 0, 0, 1)">            }
+</span><span style="color: rgba(0, 128, 128, 1)"> 92</span>             <span style="color: rgba(0, 0, 255, 1)">else</span>
+<span style="color: rgba(0, 128, 128, 1)"> 93</span> <span style="color: rgba(0, 0, 0, 1)">            {
+</span><span style="color: rgba(0, 128, 128, 1)"> 94</span>                 pOprTop = &amp;<span style="color: rgba(0, 0, 0, 1)">stackOperators.top();
+</span><span style="color: rgba(0, 128, 128, 1)"> 95</span> 
+<span style="color: rgba(0, 128, 128, 1)"> 96</span>                 <span style="color: rgba(0, 0, 255, 1)">while</span> (compare[opr.nWordType][pOprTop-&gt;nWordType] &gt; <span style="color: rgba(128, 0, 128, 1)">0</span><span style="color: rgba(0, 0, 0, 1)">)
+</span><span style="color: rgba(0, 128, 128, 1)"> 97</span> <span style="color: rgba(0, 0, 0, 1)">                {
+</span><span style="color: rgba(0, 128, 128, 1)"> 98</span>                     m_expr.push_back(*<span style="color: rgba(0, 0, 0, 1)">pOprTop);
+</span><span style="color: rgba(0, 128, 128, 1)"> 99</span> <span style="color: rgba(0, 0, 0, 1)">                    stackOperators.pop();
+</span><span style="color: rgba(0, 128, 128, 1)">100</span> 
+<span style="color: rgba(0, 128, 128, 1)">101</span>                     <span style="color: rgba(0, 0, 255, 1)">if</span> (stackOperators.size() == <span style="color: rgba(128, 0, 128, 1)">0</span><span style="color: rgba(0, 0, 0, 1)">)
+</span><span style="color: rgba(0, 128, 128, 1)">102</span> <span style="color: rgba(0, 0, 0, 1)">                    {
+</span><span style="color: rgba(0, 128, 128, 1)">103</span>                         <span style="color: rgba(0, 0, 255, 1)">break</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)">104</span> <span style="color: rgba(0, 0, 0, 1)">                    }
+</span><span style="color: rgba(0, 128, 128, 1)">105</span> 
+<span style="color: rgba(0, 128, 128, 1)">106</span>                     pOprTop = &amp;<span style="color: rgba(0, 0, 0, 1)">stackOperators.top();
+</span><span style="color: rgba(0, 128, 128, 1)">107</span> <span style="color: rgba(0, 0, 0, 1)">                }
+</span><span style="color: rgba(0, 128, 128, 1)">108</span> 
+<span style="color: rgba(0, 128, 128, 1)">109</span> <span style="color: rgba(0, 0, 0, 1)">                stackOperators.push(opr);
+</span><span style="color: rgba(0, 128, 128, 1)">110</span> <span style="color: rgba(0, 0, 0, 1)">            }
+</span><span style="color: rgba(0, 128, 128, 1)">111</span>             <span style="color: rgba(0, 0, 255, 1)">break</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)">112</span>         <span style="color: rgba(0, 0, 255, 1)">case</span><span style="color: rgba(0, 0, 0, 1)"> TYPE_RIGHT:
+</span><span style="color: rgba(0, 128, 128, 1)">113</span>             <span style="color: rgba(0, 0, 255, 1)">if</span> (stackOperators.size() == <span style="color: rgba(128, 0, 128, 1)">0</span><span style="color: rgba(0, 0, 0, 1)">)
+</span><span style="color: rgba(0, 128, 128, 1)">114</span> <span style="color: rgba(0, 0, 0, 1)">            {
+</span><span style="color: rgba(0, 128, 128, 1)">115</span>                 cerr &lt;&lt; <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">语法错误3：右括号不匹配左括号1</span><span style="color: rgba(128, 0, 0, 1)">"</span> &lt;&lt;<span style="color: rgba(0, 0, 0, 1)"> endl;
+</span><span style="color: rgba(0, 128, 128, 1)">116</span> <span style="color: rgba(0, 0, 0, 1)">                m_expr.clear();
+</span><span style="color: rgba(0, 128, 128, 1)">117</span>                 <span style="color: rgba(0, 0, 255, 1)">return</span> <span style="color: rgba(0, 0, 255, 1)">false</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)">118</span> <span style="color: rgba(0, 0, 0, 1)">            }
+</span><span style="color: rgba(0, 128, 128, 1)">119</span>             <span style="color: rgba(0, 0, 255, 1)">else</span>
+<span style="color: rgba(0, 128, 128, 1)">120</span> <span style="color: rgba(0, 0, 0, 1)">            {
+</span><span style="color: rgba(0, 128, 128, 1)">121</span>                 <span style="color: rgba(0, 0, 255, 1)">const</span> ST_WORD *pOprTop = &amp;<span style="color: rgba(0, 0, 0, 1)">stackOperators.top();
+</span><span style="color: rgba(0, 128, 128, 1)">122</span> 
+<span style="color: rgba(0, 128, 128, 1)">123</span>                 <span style="color: rgba(0, 0, 255, 1)">while</span> (compare[opr.nWordType][pOprTop-&gt;nWordType] &gt; <span style="color: rgba(128, 0, 128, 1)">0</span><span style="color: rgba(0, 0, 0, 1)">)
+</span><span style="color: rgba(0, 128, 128, 1)">124</span> <span style="color: rgba(0, 0, 0, 1)">                {
+</span><span style="color: rgba(0, 128, 128, 1)">125</span>                     m_expr.push_back(*<span style="color: rgba(0, 0, 0, 1)">pOprTop);
+</span><span style="color: rgba(0, 128, 128, 1)">126</span> <span style="color: rgba(0, 0, 0, 1)">                    stackOperators.pop();
+</span><span style="color: rgba(0, 128, 128, 1)">127</span> 
+<span style="color: rgba(0, 128, 128, 1)">128</span>                     <span style="color: rgba(0, 0, 255, 1)">if</span> (stackOperators.size() == <span style="color: rgba(128, 0, 128, 1)">0</span><span style="color: rgba(0, 0, 0, 1)">)
+</span><span style="color: rgba(0, 128, 128, 1)">129</span> <span style="color: rgba(0, 0, 0, 1)">                    {
+</span><span style="color: rgba(0, 128, 128, 1)">130</span>                         cerr &lt;&lt; <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">语法错误4：右括号不匹配左括号2</span><span style="color: rgba(128, 0, 0, 1)">"</span> &lt;&lt;<span style="color: rgba(0, 0, 0, 1)"> endl;
+</span><span style="color: rgba(0, 128, 128, 1)">131</span> <span style="color: rgba(0, 0, 0, 1)">                        m_expr.clear();
+</span><span style="color: rgba(0, 128, 128, 1)">132</span>                         <span style="color: rgba(0, 0, 255, 1)">break</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)">133</span> <span style="color: rgba(0, 0, 0, 1)">                    }
+</span><span style="color: rgba(0, 128, 128, 1)">134</span> 
+<span style="color: rgba(0, 128, 128, 1)">135</span>                     pOprTop = &amp;<span style="color: rgba(0, 0, 0, 1)">stackOperators.top();
+</span><span style="color: rgba(0, 128, 128, 1)">136</span> <span style="color: rgba(0, 0, 0, 1)">                }
+</span><span style="color: rgba(0, 128, 128, 1)">137</span> 
+<span style="color: rgba(0, 128, 128, 1)">138</span>                 <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">把左括号出栈</span>
+<span style="color: rgba(0, 128, 128, 1)">139</span> <span style="color: rgba(0, 0, 0, 1)">                stackOperators.pop();
+</span><span style="color: rgba(0, 128, 128, 1)">140</span> <span style="color: rgba(0, 0, 0, 1)">            }
+</span><span style="color: rgba(0, 128, 128, 1)">141</span>             <span style="color: rgba(0, 0, 255, 1)">break</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)">142</span>         <span style="color: rgba(0, 0, 255, 1)">default</span><span style="color: rgba(0, 0, 0, 1)">:
+</span><span style="color: rgba(0, 128, 128, 1)">143</span>             cerr &lt;&lt; <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">语法错误5：未知类型</span><span style="color: rgba(128, 0, 0, 1)">"</span> &lt;&lt;<span style="color: rgba(0, 0, 0, 1)"> endl;
+</span><span style="color: rgba(0, 128, 128, 1)">144</span> <span style="color: rgba(0, 0, 0, 1)">            m_expr.clear();
+</span><span style="color: rgba(0, 128, 128, 1)">145</span>             <span style="color: rgba(0, 0, 255, 1)">return</span> <span style="color: rgba(0, 0, 255, 1)">false</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)">146</span> <span style="color: rgba(0, 0, 0, 1)">        }
+</span><span style="color: rgba(0, 128, 128, 1)">147</span> <span style="color: rgba(0, 0, 0, 1)">    }
+</span><span style="color: rgba(0, 128, 128, 1)">148</span> 
+<span style="color: rgba(0, 128, 128, 1)">149</span>     <span style="color: rgba(0, 0, 255, 1)">if</span><span style="color: rgba(0, 0, 0, 1)"> (bExpectWord)
+</span><span style="color: rgba(0, 128, 128, 1)">150</span> <span style="color: rgba(0, 0, 0, 1)">    {
+</span><span style="color: rgba(0, 128, 128, 1)">151</span>         cerr &lt;&lt; <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">语法错误6：缺少关键字</span><span style="color: rgba(128, 0, 0, 1)">"</span> &lt;&lt;<span style="color: rgba(0, 0, 0, 1)"> endl;
+</span><span style="color: rgba(0, 128, 128, 1)">152</span> <span style="color: rgba(0, 0, 0, 1)">        m_expr.clear();
+</span><span style="color: rgba(0, 128, 128, 1)">153</span>         <span style="color: rgba(0, 0, 255, 1)">return</span> <span style="color: rgba(0, 0, 255, 1)">false</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)">154</span> <span style="color: rgba(0, 0, 0, 1)">    }
+</span><span style="color: rgba(0, 128, 128, 1)">155</span> 
+<span style="color: rgba(0, 128, 128, 1)">156</span>     size_t nLeft =<span style="color: rgba(0, 0, 0, 1)"> stackOperators.size();
+</span><span style="color: rgba(0, 128, 128, 1)">157</span> 
+<span style="color: rgba(0, 128, 128, 1)">158</span>     <span style="color: rgba(0, 0, 255, 1)">for</span> (size_t i = <span style="color: rgba(128, 0, 128, 1)">0</span>; i &lt; nLeft; ++<span style="color: rgba(0, 0, 0, 1)">i)
+</span><span style="color: rgba(0, 128, 128, 1)">159</span> <span style="color: rgba(0, 0, 0, 1)">    {
+</span><span style="color: rgba(0, 128, 128, 1)">160</span>         pOprTop = &amp;<span style="color: rgba(0, 0, 0, 1)">stackOperators.top();
+</span><span style="color: rgba(0, 128, 128, 1)">161</span>         <span style="color: rgba(0, 0, 255, 1)">if</span> (pOprTop-&gt;nWordType ==<span style="color: rgba(0, 0, 0, 1)"> TYPE_LEFT)
+</span><span style="color: rgba(0, 128, 128, 1)">162</span> <span style="color: rgba(0, 0, 0, 1)">        {
+</span><span style="color: rgba(0, 128, 128, 1)">163</span>             cerr &lt;&lt; <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">语法错误7：右括号不匹配左括号3</span><span style="color: rgba(128, 0, 0, 1)">"</span> &lt;&lt;<span style="color: rgba(0, 0, 0, 1)"> endl;
+</span><span style="color: rgba(0, 128, 128, 1)">164</span> <span style="color: rgba(0, 0, 0, 1)">            m_expr.clear();
+</span><span style="color: rgba(0, 128, 128, 1)">165</span>             <span style="color: rgba(0, 0, 255, 1)">return</span> <span style="color: rgba(0, 0, 255, 1)">false</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)">166</span> <span style="color: rgba(0, 0, 0, 1)">        }
+</span><span style="color: rgba(0, 128, 128, 1)">167</span>         m_expr.push_back(*<span style="color: rgba(0, 0, 0, 1)">pOprTop);
+</span><span style="color: rgba(0, 128, 128, 1)">168</span> <span style="color: rgba(0, 0, 0, 1)">        stackOperators.pop();
+</span><span style="color: rgba(0, 128, 128, 1)">169</span> <span style="color: rgba(0, 0, 0, 1)">    }
+</span><span style="color: rgba(0, 128, 128, 1)">170</span> 
+<span style="color: rgba(0, 128, 128, 1)">171</span>     <span style="color: rgba(0, 0, 255, 1)">return</span> <span style="color: rgba(0, 0, 255, 1)">true</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)">172</span> <span style="color: rgba(0, 0, 0, 1)">}
+</span><span style="color: rgba(0, 128, 128, 1)">173</span> 
+<span style="color: rgba(0, 128, 128, 1)">174</span> <span style="color: rgba(0, 0, 255, 1)">bool</span> CPostfixExpressions::grep(<span style="color: rgba(0, 0, 255, 1)">const</span> <span style="color: rgba(0, 0, 255, 1)">char</span> *<span style="color: rgba(0, 0, 0, 1)">str)
+</span><span style="color: rgba(0, 128, 128, 1)">175</span> <span style="color: rgba(0, 0, 0, 1)">{
+</span><span style="color: rgba(0, 128, 128, 1)">176</span>     <span style="color: rgba(0, 0, 255, 1)">if</span> (m_expr.size() == <span style="color: rgba(128, 0, 128, 1)">0</span><span style="color: rgba(0, 0, 0, 1)">)
+</span><span style="color: rgba(0, 128, 128, 1)">177</span> <span style="color: rgba(0, 0, 0, 1)">    {
+</span><span style="color: rgba(0, 128, 128, 1)">178</span>         cerr &lt;&lt; <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">分组错误1，可能是表达式有问题</span><span style="color: rgba(128, 0, 0, 1)">"</span> &lt;&lt;<span style="color: rgba(0, 0, 0, 1)"> endl;
+</span><span style="color: rgba(0, 128, 128, 1)">179</span>         <span style="color: rgba(0, 0, 255, 1)">return</span> <span style="color: rgba(0, 0, 255, 1)">false</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)">180</span> <span style="color: rgba(0, 0, 0, 1)">    }
+</span><span style="color: rgba(0, 128, 128, 1)">181</span> 
+<span style="color: rgba(0, 128, 128, 1)">182</span> 
+<span style="color: rgba(0, 128, 128, 1)">183</span>     vector&lt;ST_WORD&gt; expr =<span style="color: rgba(0, 0, 0, 1)"> m_expr;
+</span><span style="color: rgba(0, 128, 128, 1)">184</span> 
+<span style="color: rgba(0, 128, 128, 1)">185</span>     <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">先把关键字转换成布尔值</span>
+<span style="color: rgba(0, 128, 128, 1)">186</span>     <span style="color: rgba(0, 0, 255, 1)">for</span> (size_t i = <span style="color: rgba(128, 0, 128, 1)">0</span>; i &lt; expr.size(); ++<span style="color: rgba(0, 0, 0, 1)">i)
+</span><span style="color: rgba(0, 128, 128, 1)">187</span> <span style="color: rgba(0, 0, 0, 1)">    {
+</span><span style="color: rgba(0, 128, 128, 1)">188</span>         <span style="color: rgba(0, 0, 255, 1)">if</span> (expr[i].nWordType ==<span style="color: rgba(0, 0, 0, 1)"> TYPE_WORD)
+</span><span style="color: rgba(0, 128, 128, 1)">189</span> <span style="color: rgba(0, 0, 0, 1)">        {
+</span><span style="color: rgba(0, 128, 128, 1)">190</span>             expr[i].nWordType =<span style="color: rgba(0, 0, 0, 1)"> TYPE_BOOL;
+</span><span style="color: rgba(0, 128, 128, 1)">191</span>             <span style="color: rgba(0, 0, 255, 1)">if</span> (strstr(str, expr[i].sValue.c_str()) !=<span style="color: rgba(0, 0, 0, 1)"> NULL)
+</span><span style="color: rgba(0, 128, 128, 1)">192</span> <span style="color: rgba(0, 0, 0, 1)">            {
+</span><span style="color: rgba(0, 128, 128, 1)">193</span>                 expr[i].sValue = <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">1</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)">194</span> <span style="color: rgba(0, 0, 0, 1)">            }
+</span><span style="color: rgba(0, 128, 128, 1)">195</span>             <span style="color: rgba(0, 0, 255, 1)">else</span>
+<span style="color: rgba(0, 128, 128, 1)">196</span> <span style="color: rgba(0, 0, 0, 1)">            {
+</span><span style="color: rgba(0, 128, 128, 1)">197</span>                 expr[i].sValue = <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">0</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)">198</span> <span style="color: rgba(0, 0, 0, 1)">            }
+</span><span style="color: rgba(0, 128, 128, 1)">199</span> <span style="color: rgba(0, 0, 0, 1)">        }
+</span><span style="color: rgba(0, 128, 128, 1)">200</span> <span style="color: rgba(0, 0, 0, 1)">    }
+</span><span style="color: rgba(0, 128, 128, 1)">201</span> 
+<span style="color: rgba(0, 128, 128, 1)">202</span>     <span style="color: rgba(0, 0, 255, 1)">if</span> (m_expr.size() == <span style="color: rgba(128, 0, 128, 1)">1</span><span style="color: rgba(0, 0, 0, 1)">)
+</span><span style="color: rgba(0, 128, 128, 1)">203</span> <span style="color: rgba(0, 0, 0, 1)">    {
+</span><span style="color: rgba(0, 128, 128, 1)">204</span>         <span style="color: rgba(0, 0, 255, 1)">return</span> expr[<span style="color: rgba(128, 0, 128, 1)">0</span>].sValue[<span style="color: rgba(128, 0, 128, 1)">0</span>] == <span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">1</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)">205</span> <span style="color: rgba(0, 0, 0, 1)">    }
+</span><span style="color: rgba(0, 128, 128, 1)">206</span> 
+<span style="color: rgba(0, 128, 128, 1)">207</span>     stack&lt;ST_WORD&gt;<span style="color: rgba(0, 0, 0, 1)"> stackOper;
+</span><span style="color: rgba(0, 128, 128, 1)">208</span> <span style="color: rgba(0, 0, 0, 1)">    ST_WORD tmpResult;
+</span><span style="color: rgba(0, 128, 128, 1)">209</span>     tmpResult.nWordType =<span style="color: rgba(0, 0, 0, 1)"> TYPE_BOOL;
+</span><span style="color: rgba(0, 128, 128, 1)">210</span>     tmpResult.sValue = <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">1</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)">211</span> 
+<span style="color: rgba(0, 128, 128, 1)">212</span>     <span style="color: rgba(0, 0, 255, 1)">for</span> (size_t i = <span style="color: rgba(128, 0, 128, 1)">0</span>; i &lt; expr.size(); ++<span style="color: rgba(0, 0, 0, 1)">i)
+</span><span style="color: rgba(0, 128, 128, 1)">213</span> <span style="color: rgba(0, 0, 0, 1)">    {
+</span><span style="color: rgba(0, 128, 128, 1)">214</span>         <span style="color: rgba(0, 0, 255, 1)">if</span> (expr[i].nWordType ==<span style="color: rgba(0, 0, 0, 1)"> TYPE_BOOL)
+</span><span style="color: rgba(0, 128, 128, 1)">215</span> <span style="color: rgba(0, 0, 0, 1)">        {
+</span><span style="color: rgba(0, 128, 128, 1)">216</span> <span style="color: rgba(0, 0, 0, 1)">            stackOper.push(expr[i]);
+</span><span style="color: rgba(0, 128, 128, 1)">217</span> <span style="color: rgba(0, 0, 0, 1)">        }
+</span><span style="color: rgba(0, 128, 128, 1)">218</span>         <span style="color: rgba(0, 0, 255, 1)">else</span>
+<span style="color: rgba(0, 128, 128, 1)">219</span> <span style="color: rgba(0, 0, 0, 1)">        {
+</span><span style="color: rgba(0, 128, 128, 1)">220</span>             <span style="color: rgba(0, 0, 255, 1)">if</span> (stackOper.size() &lt; <span style="color: rgba(128, 0, 128, 1)">2</span><span style="color: rgba(0, 0, 0, 1)">)
+</span><span style="color: rgba(0, 128, 128, 1)">221</span> <span style="color: rgba(0, 0, 0, 1)">            {
+</span><span style="color: rgba(0, 128, 128, 1)">222</span>                 cerr &lt;&lt; <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">分组错误2，可能是表达式有问题</span><span style="color: rgba(128, 0, 0, 1)">"</span> &lt;&lt;<span style="color: rgba(0, 0, 0, 1)"> endl;
+</span><span style="color: rgba(0, 128, 128, 1)">223</span>                 <span style="color: rgba(0, 0, 255, 1)">return</span> <span style="color: rgba(0, 0, 255, 1)">false</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)">224</span> <span style="color: rgba(0, 0, 0, 1)">            }
+</span><span style="color: rgba(0, 128, 128, 1)">225</span> 
+<span style="color: rgba(0, 128, 128, 1)">226</span>             <span style="color: rgba(0, 0, 255, 1)">const</span> ST_WORD right =<span style="color: rgba(0, 0, 0, 1)"> stackOper.top();
+</span><span style="color: rgba(0, 128, 128, 1)">227</span> <span style="color: rgba(0, 0, 0, 1)">            stackOper.pop();
+</span><span style="color: rgba(0, 128, 128, 1)">228</span>             <span style="color: rgba(0, 0, 255, 1)">const</span> ST_WORD left =<span style="color: rgba(0, 0, 0, 1)"> stackOper.top();
+</span><span style="color: rgba(0, 128, 128, 1)">229</span> <span style="color: rgba(0, 0, 0, 1)">            stackOper.pop();
+</span><span style="color: rgba(0, 128, 128, 1)">230</span> 
+<span style="color: rgba(0, 128, 128, 1)">231</span>             <span style="color: rgba(0, 0, 255, 1)">int</span><span style="color: rgba(0, 0, 0, 1)"> nResult;
+</span><span style="color: rgba(0, 128, 128, 1)">232</span> 
+<span style="color: rgba(0, 128, 128, 1)">233</span>             <span style="color: rgba(0, 0, 255, 1)">if</span> (expr[i].nWordType ==<span style="color: rgba(0, 0, 0, 1)"> TYPE_AND)
+</span><span style="color: rgba(0, 128, 128, 1)">234</span> <span style="color: rgba(0, 0, 0, 1)">            {
+</span><span style="color: rgba(0, 128, 128, 1)">235</span>                 nResult = (left.sValue[<span style="color: rgba(128, 0, 128, 1)">0</span>] - <span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">0</span><span style="color: rgba(128, 0, 0, 1)">'</span>) &amp;&amp; (right.sValue[<span style="color: rgba(128, 0, 128, 1)">0</span>] - <span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">0</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">);
+</span><span style="color: rgba(0, 128, 128, 1)">236</span> <span style="color: rgba(0, 0, 0, 1)">            }
+</span><span style="color: rgba(0, 128, 128, 1)">237</span>             <span style="color: rgba(0, 0, 255, 1)">else</span>
+<span style="color: rgba(0, 128, 128, 1)">238</span> <span style="color: rgba(0, 0, 0, 1)">            {
+</span><span style="color: rgba(0, 128, 128, 1)">239</span>                 nResult = (left.sValue[<span style="color: rgba(128, 0, 128, 1)">0</span>] - <span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">0</span><span style="color: rgba(128, 0, 0, 1)">'</span>) || (right.sValue[<span style="color: rgba(128, 0, 128, 1)">0</span>] - <span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">0</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">);
+</span><span style="color: rgba(0, 128, 128, 1)">240</span> <span style="color: rgba(0, 0, 0, 1)">            }
+</span><span style="color: rgba(0, 128, 128, 1)">241</span> 
+<span style="color: rgba(0, 128, 128, 1)">242</span>             tmpResult.sValue[<span style="color: rgba(128, 0, 128, 1)">0</span>] = nResult + <span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">0</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)">243</span> 
+<span style="color: rgba(0, 128, 128, 1)">244</span>             <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">计算结果放回操作数堆栈</span>
+<span style="color: rgba(0, 128, 128, 1)">245</span> <span style="color: rgba(0, 0, 0, 1)">            stackOper.push(tmpResult);
+</span><span style="color: rgba(0, 128, 128, 1)">246</span> <span style="color: rgba(0, 0, 0, 1)">        }
+</span><span style="color: rgba(0, 128, 128, 1)">247</span> <span style="color: rgba(0, 0, 0, 1)">    }
+</span><span style="color: rgba(0, 128, 128, 1)">248</span> 
+<span style="color: rgba(0, 128, 128, 1)">249</span>     <span style="color: rgba(0, 0, 255, 1)">if</span> (tmpResult.sValue[<span style="color: rgba(128, 0, 128, 1)">0</span>] == <span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">1</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">)
+</span><span style="color: rgba(0, 128, 128, 1)">250</span> <span style="color: rgba(0, 0, 0, 1)">    {
+</span><span style="color: rgba(0, 128, 128, 1)">251</span>         <span style="color: rgba(0, 0, 255, 1)">return</span> <span style="color: rgba(0, 0, 255, 1)">true</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)">252</span> <span style="color: rgba(0, 0, 0, 1)">    }
+</span><span style="color: rgba(0, 128, 128, 1)">253</span>     <span style="color: rgba(0, 0, 255, 1)">else</span>
+<span style="color: rgba(0, 128, 128, 1)">254</span> <span style="color: rgba(0, 0, 0, 1)">    {
+</span><span style="color: rgba(0, 128, 128, 1)">255</span>         <span style="color: rgba(0, 0, 255, 1)">return</span> <span style="color: rgba(0, 0, 255, 1)">false</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)">256</span> <span style="color: rgba(0, 0, 0, 1)">    }
+</span><span style="color: rgba(0, 128, 128, 1)">257</span> <span style="color: rgba(0, 0, 0, 1)">}
+</span><span style="color: rgba(0, 128, 128, 1)">258</span> 
+<span style="color: rgba(0, 128, 128, 1)">259</span> 
+<span style="color: rgba(0, 128, 128, 1)">260</span> 
+<span style="color: rgba(0, 128, 128, 1)">261</span> 
+<span style="color: rgba(0, 128, 128, 1)">262</span> <span style="color: rgba(0, 0, 255, 1)">void</span><span style="color: rgba(0, 0, 0, 1)"> testParse()
+</span><span style="color: rgba(0, 128, 128, 1)">263</span> <span style="color: rgba(0, 0, 0, 1)">{
+</span><span style="color: rgba(0, 128, 128, 1)">264</span>     <span style="color: rgba(0, 0, 255, 1)">char</span> *strExpr[] = {<span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">单词</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">,
+</span><span style="color: rgba(0, 128, 128, 1)">265</span>         <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">双词&amp;与</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">,
+</span><span style="color: rgba(0, 128, 128, 1)">266</span>         <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">双词&amp;或</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">,
+</span><span style="color: rgba(0, 128, 128, 1)">267</span>         <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">三词&amp;与|或</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">,
+</span><span style="color: rgba(0, 128, 128, 1)">268</span>         <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">三词|或&amp;与</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">,
+</span><span style="color: rgba(0, 128, 128, 1)">269</span>         <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">三词&amp;与&amp;与</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">,
+</span><span style="color: rgba(0, 128, 128, 1)">270</span>         <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">三词|或|或</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">,
+</span><span style="color: rgba(0, 128, 128, 1)">271</span>         <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">(计算机&amp;专业)|广工</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">,
+</span><span style="color: rgba(0, 128, 128, 1)">272</span>         <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">计算机&amp;广东</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">,
+</span><span style="color: rgba(0, 128, 128, 1)">273</span>         <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">计算机|好的|专业</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">,
+</span><span style="color: rgba(0, 128, 128, 1)">274</span>         <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">(美丽|专业&amp;低薪)|测试</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">,
+</span><span style="color: rgba(0, 128, 128, 1)">275</span>         <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">(计算机&amp;帅哥)&amp;广工</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">,
+</span><span style="color: rgba(0, 128, 128, 1)">276</span>         <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">(美丽&amp;贤惠|计算机&amp;专业)|广工&amp;北大</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">,
+</span><span style="color: rgba(0, 128, 128, 1)">277</span>         <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">(计算机&amp;帅哥)&amp;广工(美丽&amp;贤惠|计算机&amp;专业)|广工&amp;北大</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">,
+</span><span style="color: rgba(0, 128, 128, 1)">278</span>         <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">(计算机(帅哥&amp;广工))</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">,
+</span><span style="color: rgba(0, 128, 128, 1)">279</span>         <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">((帅哥&amp;广工)计算机)</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">,
+</span><span style="color: rgba(0, 128, 128, 1)">280</span>         <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">计算机(帅哥&amp;广工))</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">,
+</span><span style="color: rgba(0, 128, 128, 1)">281</span>         <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">(计算机(帅哥&amp;广工)</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">,
+</span><span style="color: rgba(0, 128, 128, 1)">282</span>         <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">计算机(帅哥&amp;广工)</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">,
+</span><span style="color: rgba(0, 128, 128, 1)">283</span>         <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">&amp;</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">,
+</span><span style="color: rgba(0, 128, 128, 1)">284</span>         <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">&amp;&amp;</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">,
+</span><span style="color: rgba(0, 128, 128, 1)">285</span>         <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">我&amp;</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">};
+</span><span style="color: rgba(0, 128, 128, 1)">286</span> 
+<span style="color: rgba(0, 128, 128, 1)">287</span>     <span style="color: rgba(0, 0, 255, 1)">for</span> (<span style="color: rgba(0, 0, 255, 1)">int</span> i = <span style="color: rgba(128, 0, 128, 1)">0</span>; i &lt; NUMOF(strExpr); ++<span style="color: rgba(0, 0, 0, 1)">i)
+</span><span style="color: rgba(0, 128, 128, 1)">288</span> <span style="color: rgba(0, 0, 0, 1)">    {
+</span><span style="color: rgba(0, 128, 128, 1)">289</span> <span style="color: rgba(0, 0, 0, 1)">        CPostfixExpressions expr;
+</span><span style="color: rgba(0, 128, 128, 1)">290</span> 
+<span style="color: rgba(0, 128, 128, 1)">291</span> 
+<span style="color: rgba(0, 128, 128, 1)">292</span>         cerr &lt;&lt; strExpr[i] &lt;&lt;<span style="color: rgba(0, 0, 0, 1)"> endl;
+</span><span style="color: rgba(0, 128, 128, 1)">293</span>         <span style="color: rgba(0, 0, 255, 1)">if</span><span style="color: rgba(0, 0, 0, 1)"> (expr.parse(strExpr[i]))
+</span><span style="color: rgba(0, 128, 128, 1)">294</span> <span style="color: rgba(0, 0, 0, 1)">        {
+</span><span style="color: rgba(0, 128, 128, 1)">295</span>             cerr &lt;&lt; <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">语法正确</span><span style="color: rgba(128, 0, 0, 1)">"</span> &lt;&lt;<span style="color: rgba(0, 0, 0, 1)"> endl;
+</span><span style="color: rgba(0, 128, 128, 1)">296</span> <span style="color: rgba(0, 0, 0, 1)">            expr.showExpr();
+</span><span style="color: rgba(0, 128, 128, 1)">297</span> <span style="color: rgba(0, 0, 0, 1)">        }
+</span><span style="color: rgba(0, 128, 128, 1)">298</span>         <span style="color: rgba(0, 0, 255, 1)">else</span>
+<span style="color: rgba(0, 128, 128, 1)">299</span> <span style="color: rgba(0, 0, 0, 1)">        {
+</span><span style="color: rgba(0, 128, 128, 1)">300</span>             cerr &lt;&lt; <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">语法错误</span><span style="color: rgba(128, 0, 0, 1)">"</span> &lt;&lt;<span style="color: rgba(0, 0, 0, 1)"> endl;
+</span><span style="color: rgba(0, 128, 128, 1)">301</span> <span style="color: rgba(0, 0, 0, 1)">        }
+</span><span style="color: rgba(0, 128, 128, 1)">302</span>         cerr &lt;&lt; <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">------------</span><span style="color: rgba(128, 0, 0, 1)">"</span> &lt;&lt;<span style="color: rgba(0, 0, 0, 1)"> endl;
+</span><span style="color: rgba(0, 128, 128, 1)">303</span> <span style="color: rgba(0, 0, 0, 1)">    }
+</span><span style="color: rgba(0, 128, 128, 1)">304</span> <span style="color: rgba(0, 0, 0, 1)">}
+</span><span style="color: rgba(0, 128, 128, 1)">305</span> 
+<span style="color: rgba(0, 128, 128, 1)">306</span> 
+<span style="color: rgba(0, 128, 128, 1)">307</span> <span style="color: rgba(0, 0, 255, 1)">void</span> testGrep(<span style="color: rgba(0, 0, 255, 1)">int</span> argc, _TCHAR*<span style="color: rgba(0, 0, 0, 1)"> argv[])
+</span><span style="color: rgba(0, 128, 128, 1)">308</span> <span style="color: rgba(0, 0, 0, 1)">{
+</span><span style="color: rgba(0, 128, 128, 1)">309</span>     <span style="color: rgba(0, 0, 255, 1)">char</span> *strExpr[] = {<span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">(计算机&amp;专业)|广工</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">,
+</span><span style="color: rgba(0, 128, 128, 1)">310</span>         <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">计算机&amp;广东</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">,
+</span><span style="color: rgba(0, 128, 128, 1)">311</span>         <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">计算机|好的|专业</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">,
+</span><span style="color: rgba(0, 128, 128, 1)">312</span>         <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">(美丽|专业&amp;低薪)|测试</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">,
+</span><span style="color: rgba(0, 128, 128, 1)">313</span>         <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">(计算机&amp;帅哥)&amp;广工</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">,
+</span><span style="color: rgba(0, 128, 128, 1)">314</span>         <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">计算机&amp;(帅哥&amp;广工)</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">,
+</span><span style="color: rgba(0, 128, 128, 1)">315</span>         <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">(美丽&amp;贤惠|计算机&amp;专业)|广工&amp;北大</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">,
+</span><span style="color: rgba(0, 128, 128, 1)">316</span>         <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">(计算机|(帅哥&amp;广工))</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">,
+</span><span style="color: rgba(0, 128, 128, 1)">317</span>         <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">广工</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">,
+</span><span style="color: rgba(0, 128, 128, 1)">318</span>         <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">我们</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">};
+</span><span style="color: rgba(0, 128, 128, 1)">319</span> 
+<span style="color: rgba(0, 128, 128, 1)">320</span>     <span style="color: rgba(0, 0, 255, 1)">char</span> *strInput[] =<span style="color: rgba(0, 0, 0, 1)"> {
+</span><span style="color: rgba(0, 128, 128, 1)">321</span>         <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">计算机</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">,
+</span><span style="color: rgba(0, 128, 128, 1)">322</span>         <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">黄词辉</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">,
+</span><span style="color: rgba(0, 128, 128, 1)">323</span>         <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">广工</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">,
+</span><span style="color: rgba(0, 128, 128, 1)">324</span>         <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">专业</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">,
+</span><span style="color: rgba(0, 128, 128, 1)">325</span>         <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">黄词辉 计算机 广工毕业 帅哥</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">,
+</span><span style="color: rgba(0, 128, 128, 1)">326</span>         <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">美丽 计算机 广工毕业 贤惠</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">,
+</span><span style="color: rgba(0, 128, 128, 1)">327</span>         <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">专业 计算机 广工毕业 贤惠</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">,
+</span><span style="color: rgba(0, 128, 128, 1)">328</span>         <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">黄词辉 计算机 广工毕业 贤惠</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">,
+</span><span style="color: rgba(0, 128, 128, 1)">329</span>         <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">美丽 计算机 专业 帅哥</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">,
+</span><span style="color: rgba(0, 128, 128, 1)">330</span>         <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">低薪 计算机 专业 帅哥</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">,
+</span><span style="color: rgba(0, 128, 128, 1)">331</span>         <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">黄词辉 计算机 测试 帅哥</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">,
+</span><span style="color: rgba(0, 128, 128, 1)">332</span>         <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">我们曾经一起奋斗 广工</span><span style="color: rgba(128, 0, 0, 1)">"</span>
+<span style="color: rgba(0, 128, 128, 1)">333</span> <span style="color: rgba(0, 0, 0, 1)">    };
+</span><span style="color: rgba(0, 128, 128, 1)">334</span>     <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">     testParse();
+</span><span style="color: rgba(0, 128, 128, 1)">335</span>     <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">     return true;</span>
+<span style="color: rgba(0, 128, 128, 1)">336</span>     <span style="color: rgba(0, 0, 255, 1)">for</span> (<span style="color: rgba(0, 0, 255, 1)">int</span> i = <span style="color: rgba(128, 0, 128, 1)">0</span>; i &lt; NUMOF(strExpr); ++<span style="color: rgba(0, 0, 0, 1)">i)
+</span><span style="color: rgba(0, 128, 128, 1)">337</span> <span style="color: rgba(0, 0, 0, 1)">    {
+</span><span style="color: rgba(0, 128, 128, 1)">338</span> <span style="color: rgba(0, 0, 0, 1)">        CPostfixExpressions expr;
+</span><span style="color: rgba(0, 128, 128, 1)">339</span> 
+<span style="color: rgba(0, 128, 128, 1)">340</span> 
+<span style="color: rgba(0, 128, 128, 1)">341</span>         cerr &lt;&lt; <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">词根：</span><span style="color: rgba(128, 0, 0, 1)">"</span> &lt;&lt; strExpr[i] &lt;&lt;<span style="color: rgba(0, 0, 0, 1)"> endl;
+</span><span style="color: rgba(0, 128, 128, 1)">342</span>         <span style="color: rgba(0, 0, 255, 1)">if</span><span style="color: rgba(0, 0, 0, 1)"> (expr.parse(strExpr[i]))
+</span><span style="color: rgba(0, 128, 128, 1)">343</span> <span style="color: rgba(0, 0, 0, 1)">        {
+</span><span style="color: rgba(0, 128, 128, 1)">344</span>             <span style="color: rgba(0, 0, 255, 1)">for</span> (<span style="color: rgba(0, 0, 255, 1)">int</span> j = <span style="color: rgba(128, 0, 128, 1)">0</span>; j &lt; NUMOF(strInput); ++<span style="color: rgba(0, 0, 0, 1)">j)
+</span><span style="color: rgba(0, 128, 128, 1)">345</span> <span style="color: rgba(0, 0, 0, 1)">            {
+</span><span style="color: rgba(0, 128, 128, 1)">346</span>                 cerr &lt;&lt; <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">匹配 </span><span style="color: rgba(128, 0, 0, 1)">"</span> &lt;&lt;<span style="color: rgba(0, 0, 0, 1)"> strInput[j];
+</span><span style="color: rgba(0, 128, 128, 1)">347</span>                 <span style="color: rgba(0, 0, 255, 1)">if</span><span style="color: rgba(0, 0, 0, 1)"> (expr.grep(strInput[j]))
+</span><span style="color: rgba(0, 128, 128, 1)">348</span> <span style="color: rgba(0, 0, 0, 1)">                {
+</span><span style="color: rgba(0, 128, 128, 1)">349</span>                     cerr &lt;&lt; <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)"> 成功</span><span style="color: rgba(128, 0, 0, 1)">"</span> &lt;&lt;<span style="color: rgba(0, 0, 0, 1)"> endl;
+</span><span style="color: rgba(0, 128, 128, 1)">350</span> <span style="color: rgba(0, 0, 0, 1)">                }
+</span><span style="color: rgba(0, 128, 128, 1)">351</span>                 <span style="color: rgba(0, 0, 255, 1)">else</span>
+<span style="color: rgba(0, 128, 128, 1)">352</span> <span style="color: rgba(0, 0, 0, 1)">                {
+</span><span style="color: rgba(0, 128, 128, 1)">353</span>                     cerr &lt;&lt; <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)"> 失败</span><span style="color: rgba(128, 0, 0, 1)">"</span> &lt;&lt;<span style="color: rgba(0, 0, 0, 1)"> endl;
+</span><span style="color: rgba(0, 128, 128, 1)">354</span> <span style="color: rgba(0, 0, 0, 1)">                }
+</span><span style="color: rgba(0, 128, 128, 1)">355</span> <span style="color: rgba(0, 0, 0, 1)">            }
+</span><span style="color: rgba(0, 128, 128, 1)">356</span> <span style="color: rgba(0, 0, 0, 1)">        }
+</span><span style="color: rgba(0, 128, 128, 1)">357</span>         <span style="color: rgba(0, 0, 255, 1)">else</span>
+<span style="color: rgba(0, 128, 128, 1)">358</span> <span style="color: rgba(0, 0, 0, 1)">        {
+</span><span style="color: rgba(0, 128, 128, 1)">359</span>             cerr &lt;&lt; <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">语法错误</span><span style="color: rgba(128, 0, 0, 1)">"</span> &lt;&lt;<span style="color: rgba(0, 0, 0, 1)"> endl;
+</span><span style="color: rgba(0, 128, 128, 1)">360</span> <span style="color: rgba(0, 0, 0, 1)">        }
+</span><span style="color: rgba(0, 128, 128, 1)">361</span>         cerr &lt;&lt; <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">------------</span><span style="color: rgba(128, 0, 0, 1)">"</span> &lt;&lt;<span style="color: rgba(0, 0, 0, 1)"> endl;
+</span><span style="color: rgba(0, 128, 128, 1)">362</span> <span style="color: rgba(0, 0, 0, 1)">    }
+</span><span style="color: rgba(0, 128, 128, 1)">363</span> }</pre>
+</div>
+<p>stdafx.cpp</p>
+<div class="cnblogs_code">
+<pre><span style="color: rgba(0, 128, 128, 1)">1</span> <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)"> stdafx.cpp : 只包括标准包含文件的源文件
+</span><span style="color: rgba(0, 128, 128, 1)">2</span> <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)"> divide_group.pch 将作为预编译头
+</span><span style="color: rgba(0, 128, 128, 1)">3</span> <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)"> stdafx.obj 将包含预编译类型信息</span>
+<span style="color: rgba(0, 128, 128, 1)">4</span> 
+<span style="color: rgba(0, 128, 128, 1)">5</span> #include <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">stdafx.h</span><span style="color: rgba(128, 0, 0, 1)">"</span>
+<span style="color: rgba(0, 128, 128, 1)">6</span> 
+<span style="color: rgba(0, 128, 128, 1)">7</span> <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)"> TODO: 在 STDAFX.H 中
+</span><span style="color: rgba(0, 128, 128, 1)">8</span> <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)"> 引用任何所需的附加头文件，而不是在此文件中引用</span></pre>
+</div>
+<p>&nbsp;</p>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2019-05-18 18:37</span>&nbsp;
+<a href="https://www.cnblogs.com/kingstarer/">皇家救星</a>&nbsp;
+阅读(<span id="post_view_count">3156</span>)&nbsp;
+评论(<span id="post_comment_count">2</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10886607" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(10886607);return false;">收藏</a>&nbsp;
+<a href="javascript:void(0)" onclick="reportManager.report({ currentUserId: '', targetType: 'blogPost', targetId: '10886607', targetLink: 'https://www.cnblogs.com/kingstarer/p/10886607.html', title: '最近帮朋友写了一个百度竞价关键词快速分词（分组）工具，支持与或逻辑分组，附源码和工具下载链接' })">举报</a></div>
+        </div>
+        <script src="https://common.cnblogs.com/highlight/10.3.1/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 234136, cb_blogApp = 'kingstarer', cb_blogUserGuid = '6c01f56e-ee22-e511-b908-9dcfd8948a71';
+    var cb_entryId = 10886607, cb_entryCreatedDate = '2019-05-18 18:37', cb_postType = 1;
+    updatePostStats(
+        [cb_entryId],
+        function(id, count) { $("#post_view_count").text(count) },
+        function(id, count) { $("#post_comment_count").text(count) })
+    zoomManager.apply("#cnblogs_post_body img:not(.code_img_closed):not(.code_img_opened)");
+</script>
+        <a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <div id="cnblogs_c1" class="under-post-card">
+        <div id='div-gpt-ad-1592365906576-0' style='width: 300px; height: 250px;'></div>
+    </div>
+    <div id="under_post_card1"></div>
+    <div id="cnblogs_c2" class="under-post-card">
+        <div id='div-gpt-ad-1592366332455-0' style='width: 468px; height: 60px;'></div>
+    </div>
+    <div id="under_post_card2"></div>
+    <div id="HistoryToday" class="under-post-card"></div>
+    <script type="text/javascript">
+       var commentManager = new blogCommentManager();
+       commentManager.renderComments(0);
+       fixPostBody();
+       deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);       deliverT2();
+       deliverC1C2();
+       loadNewsAndKb();
+       loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);       LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+       GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+       loadOptUnderPost();
+       GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+
+    </div>
+</div>
+            </div>
+        </div>
+
+        <div id="sideBar">
+            <div id="sideBarMain">
+                <div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+<div id="sidebar_c3"></div>
+                <div id="calendar"><div id="blog-calendar" style="display:none"></div></div>                
+                <script>loadBlogDefaultCalendar();</script>
+                <div id="leftcontentcontainer">
+                    <!-- begin:SingleColumn -->
+                    <div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+                    <!-- end:  SingleColumn -->
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div id="footer">
+        <!--done-->
+Copyright &copy; 2021 皇家救星
+<br /><span id="poweredby">Powered by .NET 5.0 on Kubernetes</span>
+
+    </div>
+</div>
+
+    
+
+    <input type="hidden" id="antiforgery_token" value="CfDJ8L-rpLgFVEJMgssCVvNUAjsbUvlmj5jdifVEJAq_iMAoBirNh4CPEsZiBUfaFLXRihLKAhi1gSoZks0E4vNTSl_KNiKQrD7jKhFtKtF6Asa8T79fh4lwg9lOH5iFfEQGj355H3jlIzFg92Y2UJFx_gI" />
+</body>
+</html>

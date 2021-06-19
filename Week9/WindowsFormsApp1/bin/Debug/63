@@ -1,0 +1,329 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin-when-crossorigin" />
+    <meta name="description" content="今天同事说新装了一台云服务器，使用ssh登录正常，但是上面的达梦数据库服务端口不能访问。 用netstat anp查看端口是正常监听的，监听的地址也是允许任意ip访问 并且防火墙和iptables都是" />
+    <meta property="og:description" content="今天同事说新装了一台云服务器，使用ssh登录正常，但是上面的达梦数据库服务端口不能访问。 用netstat anp查看端口是正常监听的，监听的地址也是允许任意ip访问 并且防火墙和iptables都是" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>一次云服务器安装达梦数据库后无法远程访问问题处理 - 皇家救星 - 博客园</title>
+    <link id="favicon" rel="shortcut icon" href="//common.cnblogs.com/favicon.svg" type="image/svg+xml" />
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=6tvK5XC6GPbg3p_sy7wzz_2291HoYACr4440iKBzQIw" />
+    <link id="MainCss" rel="stylesheet" href="/skins/simpleblue/bundle-simpleblue.min.css?v=2hjghzSZyhYA1HxvSxKnXih3JbC120DBjeO9V9T_nSs" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/simpleblue/bundle-simpleblue-mobile.min.css?v=3tvwgOOqUo3RpS6gGzEdK0LbptOPv4Bx7M85_UAnFGs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/kingstarer/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/kingstarer/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/kingstarer/wlwmanifest.xml" />
+    <script>
+        var currentBlogId = 234136;
+        var currentBlogApp = 'kingstarer';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var isBlogOwner = false;
+        var skinName = 'SimpleBlue';
+        var visitorUserId = '';
+    </script>
+        <script>
+            var currentPostDateAdded = '2020-05-24 06:53';
+        </script>
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=ZUvfwhWs5fv-s8Nv7WofCOhwKAxiDO928zdWFzhnOPk"></script>
+    
+    
+    
+</head>
+<body class="has-navbar has-bannerbar">
+    <a name="top"></a>
+            <a target="_blank" href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:pc|pp:bokeyuan-huodong-21nianzhongdacu-neiyePCtonglanbanner|pu:21nianzhongdacu-neiyePCtonglanbanner|ci:21nzdc|kw:10224545" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-pc')">
+                <div class="bannerbar aliyun forpc" style="background-size: contain; filter: brightness(0.95); background-image: url(https://img2020.cnblogs.com/blog/35695/202106/35695-20210610183724605-1725070929.jpg)">
+                </div>
+            </a>
+            <div id="bannerbar" class="bannerbar-mobile formobile">
+            <a href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:mb|pp:bokeyuan-huodong-21nianzhongdacu-neiyeyidongduantonglanbanner|pu:21nianzhongdacu-neiyeyidongduantonglanbanner|ci:21nzdc|kw:10224547" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-mobile')">
+                <img src="https://img2020.cnblogs.com/blog/35695/202106/35695-20210610184806729-1738888164.jpg" alt="" />
+            </a>
+            </div>
+    <div id="top_nav" class="navbar forpc">
+        <nav id="nav_main" class="navbar-main">
+            <ul id="nav_left" class="navbar-list navbar-left">
+                <li class="navbar-branding"><a href="https://www.cnblogs.com/" title="开发者的网上家园"><img src="/images/logo.svg?v=R9M0WmLAIPVydmdzE2keuvnjl-bPR7_35oHqtiBzGsM" alt="博客园Logo" /></a></li>
+                <li><a href="/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-sitehome')">首页</a></li>
+                <li><a href="https://news.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-news')">新闻</a></li>
+                <li><a href="https://q.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-q')">博问</a></li>
+                <li><a id="nav_brandzone" href="https://brands.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-brands')">专区</a></li>
+                <li><a href="https://ing.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-ing')">闪存</a></li>
+                <li><a href="https://edu.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-edu')">班级</a></li>
+            </ul>
+            <ul id="nav_right" class="navbar-list navbar-right">
+                <li>
+                    <form id="zzk_search" class="navbar-search" action="https://zzk.cnblogs.com/s" method="get">
+                        <input name="w" id="zzk_search_input" placeholder="代码改变世界" type="text" tabindex="3" />
+                        <button type="submit" id="zzk_search_button">
+                            <img src="/images/aggsite/search.svg" alt="搜索" />
+                        </button>
+                    </form>
+                </li>
+                <li id="navbar_login_status" class="navbar-list">
+                    <a class="navbar-user-info navbar-blog" href="https://i.cnblogs.com/EditPosts.aspx?opt=1" alt="写随笔" title="写随笔">
+                        <img id="new_post_icon" class="navbar-icon" src="/images/aggsite/newpost.svg" alt="写随笔" />
+                    </a>
+                    <a id="navblog-myblog-icon" class="navbar-user-info navbar-blog" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx" alt="我的博客" title="我的博客">
+                        <img id="myblog_icon" class="navbar-icon" src="/images/aggsite/myblog.svg" alt="我的博客" />
+                    </a>
+                    <a class="navbar-user-info navbar-message navbar-icon-wrapper" href="https://msg.cnblogs.com/" alt="短消息" title="短消息">
+                        <img id="msg_icon" class="navbar-icon" src="/images/aggsite/message.svg?v=J0WS2P2iPgaIVgXxcAhliw4AFZIpaTWxtdoNAv9eiCA" alt="短消息" />
+                        <span id="msg_count" style="display: none"></span>
+                    </a>
+                    <div id="user_info" class="navbar-user-info dropdown">
+                        <a class="dropdown-button" href="https://home.cnblogs.com/">
+                            <img id="user_icon" class="navbar-avatar" src="/images/aggsite/avatar-default.svg" alt="用户头像" />
+                        </a>
+                        <div class="dropdown-menu">
+                            <a id="navblog-myblog-text" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx">我的博客</a>
+                            <a href="https://home.cnblogs.com/">我的园子</a>
+                            <a href="https://account.cnblogs.com/settings/account">账号设置</a>
+                            <a href="javascript:void(0)" id="navbar_lite_mode_toggle" title="简洁模式会使用简洁款皮肤显示所有博客">
+    简洁模式 <img id="navbar_lite_mode_on" src="/images/lite-mode-check.svg" class="hide" /><span id="navbar_lite_mode_spinner" class="hide">...</span>
+</a>
+                            <a href="javascript:void(0)" onclick="account.logout();">退出登录</a>
+                        </div>
+                    </div>
+                    <a class="navbar-anonymous" href="https://account.cnblogs.com/signup/">注册</a>
+                    <a class="navbar-anonymous" href="javascript:void(0);" onclick="account.login()">登录</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    
+    <div id="home">
+    <div id="header">
+        <div id="blogTitle">
+            <div class="title"><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/kingstarer/">皇家救星</a>
+</div>
+<div class="subtitle"></div>
+
+        </div>
+        <div id="navigator">
+            
+<ul id="navList">
+    <li id="nav_sitehome"><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+    <li id="nav_myhome">
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/kingstarer/">
+首页</a>
+</li>
+    <li id="nav_newpost">
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+    <li id="nav_contact">
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E7%9A%87%E5%AE%B6%E6%95%91%E6%98%9F">
+联系</a></li>
+    <li id="nav_rss">
+<a id="blog_nav_rss" class="menu" href="javascript:void(0)" data-rss="https://www.cnblogs.com/kingstarer/rss/">
+订阅</a></li>
+    <li id="nav_admin">
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+            <div class="blogStats">
+                <div id="blog_stats_place_holder"><script>loadBlogStats();</script></div>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div id="mainContent">
+            <div class="forFlow">
+                <div id="post_detail">
+    <div id="topics">
+        <div class="post">
+            <h1 class="postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2 vertical-middle" href="https://www.cnblogs.com/kingstarer/p/12952170.html">
+    <span>一次云服务器安装达梦数据库后无法远程访问问题处理</span>
+    
+
+
+
+</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                <div id="cnblogs_post_body" class="blogpost-body cnblogs-markdown">
+<p>今天同事说新装了一台云服务器，使用ssh登录正常，但是上面的达梦数据库服务端口不能访问。</p>
+<p>用netstat -anp查看端口是正常监听的，监听的地址也是允许任意ip访问</p>
+<p>并且防火墙和iptables都是关闭的</p>
+<hr>
+<p>我也觉得奇怪，于是远程登录上去服务器。查看了达梦的端口，看起来是正常的。</p>
+<p>Active Internet connections (servers and established)<br>
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name</p>
+<p>tcp6       0      0 :::5236                 ::😗                    LISTEN      3810/dmserver</p>
+<p>ssh  -v -p 5236 root@服务器公网ip  试一下访问达梦数据库 发现连接失败</p>
+<p>于是改成</p>
+<p>ssh  -v -p 5236 root@127.0.0.1  发现是可以成功连接的</p>
+<hr>
+<p>防火墙都是关闭状态，应该不是防火墙问题，我尝试地使用traceroute 服务器公网ip，想看一下是不是网络路由有问题。</p>
+<p>结果从traceroute输出发现连接本机ip要经过好几台机，这有点不正常。</p>
+<blockquote>
+<p>traceroute to ##脱敏##, 30 hops max, 60 byte packets<br>
+1  100.108.0.1 (100.108.0.1)  7.172 ms  7.271 ms  7.255 ms<br>
+2  11.245.20.8 (11.245.20.8)  5.880 ms  6.032 ms 11.245.20.2 (11.245.20.2)  5.943 ms<br>
+3  11.245.96.3 (11.245.96.3)  5.058 ms  4.933 ms 11.245.96.9 (11.245.96.9)  5.103 ms</p>
+</blockquote>
+<p>使用route -n查一下路由，发现是没有本机公网ip的路由，所以应该是走了default路由</p>
+<hr>
+<p>为什么缺了本地路由呢，难道是ip没配置好。但没配置好为什么ssh能连接呢？我尝试使用ifconfig -a查一下，发现一个问题：<strong>本机根本没有配置这个公网的ip！</strong></p>
+<blockquote>
+<p>eth0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500<br>
+inet 192.168.0.137  netmask 255.255.255.0  broadcast 192.168.0.255<br>
+inet6 fe80::8d9f:e6ba:acea:d7bd  prefixlen 64  scopeid 0x20<br>
+ether fa:16:3e:35:e6:b7  txqueuelen 1000  (Ethernet)<br>
+RX packets 84212  bytes 49923509 (47.6 MiB)<br>
+RX errors 0  dropped 0  overruns 0  frame 0<br>
+TX packets 48468  bytes 14177057 (13.5 MiB)<br>
+TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</p>
+<p>lo: flags=73&lt;UP,LOOPBACK,RUNNING&gt;  mtu 65536<br>
+inet 127.0.0.1  netmask 255.0.0.0<br>
+inet6 ::1  prefixlen 128  scopeid 0x10<host><br>
+loop  txqueuelen 1000  (Local Loopback)<br>
+RX packets 58427  bytes 56052388 (53.4 MiB)<br>
+RX errors 0  dropped 0  overruns 0  frame 0<br>
+TX packets 58427  bytes 56052388 (53.4 MiB)<br>
+TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</host></p>
+<p>virbr0: flags=4099&lt;UP,BROADCAST,MULTICAST&gt;  mtu 1500<br>
+inet 192.168.122.1  netmask 255.255.255.0  broadcast 192.168.122.255<br>
+ether 52:54:00:e8:4d:1c  txqueuelen 1000  (Ethernet)<br>
+RX packets 0  bytes 0 (0.0 B)<br>
+RX errors 0  dropped 0  overruns 0  frame 0<br>
+TX packets 0  bytes 0 (0.0 B)<br>
+TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</p>
+<p>virbr0-nic: flags=4098&lt;BROADCAST,MULTICAST&gt;  mtu 1500<br>
+ether 52:54:00:e8:4d:1c  txqueuelen 1000  (Ethernet)<br>
+RX packets 0  bytes 0 (0.0 B)<br>
+RX errors 0  dropped 0  overruns 0  frame 0<br>
+TX packets 0  bytes 0 (0.0 B)<br>
+TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</p>
+</blockquote>
+<p>后来咨询了一下同行，才知道云服务器都是这样的，通过他们路由做nat映射，并不需要在本机配置公网ip。</p>
+<p>如果想知道本机公网ip，可以使用curl ip.cip.cc获取。</p>
+<p>于是我执行这个命令，给本机配置多一个虚拟ip（公网的）</p>
+<pre><code class="language-bash">ifconfig eth0:1 $(curl ip.cip.cc) netmask 255.255.255.0 up
+</code></pre>
+<p>再次执行ssh  -v -p 5236 root@服务器公网ip，发现可以成功访问了。</p>
+<p>这就说明应该是云服务器的路由阻止了5236端口连接，而不是本机问题。</p>
+<hr>
+<p>接下来的事情就简单了，一边找华为云的接口人，看能不能多放开几个端口。在华为云回复前，我们自己使用ssh转发，**把远程端口通过ssh映射到本机访问。这样就可以绕开华为云的防火墙问题。</p>
+
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-05-24 18:53</span>&nbsp;
+<a href="https://www.cnblogs.com/kingstarer/">皇家救星</a>&nbsp;
+阅读(<span id="post_view_count">1094</span>)&nbsp;
+评论(<span id="post_comment_count">0</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12952170" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12952170);return false;">收藏</a>&nbsp;
+<a href="javascript:void(0)" onclick="reportManager.report({ currentUserId: '', targetType: 'blogPost', targetId: '12952170', targetLink: 'https://www.cnblogs.com/kingstarer/p/12952170.html', title: '一次云服务器安装达梦数据库后无法远程访问问题处理' })">举报</a></div>
+        </div>
+        <script src="https://common.cnblogs.com/highlight/10.3.1/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 234136, cb_blogApp = 'kingstarer', cb_blogUserGuid = '6c01f56e-ee22-e511-b908-9dcfd8948a71';
+    var cb_entryId = 12952170, cb_entryCreatedDate = '2020-05-24 18:53', cb_postType = 1;
+    updatePostStats(
+        [cb_entryId],
+        function(id, count) { $("#post_view_count").text(count) },
+        function(id, count) { $("#post_comment_count").text(count) })
+    zoomManager.apply("#cnblogs_post_body img:not(.code_img_closed):not(.code_img_opened)");
+</script>
+        <a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <div id="cnblogs_c1" class="under-post-card">
+        <div id='div-gpt-ad-1592365906576-0' style='width: 300px; height: 250px;'></div>
+    </div>
+    <div id="under_post_card1"></div>
+    <div id="cnblogs_c2" class="under-post-card">
+        <div id='div-gpt-ad-1592366332455-0' style='width: 468px; height: 60px;'></div>
+    </div>
+    <div id="under_post_card2"></div>
+    <div id="HistoryToday" class="under-post-card"></div>
+    <script type="text/javascript">
+       var commentManager = new blogCommentManager();
+       commentManager.renderComments(0);
+       fixPostBody();
+       deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);       deliverT2();
+       deliverC1C2();
+       loadNewsAndKb();
+       loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);       LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+       GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+       loadOptUnderPost();
+       GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+
+    </div>
+</div>
+            </div>
+        </div>
+
+        <div id="sideBar">
+            <div id="sideBarMain">
+                <div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+<div id="sidebar_c3"></div>
+                <div id="calendar"><div id="blog-calendar" style="display:none"></div></div>                
+                <script>loadBlogDefaultCalendar();</script>
+                <div id="leftcontentcontainer">
+                    <!-- begin:SingleColumn -->
+                    <div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+                    <!-- end:  SingleColumn -->
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div id="footer">
+        <!--done-->
+Copyright &copy; 2021 皇家救星
+<br /><span id="poweredby">Powered by .NET 5.0 on Kubernetes</span>
+
+    </div>
+</div>
+
+    
+
+    <input type="hidden" id="antiforgery_token" value="CfDJ8L-rpLgFVEJMgssCVvNUAjt0s6h9j_D4e_sF2fqolaDWOK0eFuyjgIBOGQNyXjo6LGhgRTAbSJ8HiiaopRYWr5Jve-riuGq1lsdtvwwxJ7O7iGU6w03JvlgDgeIY3FQ-nUMIOdqmqdC48yTqxjEVaE4" />
+</body>
+</html>

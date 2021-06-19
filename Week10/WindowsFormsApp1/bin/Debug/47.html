@@ -1,0 +1,1278 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin-when-crossorigin" />
+    
+    
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>RioTian - 博客园</title>
+    <link id="favicon" rel="shortcut icon" href="//common.cnblogs.com/favicon.svg" type="image/svg+xml" />
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=6tvK5XC6GPbg3p_sy7wzz_2291HoYACr4440iKBzQIw" />
+    
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/RioTian/custom.css?v=YkIw&#x2B;KzxA1HExcGzgpfdiaPmqFs=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/SimpleMemory/bundle-SimpleMemory-mobile.min.css" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/RioTian/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/RioTian/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/RioTian/wlwmanifest.xml" />
+    <script>
+        var currentBlogId = 568589;
+        var currentBlogApp = 'RioTian';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var isBlogOwner = false;
+        var skinName = 'SimpleMemory';
+        var visitorUserId = '';
+    </script>
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=ZUvfwhWs5fv-s8Nv7WofCOhwKAxiDO928zdWFzhnOPk"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML&amp;v=20200504"></script>
+    
+</head>
+<body class="no-navbar">
+    <a name="top"></a>
+            <div id="bannerbar" class="bannerbar-mobile formobile">
+            <a href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:mb|pp:bokeyuan-huodong-21nianzhongdacu-neiyeyidongduantonglanbanner|pu:21nianzhongdacu-neiyeyidongduantonglanbanner|ci:21nzdc|kw:10224547" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-mobile')">
+                <img src="https://img2020.cnblogs.com/blog/35695/202106/35695-20210610184806729-1738888164.jpg" alt="" />
+            </a>
+            </div>
+    <div id="top_nav" class="navbar forpc navbar-custom">
+        <nav id="nav_main" class="navbar-main">
+            <ul id="nav_left" class="navbar-list navbar-left">
+                <li class="navbar-branding"><a href="https://www.cnblogs.com/" title="开发者的网上家园"><img src="/images/logo.svg?v=R9M0WmLAIPVydmdzE2keuvnjl-bPR7_35oHqtiBzGsM" alt="博客园Logo" /></a></li>
+                <li><a href="/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-sitehome')">首页</a></li>
+                <li><a href="https://news.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-news')">新闻</a></li>
+                <li><a href="https://q.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-q')">博问</a></li>
+                <li><a id="nav_brandzone" href="https://brands.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-brands')">专区</a></li>
+                <li><a href="https://ing.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-ing')">闪存</a></li>
+                <li><a href="https://edu.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-edu')">班级</a></li>
+            </ul>
+            <ul id="nav_right" class="navbar-list navbar-right">
+                <li>
+                    <form id="zzk_search" class="navbar-search" action="https://zzk.cnblogs.com/s" method="get">
+                        <input name="w" id="zzk_search_input" placeholder="代码改变世界" type="text" tabindex="3" />
+                        <button type="submit" id="zzk_search_button">
+                            <img src="/images/aggsite/search.svg" alt="搜索" />
+                        </button>
+                    </form>
+                </li>
+                <li id="navbar_login_status" class="navbar-list">
+                    <a class="navbar-user-info navbar-blog" href="https://i.cnblogs.com/EditPosts.aspx?opt=1" alt="写随笔" title="写随笔">
+                        <img id="new_post_icon" class="navbar-icon" src="/images/aggsite/newpost.svg" alt="写随笔" />
+                    </a>
+                    <a id="navblog-myblog-icon" class="navbar-user-info navbar-blog" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx" alt="我的博客" title="我的博客">
+                        <img id="myblog_icon" class="navbar-icon" src="/images/aggsite/myblog.svg" alt="我的博客" />
+                    </a>
+                    <a class="navbar-user-info navbar-message navbar-icon-wrapper" href="https://msg.cnblogs.com/" alt="短消息" title="短消息">
+                        <img id="msg_icon" class="navbar-icon" src="/images/aggsite/message.svg?v=J0WS2P2iPgaIVgXxcAhliw4AFZIpaTWxtdoNAv9eiCA" alt="短消息" />
+                        <span id="msg_count" style="display: none"></span>
+                    </a>
+                    <div id="user_info" class="navbar-user-info dropdown">
+                        <a class="dropdown-button" href="https://home.cnblogs.com/">
+                            <img id="user_icon" class="navbar-avatar" src="/images/aggsite/avatar-default.svg" alt="用户头像" />
+                        </a>
+                        <div class="dropdown-menu">
+                            <a id="navblog-myblog-text" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx">我的博客</a>
+                            <a href="https://home.cnblogs.com/">我的园子</a>
+                            <a href="https://account.cnblogs.com/settings/account">账号设置</a>
+                            <a href="javascript:void(0)" id="navbar_lite_mode_toggle" title="简洁模式会使用简洁款皮肤显示所有博客">
+    简洁模式 <img id="navbar_lite_mode_on" src="/images/lite-mode-check.svg" class="hide" /><span id="navbar_lite_mode_spinner" class="hide">...</span>
+</a>
+                            <a href="javascript:void(0)" onclick="account.logout();">退出登录</a>
+                        </div>
+                    </div>
+                    <a class="navbar-anonymous" href="https://account.cnblogs.com/signup/">注册</a>
+                    <a class="navbar-anonymous" href="javascript:void(0);" onclick="account.login()">登录</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <div id="page_begin_html">
+        <script>loadPageBeginHtml();</script>
+    </div>
+    <!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/RioTian/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/RioTian/"><p style="font-family: RocknRoll One">RioTian の 博客</p></a>
+</h1>
+<h2><link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=RocknRoll+One&amp;display=swap" rel="stylesheet">
+<p style="font-family: RocknRoll One">本科CS系蒟蒻，算法学习半吊子。Student. Compilers &amp; TT. Powered by love. Etc. He/His <br>（In
+    addition: 猫の耳とくすんだ髪は共存できません）</p></h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/RioTian/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/RioTian">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="javascript:void(0)" data-rss="https://www.cnblogs.com/RioTian/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			<div id="blog_stats_place_holder"><script>loadBlogStats();</script></div>
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+
+
+
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/RioTian/archive/2021/05/12.html">2021年5月12日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/RioTian/p/14761145.html">
+    <span>
+            <span>[置顶]</span>
+        AcWing 每日一题 - Summer
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：本篇解题记录题源来自 AcWing 的 Summer 每日一题 补题链接：Here Week 1 星期一 AcWing 3485. 最大异或和 （Hard 思路 先求出前i个数的异或和sum[i]，再在大小为m的滑动窗口内进行trie. \(\mathcal{O}(nlog\ n)\) int n,        <a href="https://www.cnblogs.com/RioTian/p/14761145.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-05-12 18:47
+RioTian
+<span data-post-id="14761145" class="post-view-count">阅读(80)</span> 
+<span data-post-id="14761145" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14761145" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14761145" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/RioTian/archive/2021/04/04.html">2021年4月4日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/RioTian/p/14616878.html">
+    <span>
+            <span>[置顶]</span>
+        【每日一题一期】日常算法题题集
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：每日一题一期题单链接：Click Here 每道题的题解会由博主做完以后总结然后发布的 时间 题号 题解 来源 算法备注 3月25日 NC50439 村人B 牛客练习赛50-C 优先队列 + 排序 3月26日 NC13230 村人B 美团2017年CodeM大赛-初赛A轮 区间DP，区间DP小结 3        <a href="https://www.cnblogs.com/RioTian/p/14616878.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-04-04 19:59
+RioTian
+<span data-post-id="14616878" class="post-view-count">阅读(93)</span> 
+<span data-post-id="14616878" class="post-comment-count">评论(2)</span> 
+<span data-post-id="14616878" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14616878" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/RioTian/archive/2021/03/25.html">2021年3月25日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/RioTian/p/14563284.html">
+    <span>
+            <span>[置顶]</span>
+        LaTex常用数学符号整理
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：在论文和博客的写作中，经常会用到Latex的语法来书写数学公式，一份详细的数学符号对照表必不可少，本文重写了部分 Markdown 公式指导手册 。 0.大括号公式和一般括号 大括号显示 \left\{ \begin{array}{**lr**} x=\dfrac{3\pi}{2}(1+2t)\co        <a href="https://www.cnblogs.com/RioTian/p/14563284.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-03-25 21:21
+RioTian
+<span data-post-id="14563284" class="post-view-count">阅读(68)</span> 
+<span data-post-id="14563284" class="post-comment-count">评论(3)</span> 
+<span data-post-id="14563284" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14563284" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/RioTian/archive/2020/11/06.html">2020年11月6日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/RioTian/p/13939375.html">
+    <span>
+            <span>[置顶]</span>
+        算法与数据结构学习笔记（目录）
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：设立本专栏的初衷在于，我意识到我学习过的很多算法，一段时间不使用就会被我遗忘，于是决定把学习这些算法的过程记录下来，也同时分享给其他有需要的人。 本专栏默认读者会使用基本的C++语言且掌握基本的贪心、搜索、动态规划思想(部分文章也会补充$Python$ 和 \(Java\) 代码) 当前文章记录数：        <a href="https://www.cnblogs.com/RioTian/p/13939375.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2020-11-06 22:49
+RioTian
+<span data-post-id="13939375" class="post-view-count">阅读(371)</span> 
+<span data-post-id="13939375" class="post-comment-count">评论(6)</span> 
+<span data-post-id="13939375" class="post-digg-count">推荐(2)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=13939375" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/RioTian/archive/2020/08/21.html">2020年8月21日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/RioTian/p/13524222.html">
+    <span>
+            <span>[置顶]</span>
+        语录收藏
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：不是世界变得无聊了，而是你变得无聊了 ——樱野栗梦 Time will solve everything 时间会解决一切 喜欢那种淡到极致的美，不急不躁，不温不火，款步有声，舒缓有序；一弯浅笑，万千深情，尘烟几许，浅思淡行。于时光深处，静看花开花谢，虽历尽沧桑， 仍含笑一腔温暖如初。 孤独这两个字拆        <a href="https://www.cnblogs.com/RioTian/p/13524222.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2020-08-21 20:28
+RioTian
+<span data-post-id="13524222" class="post-view-count">阅读(271)</span> 
+<span data-post-id="13524222" class="post-comment-count">评论(7)</span> 
+<span data-post-id="13524222" class="post-digg-count">推荐(3)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=13524222" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/RioTian/archive/2020/06/06.html">2020年6月6日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/RioTian/p/13056668.html">
+    <span>
+            <span>[置顶]</span>
+        ACM学习计划
+    </span>
+    
+
+    <img src="/images/lock.svg" class="text-tail-icon" title="密码保护" alt="密码保护" />
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+该文被密码保护。        <a href="https://www.cnblogs.com/RioTian/p/13056668.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2020-06-06 21:56
+RioTian
+<span data-post-id="13056668" class="post-view-count">阅读(0)</span> 
+<span data-post-id="13056668" class="post-comment-count">评论(0)</span> 
+<span data-post-id="13056668" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=13056668" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/RioTian/archive/2021/06/19.html">2021年6月19日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/RioTian/p/14905074.html">
+    <span>
+        【数据库】关系模式的范式的简明判断
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：&#128018;求候选键： 只出现在函数依赖（FD）左边的，或者没出现在 FD 中的属性一定是主属性。（组成候选键的属性都叫主属性） 只出现在函数依赖右边的属性一定是非主属性。（不是主属性即为非主属性） 如果一个只出现在函数依赖左边的属性它的闭包包含了所有的属性，则它是唯一候选键 例： 设关系模式 \(R(AB        <a href="https://www.cnblogs.com/RioTian/p/14905074.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-06-19 21:54
+RioTian
+<span data-post-id="14905074" class="post-view-count">阅读(26)</span> 
+<span data-post-id="14905074" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14905074" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14905074" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+            <div class="postSeparator"></div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/RioTian/p/14903526.html">
+    <span>
+        【数据库】E-R图向关系模型转换的规则
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：E-R图向关系模型转换的规则： (1) 一个实体型转换为一个关系模式，实体的属性就是关系的属性，实体的码(关键字)就是关系的码。 (2) 一个 1:1 联系可以转换为一个独立的关系模式，也可以与任意一端对应的关系模式合并。如果转换为一个独立的模式，则与该联系相连的各实体的码以及联系本身的属性均转换为        <a href="https://www.cnblogs.com/RioTian/p/14903526.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-06-19 17:06
+RioTian
+<span data-post-id="14903526" class="post-view-count">阅读(4)</span> 
+<span data-post-id="14903526" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14903526" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14903526" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+            <div class="postSeparator"></div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/RioTian/p/14903517.html">
+    <span>
+        6.0 《数据库系统概论》之关系数据库的规范化理论（数据依赖对表的影响[插入-删除-修改-冗余]、1NF-2NF-3NF-BCNF-4NF、函数依赖与多值依赖）
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：前言 本篇文章学习书籍：《数据库系统概论》第5版 王珊 萨师煊编著 视频资源来自：数据库系统概论完整版(基础篇+高级篇+新技术篇) 由于 BitHachi 学长已经系统的整理过本书了，我在学习课本和视频以及学长文章的同时在学长文章的基础上进行相应学习修改。（学长原系列目录：Here） 资料参考网站：        <a href="https://www.cnblogs.com/RioTian/p/14903517.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-06-19 17:04
+RioTian
+<span data-post-id="14903517" class="post-view-count">阅读(4)</span> 
+<span data-post-id="14903517" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14903517" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14903517" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+            <div class="postSeparator"></div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/RioTian/p/14902989.html">
+    <span>
+        5.0 数据库完整性详解（PRIMARY KEY、REFERENCES、CHECK、CONSTRAINT、DOMAIN、TRIGGER）
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：前言 本篇文章学习书籍：《数据库系统概论》第5版 王珊 萨师煊编著 视频资源来自：数据库系统概论完整版(基础篇+高级篇+新技术篇) 由于 BitHachi 学长已经系统的整理过本书了，我在学习课本和视频以及学长文章的同时在学长文章的基础上进行相应学习修改。（学长原系列目录：Here） 资料参考网站：        <a href="https://www.cnblogs.com/RioTian/p/14902989.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-06-19 15:08
+RioTian
+<span data-post-id="14902989" class="post-view-count">阅读(4)</span> 
+<span data-post-id="14902989" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14902989" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14902989" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+            <div class="postSeparator"></div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/RioTian/p/14902905.html">
+    <span>
+        4.0 《数据库系统概论》数据库安全性详解---（存取控制、DAC&amp;MAC、视图机制、审计Audit....）
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：前言 本篇文章学习书籍：《数据库系统概论》第5版 王珊 萨师煊编著 视频资源来自：数据库系统概论完整版(基础篇+高级篇+新技术篇) 由于 BitHachi 学长已经系统的整理过本书了，我在学习课本和视频以及学长文章的同时在学长文章的基础上进行相应学习修改。（学长原系列目录：Here） 资料参考网站：        <a href="https://www.cnblogs.com/RioTian/p/14902905.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-06-19 14:41
+RioTian
+<span data-post-id="14902905" class="post-view-count">阅读(4)</span> 
+<span data-post-id="14902905" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14902905" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14902905" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/RioTian/archive/2021/06/14.html">2021年6月14日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/RioTian/p/14883469.html">
+    <span>
+        3.1 《数据库系统概论》SQL概述及数据定义（模式SCHEMA、表TABLE、索引INDEX）
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：前言 本篇文章学习书籍：《数据库系统概论》第5版 王珊 萨师煊编著 视频资源来自：数据库系统概论完整版(基础篇+高级篇+新技术篇) 由于 BitHachi 学长已经系统的整理过本书了，我在学习课本和视频以及学长文章的同时在学长文章的基础上进行相应学习修改。（学长原系列目录：Here） 资料参考网站：        <a href="https://www.cnblogs.com/RioTian/p/14883469.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-06-14 21:47
+RioTian
+<span data-post-id="14883469" class="post-view-count">阅读(13)</span> 
+<span data-post-id="14883469" class="post-comment-count">评论(1)</span> 
+<span data-post-id="14883469" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14883469" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/RioTian/archive/2021/06/12.html">2021年6月12日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/RioTian/p/14878470.html">
+    <span>
+        Codeforces Round #725 (Div. 3) A~G 题解记录
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：补题链接：Here 1538A. Stone Game 数组 \(a\) 的大小为 \(n\) ，请问每次可以删除最左和最右侧的元素，请问最少执行多少次能删除掉数组中的最大值和最小值 （\(1\le a_i\le n\)) 在输入的时候确定最大值和最小值的下标， 4种情况 比较从左边删除和右边删除的        <a href="https://www.cnblogs.com/RioTian/p/14878470.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-06-12 16:10
+RioTian
+<span data-post-id="14878470" class="post-view-count">阅读(23)</span> 
+<span data-post-id="14878470" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14878470" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14878470" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/RioTian/archive/2021/06/10.html">2021年6月10日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/RioTian/p/14870073.html">
+    <span>
+        Java | VS Code 如何导入外部 jar 包源
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：Java Extension Pack里的Project Manager for Java扩展，安装后在文档查看的下方会有“JAVA PROJECTS”，在Referenced Libraries里添加外部jar包。 补充一下官方文档通过“Project Manager for Java”导入jar        <a href="https://www.cnblogs.com/RioTian/p/14870073.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-06-10 10:29
+RioTian
+<span data-post-id="14870073" class="post-view-count">阅读(17)</span> 
+<span data-post-id="14870073" class="post-comment-count">评论(1)</span> 
+<span data-post-id="14870073" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14870073" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/RioTian/archive/2021/06/09.html">2021年6月9日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/RioTian/p/14868829.html">
+    <span>
+        命令行状态下切换盘符 cd 跨盘
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：这个经常忘记，在这记下来 cd /d d: 就是加上/d参数        <a href="https://www.cnblogs.com/RioTian/p/14868829.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-06-09 21:01
+RioTian
+<span data-post-id="14868829" class="post-view-count">阅读(13)</span> 
+<span data-post-id="14868829" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14868829" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14868829" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+            <div class="postSeparator"></div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/RioTian/p/14865978.html">
+    <span>
+        Windows 10 修改环境变量不重启生效的解决方案
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：# 表示 Win 键 #R 进入 cmd（不要使用 Listary 的 cmd 方式进入，设置不会生效） 键入 set PATH=C: 关闭窗口 同样方式打开 cmd 键入 echo %PATH%，会打印出新配置的环境变量 补充 如果无效，尝试重启资源管理器        <a href="https://www.cnblogs.com/RioTian/p/14865978.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-06-09 10:52
+RioTian
+<span data-post-id="14865978" class="post-view-count">阅读(7)</span> 
+<span data-post-id="14865978" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14865978" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14865978" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/RioTian/archive/2021/06/08.html">2021年6月8日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/RioTian/p/14862941.html">
+    <span>
+        C++ 中的lambda表达式
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：C++中的lambda与函数对象 lambda表达式是C11中引入的一项新技术，利用lambda表达式可以编写内嵌的匿名函数，用以替换独立函数或者函数对象，并且使代码更可读。但是从本质上来讲，lambda表达式只是一种语法糖，因为所有其能完成的工作都可以用其它稍微复杂的代码来实现。但是它简便的语法却        <a href="https://www.cnblogs.com/RioTian/p/14862941.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-06-08 15:15
+RioTian
+<span data-post-id="14862941" class="post-view-count">阅读(82)</span> 
+<span data-post-id="14862941" class="post-comment-count">评论(2)</span> 
+<span data-post-id="14862941" class="post-digg-count">推荐(1)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14862941" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+            <div class="postSeparator"></div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/RioTian/p/14862862.html">
+    <span>
+        Educational Codeforces Round 110 (Rated for Div. 2) （AB签到，C题双指针，D题DP好题）
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：补题链接：Here 1535A. Fair Playoff 四名选手参加了季后赛。比赛按以下方案进行：第一名选手与第二名选手比赛，第三名选手与第四名选手比赛，然后两人中的获胜者进入决赛。 众所周知，在两个选手之间的比赛中，技术更高的一个将获胜。第 \(i\) 位玩家的技能等于 \(s_i\) ，所有        <a href="https://www.cnblogs.com/RioTian/p/14862862.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-06-08 15:03
+RioTian
+<span data-post-id="14862862" class="post-view-count">阅读(15)</span> 
+<span data-post-id="14862862" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14862862" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14862862" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+            <div class="postSeparator"></div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/RioTian/p/14862616.html">
+    <span>
+        AtCoder Beginner Contest 204 （AB水题，C题DFS，D题位运算DP，E题BFS好题）
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：补题链接：Here A - Rock-paper-scissors 石头剪刀布，两方是一样的则输出该值，否则输出该值 int s[4] = {0, 1, 2}; void solve() { int x, y; cin &gt;&gt; x &gt;&gt; y; if (x == y) cout &lt;&lt; x; else {        <a href="https://www.cnblogs.com/RioTian/p/14862616.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-06-08 14:23
+RioTian
+<span data-post-id="14862616" class="post-view-count">阅读(19)</span> 
+<span data-post-id="14862616" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14862616" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14862616" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/RioTian/archive/2021/06/04.html">2021年6月4日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/RioTian/p/14851339.html">
+    <span>
+        20级训练赛Round #4 
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：给20级学弟学妹们带带榜单 A - 凯少的动作序列 枚举情况替换即可 #include &lt;bits/stdc++.h&gt; using namespace std; using ll = long long; void solve() { int n; string s; cin &gt;&gt; n &gt;&gt; s;         <a href="https://www.cnblogs.com/RioTian/p/14851339.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-06-04 21:04
+RioTian
+<span data-post-id="14851339" class="post-view-count">阅读(19)</span> 
+<span data-post-id="14851339" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14851339" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14851339" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+            <div class="postSeparator"></div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/RioTian/p/14851304.html">
+    <span>
+        【每日一题】41. 德玛西亚万岁 (状态压缩DP)
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：补题链接：Here 经典状压DP问题 坑点，注意多组输入。。。 const int N = 16, mod = 100000000; int f[N][1 &lt;&lt; N]; int a[N]; void solve() { int n, m; while (cin &gt;&gt; n &gt;&gt; m) { memset        <a href="https://www.cnblogs.com/RioTian/p/14851304.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-06-04 20:51
+RioTian
+<span data-post-id="14851304" class="post-view-count">阅读(5)</span> 
+<span data-post-id="14851304" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14851304" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14851304" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+
+<div class="topicListFooter">
+    <div id="nav_next_page">
+        
+    <a href="https://www.cnblogs.com/RioTian/default.html?page=2">
+        下一页
+    </a>
+
+    </div>    
+</div>
+
+
+
+
+
+
+<script>
+    updatePostStats(
+        $(".post-view-count").map(function () { return this.dataset.postId }).get(),
+        function(id, count) { $(".post-view-count[data-post-id=" + id + "]").text("阅读(" + count + ")") },
+        function(id, count) { $(".post-comment-count[data-post-id=" + id + "]").text("评论(" + count + ")") },
+        function(id, count) { $(".post-digg-count[data-post-id=" + id + "]").text("推荐(" + count + ")") });
+</script>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+	<div id="sideBar">
+		<div id="sideBarMain">
+			<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+<div id="sidebar_c3"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2021 RioTian
+<br /><span id="poweredby">Powered by .NET 5.0 on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <!-- 生成博客目录的JS代码，两级目录 -->
+<script type="text/javascript">
+    /*  
+        这段代码按H2、H3格式生成两级菜单
+        写博客按H2、H3格式写，不然生成不了
+        Markdown写作按##、###两级目录写
+        当然你也可以改写代码成三级菜单
+    */
+    var BlogDirectory = {
+        /* 获取元素位置，距浏览器左边界的距离（left）和距浏览器上边界的距离（top）*/
+        getElementPosition: function (ele) {
+            var topPosition = 0;
+            var leftPosition = 0;
+            while (ele) {
+                topPosition += ele.offsetTop;
+                leftPosition += ele.offsetLeft;
+                ele = ele.offsetParent;
+            }
+            return {
+                top: topPosition,
+                left: leftPosition
+            };
+        },
+        /*获取滚动条当前位置 */
+        getScrollBarPosition: function () {
+            var scrollBarPosition = document.body.scrollTop || document.documentElement.scrollTop;
+            return scrollBarPosition;
+        },
+        /* 移动滚动条，finalPos 为目的位置，internal 为移动速度 */
+        moveScrollBar: function (finalpos, interval) {
+            //若不支持此方法，则退出
+            if (!window.scrollTo) {
+                return false;
+            }
+
+            //窗体滚动时，禁用鼠标滚轮
+            window.onmousewheel = function () {
+                return false;
+            };
+
+            //清除计时
+            if (document.body.movement) {
+                clearTimeout(document.body.movement);
+            }
+
+            //获取滚动条当前位置
+            var currentpos = BlogDirectory.getScrollBarPosition();
+
+            var dist = 0;
+            //到达预定位置，则解禁鼠标滚轮，并退出
+            if (currentpos == finalpos) {
+                window.onmousewheel = function () {
+                    return true;
+                }
+                return true;
+            }
+            //未到达，则计算下一步所要移动的距离
+            if (currentpos < finalpos) {
+                dist = Math.ceil((finalpos - currentpos) / 10);
+                currentpos += dist;
+            }
+            if (currentpos > finalpos) {
+                dist = Math.ceil((currentpos - finalpos) / 10);
+                currentpos -= dist;
+            }
+
+            var scrTop = BlogDirectory.getScrollBarPosition(); //获取滚动条当前位置
+            window.scrollTo(0, currentpos); //移动窗口
+            if (BlogDirectory.getScrollBarPosition() == scrTop) //若已到底部，则解禁鼠标滚轮，并退出
+            {
+                window.onmousewheel = function () {
+                    return true;
+                }
+                return true;
+            }
+
+            //进行下一步移动
+            var repeat = "BlogDirectory.moveScrollBar(" + finalpos + "," + interval + ")";
+            document.body.movement = setTimeout(repeat, interval);
+        },
+
+        htmlDecode: function (text) {
+            var temp = document.createElement("div");
+            temp.innerHTML = text;
+            var output = temp.innerText || temp.textContent;
+            temp = null;
+            return output;
+        },
+
+        /*
+        创建博客目录，id表示包含博文正文的 div 容器的 id，
+        mt 和 st 分别表示主标题和次级标题的标签名称（如 H2、H3，大写或小写都可以！），
+        interval 表示移动的速度
+        */
+        createBlogDirectory: function (id, mt, st, interval) {
+            //获取博文正文div容器
+            var elem = document.getElementById(id);
+            if (!elem) return false;
+            //获取div中所有元素结点
+            var nodes = elem.getElementsByTagName("*");
+            //创建博客目录的div容器
+            var divSideBar = document.createElement('DIV');
+            divSideBar.className = 'uprightsideBar';
+            divSideBar.setAttribute('id', 'uprightsideBar');
+
+            var divSideBarTab = document.createElement('DIV');
+            divSideBarTab.setAttribute('id', 'sideBarTab');
+
+            var p = document.createElement('p');
+            divSideBarTab.appendChild(p);
+            var txt = document.createTextNode('📖目录');
+            p.setAttribute('id', 'catalogHeadTitle');
+            p.appendChild(txt);
+
+            var divSideBarContents = document.createElement('DIV');
+            divSideBarContents.style.display = 'none';
+            divSideBarContents.setAttribute('id', 'sideBarContents');
+
+            divSideBar.appendChild(divSideBarTab);
+            divSideBar.appendChild(divSideBarContents);
+
+            //创建自定义列表
+            var dlist = document.createElement("dl");
+            divSideBarContents.appendChild(dlist);
+            var num = 0; //统计找到的mt和st
+            mt = mt.toUpperCase(); //转化成大写
+            st = st.toUpperCase(); //转化成大写
+            //遍历所有元素结点
+            for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].nodeName == mt || nodes[i].nodeName == st) {
+                    //获取标题文本
+                    var nodetext = nodes[i].innerHTML.replace(/<\/?[^>]+>/g,
+                        ""); //innerHTML里面的内容可能有HTML标签，所以用正则表达式去除HTML的标签
+                    // nodetext = nodetext.replace(/ /ig, "");//替换掉所有的空格
+                    nodetext = BlogDirectory.htmlDecode(nodetext);
+                    //插入锚
+                    nodes[i].setAttribute("id", "blogTitle" + num);
+                    var item;
+                    switch (nodes[i].nodeName) {
+                        case mt: //若为主标题
+                            item = document.createElement("dt");
+                            var itemtext = document.createTextNode(nodetext);
+                            break;
+                        case st: //若为子标题
+                            item = document.createElement("dd");
+                            var itemtext = document.createTextNode('• ' + nodetext);
+                            break;
+                    }
+
+                    //创建锚链接
+                    item.appendChild(itemtext);
+                    item.setAttribute("name", num);
+                    //添加鼠标点击触发函数
+                    item.onclick = function () {
+                        var pos = BlogDirectory.getElementPosition(document.getElementById("blogTitle" +
+                            this.getAttribute("name")));
+                        if (!BlogDirectory.moveScrollBar(pos.top, interval)) return false;
+                    };
+                    //将自定义表项加入自定义列表中
+                    dlist.appendChild(item);
+                    num++;
+                }
+            }
+
+            if (num == 0) return false;
+            // 如果是移动端，通过点击的方式来显示或隐藏目录
+            // 如果是PC端，通过鼠标聚焦的方式来显示或隐藏
+            if (isMobile()) {
+                divSideBarContents.style.borderRadius = '0px 6px 6px 6px';
+                divSideBar.onclick = function () {
+                    var status = divSideBarContents.style.display;
+                    if (status == 'block') {
+                        document.getElementById('catalogHeadTitle').innerText = '📖目录';
+                        divSideBarTab.style.borderRadius = '6px';
+                        divSideBarContents.style.display = 'none';
+                    } else if (status == 'none') {
+                        document.getElementById('catalogHeadTitle').innerText = '❎关闭';
+                        divSideBarTab.style.borderRadius = '6px 0px 0px 6px';
+                        divSideBarContents.style.display = 'block';
+                    }
+                }
+            } else {
+                /* 鼠标进入时的事件处理 */
+                divSideBarTab.onmouseenter = function () {
+                    divSideBarContents.style.display = 'block';
+                }
+                /* 鼠标离开时的事件处理 */
+                divSideBar.onmouseleave = function () {
+                    divSideBarContents.style.display = 'none';
+                }
+            }
+            document.body.appendChild(divSideBar);
+        }
+
+    };
+
+    // 判断浏览器函数
+    function isMobile() {
+        if (window.navigator.userAgent.match(
+                /(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
+            )) {
+            return true; // 移动端
+        } else {
+            return false; // PC端
+        }
+    }
+
+    window.onload = function () {
+        /* 页面加载完成之后生成博客目录 */
+        BlogDirectory.createBlogDirectory("cnblogs_post_body", "h2", "h3", 20);
+    }
+</script>
+
+<!-- 返回顶部功能-->
+<script type="text/javascript">
+    (function () {
+        var $backToTopTxt = "返回顶部",
+            $backToTopEle = $('<div class="backToTop"></div>').appendTo($("body"))
+            .text($backToTopTxt).attr("title", $backToTopTxt).click(function () {
+                $("html, body").animate({
+                    scrollTop: 0
+                }, 120);
+            }),
+            $backToTopFun = function () {
+                var st = $(document).scrollTop(),
+                    winh = $(window).height();
+                (st > 0) ? $backToTopEle.show(): $backToTopEle.hide();
+                //IE6下的定位
+                if (!window.XMLHttpRequest) {
+                    $backToTopEle.css("top", st + winh - 166);
+                }
+            };
+        $(window).bind("scroll", $backToTopFun);
+        $(function () {
+            $backToTopFun();
+        });
+    })();
+</script>
+
+
+    </div>
+
+    <input type="hidden" id="antiforgery_token" value="CfDJ8L-rpLgFVEJMgssCVvNUAjvvALtosLZ0TK-UZHTJu_VfZmqlB-xUMFG1JxKmik6_XwfDuBd2QyU9_Ec9TCj7bJ4U-KjXk3Yd7rKawkgo39kZ90-8pZ8qZ18R6h3ZY6xinaXmf4xqLttNB1rKJjRBCk0" />
+</body>
+</html>

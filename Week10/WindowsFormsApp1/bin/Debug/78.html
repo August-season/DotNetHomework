@@ -1,0 +1,354 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="never" />
+    <meta name="description" content="我在博客园发表了一系列文章，开始介绍基于 .net core 的在线客服系统开发过程。园友们又提出了新的要求，希望发布基于 Docker 的版本方便安装使用，今天，他来了。" />
+    <meta property="og:description" content="我在博客园发表了一系列文章，开始介绍基于 .net core 的在线客服系统开发过程。园友们又提出了新的要求，希望发布基于 Docker 的版本方便安装使用，今天，他来了。" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Docker 版 3分钟部署 .net core 开源在线客服系统，他来了 - sheng.chao - 博客园</title>
+    <link id="favicon" rel="shortcut icon" href="//common.cnblogs.com/favicon.svg" type="image/svg+xml" />
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=6tvK5XC6GPbg3p_sy7wzz_2291HoYACr4440iKBzQIw" />
+    <link id="MainCss" rel="stylesheet" href="/skins/lessismoreright/bundle-lessismoreright.min.css?v=4W7JFeW6yawmSvuAPXAMgmONTEeyjPHEBIN7uU-h2oo" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/lessismoreright/bundle-lessismoreright-mobile.min.css?v=cSBXSFXCBG9KdnF2sdUs-Rwu75GHG2_Gs50OCy_ecGg" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/sheng_chao/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/sheng_chao/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/sheng_chao/wlwmanifest.xml" />
+    <script>
+        var currentBlogId = 58849;
+        var currentBlogApp = 'sheng_chao';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var isBlogOwner = false;
+        var skinName = 'LessIsMoreRight';
+        var visitorUserId = '';
+    </script>
+        <script>
+            var currentPostDateAdded = '2021-06-19 05:05';
+        </script>
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=ZUvfwhWs5fv-s8Nv7WofCOhwKAxiDO928zdWFzhnOPk"></script>
+    
+    
+    
+</head>
+<body class="has-navbar has-bannerbar">
+    <a name="top"></a>
+            <a target="_blank" href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:pc|pp:bokeyuan-huodong-21nianzhongdacu-neiyePCtonglanbanner|pu:21nianzhongdacu-neiyePCtonglanbanner|ci:21nzdc|kw:10224545" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-pc')">
+                <div class="bannerbar aliyun forpc" style="background-size: contain; filter: brightness(0.95); background-image: url(https://img2020.cnblogs.com/blog/35695/202106/35695-20210610183724605-1725070929.jpg)">
+                </div>
+            </a>
+            <div id="bannerbar" class="bannerbar-mobile formobile">
+            <a href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:mb|pp:bokeyuan-huodong-21nianzhongdacu-neiyeyidongduantonglanbanner|pu:21nianzhongdacu-neiyeyidongduantonglanbanner|ci:21nzdc|kw:10224547" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-mobile')">
+                <img src="https://img2020.cnblogs.com/blog/35695/202106/35695-20210610184806729-1738888164.jpg" alt="" />
+            </a>
+            </div>
+    <div id="top_nav" class="navbar forpc">
+        <nav id="nav_main" class="navbar-main">
+            <ul id="nav_left" class="navbar-list navbar-left">
+                <li class="navbar-branding"><a href="https://www.cnblogs.com/" title="开发者的网上家园"><img src="/images/logo.svg?v=R9M0WmLAIPVydmdzE2keuvnjl-bPR7_35oHqtiBzGsM" alt="博客园Logo" /></a></li>
+                <li><a href="/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-sitehome')">首页</a></li>
+                <li><a href="https://news.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-news')">新闻</a></li>
+                <li><a href="https://q.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-q')">博问</a></li>
+                <li><a id="nav_brandzone" href="https://brands.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-brands')">专区</a></li>
+                <li><a href="https://ing.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-ing')">闪存</a></li>
+                <li><a href="https://edu.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-edu')">班级</a></li>
+            </ul>
+            <ul id="nav_right" class="navbar-list navbar-right">
+                <li>
+                    <form id="zzk_search" class="navbar-search" action="https://zzk.cnblogs.com/s" method="get">
+                        <input name="w" id="zzk_search_input" placeholder="代码改变世界" type="text" tabindex="3" />
+                        <button type="submit" id="zzk_search_button">
+                            <img src="/images/aggsite/search.svg" alt="搜索" />
+                        </button>
+                    </form>
+                </li>
+                <li id="navbar_login_status" class="navbar-list">
+                    <a class="navbar-user-info navbar-blog" href="https://i.cnblogs.com/EditPosts.aspx?opt=1" alt="写随笔" title="写随笔">
+                        <img id="new_post_icon" class="navbar-icon" src="/images/aggsite/newpost.svg" alt="写随笔" />
+                    </a>
+                    <a id="navblog-myblog-icon" class="navbar-user-info navbar-blog" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx" alt="我的博客" title="我的博客">
+                        <img id="myblog_icon" class="navbar-icon" src="/images/aggsite/myblog.svg" alt="我的博客" />
+                    </a>
+                    <a class="navbar-user-info navbar-message navbar-icon-wrapper" href="https://msg.cnblogs.com/" alt="短消息" title="短消息">
+                        <img id="msg_icon" class="navbar-icon" src="/images/aggsite/message.svg?v=J0WS2P2iPgaIVgXxcAhliw4AFZIpaTWxtdoNAv9eiCA" alt="短消息" />
+                        <span id="msg_count" style="display: none"></span>
+                    </a>
+                    <div id="user_info" class="navbar-user-info dropdown">
+                        <a class="dropdown-button" href="https://home.cnblogs.com/">
+                            <img id="user_icon" class="navbar-avatar" src="/images/aggsite/avatar-default.svg" alt="用户头像" />
+                        </a>
+                        <div class="dropdown-menu">
+                            <a id="navblog-myblog-text" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx">我的博客</a>
+                            <a href="https://home.cnblogs.com/">我的园子</a>
+                            <a href="https://account.cnblogs.com/settings/account">账号设置</a>
+                            <a href="javascript:void(0)" id="navbar_lite_mode_toggle" title="简洁模式会使用简洁款皮肤显示所有博客">
+    简洁模式 <img id="navbar_lite_mode_on" src="/images/lite-mode-check.svg" class="hide" /><span id="navbar_lite_mode_spinner" class="hide">...</span>
+</a>
+                            <a href="javascript:void(0)" onclick="account.logout();">退出登录</a>
+                        </div>
+                    </div>
+                    <a class="navbar-anonymous" href="https://account.cnblogs.com/signup/">注册</a>
+                    <a class="navbar-anonymous" href="javascript:void(0);" onclick="account.login()">登录</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    
+    <div id="home">
+    <div id="header">
+        <div id="blogTitle">
+            <div class="title"><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/sheng_chao/">sheng.chao</a>
+</div>
+<div class="subtitle"></div>
+
+        </div>
+        <div id="navigator">
+            
+<ul id="navList">
+    <li id="nav_sitehome"><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+    <li id="nav_myhome">
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/sheng_chao/">
+首页</a>
+</li>
+    <li id="nav_newpost">
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+    <li id="nav_contact">
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/sheng.chao">
+联系</a></li>
+    <li id="nav_rss">
+<a id="blog_nav_rss" class="menu" href="javascript:void(0)" data-rss="https://www.cnblogs.com/sheng_chao/rss/">
+订阅</a></li>
+    <li id="nav_admin">
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+            <div class="blogStats">
+                <div id="blog_stats_place_holder"><script>loadBlogStats();</script></div>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div id="mainContent">
+            <div class="forFlow">
+                <div id="post_detail">
+    <div id="topics">
+        <div class="post">
+            <h1 class="postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2 vertical-middle" href="https://www.cnblogs.com/sheng_chao/p/14903272.html">
+    <span>Docker 版 3分钟部署 .net core 开源在线客服系统，他来了</span>
+    
+
+
+
+</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                    <div id="cnblogs_post_description" style="display: none">
+        我在博客园发表了一系列文章，开始介绍基于 .net core 的在线客服系统开发过程。园友们又提出了新的要求，希望发布基于 Docker 的版本方便安装使用，今天，他来了。
+    </div>
+<div id="cnblogs_post_body" class="blogpost-body cnblogs-markdown">
+<p>我在博客园发表了一系列文章，开始介绍基于 .net core 的在线客服系统开发过程。<br>
+前些天又应朋友的要求，发了一篇 CentOS 版本的安装部署教程：<a href="https://www.cnblogs.com/sheng_chao/p/14889995.html" target="_blank">https://www.cnblogs.com/sheng_chao/p/14889995.html</a><br>
+园友们又提出了新的要求，希望发布基于 Docker 的版本方便安装使用，今天，他来了。</p>
+<h1 id="简介">简介</h1>
+<p>升讯威在线客服与营销系统是基于 .net core / WPF 开发的一款在线客服软件，宗旨是： <strong>开放、开源、共享。努力打造 .net 社区的一款优秀开源产品。</strong></p>
+<h2 id="完整私有化包下载地址">完整私有化包下载地址</h2>
+<blockquote>
+<p>💾 <a href="https://kf.shengxunwei.com/freesite.zip" target="_blank">https://kf.shengxunwei.com/freesite.zip</a></p>
+</blockquote>
+<h2 id="当前版本信息">当前版本信息</h2>
+<p>发布日期：2021-6-11<br>
+数据库版本：20210608063023_20210608a<br>
+通信协议版本：20210609<br>
+服务器版本：1.3.1.0<br>
+客服程序版本：1.3.3.0<br>
+资源站点版本：1.2.56.0</p>
+<p><img src="https://docs-api.shengxunwei.com/StaticFiles/Upload/94798a64-bfb1-433b-a9d3-331a209a2797.jpg" alt="" loading="lazy"></p>
+<p><img src="https://docs-api.shengxunwei.com/StaticFiles/Upload/bb06b2e5-4d94-48af-aa3e-f600c909af12.JPG" alt="" loading="lazy"></p>
+<h1 id="docker-版安装使用教程">Docker 版安装使用教程</h1>
+<p>从 Docker Hub 下载服务器镜像<br>
+<code>docker pull  iccb1013/linkup:linkup_1.3.1.0</code></p>
+<p>启动<br>
+<code>docker run -p 8020:80 -p 8021:8021 -p 8022:8022 -p 9527:9527 --privileged -it -d --name=linkup_1.3.1.0 iccb1013/linkup:linkup_1.3.1.0 /usr/sbin/init</code></p>
+<h2 id="说明">说明</h2>
+<ul>
+<li>localhost:8021 为服务器主程序，可以使用 <a href="http://localhost:8021/status" target="_blank">http://localhost:8021/status</a> 来查看其运行状态。</li>
+<li>localhost:8022 为服务器资源站点，可以使用 <a href="http://localhost:8022/v.html" target="_blank">http://localhost:8022/v.html</a> 来查看其版本。</li>
+<li>9527 端口用于客服端程序通信。</li>
+</ul>
+<h2 id="使用">使用</h2>
+<h3 id="下载客服端程序（私有化免费版专用）">下载客服端程序（私有化免费版专用）</h3>
+<p><a href="http://localhost:8022/shell.zip" target="_blank">http://localhost:8022/shell.zip</a></p>
+<blockquote>
+<p>或 <a href="https://kf.shengxunwei.com/freesite/Shell/1.3.3.0.zip" target="_blank">https://kf.shengxunwei.com/freesite/Shell/1.3.3.0.zip</a></p>
+</blockquote>
+<p>在登录界面，点击下方“修改”，填入服务器地址 <code>http://localhost:8021</code>，然后使用默认密码 123 登录即可。</p>
+<h3 id="打开访客聊天页面">打开访客聊天页面</h3>
+<p><a href="http://localhost:8022/WebChat/WebChat.html?sitecode=freesite" target="_blank">http://localhost:8022/WebChat/WebChat.html?sitecode=freesite</a></p>
+<blockquote>
+<p>结束，基于 Docker 可能连 3 分钟都不需要。</p>
+</blockquote>
+<h2 id="绑定域名">绑定域名</h2>
+<p>在正式发布到互联网时，需要绑定您的域名。</p>
+<h3 id="修改客服系统相关配置文">修改客服系统相关配置文</h3>
+<p>参阅：<br>
+<a href="https://docs.shengxunwei.com/Post/f7bc8496-14ee-4a53-07b4-08d8e3da6269/6bcdb41b-c963-46e9-aa42-e4ef4bf5f5f3" target="_blank">使用自动化工具配置服务器端程序</a><br>
+<a href="https://docs.shengxunwei.com/Post/f7bc8496-14ee-4a53-07b4-08d8e3da6269/ca613726-63f2-4c7d-934f-b8b104281407" target="_blank">主程序配置文件修改维护说明</a><br>
+<a href="https://docs.shengxunwei.com/Post/f7bc8496-14ee-4a53-07b4-08d8e3da6269/9bfa8514-386a-4320-8782-6a7405568bfb" target="_blank">资源站点配置文件修改维护说明</a></p>
+<h3 id="修改-nginx-中的域名绑定">修改 nginx 中的域名绑定</h3>
+<ol>
+<li>
+<p>进入容器命令行</p>
+</li>
+<li>
+<p>编辑 nginx 配置文件<br>
+<code>vim /usr/local/nginx/conf/nginx.conf</code></p>
+</li>
+<li>
+<p>修改服务器主程序域名<br>
+找到使用 8021 端口的 Server 节点，把 8021 修改为 80，把 server_name 后的 localhost 修改为你的域名，如 kf-api.yourname.com</p>
+</li>
+<li>
+<p>修改服务器静态资源域名<br>
+找到使用 8022 端口的 Server 节点，把 8022 修改为 80，把 server_name 后的 localhost 修改为你的域名，如 kf-resource.yourname.com</p>
+</li>
+<li>
+<p>重新加载 nginx 配置文件<br>
+<code>cd /usr/local/nginx/sbin</code><br>
+<code>./nginx -s reload</code></p>
+</li>
+</ol>
+
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2021-06-19 17:05</span>&nbsp;
+<a href="https://www.cnblogs.com/sheng_chao/">sheng.chao</a>&nbsp;
+阅读(<span id="post_view_count">102</span>)&nbsp;
+评论(<span id="post_comment_count">0</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14903272" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(14903272);return false;">收藏</a>&nbsp;
+<a href="javascript:void(0)" onclick="reportManager.report({ currentUserId: '', targetType: 'blogPost', targetId: '14903272', targetLink: 'https://www.cnblogs.com/sheng_chao/p/14903272.html', title: 'Docker 版 3分钟部署 .net core 开源在线客服系统，他来了' })">举报</a></div>
+        </div>
+        <script src="https://common.cnblogs.com/highlight/10.3.1/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 58849, cb_blogApp = 'sheng_chao', cb_blogUserGuid = '5ed29e4f-5c77-de11-be36-001cf0cd104b';
+    var cb_entryId = 14903272, cb_entryCreatedDate = '2021-06-19 17:05', cb_postType = 1;
+    updatePostStats(
+        [cb_entryId],
+        function(id, count) { $("#post_view_count").text(count) },
+        function(id, count) { $("#post_comment_count").text(count) })
+    zoomManager.apply("#cnblogs_post_body img:not(.code_img_closed):not(.code_img_opened)");
+</script>
+        <a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <div id="cnblogs_c1" class="under-post-card">
+        <div id='div-gpt-ad-1592365906576-0' style='width: 300px; height: 250px;'></div>
+    </div>
+    <div id="under_post_card1"></div>
+    <div id="cnblogs_c2" class="under-post-card">
+        <div id='div-gpt-ad-1592366332455-0' style='width: 468px; height: 60px;'></div>
+    </div>
+    <div id="under_post_card2"></div>
+    <div id="HistoryToday" class="under-post-card"></div>
+    <script type="text/javascript">
+       var commentManager = new blogCommentManager();
+       commentManager.renderComments(0);
+       fixPostBody();
+       deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);       deliverT2();
+       deliverC1C2();
+       loadNewsAndKb();
+       loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);       LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+       GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+       loadOptUnderPost();
+       GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+
+    </div>
+</div>
+            </div>
+        </div>
+
+        <div id="sideBar">
+            <div id="sideBarMain">
+                <div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+<div id="sidebar_c3"></div>
+                <div id="calendar"><div id="blog-calendar" style="display:none"></div></div>                
+                <script>loadBlogDefaultCalendar();</script>
+                <div id="leftcontentcontainer">
+                    <!-- begin:SingleColumn -->
+                    <div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+                    <!-- end:  SingleColumn -->
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div id="footer">
+        <!--done-->
+Copyright &copy; 2021 sheng.chao
+<br /><span id="poweredby">Powered by .NET 5.0 on Kubernetes</span>
+
+    </div>
+</div>
+
+    <div id="page_end_html">
+        <style type="text/css"> 
+#div_digg{
+  position:fixed;
+  bottom:5px;
+  width:140px;
+  right:350px;
+  border:2px solid #6FA833;
+  padding:10px;
+  background-color:#fff;
+  border-radius:5px 5px 5px 5px !important;
+  box-shadow:0 0 0 1px #5F5A4B, 1px 1px 6px 1px rgba(10, 10, 0, 0.5);
+}
+</style>
+    </div>
+
+    <input type="hidden" id="antiforgery_token" value="CfDJ8L-rpLgFVEJMgssCVvNUAjsJ0tzpQFRnrR6PWqRNNBt-8SrwkApqxg353UrbHmErR9b9FRIQ6CdwiKUy79oZy1u4U57-l37r4h7yETSFldxCbRLwhD0X-pPK-AZI4u8XyDg2gsLgHkwIHzc1xt8jSmk" />
+</body>
+</html>

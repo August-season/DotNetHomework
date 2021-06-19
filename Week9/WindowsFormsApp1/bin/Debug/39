@@ -1,0 +1,672 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin-when-crossorigin" />
+    
+    
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>随笔列表第6页 - 皇家救星 - 博客园</title>
+    <link id="favicon" rel="shortcut icon" href="//common.cnblogs.com/favicon.svg" type="image/svg+xml" />
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=6tvK5XC6GPbg3p_sy7wzz_2291HoYACr4440iKBzQIw" />
+    <link id="MainCss" rel="stylesheet" href="/skins/simpleblue/bundle-simpleblue.min.css?v=2hjghzSZyhYA1HxvSxKnXih3JbC120DBjeO9V9T_nSs" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/simpleblue/bundle-simpleblue-mobile.min.css?v=3tvwgOOqUo3RpS6gGzEdK0LbptOPv4Bx7M85_UAnFGs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/kingstarer/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/kingstarer/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/kingstarer/wlwmanifest.xml" />
+    <script>
+        var currentBlogId = 234136;
+        var currentBlogApp = 'kingstarer';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var isBlogOwner = false;
+        var skinName = 'SimpleBlue';
+        var visitorUserId = '';
+    </script>
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=ZUvfwhWs5fv-s8Nv7WofCOhwKAxiDO928zdWFzhnOPk"></script>
+    
+    
+    
+</head>
+<body class="has-navbar has-bannerbar">
+    <a name="top"></a>
+            <a target="_blank" href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:pc|pp:bokeyuan-huodong-21nianzhongdacu-neiyePCtonglanbanner|pu:21nianzhongdacu-neiyePCtonglanbanner|ci:21nzdc|kw:10224545" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-pc')">
+                <div class="bannerbar aliyun forpc" style="background-size: contain; filter: brightness(0.95); background-image: url(https://img2020.cnblogs.com/blog/35695/202106/35695-20210610183724605-1725070929.jpg)">
+                </div>
+            </a>
+            <div id="bannerbar" class="bannerbar-mobile formobile">
+            <a href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:mb|pp:bokeyuan-huodong-21nianzhongdacu-neiyeyidongduantonglanbanner|pu:21nianzhongdacu-neiyeyidongduantonglanbanner|ci:21nzdc|kw:10224547" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-mobile')">
+                <img src="https://img2020.cnblogs.com/blog/35695/202106/35695-20210610184806729-1738888164.jpg" alt="" />
+            </a>
+            </div>
+    <div id="top_nav" class="navbar forpc">
+        <nav id="nav_main" class="navbar-main">
+            <ul id="nav_left" class="navbar-list navbar-left">
+                <li class="navbar-branding"><a href="https://www.cnblogs.com/" title="开发者的网上家园"><img src="/images/logo.svg?v=R9M0WmLAIPVydmdzE2keuvnjl-bPR7_35oHqtiBzGsM" alt="博客园Logo" /></a></li>
+                <li><a href="/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-sitehome')">首页</a></li>
+                <li><a href="https://news.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-news')">新闻</a></li>
+                <li><a href="https://q.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-q')">博问</a></li>
+                <li><a id="nav_brandzone" href="https://brands.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-brands')">专区</a></li>
+                <li><a href="https://ing.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-ing')">闪存</a></li>
+                <li><a href="https://edu.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-edu')">班级</a></li>
+            </ul>
+            <ul id="nav_right" class="navbar-list navbar-right">
+                <li>
+                    <form id="zzk_search" class="navbar-search" action="https://zzk.cnblogs.com/s" method="get">
+                        <input name="w" id="zzk_search_input" placeholder="代码改变世界" type="text" tabindex="3" />
+                        <button type="submit" id="zzk_search_button">
+                            <img src="/images/aggsite/search.svg" alt="搜索" />
+                        </button>
+                    </form>
+                </li>
+                <li id="navbar_login_status" class="navbar-list">
+                    <a class="navbar-user-info navbar-blog" href="https://i.cnblogs.com/EditPosts.aspx?opt=1" alt="写随笔" title="写随笔">
+                        <img id="new_post_icon" class="navbar-icon" src="/images/aggsite/newpost.svg" alt="写随笔" />
+                    </a>
+                    <a id="navblog-myblog-icon" class="navbar-user-info navbar-blog" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx" alt="我的博客" title="我的博客">
+                        <img id="myblog_icon" class="navbar-icon" src="/images/aggsite/myblog.svg" alt="我的博客" />
+                    </a>
+                    <a class="navbar-user-info navbar-message navbar-icon-wrapper" href="https://msg.cnblogs.com/" alt="短消息" title="短消息">
+                        <img id="msg_icon" class="navbar-icon" src="/images/aggsite/message.svg?v=J0WS2P2iPgaIVgXxcAhliw4AFZIpaTWxtdoNAv9eiCA" alt="短消息" />
+                        <span id="msg_count" style="display: none"></span>
+                    </a>
+                    <div id="user_info" class="navbar-user-info dropdown">
+                        <a class="dropdown-button" href="https://home.cnblogs.com/">
+                            <img id="user_icon" class="navbar-avatar" src="/images/aggsite/avatar-default.svg" alt="用户头像" />
+                        </a>
+                        <div class="dropdown-menu">
+                            <a id="navblog-myblog-text" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx">我的博客</a>
+                            <a href="https://home.cnblogs.com/">我的园子</a>
+                            <a href="https://account.cnblogs.com/settings/account">账号设置</a>
+                            <a href="javascript:void(0)" id="navbar_lite_mode_toggle" title="简洁模式会使用简洁款皮肤显示所有博客">
+    简洁模式 <img id="navbar_lite_mode_on" src="/images/lite-mode-check.svg" class="hide" /><span id="navbar_lite_mode_spinner" class="hide">...</span>
+</a>
+                            <a href="javascript:void(0)" onclick="account.logout();">退出登录</a>
+                        </div>
+                    </div>
+                    <a class="navbar-anonymous" href="https://account.cnblogs.com/signup/">注册</a>
+                    <a class="navbar-anonymous" href="javascript:void(0);" onclick="account.login()">登录</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    
+    <div id="home">
+    <div id="header">
+        <div id="blogTitle">
+            <div class="title"><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/kingstarer/">皇家救星</a>
+</div>
+<div class="subtitle"></div>
+
+        </div>
+        <div id="navigator">
+            
+<ul id="navList">
+    <li id="nav_sitehome"><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+    <li id="nav_myhome">
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/kingstarer/">
+首页</a>
+</li>
+    <li id="nav_newpost">
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+    <li id="nav_contact">
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E7%9A%87%E5%AE%B6%E6%95%91%E6%98%9F">
+联系</a></li>
+    <li id="nav_rss">
+<a id="blog_nav_rss" class="menu" href="javascript:void(0)" data-rss="https://www.cnblogs.com/kingstarer/rss/">
+订阅</a></li>
+    <li id="nav_admin">
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+            <div class="blogStats">
+                <div id="blog_stats_place_holder"><script>loadBlogStats();</script></div>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div id="mainContent">
+            <div class="forFlow">
+                
+
+
+
+<div id="homepage_top_pager" class="topicListFooter">
+    
+
+<div class="pager">
+    <a href="https://www.cnblogs.com/kingstarer/default.html?page=5">上一页</a>
+    
+    
+        <a href="https://www.cnblogs.com/kingstarer/default.html?page=1">1</a>
+        <a href="https://www.cnblogs.com/kingstarer/default.html?page=2">2</a>
+        <a href="https://www.cnblogs.com/kingstarer/default.html?page=3">3</a>
+        <a href="https://www.cnblogs.com/kingstarer/default.html?page=4">4</a>
+        <a href="https://www.cnblogs.com/kingstarer/default.html?page=5">5</a>
+    6
+        <a href="https://www.cnblogs.com/kingstarer/default.html?page=7">7</a>
+        <a href="https://www.cnblogs.com/kingstarer/default.html?page=8">8</a>
+    
+    
+    <a href="https://www.cnblogs.com/kingstarer/default.html?page=7">下一页</a>
+</div>
+</div>
+
+
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/kingstarer/archive/2019/01/05.html">2019年1月5日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/kingstarer/p/10225674.html">
+    <span>
+        写高并发程序时慎用strncpy和sprintf
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：在写高并发交易代码时要谨慎使用strncpy和sprintf 原因及建议实践        <a href="https://www.cnblogs.com/kingstarer/p/10225674.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            posted @ 2019-01-05 18:51
+皇家救星
+<span data-post-id="10225674" class="post-view-count">阅读(2581)</span> 
+<span data-post-id="10225674" class="post-comment-count">评论(0)</span> 
+<span data-post-id="10225674" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10225674" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/kingstarer/archive/2018/12/31.html">2018年12月31日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/kingstarer/p/10202857.html">
+    <span>
+        介绍一个对陌生程序快速进行性能瓶颈分析的技巧
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：前言 工作多年，一直做的是curd系统。前几年做的系统应用场景，大多对数据库依赖比较重。例如报表统计，数据迁移，批量对账等。所以这些系统出现性能瓶颈一般出在数据库操作上面。 如果程序因为数据库操作出现性能瓶颈是比较好办的，因为oracle提供了完善的性能分析工具。往往使用awr报告简单分析一下（to        <a href="https://www.cnblogs.com/kingstarer/p/10202857.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            posted @ 2018-12-31 18:31
+皇家救星
+<span data-post-id="10202857" class="post-view-count">阅读(997)</span> 
+<span data-post-id="10202857" class="post-comment-count">评论(0)</span> 
+<span data-post-id="10202857" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10202857" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/kingstarer/archive/2018/12/22.html">2018年12月22日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/kingstarer/p/10160054.html">
+    <span>
+        oracle与infomix异同点
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：之前是做oracle数据库应用开发的，现在工作用的是informix，特别不习惯。用了一段时间后才慢慢适应，最近做系统升级，把informix换成oracle数据库。顺便整理了一下informix与oracle区别，希望对各位有用。 差异点 oracle infomix update多列 updat        <a href="https://www.cnblogs.com/kingstarer/p/10160054.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            posted @ 2018-12-22 10:43
+皇家救星
+<span data-post-id="10160054" class="post-view-count">阅读(604)</span> 
+<span data-post-id="10160054" class="post-comment-count">评论(0)</span> 
+<span data-post-id="10160054" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10160054" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/kingstarer/archive/2018/12/09.html">2018年12月9日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/kingstarer/p/10092445.html">
+    <span>
+        linux信号处理相关知识
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：个人总结的linux信号处理相关知识        <a href="https://www.cnblogs.com/kingstarer/p/10092445.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            posted @ 2018-12-09 18:36
+皇家救星
+<span data-post-id="10092445" class="post-view-count">阅读(508)</span> 
+<span data-post-id="10092445" class="post-comment-count">评论(0)</span> 
+<span data-post-id="10092445" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=10092445" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/kingstarer/archive/2018/10/28.html">2018年10月28日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/kingstarer/p/9867801.html">
+    <span>
+        记录一下最近做系统性能优化的经验
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：最近主要的工作是对系统做压测与优化，记录一下优化经验。 vmstat/top/ps 查看系统/进程整体情况ptrace/ltrace查看进程系统调用和标准库函数调用情况，还可以使用-c -T选项生成统计报表pstack查看进程堆栈（多查看几次，看看进程比较频繁停留的函数） perf或者callgri        <a href="https://www.cnblogs.com/kingstarer/p/9867801.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            posted @ 2018-10-28 22:52
+皇家救星
+<span data-post-id="9867801" class="post-view-count">阅读(124)</span> 
+<span data-post-id="9867801" class="post-comment-count">评论(0)</span> 
+<span data-post-id="9867801" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=9867801" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/kingstarer/archive/2018/10/07.html">2018年10月7日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/kingstarer/p/9750570.html">
+    <span>
+        vs2010(vs2012)好用的扩展插件介绍
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：一直以来只使用番茄vs助手(https://www.wholetomato.com/downloads/default.asp)辅助写代码，也都忘了是谁介绍的，不过确实好用。 相比原始的vs，它提供了很多改进功能。例如，重命名变量，高亮宏与自定义类型，查找引用，智能代码提示等。 因为一直以来用着没有        <a href="https://www.cnblogs.com/kingstarer/p/9750570.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            posted @ 2018-10-07 21:42
+皇家救星
+<span data-post-id="9750570" class="post-view-count">阅读(953)</span> 
+<span data-post-id="9750570" class="post-comment-count">评论(0)</span> 
+<span data-post-id="9750570" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=9750570" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/kingstarer/archive/2018/09/12.html">2018年9月12日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/kingstarer/p/9638143.html">
+    <span>
+        dbtool一bug跟踪记
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：dbx调试string变量赋值导致程序core的经验        <a href="https://www.cnblogs.com/kingstarer/p/9638143.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            posted @ 2018-09-12 23:39
+皇家救星
+<span data-post-id="9638143" class="post-view-count">阅读(185)</span> 
+<span data-post-id="9638143" class="post-comment-count">评论(0)</span> 
+<span data-post-id="9638143" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=9638143" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/kingstarer/archive/2018/09/09.html">2018年9月9日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/kingstarer/p/9613626.html">
+    <span>
+        oracle数据库应用性能优化经验（培训讲义）
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：数据库应用优化的经验分享。涉及oracle,awr,sql优化        <a href="https://www.cnblogs.com/kingstarer/p/9613626.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            posted @ 2018-09-09 14:34
+皇家救星
+<span data-post-id="9613626" class="post-view-count">阅读(604)</span> 
+<span data-post-id="9613626" class="post-comment-count">评论(4)</span> 
+<span data-post-id="9613626" class="post-digg-count">推荐(2)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=9613626" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/kingstarer/archive/2018/07/17.html">2018年7月17日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/kingstarer/p/9321218.html">
+    <span>
+        使用抽象工厂解决“根据类名生成类对象”
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：前段时间参加了一个项目的开发，里面有一个程序需要实现这样的功能： 程序启动时根据命令行参数提供的接口名称调用不同接口 所有接口相互独立，但能抽象出共同行为work，主函数只需负责调用该接口执行work动作 接口可能经常变化（增删改），但主函数基本不变 这个程序是这样实现的： 第一版程序实现（详细见附        <a href="https://www.cnblogs.com/kingstarer/p/9321218.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            posted @ 2018-07-17 00:26
+皇家救星
+<span data-post-id="9321218" class="post-view-count">阅读(309)</span> 
+<span data-post-id="9321218" class="post-comment-count">评论(3)</span> 
+<span data-post-id="9321218" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=9321218" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+    
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/kingstarer/archive/2018/02/25.html">2018年2月25日</a>
+    </div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/kingstarer/p/8469016.html">
+    <span>
+        工作碰上的技术问题及处理经验
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+            
+
+    <div class="c_b_p_desc">
+摘要：前言：工作中经常碰上各色各样的问题。有些问题处理过后就记在心中，下次碰上同样问题能很快解决。 但还是有不少问题，花了不少精力处理，但是印象不深刻，再次处理时又花了不少时间重新来过。 有鉴于此，我打算以后碰上问题处理完后都简单记一下，有空就翻翻，加深印象。 以下是目前整理出来在部分问题及处理经验，还有        <a href="https://www.cnblogs.com/kingstarer/p/8469016.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+
+        </div>
+        <div class="clear"></div>
+        <div class="postDesc">
+            posted @ 2018-02-25 12:01
+皇家救星
+<span data-post-id="8469016" class="post-view-count">阅读(640)</span> 
+<span data-post-id="8469016" class="post-comment-count">评论(0)</span> 
+<span data-post-id="8469016" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=8469016" rel="nofollow">
+    编辑
+</a>
+
+        </div>
+        <div class="clear"></div>
+</div>
+
+<div class="topicListFooter">
+    <div id="nav_next_page">
+        
+
+    </div>    
+</div>
+
+
+<div id="homepage_bottom_pager" class="topicListFooter">
+    
+
+<div class="pager">
+    <a href="https://www.cnblogs.com/kingstarer/default.html?page=5">上一页</a>
+    
+    
+        <a href="https://www.cnblogs.com/kingstarer/default.html?page=1">1</a>
+        <a href="https://www.cnblogs.com/kingstarer/default.html?page=2">2</a>
+        <a href="https://www.cnblogs.com/kingstarer/default.html?page=3">3</a>
+        <a href="https://www.cnblogs.com/kingstarer/default.html?page=4">4</a>
+        <a href="https://www.cnblogs.com/kingstarer/default.html?page=5">5</a>
+    6
+        <a href="https://www.cnblogs.com/kingstarer/default.html?page=7">7</a>
+        <a href="https://www.cnblogs.com/kingstarer/default.html?page=8">8</a>
+    
+    
+    <a href="https://www.cnblogs.com/kingstarer/default.html?page=7">下一页</a>
+</div>
+</div>
+
+<script>
+    updatePostStats(
+        $(".post-view-count").map(function () { return this.dataset.postId }).get(),
+        function(id, count) { $(".post-view-count[data-post-id=" + id + "]").text("阅读(" + count + ")") },
+        function(id, count) { $(".post-comment-count[data-post-id=" + id + "]").text("评论(" + count + ")") },
+        function(id, count) { $(".post-digg-count[data-post-id=" + id + "]").text("推荐(" + count + ")") });
+</script>
+            </div>
+        </div>
+
+        <div id="sideBar">
+            <div id="sideBarMain">
+                <div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+<div id="sidebar_c3"></div>
+                <div id="calendar"><div id="blog-calendar" style="display:none"></div></div>                
+                <script>loadBlogDefaultCalendar();</script>
+                <div id="leftcontentcontainer">
+                    <!-- begin:SingleColumn -->
+                    <div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+                    <!-- end:  SingleColumn -->
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div id="footer">
+        <!--done-->
+Copyright &copy; 2021 皇家救星
+<br /><span id="poweredby">Powered by .NET 5.0 on Kubernetes</span>
+
+    </div>
+</div>
+
+    
+
+    <input type="hidden" id="antiforgery_token" value="CfDJ8L-rpLgFVEJMgssCVvNUAjtCaNe5Dnn-yAMGWJ_u8BX-q2g7eW5JGrtYHvxwqwEYKBn_3q6CbVrFF2XqXifI2K8VCxy9Ie5Z5nc9NQhEch1FOGvXn6FRl50AcNWG6UBPB38VVM0Dy7RKMJ0NjFGMYFk" />
+</body>
+</html>

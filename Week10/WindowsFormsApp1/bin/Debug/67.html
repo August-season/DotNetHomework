@@ -1,0 +1,713 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin-when-crossorigin" />
+    
+    
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Kevin.ZhangCG - 博客园</title>
+    <link id="favicon" rel="shortcut icon" href="//common.cnblogs.com/favicon.svg" type="image/svg+xml" />
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=6tvK5XC6GPbg3p_sy7wzz_2291HoYACr4440iKBzQIw" />
+    <link id="MainCss" rel="stylesheet" href="/skins/bluesky/bundle-bluesky.min.css?v=QgnRqPZd0AFqBojTDaexyiNRMaV3YDud6PKtl7URQ4M" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/bluesky/bundle-bluesky-mobile.min.css?v=R6fv62IpzGSvTM7pHsnRgkrk1El3gMSYm75Iwe80srs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/Kevin-ZhangCG/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/Kevin-ZhangCG/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/Kevin-ZhangCG/wlwmanifest.xml" />
+    <script>
+        var currentBlogId = 427066;
+        var currentBlogApp = 'Kevin-ZhangCG';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var isBlogOwner = false;
+        var skinName = 'BlueSky';
+        var visitorUserId = '';
+    </script>
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=ZUvfwhWs5fv-s8Nv7WofCOhwKAxiDO928zdWFzhnOPk"></script>
+    
+    
+    
+</head>
+<body class="has-navbar has-bannerbar">
+    <a name="top"></a>
+            <a target="_blank" href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:pc|pp:bokeyuan-huodong-21nianzhongdacu-neiyePCtonglanbanner|pu:21nianzhongdacu-neiyePCtonglanbanner|ci:21nzdc|kw:10224545" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-pc')">
+                <div class="bannerbar aliyun forpc" style="background-size: contain; filter: brightness(0.95); background-image: url(https://img2020.cnblogs.com/blog/35695/202106/35695-20210610183724605-1725070929.jpg)">
+                </div>
+            </a>
+            <div id="bannerbar" class="bannerbar-mobile formobile">
+            <a href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:mb|pp:bokeyuan-huodong-21nianzhongdacu-neiyeyidongduantonglanbanner|pu:21nianzhongdacu-neiyeyidongduantonglanbanner|ci:21nzdc|kw:10224547" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-mobile')">
+                <img src="https://img2020.cnblogs.com/blog/35695/202106/35695-20210610184806729-1738888164.jpg" alt="" />
+            </a>
+            </div>
+    <div id="top_nav" class="navbar forpc">
+        <nav id="nav_main" class="navbar-main">
+            <ul id="nav_left" class="navbar-list navbar-left">
+                <li class="navbar-branding"><a href="https://www.cnblogs.com/" title="开发者的网上家园"><img src="/images/logo.svg?v=R9M0WmLAIPVydmdzE2keuvnjl-bPR7_35oHqtiBzGsM" alt="博客园Logo" /></a></li>
+                <li><a href="/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-sitehome')">首页</a></li>
+                <li><a href="https://news.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-news')">新闻</a></li>
+                <li><a href="https://q.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-q')">博问</a></li>
+                <li><a id="nav_brandzone" href="https://brands.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-brands')">专区</a></li>
+                <li><a href="https://ing.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-ing')">闪存</a></li>
+                <li><a href="https://edu.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-edu')">班级</a></li>
+            </ul>
+            <ul id="nav_right" class="navbar-list navbar-right">
+                <li>
+                    <form id="zzk_search" class="navbar-search" action="https://zzk.cnblogs.com/s" method="get">
+                        <input name="w" id="zzk_search_input" placeholder="代码改变世界" type="text" tabindex="3" />
+                        <button type="submit" id="zzk_search_button">
+                            <img src="/images/aggsite/search.svg" alt="搜索" />
+                        </button>
+                    </form>
+                </li>
+                <li id="navbar_login_status" class="navbar-list">
+                    <a class="navbar-user-info navbar-blog" href="https://i.cnblogs.com/EditPosts.aspx?opt=1" alt="写随笔" title="写随笔">
+                        <img id="new_post_icon" class="navbar-icon" src="/images/aggsite/newpost.svg" alt="写随笔" />
+                    </a>
+                    <a id="navblog-myblog-icon" class="navbar-user-info navbar-blog" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx" alt="我的博客" title="我的博客">
+                        <img id="myblog_icon" class="navbar-icon" src="/images/aggsite/myblog.svg" alt="我的博客" />
+                    </a>
+                    <a class="navbar-user-info navbar-message navbar-icon-wrapper" href="https://msg.cnblogs.com/" alt="短消息" title="短消息">
+                        <img id="msg_icon" class="navbar-icon" src="/images/aggsite/message.svg?v=J0WS2P2iPgaIVgXxcAhliw4AFZIpaTWxtdoNAv9eiCA" alt="短消息" />
+                        <span id="msg_count" style="display: none"></span>
+                    </a>
+                    <div id="user_info" class="navbar-user-info dropdown">
+                        <a class="dropdown-button" href="https://home.cnblogs.com/">
+                            <img id="user_icon" class="navbar-avatar" src="/images/aggsite/avatar-default.svg" alt="用户头像" />
+                        </a>
+                        <div class="dropdown-menu">
+                            <a id="navblog-myblog-text" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx">我的博客</a>
+                            <a href="https://home.cnblogs.com/">我的园子</a>
+                            <a href="https://account.cnblogs.com/settings/account">账号设置</a>
+                            <a href="javascript:void(0)" id="navbar_lite_mode_toggle" title="简洁模式会使用简洁款皮肤显示所有博客">
+    简洁模式 <img id="navbar_lite_mode_on" src="/images/lite-mode-check.svg" class="hide" /><span id="navbar_lite_mode_spinner" class="hide">...</span>
+</a>
+                            <a href="javascript:void(0)" onclick="account.logout();">退出登录</a>
+                        </div>
+                    </div>
+                    <a class="navbar-anonymous" href="https://account.cnblogs.com/signup/">注册</a>
+                    <a class="navbar-anonymous" href="javascript:void(0);" onclick="account.login()">登录</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    
+    <!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/Kevin-ZhangCG/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/Kevin-ZhangCG/">Kevin_Zhang</a>
+</h1>
+<h2></h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/Kevin-ZhangCG/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/Kevin.ZhangCG">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="javascript:void(0)" data-rss="https://www.cnblogs.com/Kevin-ZhangCG/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			<div id="blog_stats_place_holder"><script>loadBlogStats();</script></div>
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+
+
+
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/Kevin-ZhangCG/archive/2018/08/20.html">2018年8月20日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/Kevin-ZhangCG/p/9501635.html">
+    <span>
+            <span>[置顶]</span>
+        前后端分离原理
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：前言 前后端分离已成为互联网项目开发的业界标准使用方式，通过Nginx+Tomcat的方式（也可以中间加一个Node.js）有效的进行解耦，并且前后端分离会为以后的大型分布式架构、弹性计算架构、微服务架构、多端化服务（多种客户端，例如：浏览器，车载终端，安卓，IOS等等）打下坚实的基础。这个步骤是系        <a href="https://www.cnblogs.com/Kevin-ZhangCG/p/9501635.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2018-08-20 10:50
+Kevin.ZhangCG
+<span data-post-id="9501635" class="post-view-count">阅读(3765)</span> 
+<span data-post-id="9501635" class="post-comment-count">评论(3)</span> 
+<span data-post-id="9501635" class="post-digg-count">推荐(3)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=9501635" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/Kevin-ZhangCG/archive/2018/05/11.html">2018年5月11日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/Kevin-ZhangCG/p/9024423.html">
+    <span>
+            <span>[置顶]</span>
+        Java学习路线图分析
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：Java学习路线分析图 第一阶段 技术名称 技术内容 J2SE(java基础部分) java开发前奏 计算机基本原理，Java语言发展简史以及开发环境的搭建，体验Java程序的开发，环境变量的设置，程序的执行过程，相关反编译工具介绍，java开发工具Eclipse的安装和使用，javadoc的说明。        <a href="https://www.cnblogs.com/Kevin-ZhangCG/p/9024423.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2018-05-11 14:31
+Kevin.ZhangCG
+<span data-post-id="9024423" class="post-view-count">阅读(1842)</span> 
+<span data-post-id="9024423" class="post-comment-count">评论(0)</span> 
+<span data-post-id="9024423" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=9024423" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/Kevin-ZhangCG/archive/2021/06/19.html">2021年6月19日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/Kevin-ZhangCG/p/14892610.html">
+    <span>
+        在设计原则中，为什么反复强调组合要优于继承？
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：面向对象编程中，有一条非常经典的设计原则，那就是：组合优于继承，多用组合少用继承。同样地，在《阿里巴巴Java开发手册》中有一条规定：谨慎使用继承的方式进行扩展，优先使用组合的方式实现。 为什么不推荐使用继承 每个人在刚刚学习面向对象编程时都会觉得：继承可以实现类的复用。所以，很多开发人员在需要复用        <a href="https://www.cnblogs.com/Kevin-ZhangCG/p/14892610.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-06-19 18:10
+Kevin.ZhangCG
+<span data-post-id="14892610" class="post-view-count">阅读(69)</span> 
+<span data-post-id="14892610" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14892610" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14892610" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/Kevin-ZhangCG/archive/2021/06/18.html">2021年6月18日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/Kevin-ZhangCG/p/14852547.html">
+    <span>
+        Java8中使用Optional处理null对象
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：系统环境： Java JDK 版本：1.8 参考地址： Oracle JDK API 参考文档 https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html 菜鸟教程-Java 8 Optional 类 https://www.r        <a href="https://www.cnblogs.com/Kevin-ZhangCG/p/14852547.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-06-18 10:54
+Kevin.ZhangCG
+<span data-post-id="14852547" class="post-view-count">阅读(9)</span> 
+<span data-post-id="14852547" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14852547" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14852547" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/Kevin-ZhangCG/archive/2021/06/17.html">2021年6月17日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/Kevin-ZhangCG/p/14853413.html">
+    <span>
+        Java8 Lambda表达式、Optional类浅析
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：1.概念 Lambda是一个匿名函数，可以将其理解为一段可以传递的代码（将代码像数据一样进行传递）可以写出更简洁、更灵活的代码。作为一种更紧凑的代码风格，使得java语言的表达能利得到了提升。 2. Lambda表达式的基础语法 java8中引用了一个新的操作符&quot;-&gt;&quot;，该操作符称为箭头操作符或者L        <a href="https://www.cnblogs.com/Kevin-ZhangCG/p/14853413.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-06-17 10:59
+Kevin.ZhangCG
+<span data-post-id="14853413" class="post-view-count">阅读(22)</span> 
+<span data-post-id="14853413" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14853413" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14853413" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/Kevin-ZhangCG/archive/2021/06/16.html">2021年6月16日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/Kevin-ZhangCG/p/14852528.html">
+    <span>
+        Java8 中使用Stream 让List 转 Map使用总结
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：在使用 Java 的新特性 Collectors.toMap() 将 List 转换为 Map 时存在一些不容易发现的问题，这里总结一下备查。 空指针风险 java.lang.NullPointerException 当 List 中有 null 值的时候，使用 Collectors.toMap()        <a href="https://www.cnblogs.com/Kevin-ZhangCG/p/14852528.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-06-16 11:03
+Kevin.ZhangCG
+<span data-post-id="14852528" class="post-view-count">阅读(375)</span> 
+<span data-post-id="14852528" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14852528" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14852528" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/Kevin-ZhangCG/archive/2021/06/15.html">2021年6月15日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/Kevin-ZhangCG/p/14853665.html">
+    <span>
+        Java8 Stream流式编程浅析
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：java8自带常用的函数式接口 Predicate&lt;T&gt; boolean test(T t)&#160;传入一个参数返回boolean值 Consumer&lt;T&gt; void accept(T t)&#160;传入一个参数，无返回值 Function&lt;T,R&gt; R apply(T t)&#160;传入一个参数，返回另一个类型 准备数        <a href="https://www.cnblogs.com/Kevin-ZhangCG/p/14853665.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-06-15 17:20
+Kevin.ZhangCG
+<span data-post-id="14853665" class="post-view-count">阅读(16)</span> 
+<span data-post-id="14853665" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14853665" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14853665" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/Kevin-ZhangCG/archive/2021/06/05.html">2021年6月5日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/Kevin-ZhangCG/p/14852456.html">
+    <span>
+        浅析IOC 和 DI 
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：学习过spring框架的人一定都会听过Spring的IoC(控制反转) 、DI(依赖注入)这两个概念，对于初学Spring的人来说，总觉得IoC 、DI这两个概念是模糊不清的，是很难理解的，今天和大家分享网上的一些技术大牛们对Spring框架的IOC的理解以及谈谈我对Spring Ioc的理解。 1        <a href="https://www.cnblogs.com/Kevin-ZhangCG/p/14852456.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-06-05 12:15
+Kevin.ZhangCG
+<span data-post-id="14852456" class="post-view-count">阅读(158)</span> 
+<span data-post-id="14852456" class="post-comment-count">评论(0)</span> 
+<span data-post-id="14852456" class="post-digg-count">推荐(2)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14852456" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/Kevin-ZhangCG/archive/2021/06/04.html">2021年6月4日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/Kevin-ZhangCG/p/8954666.html">
+    <span>
+        [ Java面试题 ]Java 开发岗面试知识点解析
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：如背景中介绍，作者在一年之内参加过多场面试，应聘岗位均为 Java 开发方向。 在不断的面试中，分类总结了 Java 开发岗位面试中的一些知识点。 主要包括以下几个部分： Java 基础知识点 Java 常见集合 高并发编程（JUC 包） JVM 内存管理 Java 8 知识点 网络协议相关 数据库        <a href="https://www.cnblogs.com/Kevin-ZhangCG/p/8954666.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-06-04 18:50
+Kevin.ZhangCG
+<span data-post-id="8954666" class="post-view-count">阅读(311)</span> 
+<span data-post-id="8954666" class="post-comment-count">评论(0)</span> 
+<span data-post-id="8954666" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=8954666" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/Kevin-ZhangCG/archive/2021/06/03.html">2021年6月3日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/Kevin-ZhangCG/p/13418553.html">
+    <span>
+        Intellij Idea 常用快捷键总结+实用小技巧
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：快捷键列表 Alt+回车 导入包,自动修正Ctrl+N 查找类Ctrl+Shift+N 查找文件Ctrl+Alt+L 格式化代码 Ctrl+Alt+O 优化导入的类和包Alt+Insert 生成代码(如get,set方法,构造函数等)Ctrl+E或者Alt+Shift+C 最近更改的代码Ctrl+R        <a href="https://www.cnblogs.com/Kevin-ZhangCG/p/13418553.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-06-03 21:30
+Kevin.ZhangCG
+<span data-post-id="13418553" class="post-view-count">阅读(21)</span> 
+<span data-post-id="13418553" class="post-comment-count">评论(0)</span> 
+<span data-post-id="13418553" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=13418553" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+            <div class="postSeparator"></div>
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/Kevin-ZhangCG/p/13418557.html">
+    <span>
+        Intellij Idea基础设置
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：web页面热加载-Dorg.apache.tapestry.disable-caching=true 编码设置 代码提示不区分大小写 设置导航栏多行显示 设置字体大小格式 设置方法分割线 设置修改代码星号提示 设置方法形参参数提示 解决控制台输出乱码 -Dfile.encoding=UTF-8        <a href="https://www.cnblogs.com/Kevin-ZhangCG/p/13418557.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-06-03 21:26
+Kevin.ZhangCG
+<span data-post-id="13418557" class="post-view-count">阅读(8)</span> 
+<span data-post-id="13418557" class="post-comment-count">评论(0)</span> 
+<span data-post-id="13418557" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=13418557" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+		
+
+
+<div class="day">
+    <div class="dayTitle">
+        <a href="https://www.cnblogs.com/Kevin-ZhangCG/archive/2021/06/02.html">2021年6月2日</a>
+    </div>
+
+        <div class="postTitle">
+            
+
+<a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/Kevin-ZhangCG/p/13418560.html">
+    <span>
+        Eclipse基础设置
+    </span>
+    
+
+
+
+</a>
+
+        </div>
+        <div class="postCon">
+
+    <div class="c_b_p_desc">
+摘要：• 设置自动联想提示	Window -&gt; Preferences -&gt; Java -&gt; Editor -&gt; Content Assist -&gt; Auto Activation • 设置格式化模板	window-&gt;preferences-&gt;Java-&gt;Code Style-&gt;Formatter • 设        <a href="https://www.cnblogs.com/Kevin-ZhangCG/p/13418560.html" class="c_b_p_desc_readmore">阅读全文</a>
+    </div>
+</div>
+        <div class="clear"></div>
+        <div class="postDesc">posted @ 2021-06-02 12:40
+Kevin.ZhangCG
+<span data-post-id="13418560" class="post-view-count">阅读(11)</span> 
+<span data-post-id="13418560" class="post-comment-count">评论(0)</span> 
+<span data-post-id="13418560" class="post-digg-count">推荐(0)</span> 
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=13418560" rel="nofollow">
+    编辑
+</a>
+</div>
+        <div class="clear"></div>
+</div>
+
+
+
+<div class="topicListFooter">
+    <div id="nav_next_page">
+        
+    <a href="https://www.cnblogs.com/Kevin-ZhangCG/default.html?page=2">
+        下一页
+    </a>
+
+    </div>    
+</div>
+
+
+
+
+
+
+<script>
+    updatePostStats(
+        $(".post-view-count").map(function () { return this.dataset.postId }).get(),
+        function(id, count) { $(".post-view-count[data-post-id=" + id + "]").text("阅读(" + count + ")") },
+        function(id, count) { $(".post-comment-count[data-post-id=" + id + "]").text("评论(" + count + ")") },
+        function(id, count) { $(".post-digg-count[data-post-id=" + id + "]").text("推荐(" + count + ")") });
+</script>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+	<div id="sideBar">
+		<div id="sideBarMain">
+			<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+<div id="sidebar_c3"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2021 Kevin.ZhangCG
+<br /><span id="poweredby">Powered by .NET 5.0 on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+
+    <input type="hidden" id="antiforgery_token" value="CfDJ8L-rpLgFVEJMgssCVvNUAjuqgiuinGbfn5wI7UFYfgJCVLv6KB4dWf5oOO3NOKSdqVcqzSUl-8wxuvMyC8qjmNAmTTbWzBp0oUIj7jasgQw0wWo2Jz-2dmbWE3XhybNld7kEvk6IW5FwztmJR3ZxKNc" />
+</body>
+</html>

@@ -1,0 +1,476 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin-when-crossorigin" />
+    <meta name="description" content="续上一篇随笔：https://www.cnblogs.com/kingstarer/p/12497000.html《工作碰上的技术问题及处理经验》（五） 我这人记忆力比较差，经常出现有些知识学了不久后" />
+    <meta property="og:description" content="续上一篇随笔：https://www.cnblogs.com/kingstarer/p/12497000.html《工作碰上的技术问题及处理经验》（五） 我这人记忆力比较差，经常出现有些知识学了不久后" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>《工作碰上的技术问题及处理经验》（六） - 皇家救星 - 博客园</title>
+    <link id="favicon" rel="shortcut icon" href="//common.cnblogs.com/favicon.svg" type="image/svg+xml" />
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=6tvK5XC6GPbg3p_sy7wzz_2291HoYACr4440iKBzQIw" />
+    <link id="MainCss" rel="stylesheet" href="/skins/simpleblue/bundle-simpleblue.min.css?v=2hjghzSZyhYA1HxvSxKnXih3JbC120DBjeO9V9T_nSs" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/simpleblue/bundle-simpleblue-mobile.min.css?v=3tvwgOOqUo3RpS6gGzEdK0LbptOPv4Bx7M85_UAnFGs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/kingstarer/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/kingstarer/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/kingstarer/wlwmanifest.xml" />
+    <script>
+        var currentBlogId = 234136;
+        var currentBlogApp = 'kingstarer';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var isBlogOwner = false;
+        var skinName = 'SimpleBlue';
+        var visitorUserId = '';
+    </script>
+        <script>
+            var currentPostDateAdded = '2020-11-15 04:10';
+        </script>
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=ZUvfwhWs5fv-s8Nv7WofCOhwKAxiDO928zdWFzhnOPk"></script>
+    
+    
+    
+</head>
+<body class="has-navbar has-bannerbar">
+    <a name="top"></a>
+            <a target="_blank" href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:pc|pp:bokeyuan-huodong-21nianzhongdacu-neiyePCtonglanbanner|pu:21nianzhongdacu-neiyePCtonglanbanner|ci:21nzdc|kw:10224545" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-pc')">
+                <div class="bannerbar aliyun forpc" style="background-size: contain; filter: brightness(0.95); background-image: url(https://img2020.cnblogs.com/blog/35695/202106/35695-20210610183724605-1725070929.jpg)">
+                </div>
+            </a>
+            <div id="bannerbar" class="bannerbar-mobile formobile">
+            <a href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:mb|pp:bokeyuan-huodong-21nianzhongdacu-neiyeyidongduantonglanbanner|pu:21nianzhongdacu-neiyeyidongduantonglanbanner|ci:21nzdc|kw:10224547" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-mobile')">
+                <img src="https://img2020.cnblogs.com/blog/35695/202106/35695-20210610184806729-1738888164.jpg" alt="" />
+            </a>
+            </div>
+    <div id="top_nav" class="navbar forpc">
+        <nav id="nav_main" class="navbar-main">
+            <ul id="nav_left" class="navbar-list navbar-left">
+                <li class="navbar-branding"><a href="https://www.cnblogs.com/" title="开发者的网上家园"><img src="/images/logo.svg?v=R9M0WmLAIPVydmdzE2keuvnjl-bPR7_35oHqtiBzGsM" alt="博客园Logo" /></a></li>
+                <li><a href="/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-sitehome')">首页</a></li>
+                <li><a href="https://news.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-news')">新闻</a></li>
+                <li><a href="https://q.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-q')">博问</a></li>
+                <li><a id="nav_brandzone" href="https://brands.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-brands')">专区</a></li>
+                <li><a href="https://ing.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-ing')">闪存</a></li>
+                <li><a href="https://edu.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-edu')">班级</a></li>
+            </ul>
+            <ul id="nav_right" class="navbar-list navbar-right">
+                <li>
+                    <form id="zzk_search" class="navbar-search" action="https://zzk.cnblogs.com/s" method="get">
+                        <input name="w" id="zzk_search_input" placeholder="代码改变世界" type="text" tabindex="3" />
+                        <button type="submit" id="zzk_search_button">
+                            <img src="/images/aggsite/search.svg" alt="搜索" />
+                        </button>
+                    </form>
+                </li>
+                <li id="navbar_login_status" class="navbar-list">
+                    <a class="navbar-user-info navbar-blog" href="https://i.cnblogs.com/EditPosts.aspx?opt=1" alt="写随笔" title="写随笔">
+                        <img id="new_post_icon" class="navbar-icon" src="/images/aggsite/newpost.svg" alt="写随笔" />
+                    </a>
+                    <a id="navblog-myblog-icon" class="navbar-user-info navbar-blog" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx" alt="我的博客" title="我的博客">
+                        <img id="myblog_icon" class="navbar-icon" src="/images/aggsite/myblog.svg" alt="我的博客" />
+                    </a>
+                    <a class="navbar-user-info navbar-message navbar-icon-wrapper" href="https://msg.cnblogs.com/" alt="短消息" title="短消息">
+                        <img id="msg_icon" class="navbar-icon" src="/images/aggsite/message.svg?v=J0WS2P2iPgaIVgXxcAhliw4AFZIpaTWxtdoNAv9eiCA" alt="短消息" />
+                        <span id="msg_count" style="display: none"></span>
+                    </a>
+                    <div id="user_info" class="navbar-user-info dropdown">
+                        <a class="dropdown-button" href="https://home.cnblogs.com/">
+                            <img id="user_icon" class="navbar-avatar" src="/images/aggsite/avatar-default.svg" alt="用户头像" />
+                        </a>
+                        <div class="dropdown-menu">
+                            <a id="navblog-myblog-text" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx">我的博客</a>
+                            <a href="https://home.cnblogs.com/">我的园子</a>
+                            <a href="https://account.cnblogs.com/settings/account">账号设置</a>
+                            <a href="javascript:void(0)" id="navbar_lite_mode_toggle" title="简洁模式会使用简洁款皮肤显示所有博客">
+    简洁模式 <img id="navbar_lite_mode_on" src="/images/lite-mode-check.svg" class="hide" /><span id="navbar_lite_mode_spinner" class="hide">...</span>
+</a>
+                            <a href="javascript:void(0)" onclick="account.logout();">退出登录</a>
+                        </div>
+                    </div>
+                    <a class="navbar-anonymous" href="https://account.cnblogs.com/signup/">注册</a>
+                    <a class="navbar-anonymous" href="javascript:void(0);" onclick="account.login()">登录</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    
+    <div id="home">
+    <div id="header">
+        <div id="blogTitle">
+            <div class="title"><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/kingstarer/">皇家救星</a>
+</div>
+<div class="subtitle"></div>
+
+        </div>
+        <div id="navigator">
+            
+<ul id="navList">
+    <li id="nav_sitehome"><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+    <li id="nav_myhome">
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/kingstarer/">
+首页</a>
+</li>
+    <li id="nav_newpost">
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+    <li id="nav_contact">
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E7%9A%87%E5%AE%B6%E6%95%91%E6%98%9F">
+联系</a></li>
+    <li id="nav_rss">
+<a id="blog_nav_rss" class="menu" href="javascript:void(0)" data-rss="https://www.cnblogs.com/kingstarer/rss/">
+订阅</a></li>
+    <li id="nav_admin">
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+            <div class="blogStats">
+                <div id="blog_stats_place_holder"><script>loadBlogStats();</script></div>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div id="mainContent">
+            <div class="forFlow">
+                <div id="post_detail">
+    <div id="topics">
+        <div class="post">
+            <h1 class="postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2 vertical-middle" href="https://www.cnblogs.com/kingstarer/p/13977085.html">
+    <span>《工作碰上的技术问题及处理经验》（六）</span>
+    
+
+
+
+</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                <div id="cnblogs_post_body" class="blogpost-body cnblogs-markdown">
+<p>续上一篇随笔：<a href="https://www.cnblogs.com/kingstarer/p/12497000.html%E3%80%8A%E5%B7%A5%E4%BD%9C%E7%A2%B0%E4%B8%8A%E7%9A%84%E6%8A%80%E6%9C%AF%E9%97%AE%E9%A2%98%E5%8F%8A%E5%A4%84%E7%90%86%E7%BB%8F%E9%AA%8C%E3%80%8B%EF%BC%88%E4%BA%94%EF%BC%89" target="_blank">https://www.cnblogs.com/kingstarer/p/12497000.html《工作碰上的技术问题及处理经验》（五）</a></p>
+<p>我这人记忆力比较差，经常出现有些知识学了不久后就忘了，或者有些问题花了很多时间百度解决后，再过一段时间碰上时只有模糊印象，却忘了具体解决方法。</p>
+<p>最近几年工作时我开始有意识地把登记每天工作碰上的技术问题做个简单笔记。</p>
+<p>一般上班时间比较忙，只能草草记了一两句话。等过一段时间，我会把这个笔记整理一下，把问题和处理经验整理通顺，以加深自己的印象。</p>
+<h1 id="20200309">20200309</h1>
+<p>​	redhat光盘安装软件方法：<br>
+首先挂载光驱 mkdir /mnt/cdrom &amp;&amp; mount /dev/cdrom /mnt/cdrom<br>
+接着切换到 /mnt/cdrom/Package 目录，执行rpm -ivh安装对应的软件<br>
+例如rpm -ivh telnet*  安装telnet</p>
+<h1 id="20200310">20200310</h1>
+<p>​	docker查看容器时，有时因为启动命令太长显示不全，可以加上一个参数显示完整command的命令：</p>
+<pre><code class="language-shell">docker ps -a --no-trunc
+</code></pre>
+<p>--no-trunc可以用到很多地方，例如docker history</p>
+<h1 id="20200311">20200311</h1>
+<pre><code>nmon配合nmon analyser可以很轻松地生成可视化的系统性能图表。
+
+nmon常用命令：
+nmon -f -m /tmp/nmon/  -s 30 -c 120 #-f表示使用非交互模式，-N表示收集包括NFS的信息，-m指定生成报告文件的目录，-s表示第轮收集数据的间隔秒数，-c表示一共收集数据的次数；
+
+nmon analyser（该工具是一个excel文件，可以网上搜索下载）用法：
+https://blog.csdn.net/kevin_stu_info/article/details/10518139
+https://www.cnblogs.com/qgc1995/p/7523786.html
+</code></pre>
+<h1 id="20200312">20200312</h1>
+<p>​	记录一下我昨天找到的另外几个可能比较有用的可视化linux系统监控工具：<br>
+1 NetData 一个提供漂亮监控页面的可视化监控工具，需要在目标机器上安装，并通过web浏览器获取监控数据。缺点是消耗性能比较大。<br>
+​	<a href="https://blog.csdn.net/qq_41839103/article/details/88847223" target="_blank">https://blog.csdn.net/qq_41839103/article/details/88847223</a><br>
+2 zabbix 一个分布式监控工具，优点是可以集中展示多台机的监控数据。缺点是配置比较复杂。<br>
+​	以上两个工具都默认提供linux主机系统监控，并可通过插件对中间件（如mysql nginx redis）进行监控<br>
+2 Spotlight mysql/oracle 一个拥有非常漂亮、现代化感十足的界面的数据库可视化监控工具<br>
+​	<a href="https://www.cnblogs.com/L1079991001/p/10459591.html" target="_blank">https://www.cnblogs.com/L1079991001/p/10459591.html</a></p>
+<h1 id="20200322">20200322</h1>
+<p>​	今天重启家里路由器后，突然发现一台虚拟机网络连接异常。<br>
+​	由于之前一直没问题，猜测是重启后虚拟机没自动重新连接网络。<br>
+​	于是使用ifdown把网卡关了，再用ifup打算重启。结果ifup失败，提示：</p>
+<blockquote>
+<p>​	"Error: Connection activation failed:<br>
+IP configuration could not be reserved<br>
+(no available address, timeout, etc.)"</p>
+</blockquote>
+<p>​	按错误提示百度了一下，发现原来是vmware虚拟网卡配置问题。<br>
+在vmware的“虚拟网络编辑器”，把VMnet0（桥接模式）使用的网卡从自动，改为现在能连网的网卡。<br>
+再回来虚拟机，重新执行ifdown/ifup即可。</p>
+<hr>
+<p>​	今天发现linux下的系统日志：/var/log/messages，文件时间戳（即文件修改时间）不对，跟正常时间差了12个小时。<br>
+​	按网上说的执行了service rsyslog restart重启syslog服务，还是不行。<br>
+​	后来只能在/etc/profile里面强制添加时区变量才恢复：<strong>TZ='Asia/Shanghai';export TZ</strong><br>
+​	这样做之后重启系统，发现文件时间戳对了，但是/var/log/messages里面的日志内容时间还是不对。<br>
+​	于是又上网找了一下，发现有一个 timedatectl status 可以查看和修改系统当前时区设置<br>
+​	运行了一下，发现我系统设置的是"Time zone: America/Los_Angeles (PDT, -0700)"<br>
+​	尝试运行<strong>timedatectl set-timezone "Asia/Shanghai"</strong>，这下终于运行正常了</p>
+<p>​	ps：后来我查了一下，还有另一个查看当前系统时区的方法:ls -lrt /etc/localtime<br>
+​	在我系统上，显示是链接到../usr/share/zoneinfo/Asia/Shanghai</p>
+<h1 id="20200323">20200323</h1>
+<p>今天整理了一下最近学习docker的一些心得放在了博客上：</p>
+<p><a href="https://www.cnblogs.com/kingstarer/p/12592233.html" target="_blank">https://www.cnblogs.com/kingstarer/p/12592233.html</a></p>
+<h1 id="20200324">20200324</h1>
+<p>​	今天安装了netdata，安装完后发现在浏览器输入虚拟机http://ip:19999访问不了。<br>
+于是怀疑是防火墙问题，使用systemctl stop firewalld把防火墙关闭了，访问就正常了。<br>
+由于觉得防火墙碍事，于是使用systemctl disable firewalld，把防火墙服务关了，这时访问还正常。<br>
+但是重启机器后，发现浏览器访问19999端口又不行了。<br>
+百度查了一下，原来<strong>redhat在防火墙服务没开启的情况下，默认只能访问22端口</strong>。<br>
+于是又把防火墙打开，再关闭，又能访问19999端口了。<br>
+不过这次发生更奇怪的问题：我重启了机器，发现19999端口还是能正常访问。不像第一次，重启机器后端口就不能访问了。<br>
+不清楚是什么情况，不过能用就暂时用着。不过我还是找了一个防火墙打开时放开端口的命令备用：<br>
+firewall-cmd --permanent --add-port=19999/tcp</p>
+<hr>
+<p>今天使用ping命令时报没有权限，查了一下网上介绍，需要用root执行chmod u+s ping,普通用户才可以使用ping命令。<br>
+这里的+s，是给可以执行的二进制文件设置SUID权限。<br>
+有这种权限后，命令执行者执行程序时获得文件所有的身份，只在程序执行中生效，执行完就无效</p>
+<h1 id="20200325">20200325</h1>
+<p>​	linux查看dns服务器返回的域名地址方法：nslookup domain [dns-server]</p>
+<h1 id="20200326">20200326</h1>
+<p>​	今天学习了怎么使用bash的complete进行自定义命令参数补齐<br>
+​	例如给git添加命令补齐，只需要执行：complete -W "add checkout clone commit diff pull push status" git<br>
+​	更多心得记录在：  <a href="https://www.cnblogs.com/kingstarer/p/12586721.html" target="_blank">https://www.cnblogs.com/kingstarer/p/12586721.html</a> 自定义linux命令参数补全以提高工作效率</p>
+<h1 id="20200327">20200327</h1>
+<p>​	今天学到两个gdb的小技巧：<br>
+​	1 双击tab键可以补全函数名<br>
+​	2 rwatch <expr> 可以让程序读到指定变量时停下来</expr></p>
+<h1 id="20200329">20200329:</h1>
+<p>​	今天发现自己虚拟机上的docker服务没有开机启动，使用systemctl status docker查看，发现Loaded显示是这样的<br>
+"Loaded: loaded (/usr/lib/systemd/system/docker.service; disabled; vendor preset: disabled)"<br>
+​	第一个disabled位置代表服务是否开机启动，这里disabled代表不自动启动。<br>
+​	使用systemctl enable docker设置后重启就能自动起来了</p>
+<h1 id="20200331">20200331</h1>
+<p>​	今天开始学习python，纠结了一下学python2还是python3，最终决定学习2。<br>
+理由是，python2使用的人比较多，而且很多linux系统自带python 2.7。还有python2跟python3差异不是太大，以后要转也不难。<br>
+​</p>
+<hr>
+<p>​	今天碰上python在windows的power shell输出utf8乱码问题，修改一下代码页就好了：chcp 65001</p>
+<h1 id="20200401">20200401</h1>
+<p>​	今天才知道字节序不是由操作系统决定的，而是由cpu架构决定的，比如 x86 的是 little endian，而 PPC (PowerPC) 是big endian。 所以跑在 x86 上的 linux/windows 都是小端，而跑在 PPC 上的linux则是大端。<br>
+之前一直以为windows是大端，linux是小端。</p>
+<h1 id="20200407">20200407</h1>
+<p>​	今天面试被问到oracle和mysql数据库隔离级别差异的问题，回答得有点模糊，回来查了一下。<br>
+​	oracle数据库默认隔离级别与其它大多数数据库一样，是读已提交。除此外，oracle还提供了另两个隔离级别，串行事务还有序列化和只读。<br>
+序列化级别隔离，一个事务只能看到本事务开始前其它事务已提交的数据和本事务修改的数据。只读级别的话则规定本事务内不可以修改数据记录。<br>
+​	已提交级别比较容易出现幻读，隔离级别越高，数据库并行度越低。<br>
+​	脏读，即读取到其它事务未提交的记录。这是数据库在隔离级别为读未提交时才会出现，实际数据库没有提供这个级别，因为会导致数据不一致。<br>
+​	幻读，指当用户读取某一范围的数据行时，另一个事务又在该范围内插入了新行，当用户再读取该范围的数据行时，会发现有新的“幻影” 行。</p>
+<p>​	间隙锁: mysql提供间隙锁，避免幻读现象（只能在可重复读隔离级别以上可用）。使用间隙锁，把某个区间范围内锁起来，不管记录存不存在。<br>
+​	mysql默认是可重复读级别隔离，跟其它数据库不一样，略高于读已提交。这是因为mysql以前的主从复制是语句级别，而且以commit顺序进行同步。<br>
+如果使用已提交级别，同步两个操作了相同数据的事务语句，可能出现差异。<br>
+​</p>
+<h1 id="20200408">20200408</h1>
+<p>​	linux的shell变量没有export之前，只是shell一个变量，只有export后才是环境变量。<br>
+​	环境变量使用env可以显示变量值，普通变量不行。而环境变量和普通变量都能用echo $变量名</p>
+<h1 id="20200409">20200409</h1>
+<p>​	今天发现source insight原来可以支持go sql语言，只要到官方下载扩展包就行<br>
+​</p>
+<hr>
+<p>​	今天用tcpdump抓本机两个程序通信内容时发现总抓不到。<br>
+后来百度了一下，才知道可能是数据没走网卡，走本地环回，需要监听lo，命令如下：<br>
+tcpdump tcp port 50051 -n -X -s 0  -i lo</p>
+<h1 id="20200410">20200410</h1>
+<p>​	plsql developer 浏览代码时可以使用alt+left和alt+right跳转<br>
+​	如果想查看存储过程包里面函数的代码，可以使用ctrl + 右键双击函数名（如果单击是跳转到定义）</p>
+<h1 id="20200412">20200412</h1>
+<p>​	今天把redhat系统的yum源替换成阿里的，记录一下操作：<br>
+1 yum clean all<br>
+2 wget -O /etc/yum.repos.d/CentOS-Base.repo <a href="http://mirrors.aliyun.com/repo/Centos-7.repo" target="_blank">http://mirrors.aliyun.com/repo/Centos-7.repo</a><br>
+3 修改 /etc/yum/pluginconf.d/subscription-manager.conf 把里面的enable=1改成enabled=0<br>
+4 yum makecache</p>
+<h1 id="20200413">20200413</h1>
+<p>​	今天编译gprc，中间出过好几个莫名奇妙的错误。<br>
+后来发现是自己系统的软件太旧了，试着使用yum重新安装gcc gcc-c++ automake autoconf libtoolize perl这些软件，再重新编译就可以了。<br>
+重装后没奇怪错误，不过编译时还是出现报错" Cannot find install-sh, install.sh, or shtool in"<br>
+执行以下命令就可以了<br>
+libtoolize --force<br>
+aclocal<br>
+autoheader<br>
+automake --force-missing --add-missing<br>
+autoreconf -vif<br>
+./configure<br>
+​	不过编译过程中发现好多告警，猜测是我gcc版本太低导致的。yum默认更新到4.8.5，发布时间是20150623。明天打算更新一下gcc再编译一下</p>
+<h1 id="20200414">20200414</h1>
+<p>​	今天尝试在自己虚拟机上装golang，发现用yum安装时提示没有这个软件。上网找golang安装包时，发现yum有增强镜像源，叫EPEL。</p>
+<p>​	RHEL以及他的衍生发行版如CentOS、Scientific Linux为了稳定，官方的rpm repository提供的rpm包往往是很滞后的，当然了，这样做这是无可厚非的，毕竟这是服务器版本，安全稳定是重点，官方的rpm repository提供的rpm包也不够丰富，很多时候需要自己编译那太辛苦了，而EPEL恰恰可以解决这两方面的问题。</p>
+<p>​	只要先安装epel后就可以使用yum直接安装golang</p>
+<pre><code>yum install -y epel-release
+
+yum install golang
+</code></pre>
+<p>​</p>
+<h1 id="20200415">20200415</h1>
+<p>​	今天看别人的golang源码时，发现某个结构体声明里面出现反引号，像下面这样：</p>
+<pre><code>type User struct {
+    UserId   int    `json:"user_id" bson:"user_id"`
+    UserName string `json:"user_name" bson:"user_name"`
+}
+</code></pre>
+<p>​	网上查了一下，原来golang的反引用有两种作用：</p>
+<blockquote>
+<p>先介绍一下``(反引号)：反引号用来创建 原生的字符串字面量 ，这些字符串可能由多行组成(不支持任何转义序列)，原生的字符串字面量多用于书写多行消息、HTML以及正则表达式。</p>
+<p>在处理json格式字符串的时候，经常会看到声明struct结构的时候，属性的右侧还有反引号括起来的内容。如下：</p>
+<p>要比较详细的了解这个，要先了解一下golang的基础，在golang中，命名都是推荐都是用驼峰方式，并且在首字母大小写有特殊的语法含义：包外无法引用。但是由经常需要和其它的系统进行数据交互，例如转成json格式，存储到mongodb啊等等。这个时候如果用属性名来作为键值可能不一定会符合项目要求。</p>
+<p>所以呢就多了反引号的内容，在golang中叫标签（Tag），在转换成其它数据格式的时候，会使用其中特定的字段作为键值。例如上例在转成json格式</p>
+</blockquote>
+<p>​	<strong>由于没怎么认真学习golang语法，直接看代码，所以有一些比较少见的语法会搞不清楚啥意思。有空还是要系统golang语言编程学习一下才行</strong></p>
+<h1 id="20200415-1">20200415</h1>
+<p>​	今天写了一个程序，访问oracle数据库时，总是提示oci.dll找不到。但我明明把oci.dll放在了程序的目录下面的，不应该找不到。</p>
+<p>经过一番折腾才发现，原来是因为我程序是64位，而dll是32位的。</p>
+<p>​	怎么看dll是几位的呢？ 可以使用dumpbin.exe</p>
+<pre><code>dumpbin.exe   /headers    D:\oraclexe\app\oracle\product\11.2.0\server\bin\oci.dll
+Microsoft (R) COFF/PE Dumper Version 14.00.24215.1
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file D:\oraclexe\app\oracle\product\11.2.0\server\bin\oci.dll
+PE signature found
+
+File Type: DLL
+
+FILE HEADER VALUES
+            8664 machine (x64)
+</code></pre>
+<p>​	上面显示的是64位dll的输出，如果是32位，FILE HEADER VALUES会显示：14C machine (x86)</p>
+<hr>
+<p>​	今天才知道原来可以在linux下用tcpdump抓包，然后把结果拿到wireshark分析：</p>
+<pre><code>tcpdump tcp port 7182 -n -X -s 0  -i lo  -w /tmp/tcp.cap
+</code></pre>
+<h1 id="20200416">20200416</h1>
+<p>​	今天发现项目里面有一个网页可以显示图片，但是查看F12，没找到图片的链接。后来咨询一下前台开发同事，才知道使用的是html 5的svg技术:</p>
+<blockquote>
+<p>svg是使用 XML 来描述二维图形和绘图程序的语言，是个行级标签。</p>
+<p>适用场景：图标、图标icon、动效、矢量图（放大后不失真）</p>
+</blockquote>
+<p>​	也就是说只要根据svg的编码规则，编写xml文件，就可以显示成图片。与markdown排版思路差不多，使用文本描述非文本数据。</p>
+<h1 id="20200422">20200422</h1>
+<p>​	今天因为项目需要复习了一下https的原理。之前只是大概知道在通信时使用rsa对数据进行加密，但对好多细节没搞清楚：</p>
+<p>1 数据通信确实是加密的，但使用的是对称加密技术，不是rsa</p>
+<p>2 对象加密的密钥，是最开始连接时，双方通过https协议协商的，协商过程中的通信是用非对称加密rsa技术加密的。</p>
+<p>3 对称加解密效率高，非对称加解密效率低，但好处是更安全，更难破解，并且只需要在客户端存放公钥，服务端存放私钥即可，不存在密钥泄漏风险。</p>
+<p>4 https证书其实就是用来管理公钥和私钥的</p>
+<p>5 程序要提供https服务时，需要在代码里面指定自己的公钥和私钥。把公钥放在自己的https证书里面。</p>
+<p>6 浏览器访问服务器时，先请示下载https证书，获取里面的公钥。</p>
+<p>7 浏览器随机生成一个对称加密的密钥，用服务端的公钥加密后，传给服务端。以后的来往报文使用这个密钥加解密。</p>
+<p>8 以上只是最简单的https证书使用方式，又称自签证书。此方式解决了加密问题，但没有解决网站窜改问题。</p>
+<p>9 任何服务器都可以使用自签证书搭建https网站，但访问这些网站时，浏览器会提示“网站是不安全的”，需要用户点击确认按钮后才可继续访问。</p>
+<p>10 解决方法是找一个数字证书颁发机构(简称CA)给你网站颁发https证书</p>
+<p>11 申请ca认证https证书时，需要提交你服务器域名和公钥，ca机构用它们的私钥给这些信息加密生成https证书</p>
+<p>12 ca机构会跟浏览器厂商和操作系统公司合作，在他们软件预先导入ca机构的公钥</p>
+<p>13 浏览器访问网站时，先获取到https证书。使用浏览器内置的ca机构公钥对证书解密。从中提取出服务器公钥再协商通信密钥。</p>
+<p>14 如果不想跟ca申请证书（因为要钱），又不想使用最原始的自签证书，可以使用“自颁发证书”</p>
+<p>15 自颁发证书意思是自己搭建证书服务器，对自己的服务器域名和公钥进行签名认证生成自己颁发的https证书</p>
+<p>16 为了让浏览器能识别这种证书，需要自己手动在浏览器导入自建证书服务器的公钥。</p>
+<p>17 自颁发证书可以解决浏览器提示网站不安全的问题，也可以节省ca认证费用。如果网站只在局域网内部使用，是一个好的选择。</p>
+<p>18 如果不在意每次浏览网站都提示“网站不安全”，只是为了解决偷窥问题（例如服务器内部通信），可以直接使用自签证书，操作最方便。</p>
+
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-11-15 16:10</span>&nbsp;
+<a href="https://www.cnblogs.com/kingstarer/">皇家救星</a>&nbsp;
+阅读(<span id="post_view_count">171</span>)&nbsp;
+评论(<span id="post_comment_count">0</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=13977085" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(13977085);return false;">收藏</a>&nbsp;
+<a href="javascript:void(0)" onclick="reportManager.report({ currentUserId: '', targetType: 'blogPost', targetId: '13977085', targetLink: 'https://www.cnblogs.com/kingstarer/p/13977085.html', title: '《工作碰上的技术问题及处理经验》（六）' })">举报</a></div>
+        </div>
+        <script src="https://common.cnblogs.com/highlight/10.3.1/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 234136, cb_blogApp = 'kingstarer', cb_blogUserGuid = '6c01f56e-ee22-e511-b908-9dcfd8948a71';
+    var cb_entryId = 13977085, cb_entryCreatedDate = '2020-11-15 16:10', cb_postType = 1;
+    updatePostStats(
+        [cb_entryId],
+        function(id, count) { $("#post_view_count").text(count) },
+        function(id, count) { $("#post_comment_count").text(count) })
+    zoomManager.apply("#cnblogs_post_body img:not(.code_img_closed):not(.code_img_opened)");
+</script>
+        <a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <div id="cnblogs_c1" class="under-post-card">
+        <div id='div-gpt-ad-1592365906576-0' style='width: 300px; height: 250px;'></div>
+    </div>
+    <div id="under_post_card1"></div>
+    <div id="cnblogs_c2" class="under-post-card">
+        <div id='div-gpt-ad-1592366332455-0' style='width: 468px; height: 60px;'></div>
+    </div>
+    <div id="under_post_card2"></div>
+    <div id="HistoryToday" class="under-post-card"></div>
+    <script type="text/javascript">
+       var commentManager = new blogCommentManager();
+       commentManager.renderComments(0);
+       fixPostBody();
+       deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);       deliverT2();
+       deliverC1C2();
+       loadNewsAndKb();
+       loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);       LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+       GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+       loadOptUnderPost();
+       GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+
+    </div>
+</div>
+            </div>
+        </div>
+
+        <div id="sideBar">
+            <div id="sideBarMain">
+                <div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+<div id="sidebar_c3"></div>
+                <div id="calendar"><div id="blog-calendar" style="display:none"></div></div>                
+                <script>loadBlogDefaultCalendar();</script>
+                <div id="leftcontentcontainer">
+                    <!-- begin:SingleColumn -->
+                    <div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+                    <!-- end:  SingleColumn -->
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div id="footer">
+        <!--done-->
+Copyright &copy; 2021 皇家救星
+<br /><span id="poweredby">Powered by .NET 5.0 on Kubernetes</span>
+
+    </div>
+</div>
+
+    
+
+    <input type="hidden" id="antiforgery_token" value="CfDJ8L-rpLgFVEJMgssCVvNUAjv_1THbftzeRtJR8GVgRJp6GNDtgGjNPoCOI12CGVzOhusBR9mW1Q3sr9zuxAFnDTQS1fqgd9FtX7mAgS1Z4Krh90-s50LzCUXAMvvShdXml9ek0VGxDc2pX0Lw0qcbC-g" />
+</body>
+</html>

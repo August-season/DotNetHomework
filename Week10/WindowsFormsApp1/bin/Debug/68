@@ -1,0 +1,377 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin-when-crossorigin" />
+    <meta name="description" content="我们在使用bash命令时，会经常使用二次tab键进行补齐。 例如我们常用的telnet命令，在输入二次tab键时，会列出当前系统配置的所有主机名，供选择 # 输入 telnet &amp;lt;Tab&amp;gt;" />
+    <meta property="og:description" content="我们在使用bash命令时，会经常使用二次tab键进行补齐。 例如我们常用的telnet命令，在输入二次tab键时，会列出当前系统配置的所有主机名，供选择 # 输入 telnet &amp;lt;Tab&amp;gt;" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>自定义linux命令参数补全以提高工作效率 - 皇家救星 - 博客园</title>
+    <link id="favicon" rel="shortcut icon" href="//common.cnblogs.com/favicon.svg" type="image/svg+xml" />
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=6tvK5XC6GPbg3p_sy7wzz_2291HoYACr4440iKBzQIw" />
+    <link id="MainCss" rel="stylesheet" href="/skins/simpleblue/bundle-simpleblue.min.css?v=2hjghzSZyhYA1HxvSxKnXih3JbC120DBjeO9V9T_nSs" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/simpleblue/bundle-simpleblue-mobile.min.css?v=3tvwgOOqUo3RpS6gGzEdK0LbptOPv4Bx7M85_UAnFGs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/kingstarer/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/kingstarer/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/kingstarer/wlwmanifest.xml" />
+    <script>
+        var currentBlogId = 234136;
+        var currentBlogApp = 'kingstarer';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var isBlogOwner = false;
+        var skinName = 'SimpleBlue';
+        var visitorUserId = '';
+    </script>
+        <script>
+            var currentPostDateAdded = '2020-03-28 12:28';
+        </script>
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=ZUvfwhWs5fv-s8Nv7WofCOhwKAxiDO928zdWFzhnOPk"></script>
+    
+    
+    
+</head>
+<body class="has-navbar has-bannerbar">
+    <a name="top"></a>
+            <a target="_blank" href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:pc|pp:bokeyuan-huodong-21nianzhongdacu-neiyePCtonglanbanner|pu:21nianzhongdacu-neiyePCtonglanbanner|ci:21nzdc|kw:10224545" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-pc')">
+                <div class="bannerbar aliyun forpc" style="background-size: contain; filter: brightness(0.95); background-image: url(https://img2020.cnblogs.com/blog/35695/202106/35695-20210610183724605-1725070929.jpg)">
+                </div>
+            </a>
+            <div id="bannerbar" class="bannerbar-mobile formobile">
+            <a href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:mb|pp:bokeyuan-huodong-21nianzhongdacu-neiyeyidongduantonglanbanner|pu:21nianzhongdacu-neiyeyidongduantonglanbanner|ci:21nzdc|kw:10224547" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-mobile')">
+                <img src="https://img2020.cnblogs.com/blog/35695/202106/35695-20210610184806729-1738888164.jpg" alt="" />
+            </a>
+            </div>
+    <div id="top_nav" class="navbar forpc">
+        <nav id="nav_main" class="navbar-main">
+            <ul id="nav_left" class="navbar-list navbar-left">
+                <li class="navbar-branding"><a href="https://www.cnblogs.com/" title="开发者的网上家园"><img src="/images/logo.svg?v=R9M0WmLAIPVydmdzE2keuvnjl-bPR7_35oHqtiBzGsM" alt="博客园Logo" /></a></li>
+                <li><a href="/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-sitehome')">首页</a></li>
+                <li><a href="https://news.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-news')">新闻</a></li>
+                <li><a href="https://q.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-q')">博问</a></li>
+                <li><a id="nav_brandzone" href="https://brands.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-brands')">专区</a></li>
+                <li><a href="https://ing.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-ing')">闪存</a></li>
+                <li><a href="https://edu.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-edu')">班级</a></li>
+            </ul>
+            <ul id="nav_right" class="navbar-list navbar-right">
+                <li>
+                    <form id="zzk_search" class="navbar-search" action="https://zzk.cnblogs.com/s" method="get">
+                        <input name="w" id="zzk_search_input" placeholder="代码改变世界" type="text" tabindex="3" />
+                        <button type="submit" id="zzk_search_button">
+                            <img src="/images/aggsite/search.svg" alt="搜索" />
+                        </button>
+                    </form>
+                </li>
+                <li id="navbar_login_status" class="navbar-list">
+                    <a class="navbar-user-info navbar-blog" href="https://i.cnblogs.com/EditPosts.aspx?opt=1" alt="写随笔" title="写随笔">
+                        <img id="new_post_icon" class="navbar-icon" src="/images/aggsite/newpost.svg" alt="写随笔" />
+                    </a>
+                    <a id="navblog-myblog-icon" class="navbar-user-info navbar-blog" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx" alt="我的博客" title="我的博客">
+                        <img id="myblog_icon" class="navbar-icon" src="/images/aggsite/myblog.svg" alt="我的博客" />
+                    </a>
+                    <a class="navbar-user-info navbar-message navbar-icon-wrapper" href="https://msg.cnblogs.com/" alt="短消息" title="短消息">
+                        <img id="msg_icon" class="navbar-icon" src="/images/aggsite/message.svg?v=J0WS2P2iPgaIVgXxcAhliw4AFZIpaTWxtdoNAv9eiCA" alt="短消息" />
+                        <span id="msg_count" style="display: none"></span>
+                    </a>
+                    <div id="user_info" class="navbar-user-info dropdown">
+                        <a class="dropdown-button" href="https://home.cnblogs.com/">
+                            <img id="user_icon" class="navbar-avatar" src="/images/aggsite/avatar-default.svg" alt="用户头像" />
+                        </a>
+                        <div class="dropdown-menu">
+                            <a id="navblog-myblog-text" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx">我的博客</a>
+                            <a href="https://home.cnblogs.com/">我的园子</a>
+                            <a href="https://account.cnblogs.com/settings/account">账号设置</a>
+                            <a href="javascript:void(0)" id="navbar_lite_mode_toggle" title="简洁模式会使用简洁款皮肤显示所有博客">
+    简洁模式 <img id="navbar_lite_mode_on" src="/images/lite-mode-check.svg" class="hide" /><span id="navbar_lite_mode_spinner" class="hide">...</span>
+</a>
+                            <a href="javascript:void(0)" onclick="account.logout();">退出登录</a>
+                        </div>
+                    </div>
+                    <a class="navbar-anonymous" href="https://account.cnblogs.com/signup/">注册</a>
+                    <a class="navbar-anonymous" href="javascript:void(0);" onclick="account.login()">登录</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    
+    <div id="home">
+    <div id="header">
+        <div id="blogTitle">
+            <div class="title"><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/kingstarer/">皇家救星</a>
+</div>
+<div class="subtitle"></div>
+
+        </div>
+        <div id="navigator">
+            
+<ul id="navList">
+    <li id="nav_sitehome"><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+    <li id="nav_myhome">
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/kingstarer/">
+首页</a>
+</li>
+    <li id="nav_newpost">
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+    <li id="nav_contact">
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E7%9A%87%E5%AE%B6%E6%95%91%E6%98%9F">
+联系</a></li>
+    <li id="nav_rss">
+<a id="blog_nav_rss" class="menu" href="javascript:void(0)" data-rss="https://www.cnblogs.com/kingstarer/rss/">
+订阅</a></li>
+    <li id="nav_admin">
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+            <div class="blogStats">
+                <div id="blog_stats_place_holder"><script>loadBlogStats();</script></div>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div id="mainContent">
+            <div class="forFlow">
+                <div id="post_detail">
+    <div id="topics">
+        <div class="post">
+            <h1 class="postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2 vertical-middle" href="https://www.cnblogs.com/kingstarer/p/12586721.html">
+    <span>自定义linux命令参数补全以提高工作效率</span>
+    
+
+
+
+</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                <div id="cnblogs_post_body" class="blogpost-body blogpost-body-html">
+<p>　　我们在使用bash命令时，会经常使用二次tab键进行补齐。</p>
+<p>&nbsp; &nbsp; &nbsp; 例如我们常用的telnet命令，在输入二次tab键时，会列出当前系统配置的所有主机名，供选择</p>
+<div class="cnblogs_code">
+<pre># 输入 telnet &lt;Tab&gt; &lt;Tab&gt;<span style="color: rgba(0, 0, 0, 1)">
+[huangcihui:</span>/home/<span style="color: rgba(0, 0, 0, 1)">huangcihui] telnet 
+::</span><span style="color: rgba(128, 0, 128, 1)">1</span><span style="color: rgba(0, 0, 0, 1)">                      localhost                localhost4               localhost4.localdomain4  localhost6               localhost6.localdomain6  localhost.localdomain    
+[huangcihui:</span>/home/huangcihui] telnet </pre>
+</div>
+<p>&nbsp; &nbsp; &nbsp;在输入telnet参数过程中按回车，系统也会自动补全主机名</p>
+<div class="cnblogs_code">
+<pre>#输入 telnet l&lt;Tab&gt;<span style="color: rgba(0, 0, 0, 1)">
+[huangcihui:</span>/home/huangcihui] telnet localhost</pre>
+</div>
+<p>　　其它常用命令，也会有这个功能。&nbsp;例如systemctl,输入二次tab键时会列出systemctl所有子命令参数</p>
+<div class="cnblogs_code">
+<pre>#systemctl &lt;Tab&gt;&lt;Tab&gt;<span style="color: rgba(0, 0, 0, 1)">
+[huangcihui:</span>/home/<span style="color: rgba(0, 0, 0, 1)">huangcihui] systemctl 
+add</span>-requires           daemon-reexec          enable                 hybrid-<span style="color: rgba(0, 0, 255, 1)">sleep</span>           <span style="color: rgba(0, 0, 255, 1)">kill</span>                   list-units             reload-or-restart      set-<span style="color: rgba(0, 0, 0, 1)">property           suspend                
+add</span>-wants              daemon-reload          exit                   is-active              link                   mask                   reload-or-try-restart  show                   switch-<span style="color: rgba(0, 0, 0, 1)">root            
+cancel                 default                force</span>-reload           is-enabled             list-dependencies      poweroff               rescue                 show-environment       try-<span style="color: rgba(0, 0, 0, 1)">restart            
+</span><span style="color: rgba(0, 0, 255, 1)">cat</span>                    delete                 get-default            is-failed              list-jobs              preset                 reset-<span style="color: rgba(0, 0, 0, 1)">failed           snapshot               unmask                 
+condreload             disable                halt                   isolate                list</span>-sockets           reboot                 restart                start                  unset-<span style="color: rgba(0, 0, 0, 1)">environment      
+condrestart            edit                   help                   is</span>-system-running      list-timers            reenable               set-<span style="color: rgba(0, 0, 0, 1)">default            status                 
+condstop               emergency              hibernate              kexec                  list</span>-unit-files        reload                 set-<span style="color: rgba(0, 0, 0, 1)">environment        stop                   
+[huangcihui:</span>/home/huangcihui] systemctl </pre>
+</div>
+<p>　　那么，自己开发的程序，能不能实现Tab自动补全？ 答案是肯定的，借助bash的<code class="language-python">complete命令即可。</code></p>
+<p>假设我们新写了一个命令叫tel，我们想让它实现telnet的被全主机名功能，用这个命令即可：complete -A hostname tel&nbsp;效果如下：</p>
+<div class="cnblogs_code">
+<pre>[huangcihui:/home/huangcihui] complete -A <span style="color: rgba(0, 0, 255, 1)">hostname</span><span style="color: rgba(0, 0, 0, 1)"> tel
+[huangcihui:</span>/home/huangcihui] #tel l&lt;Tab&gt;<span style="color: rgba(0, 0, 0, 1)">
+[huangcihui:</span>/home/huangcihui] tel localhost</pre>
+</div>
+<p>　　而像systemctl这种补全子命令的功能，要怎么做呢？&nbsp;下面我演示一下怎么让git命令实现子命令补全功能</p>
+<div class="cnblogs_code">
+<pre>[huangcihui:/home/huangcihui] complete -W <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">add checkout clone commit diff pull push status</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)"> git
+[huangcihui:</span>/home/huangcihui] #git &lt;Tab&gt;<span style="color: rgba(0, 0, 0, 1)">
+[huangcihui:</span>/home/<span style="color: rgba(0, 0, 0, 1)">huangcihui] git 
+add       checkout  clone     commit    </span><span style="color: rgba(0, 0, 255, 1)">diff</span><span style="color: rgba(0, 0, 0, 1)">      pull      push      status    
+[huangcihui:</span>/home/huangcihui] git </pre>
+</div>
+<p>　　complete还有更多复杂的用法，有兴趣可以参考这篇文章</p>
+<p>https://blog.csdn.net/koprvhdix/article/details/81036240<br>Linux Shell 命令自动补全（各方资料汇总补全版） Clockworkai</p>
+<p>　　下面是我使用complete命令帮我自定义的dockerq命令进行自动补全的函数</p>
+<div class="cnblogs_code">
+<pre><span style="color: rgba(0, 0, 0, 1)"># 新建一个命令dockerq 用于快速操作docker
+__dockerq()
+{
+        COMPREPLY</span>=<span style="color: rgba(0, 0, 0, 1)">() # 清空候选列表
+        local cur</span>=<span style="color: rgba(0, 0, 0, 1)">${COMP_WORDS[COMP_CWORD]}; # 用户输入单词赋值给cur
+        local cmd</span>=${COMP_WORDS[COMP_CWORD-<span style="color: rgba(128, 0, 128, 1)">1</span><span style="color: rgba(0, 0, 0, 1)">]}; # 用户正在操作的命令或者子命令
+    </span><span style="color: rgba(0, 0, 255, 1)">case</span> $cmd <span style="color: rgba(0, 0, 255, 1)">in</span>
+    <span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">dockerq</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">)
+                # 获取docker所有命令
+                # local cmdlist</span>=$(docker --help|<span style="color: rgba(0, 0, 255, 1)">awk</span> <span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">{if ($1 == "Commands:") { v_showFlag = 1; next; } else if ($1 == "") v_showFlag = 0; if (v_showFlag) print $1;}</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">)
+
+                cmdlist</span>=<span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">images pull start run</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">
+                # 获取以cul开头的所有命令
+                local wordlist</span>=<span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">$(compgen -W </span><span style="color: rgba(128, 0, 0, 1)">"</span>${cmdlist}<span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)"> -- $cur)</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">
+                
+                # 给候选列表赋值
+                COMPREPLY</span>=<span style="color: rgba(0, 0, 0, 1)">( ${wordlist} ) ;;
+    </span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">images</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">)
+                #使用docker images获取所有镜像名称
+                local cmdlist</span>=$(docker images|<span style="color: rgba(0, 0, 255, 1)">awk</span> <span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">{if (NR != 1) print $1;}</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">)
+
+                # 获取以cul开头的所有命令
+                local wordlist</span>=<span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">$(compgen -W </span><span style="color: rgba(128, 0, 0, 1)">"</span>${cmdlist}<span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)"> -- $cur)</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">
+                
+                # 给候选列表赋值
+                COMPREPLY</span>=<span style="color: rgba(0, 0, 0, 1)">( ${wordlist} ) ;;
+
+    </span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">run</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">)
+                #使用docker ps获取所有容器名称
+                local cmdlist</span>=$(docker <span style="color: rgba(0, 0, 255, 1)">ps</span> -a|<span style="color: rgba(0, 0, 255, 1)">awk</span> <span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">{if (NR != 1) print $NF;}</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">)
+
+                # 获取以cul开头的所有命令
+                local wordlist</span>=<span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">$(compgen -W </span><span style="color: rgba(128, 0, 0, 1)">"</span>${cmdlist}<span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)"> -- $cur)</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">
+                
+                # 给候选列表赋值
+                COMPREPLY</span>=<span style="color: rgba(0, 0, 0, 1)">( ${wordlist} ) ;;
+    </span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">*</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">)
+                ;;
+    </span><span style="color: rgba(0, 0, 255, 1)">esac</span>
+    <span style="color: rgba(0, 0, 255, 1)">if</span> [[ <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">${COMP_WORDS[1]}</span><span style="color: rgba(128, 0, 0, 1)">"</span> == <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">read</span><span style="color: rgba(128, 0, 0, 1)">"</span> &amp;&amp; ${COMP_CWORD} -eq <span style="color: rgba(128, 0, 128, 1)">2</span> ]]; <span style="color: rgba(0, 0, 255, 1)">then</span><span style="color: rgba(0, 0, 0, 1)">
+                local pro</span>=($(<span style="color: rgba(0, 0, 255, 1)">pwd</span><span style="color: rgba(0, 0, 0, 1)">))
+                cd </span>/<span style="color: rgba(0, 0, 0, 1)">data
+                compopt </span>-<span style="color: rgba(0, 0, 0, 1)">o nospace
+                COMPREPLY</span>=($(compgen -d -f --<span style="color: rgba(0, 0, 0, 1)"> $cur))
+                cd $pro
+                </span><span style="color: rgba(0, 0, 255, 1)">fi</span><span style="color: rgba(0, 0, 0, 1)">
+    return </span><span style="color: rgba(128, 0, 128, 1)">0</span><span style="color: rgba(0, 0, 0, 1)">
+}
+complete </span>-<span style="color: rgba(0, 0, 0, 1)">F  __dockerq dockerq
+alias dockerq</span>=docker</pre>
+</div>
+<p>　　使用dockerq命令时，按Tab键可以自动补齐docker镜像或者容器的名称，非常方便</p>
+<div class="cnblogs_code">
+<pre>[root@localhost ~<span style="color: rgba(0, 0, 0, 1)">]# dockerq 
+images  pull    run     start   
+[root@localhost </span>~<span style="color: rgba(0, 0, 0, 1)">]# dockerq run 
+adoring_wozniak      charming_ptolemy     composetest_web_1    determined_hodgkin   exciting_cartwright  hardcore_mestorf     hungry_mclean        mystifying_cohen     nginx001             thirsty_franklin     
+alptest1             composetest_redis_1  cpu_set_demo         example1             exp1                 heuristic_cannon     magical_cartwright   nginx                phpfpm               thirsty_merkle       
+[root@localhost </span>~]# dockerq run ^<span style="color: rgba(0, 0, 0, 1)">C
+[root@localhost </span>~<span style="color: rgba(0, 0, 0, 1)">]# dockerq images 
+abh1nav</span>/dockerui                        composetest_web                         feisky/<span style="color: rgba(0, 0, 0, 1)">nginx                            mysql                                   redis
+alpine                                  docker</span>/compose                          feisky/php-<span style="color: rgba(0, 0, 0, 1)">fpm                          nginx                                   todoapp
+busybox                                 dockerinpractice</span>/dockerfile-from-image  hello-<span style="color: rgba(0, 0, 0, 1)">world                             node                                    ubuntu
+centurylink</span>/dockerfile-from-image       dockerinpractice/docker-image-graph     lukapeschke/<span style="color: rgba(0, 0, 0, 1)">dfa                         python                                  wordpress
+[root@localhost </span>~]# dockerq images </pre>
+</div>
+<p>&nbsp;　　希望这篇文章对你有帮助。</p>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-03-28 12:28</span>&nbsp;
+<a href="https://www.cnblogs.com/kingstarer/">皇家救星</a>&nbsp;
+阅读(<span id="post_view_count">824</span>)&nbsp;
+评论(<span id="post_comment_count">0</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12586721" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12586721);return false;">收藏</a>&nbsp;
+<a href="javascript:void(0)" onclick="reportManager.report({ currentUserId: '', targetType: 'blogPost', targetId: '12586721', targetLink: 'https://www.cnblogs.com/kingstarer/p/12586721.html', title: '自定义linux命令参数补全以提高工作效率' })">举报</a></div>
+        </div>
+        <script src="https://common.cnblogs.com/highlight/10.3.1/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 234136, cb_blogApp = 'kingstarer', cb_blogUserGuid = '6c01f56e-ee22-e511-b908-9dcfd8948a71';
+    var cb_entryId = 12586721, cb_entryCreatedDate = '2020-03-28 12:28', cb_postType = 1;
+    updatePostStats(
+        [cb_entryId],
+        function(id, count) { $("#post_view_count").text(count) },
+        function(id, count) { $("#post_comment_count").text(count) })
+    zoomManager.apply("#cnblogs_post_body img:not(.code_img_closed):not(.code_img_opened)");
+</script>
+        <a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <div id="cnblogs_c1" class="under-post-card">
+        <div id='div-gpt-ad-1592365906576-0' style='width: 300px; height: 250px;'></div>
+    </div>
+    <div id="under_post_card1"></div>
+    <div id="cnblogs_c2" class="under-post-card">
+        <div id='div-gpt-ad-1592366332455-0' style='width: 468px; height: 60px;'></div>
+    </div>
+    <div id="under_post_card2"></div>
+    <div id="HistoryToday" class="under-post-card"></div>
+    <script type="text/javascript">
+       var commentManager = new blogCommentManager();
+       commentManager.renderComments(0);
+       fixPostBody();
+       deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);       deliverT2();
+       deliverC1C2();
+       loadNewsAndKb();
+       loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);       LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+       GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+       loadOptUnderPost();
+       GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+
+    </div>
+</div>
+            </div>
+        </div>
+
+        <div id="sideBar">
+            <div id="sideBarMain">
+                <div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+<div id="sidebar_c3"></div>
+                <div id="calendar"><div id="blog-calendar" style="display:none"></div></div>                
+                <script>loadBlogDefaultCalendar();</script>
+                <div id="leftcontentcontainer">
+                    <!-- begin:SingleColumn -->
+                    <div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+                    <!-- end:  SingleColumn -->
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div id="footer">
+        <!--done-->
+Copyright &copy; 2021 皇家救星
+<br /><span id="poweredby">Powered by .NET 5.0 on Kubernetes</span>
+
+    </div>
+</div>
+
+    
+
+    <input type="hidden" id="antiforgery_token" value="CfDJ8L-rpLgFVEJMgssCVvNUAjtwLLeywj2T39pItLQjQjOf1I2KPYyvGAh6Yg4ot_zgg0IaGiwsIrCryeUlPRvvqCaigixH7nZQZTxnvjePBY46fHvdahv2_GwjUOPRrA_sM5WPpzZMbSIISe0ugpVicaM" />
+</body>
+</html>

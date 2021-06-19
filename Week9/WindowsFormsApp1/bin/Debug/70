@@ -1,0 +1,1025 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin-when-crossorigin" />
+    <meta name="description" content="续上一篇随笔：https://www.cnblogs.com/kingstarer/p/12249028.html《工作碰上的技术问题及处理经验》（四） 我这人记忆力比较差，经常出现有些知识学了不久后" />
+    <meta property="og:description" content="续上一篇随笔：https://www.cnblogs.com/kingstarer/p/12249028.html《工作碰上的技术问题及处理经验》（四） 我这人记忆力比较差，经常出现有些知识学了不久后" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>《工作碰上的技术问题及处理经验》（五） - 皇家救星 - 博客园</title>
+    <link id="favicon" rel="shortcut icon" href="//common.cnblogs.com/favicon.svg" type="image/svg+xml" />
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=6tvK5XC6GPbg3p_sy7wzz_2291HoYACr4440iKBzQIw" />
+    <link id="MainCss" rel="stylesheet" href="/skins/simpleblue/bundle-simpleblue.min.css?v=2hjghzSZyhYA1HxvSxKnXih3JbC120DBjeO9V9T_nSs" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/simpleblue/bundle-simpleblue-mobile.min.css?v=3tvwgOOqUo3RpS6gGzEdK0LbptOPv4Bx7M85_UAnFGs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/kingstarer/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/kingstarer/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/kingstarer/wlwmanifest.xml" />
+    <script>
+        var currentBlogId = 234136;
+        var currentBlogApp = 'kingstarer';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var isBlogOwner = false;
+        var skinName = 'SimpleBlue';
+        var visitorUserId = '';
+    </script>
+        <script>
+            var currentPostDateAdded = '2020-03-15 12:57';
+        </script>
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=ZUvfwhWs5fv-s8Nv7WofCOhwKAxiDO928zdWFzhnOPk"></script>
+    
+    
+    
+</head>
+<body class="has-navbar has-bannerbar">
+    <a name="top"></a>
+            <a target="_blank" href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:pc|pp:bokeyuan-huodong-21nianzhongdacu-neiyePCtonglanbanner|pu:21nianzhongdacu-neiyePCtonglanbanner|ci:21nzdc|kw:10224545" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-pc')">
+                <div class="bannerbar aliyun forpc" style="background-size: contain; filter: brightness(0.95); background-image: url(https://img2020.cnblogs.com/blog/35695/202106/35695-20210610183724605-1725070929.jpg)">
+                </div>
+            </a>
+            <div id="bannerbar" class="bannerbar-mobile formobile">
+            <a href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:mb|pp:bokeyuan-huodong-21nianzhongdacu-neiyeyidongduantonglanbanner|pu:21nianzhongdacu-neiyeyidongduantonglanbanner|ci:21nzdc|kw:10224547" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-mobile')">
+                <img src="https://img2020.cnblogs.com/blog/35695/202106/35695-20210610184806729-1738888164.jpg" alt="" />
+            </a>
+            </div>
+    <div id="top_nav" class="navbar forpc">
+        <nav id="nav_main" class="navbar-main">
+            <ul id="nav_left" class="navbar-list navbar-left">
+                <li class="navbar-branding"><a href="https://www.cnblogs.com/" title="开发者的网上家园"><img src="/images/logo.svg?v=R9M0WmLAIPVydmdzE2keuvnjl-bPR7_35oHqtiBzGsM" alt="博客园Logo" /></a></li>
+                <li><a href="/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-sitehome')">首页</a></li>
+                <li><a href="https://news.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-news')">新闻</a></li>
+                <li><a href="https://q.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-q')">博问</a></li>
+                <li><a id="nav_brandzone" href="https://brands.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-brands')">专区</a></li>
+                <li><a href="https://ing.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-ing')">闪存</a></li>
+                <li><a href="https://edu.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-edu')">班级</a></li>
+            </ul>
+            <ul id="nav_right" class="navbar-list navbar-right">
+                <li>
+                    <form id="zzk_search" class="navbar-search" action="https://zzk.cnblogs.com/s" method="get">
+                        <input name="w" id="zzk_search_input" placeholder="代码改变世界" type="text" tabindex="3" />
+                        <button type="submit" id="zzk_search_button">
+                            <img src="/images/aggsite/search.svg" alt="搜索" />
+                        </button>
+                    </form>
+                </li>
+                <li id="navbar_login_status" class="navbar-list">
+                    <a class="navbar-user-info navbar-blog" href="https://i.cnblogs.com/EditPosts.aspx?opt=1" alt="写随笔" title="写随笔">
+                        <img id="new_post_icon" class="navbar-icon" src="/images/aggsite/newpost.svg" alt="写随笔" />
+                    </a>
+                    <a id="navblog-myblog-icon" class="navbar-user-info navbar-blog" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx" alt="我的博客" title="我的博客">
+                        <img id="myblog_icon" class="navbar-icon" src="/images/aggsite/myblog.svg" alt="我的博客" />
+                    </a>
+                    <a class="navbar-user-info navbar-message navbar-icon-wrapper" href="https://msg.cnblogs.com/" alt="短消息" title="短消息">
+                        <img id="msg_icon" class="navbar-icon" src="/images/aggsite/message.svg?v=J0WS2P2iPgaIVgXxcAhliw4AFZIpaTWxtdoNAv9eiCA" alt="短消息" />
+                        <span id="msg_count" style="display: none"></span>
+                    </a>
+                    <div id="user_info" class="navbar-user-info dropdown">
+                        <a class="dropdown-button" href="https://home.cnblogs.com/">
+                            <img id="user_icon" class="navbar-avatar" src="/images/aggsite/avatar-default.svg" alt="用户头像" />
+                        </a>
+                        <div class="dropdown-menu">
+                            <a id="navblog-myblog-text" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx">我的博客</a>
+                            <a href="https://home.cnblogs.com/">我的园子</a>
+                            <a href="https://account.cnblogs.com/settings/account">账号设置</a>
+                            <a href="javascript:void(0)" id="navbar_lite_mode_toggle" title="简洁模式会使用简洁款皮肤显示所有博客">
+    简洁模式 <img id="navbar_lite_mode_on" src="/images/lite-mode-check.svg" class="hide" /><span id="navbar_lite_mode_spinner" class="hide">...</span>
+</a>
+                            <a href="javascript:void(0)" onclick="account.logout();">退出登录</a>
+                        </div>
+                    </div>
+                    <a class="navbar-anonymous" href="https://account.cnblogs.com/signup/">注册</a>
+                    <a class="navbar-anonymous" href="javascript:void(0);" onclick="account.login()">登录</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    
+    <div id="home">
+    <div id="header">
+        <div id="blogTitle">
+            <div class="title"><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/kingstarer/">皇家救星</a>
+</div>
+<div class="subtitle"></div>
+
+        </div>
+        <div id="navigator">
+            
+<ul id="navList">
+    <li id="nav_sitehome"><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+    <li id="nav_myhome">
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/kingstarer/">
+首页</a>
+</li>
+    <li id="nav_newpost">
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+    <li id="nav_contact">
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E7%9A%87%E5%AE%B6%E6%95%91%E6%98%9F">
+联系</a></li>
+    <li id="nav_rss">
+<a id="blog_nav_rss" class="menu" href="javascript:void(0)" data-rss="https://www.cnblogs.com/kingstarer/rss/">
+订阅</a></li>
+    <li id="nav_admin">
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+            <div class="blogStats">
+                <div id="blog_stats_place_holder"><script>loadBlogStats();</script></div>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div id="mainContent">
+            <div class="forFlow">
+                <div id="post_detail">
+    <div id="topics">
+        <div class="post">
+            <h1 class="postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2 vertical-middle" href="https://www.cnblogs.com/kingstarer/p/12497000.html">
+    <span>《工作碰上的技术问题及处理经验》（五）</span>
+    
+
+
+
+</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                <div id="cnblogs_post_body" class="blogpost-body blogpost-body-html">
+<p>续上一篇随笔：https://www.cnblogs.com/kingstarer/p/12249028.html《工作碰上的技术问题及处理经验》（四）</p>
+<p>&nbsp;</p>
+<p>我这人记忆力比较差，经常出现有些知识学了不久后就忘了，或者有些问题花了很多时间百度解决后，再过一段时间碰上时只有模糊印象，却忘了具体解决方法。</p>
+<p>最近几年工作时我开始有意识地把登记每天工作碰上的技术问题做个简单笔记。</p>
+<p>一般上班时间比较忙，只能草草记了一两句话。等过一段时间，我会把这个笔记整理一下，把问题和处理经验整理通顺，以加深自己的印象。</p>
+<p>&nbsp;</p>
+<div class="cnblogs_code">
+<pre><span style="color: rgba(128, 0, 128, 1)">20190402</span><span style="color: rgba(0, 0, 0, 1)">：
+    今天碰上一个脚本文件编码与系统编码不符，导致sed运行报错的问题。我脚本里面写了一个命令sed </span>-e <span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">s/月份/月份 ${V_MONTH}/g</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">
+执行时报错</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">sed: -e expression #1, char 21: unterminated `s' command</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">
+    我在执行sed之前先执行set </span>-x，打开脚本调试模式。看到输出是sed -e <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">s/\324\302\267\335/\324\302\267\335 201904/g</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">。
+这个输出说明编码是GBK，因为一个中文占了两个字节。但我系统的LANG设置为en_US.UTF</span>-<span style="color: rgba(128, 0, 128, 1)">8</span><span style="color: rgba(0, 0, 0, 1)">。不相符，所以需要改一下。
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190407</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天发现xargs命令做字符串处理还是挺方便的，以前知道用它来跟管道组合处理参数太多超过命令行限制的情况。这里摘录几个用法:
+替换字符串:echo </span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">nameXnameXnameXname</span><span style="color: rgba(128, 0, 0, 1)">"</span> | xargs -<span style="color: rgba(0, 0, 0, 1)">dX
+多行输入单行输出:(echo a; echo b; echo c) </span>|<span style="color: rgba(0, 0, 0, 1)"> xargs
+组装shell命令:cat arg.txt </span>| xargs -I {} ./sk.sh -<span style="color: rgba(0, 0, 0, 1)">p {} 
+
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190408</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天发现sourceinsight双击选中文字后会自动被修改，变成一个奇怪的问号图标。开始以为是我键盘有键被卡住了，挨个键检查了一下，没发现问题。
+    后来偶然发现原来我打开了金山词霸，想起以前也看过网友吐槽，词霸里面的取词和划译功能实现方法很粗暴，会不停往系统发快捷键消息。
+    于是尝试把金山词霸关了，果然好了。
+
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190409</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天发现oracle的systimestamp类型是带时区的timestamp，需要用cast(systimestamp </span><span style="color: rgba(0, 0, 255, 1)">as</span><span style="color: rgba(0, 0, 0, 1)"> timestamp)转换一下才变成不带时区的。
+
+    今天用proc</span>*<span style="color: rgba(0, 0, 0, 1)">c写的程序导出数据库表数据，发现有一些字段值是NULL，但我程序没报错。理论上proc如果不用指示变量，取出空的数据时会报错的。
+    后来查查，发现原来我这个程序用proc</span>*c预编译时设置了UNSAFE_NULL=<span style="color: rgba(0, 0, 0, 1)">yes，所以没报错。
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190410</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天发现oracle有一个语法insert all，可以指定一条记录同时插到两个库表：
+    insert all
+        into t1(c1)
+        </span><span style="color: rgba(0, 0, 255, 1)">int</span><span style="color: rgba(0, 0, 0, 1)"> t2(c2)
+    </span><span style="color: rgba(0, 0, 255, 1)">select</span> * <span style="color: rgba(0, 0, 255, 1)">from</span><span style="color: rgba(0, 0, 0, 1)"> t;
+    
+    proc</span>*c执行dml语句时支持预编译一次，执行sql多次。不过前提是要设置选项release_cursor=<span style="color: rgba(0, 0, 0, 1)">no（默认是no）
+
+    今天发现proc有一个参数：prefetch，指定sql语句句柄打开后预先从数据库取出多少条记录。这个参数默认是1，批量任务可以考虑把它改大，有助于提高性能。
+
+
+    今天想用gcc的</span>-Og选项编译程序，发现居然不支持。估计是我用的版本太低了。网上说-Og选项只会打开与-<span style="color: rgba(0, 0, 0, 1)">g不冲突的优化选项。
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190415</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天发现cp有一个参数</span>-p，复制时保留原文件的修改时间：cp -p old <span style="color: rgba(0, 0, 255, 1)">new</span><span style="color: rgba(0, 0, 0, 1)">
+    shell清空文件的技巧 true命令： </span><span style="color: rgba(0, 0, 255, 1)">true</span> &gt;<span style="color: rgba(0, 0, 0, 1)"> emptyfile
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190416</span><span style="color: rgba(0, 0, 0, 1)">:
+    用awk写了一个辅助宏代码对齐的脚本
+    # 输入宏代码，脚本会在每行后面补齐空格和\
+    awk </span>-v v_tab_lenth=<span style="color: rgba(128, 0, 128, 1)">8</span> <span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">{</span>
+<span style="color: rgba(0, 0, 0, 1)">    # 首先读取所有输入行 计算所有输入文本单行最大长度
+    v_arr_input[NR] </span>= $<span style="color: rgba(128, 0, 128, 1)">0</span><span style="color: rgba(0, 0, 0, 1)">;
+    v_str_len </span>= length($<span style="color: rgba(128, 0, 128, 1)">0</span><span style="color: rgba(0, 0, 0, 1)">);
+    v_arr_input_len[NR] </span>=<span style="color: rgba(0, 0, 0, 1)"> v_str_len;
+    </span><span style="color: rgba(0, 0, 255, 1)">if</span> (v_str_len &gt; v_max_len) v_max_len =<span style="color: rgba(0, 0, 0, 1)"> v_str_len;
+}
+END{
+    v_max_tab_cnt </span>= <span style="color: rgba(0, 0, 255, 1)">int</span>(v_max_len / v_tab_lenth) + <span style="color: rgba(128, 0, 128, 1)">2</span><span style="color: rgba(0, 0, 0, 1)">;
+    print </span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">v_max_tab_cnt = </span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">v_max_tab_cnt
+    </span><span style="color: rgba(0, 0, 255, 1)">for</span> (i = <span style="color: rgba(128, 0, 128, 1)">1</span>; i &lt;= NR; ++<span style="color: rgba(0, 0, 0, 1)">i)
+    {
+        v_str_tab_cnt </span>= <span style="color: rgba(0, 0, 255, 1)">int</span>(v_arr_input_len[i] /<span style="color: rgba(0, 0, 0, 1)"> v_tab_lenth);
+        v_tab_cnt </span>= v_max_tab_cnt - v_str_tab_cnt - <span style="color: rgba(128, 0, 128, 1)">1</span><span style="color: rgba(0, 0, 0, 1)">;
+        </span><span style="color: rgba(0, 0, 255, 1)">#if</span> (v_str_tab_cnt * v_tab_lenth &lt; v_arr_input_len[i]) v_tab_cnt = v_max_tab_cnt - v_str_tab_cnt - 1;
+        <span style="color: rgba(0, 0, 255, 1)">#else</span> v_tab_cnt = v_max_tab_cnt - v_str_tab_cnt;<span style="color: rgba(0, 0, 0, 1)">
+        
+        # print </span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">v_tab_cnt = </span><span style="color: rgba(128, 0, 0, 1)">"</span>v_tab_cnt, <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">v_str_tab_cnt = </span><span style="color: rgba(128, 0, 0, 1)">"</span>v_str_tab_cnt, <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">v_arr_input_len[i] = </span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)"> v_arr_input_len[i]
+        printf(</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">%s</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">, v_arr_input[i]);
+        </span><span style="color: rgba(0, 0, 255, 1)">for</span> (j = <span style="color: rgba(128, 0, 128, 1)">0</span>; j &lt; v_tab_cnt; ++<span style="color: rgba(0, 0, 0, 1)">j)
+            printf(</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">\t</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">);
+        print(</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">\\</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">);    
+    }
+}</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)"> tmp.txt</span>
+
+
+<span style="color: rgba(128, 0, 128, 1)">20190417</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天发现一个函数fcloseall（_fcloseall），作用是把fopen打开的文件句柄全关了。
+但我实际测试，发现fopen打开一个句柄fp，然后调用fcloseall，但这个fp句柄还可以正常读写和关闭。
+    不过确实证明它有fflush的作用。
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190420</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天发现proc查询数据到char </span>*<span style="color: rgba(0, 0, 0, 1)">类型缩主变量，居然是通过strlen计算其空间大小。
+这个设定好奇怪。在官方文档里面也提醒了调用者，需要用非</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">\0</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">字符填充空间。
+    
+    proc执行rollback</span>/<span style="color: rgba(0, 0, 0, 1)">commit会影响sqlca.sqlcode，所以如果需要这个值要先备份起来。
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190423</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天创建一个分区表时发现oracle在创建表的速度比删表的速度快很多。
+创建语句虽然很长，但oracle一般在十几毫秒内能完成，删表语句很短，但执行要数秒钟。
+    暂时不知道是什么原因导致的。
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190424</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天复习了oracle的savepoint语法：
+    savepoint a;
+    rollback to a;
+
+    今天我写了一个函数，使用proc</span>*<span style="color: rgba(0, 0, 0, 1)">c的数组批量操作技巧，一次插入N条记录。
+    但是有一个问题没解决，如果在插入过程中数组里面某些元素由于数据异常插入失败怎么处理？
+    我暂时的解决方法是：插入前先使用savepoint建立一个保存点，如果插入失败则回滚到该保存点。
+    不知道plsql里面的forall命令是怎么实现的使用forall批量插入数据时，如果某个数据插入出错会忽略,继续执行。
+所有出错记录会存在sql</span>%<span style="color: rgba(0, 0, 0, 1)">bulk_exceptions数组的。
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190428</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天同事分享的一个问题：进行非功能测试，随着时间增长，交易速度有明显下降。
+后来查了一下日志，发现有一些sql执行耗时异常。通过分析sql执行计划，发现sql没走索引。
+再进一步分析原因，是因为库表没有及时做统计收集，oracle以为是空表，本来应该走索引的，给走了全表扫描。
+    一般认为，库表记录较小（小于100）或者查询的数据量超过总数据的10</span>%<span style="color: rgba(0, 0, 0, 1)">走全表扫描比走索引扫描快。（一次顺序IO比多次随机IO快）
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">2190506</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天花了点时间查了一个proc的问题：
+    执行update语句时没找到记录，sqlca.sqlcode返回1403，但是前面我用EXEC SQL WHENEVER SQLERROR DO指定的proc错误处理函数没有被调用。
+    后来把.pc文件翻译成.c文件看，才知道EXEC SQL WHENEVER SQLERROR DO指定的函数只有在sqlca.sqlcode </span>&lt;<span style="color: rgba(0, 0, 0, 1)"> 0时才会被调用。
+
+    今天还注意到一个oracle语法细节：</span><span style="color: rgba(0, 0, 255, 1)">select</span> <span style="color: rgba(0, 0, 255, 1)">for</span><span style="color: rgba(0, 0, 0, 1)"> update后面还可以跟上of 字段，指定只锁定记录哪些字段。
+    </span><span style="color: rgba(0, 0, 255, 1)">select</span> <span style="color: rgba(0, 0, 255, 1)">from</span> hch <span style="color: rgba(0, 0, 255, 1)">for</span><span style="color: rgba(0, 0, 0, 1)"> update of c1;
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190507</span><span style="color: rgba(0, 0, 0, 1)">:
+    查看正在运行程序环境变量的方法： strings </span>/proc/${PID}/<span style="color: rgba(0, 0, 0, 1)">environ
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190508</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天使用valgrind检查程序内存使用情况，发现有几个出错位置函数堆栈里面没有main，而且里面都是一些oracle底层的函数。后来发现原因是出错位置函数调用层次太深，超过了默认值12。 我重新启动valgrind，加上参数</span>--num-callers=<span style="color: rgba(128, 0, 128, 1)">100</span><span style="color: rgba(0, 0, 0, 1)">，这样就能显示从main到出错位置的所有函数。
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190509</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天看到了这样的代码：
+    </span><span style="color: rgba(0, 0, 255, 1)">if</span><span style="color: rgba(0, 0, 0, 1)"> (bFlag)
+    {
+        EXEC SQL CONTEXT USE :ctx;
+    }
+    </span><span style="color: rgba(0, 0, 255, 1)">else</span><span style="color: rgba(0, 0, 0, 1)">
+    {
+        EXEC SQL CONTEXT USE DEFAULT;
+    }
+
+    EXEC SQL ...;
+    写代码人的本意根据bFlag的值决定使用不同数据库连接执行sql，但这样写是有问题的，因为EXEC SQL CONTEXT并不是一个语句。
+它有点类似C语言的宏定义，在预编译后根本不存在。(把.pc文件预编译成.c后</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">EXEC SQL CONTEXT USE</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">这段代码就是一段注释)
+    他这样写代码问题就跟用C语言这样写代码一样：
+
+    </span><span style="color: rgba(0, 0, 255, 1)">#define</span> SQL_CONTEXT_USE  ctxDeault
+
+    <span style="color: rgba(0, 0, 255, 1)">if</span><span style="color: rgba(0, 0, 0, 1)"> (bFlag)
+    {
+        </span><span style="color: rgba(0, 0, 255, 1)">#undef</span> SQL_CONTEXT_USE
+        <span style="color: rgba(0, 0, 255, 1)">#define</span> SQL_CONTEXT_USE ctx<span style="color: rgba(0, 0, 0, 1)">
+    }
+    </span><span style="color: rgba(0, 0, 255, 1)">else</span><span style="color: rgba(0, 0, 0, 1)">
+    {
+        </span><span style="color: rgba(0, 0, 255, 1)">#undef</span> SQL_CONTEXT_USE
+        <span style="color: rgba(0, 0, 255, 1)">#define</span> SQL_CONTEXT_USE DEFAULT<span style="color: rgba(0, 0, 0, 1)">
+    }
+    
+    EXEC_SQL(SQL_CONTEXT_USE); </span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">无论bFlag的值是什么，这里都是用EXEC_SQL传的值都是ctxDeault</span>
+<span style="color: rgba(0, 0, 0, 1)">
+    正确写法应该是这样：
+    </span><span style="color: rgba(0, 0, 255, 1)">if</span><span style="color: rgba(0, 0, 0, 1)"> (bFlag)
+    {
+        EXEC SQL CONTEXT USE :ctx;
+        EXEC SQL ...;
+    }
+    </span><span style="color: rgba(0, 0, 255, 1)">else</span><span style="color: rgba(0, 0, 0, 1)">
+    {
+        EXEC SQL CONTEXT USE DEFAULT;
+        EXEC SQL ...;
+    }
+
+</span><span style="color: rgba(128, 0, 128, 1)">201900512</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天一下网友分享一个案例：他用浏览器访问某个网站时能正常获取页面信息，但用爬虫访问时却获取不到。
+他已经修改了http请求头，把agent改成跟浏览器的一样也不行。
+    后来他发现原来是访问网站时服务器会返回一段js，浏览器执行那段js后才能正常生成页面信息。他的爬虫不支持js解析，所以出了错。
+
+</span><span style="color: rgba(128, 0, 128, 1)">201900513</span><span style="color: rgba(0, 0, 0, 1)">:
+    oracle应用程序，有时会需要使用sysdate（或者序列号）修改库表字段，但又想知道修改后的值是什么。这时可以使用returning into 子句，示例代码如下：
+
+    </span><span style="color: rgba(0, 0, 255, 1)">set</span> lines <span style="color: rgba(128, 0, 128, 1)">1000</span> pages <span style="color: rgba(128, 0, 128, 1)">1000</span>
+    <span style="color: rgba(0, 0, 255, 1)">set</span><span style="color: rgba(0, 0, 0, 1)"> serveroutput on
+    alter session </span><span style="color: rgba(0, 0, 255, 1)">set</span> nls_date_format=<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">yyyy-mm-dd hh24:mi:ss</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">;
+    alter session </span><span style="color: rgba(0, 0, 255, 1)">set</span> nls_timestamp_format=<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">yyyy-mm-dd hh24:mi:ss.FF6</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">;
+    alter session </span><span style="color: rgba(0, 0, 255, 1)">set</span> nls_timestamp_tz_format=<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">yyyy-mm-dd hh24:mi:ss.FF6 TZR</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">;
+    drop table tab_hch;
+    create table tab_hch(c1 date, c2 timestamp);
+    declare
+        v_dt date;
+        v_dtmicro timestamp;
+    BEGIN
+        insert into tab_hch(c1, c2) values(sysdate, systimestamp) returning c1, c2 into v_dt, v_dtmicro;
+        dbms_output.put_line(</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">c1 = </span><span style="color: rgba(128, 0, 0, 1)">'</span> ||<span style="color: rgba(0, 0, 0, 1)"> v_dt);
+        dbms_output.put_line(</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">c2 = </span><span style="color: rgba(128, 0, 0, 1)">'</span> || v_dtmicro); --<span style="color: rgba(0, 0, 0, 1)"> 这里输出的时间就是新插入的记录c2的值
+    END;
+    </span>/<span style="color: rgba(0, 0, 0, 1)">
+    col c1 </span><span style="color: rgba(0, 0, 255, 1)">for</span><span style="color: rgba(0, 0, 0, 1)">  a20
+    col c2 </span><span style="color: rgba(0, 0, 255, 1)">for</span><span style="color: rgba(0, 0, 0, 1)">  a32
+    col c3 </span><span style="color: rgba(0, 0, 255, 1)">for</span><span style="color: rgba(0, 0, 0, 1)">  a20
+    col c4 </span><span style="color: rgba(0, 0, 255, 1)">for</span><span style="color: rgba(0, 0, 0, 1)">  a34
+    </span>--<span style="color: rgba(0, 0, 0, 1)"> 比较c2与dbms_output.put_line的值，看是否一致
+    </span><span style="color: rgba(0, 0, 255, 1)">select</span> c1, c2, sysdate c3, systimestamp c4 <span style="color: rgba(0, 0, 255, 1)">from</span><span style="color: rgba(0, 0, 0, 1)"> tab_hch;
+
+
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190515</span><span style="color: rgba(0, 0, 0, 1)">:
+    oracle 交换分区如果存在全局索引，会导致全局索引失效，可以在交换分区时加上with update </span><span style="color: rgba(0, 0, 255, 1)">global</span><span style="color: rgba(0, 0, 0, 1)"> index
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190529</span><span style="color: rgba(0, 0, 0, 1)">:
+    sqlplus绑定变量用法：
+    </span><span style="color: rgba(0, 0, 255, 1)">var</span><span style="color: rgba(0, 0, 0, 1)"> v_hch number; 
+    exec :v_hch :</span>= <span style="color: rgba(128, 0, 128, 1)">1</span><span style="color: rgba(0, 0, 0, 1)">;
+    print :v_hch;
+    </span><span style="color: rgba(0, 0, 255, 1)">select</span> :v_hch <span style="color: rgba(0, 0, 255, 1)">from</span><span style="color: rgba(0, 0, 0, 1)"> dual;
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190530</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天碰上makefile里面执行cd失效导致递归编译的问题。事情是这样的:有一个程序编译时要求先到子目录下面执行makefile编译后，再回到当前目录编译。于是我写了下面这个makefile。
+prog:
+    cd common
+    make $@
+    cd ..
+    make $@
+    结果编译时发现make被无限循环调用了，网上查了一下，要这样写cd common </span>&amp;&amp;<span style="color: rgba(0, 0, 0, 1)"> make $@。原来每次执行一行命令后，makefile会重新回到当前工作目录。所以我原来的makefile等于无限循环调用make编译。
+
+
+    今天有网友问我他们系统有一个一个进程卡住，不知道是死循环了还是在等待什么条件，要怎么办。我建议他用pstack看一下堆栈，结合代码分析程序的状态。
+
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190531</span><span style="color: rgba(0, 0, 0, 1)">:
+    写了一个awk脚本，用于把长行拆成多个短行，里面考虑到了行尾单词连续性问题：
+    awk </span>-v v_line_len=<span style="color: rgba(128, 0, 128, 1)">70</span> <span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">{</span>
+        v_str = $<span style="color: rgba(128, 0, 128, 1)">0</span><span style="color: rgba(0, 0, 0, 1)">;
+        v_TotalLen </span>=<span style="color: rgba(0, 0, 0, 1)"> length(v_str);
+        
+
+        </span><span style="color: rgba(0, 0, 255, 1)">while</span>(<span style="color: rgba(128, 0, 128, 1)">1</span><span style="color: rgba(0, 0, 0, 1)">)
+        {
+                v_str_sub </span>= substr(v_str, <span style="color: rgba(128, 0, 128, 1)">1</span><span style="color: rgba(0, 0, 0, 1)">, v_line_len);
+                nLen </span>=<span style="color: rgba(0, 0, 0, 1)"> length(v_str_sub);
+                </span><span style="color: rgba(0, 0, 255, 1)">if</span> (nLen &lt;<span style="color: rgba(0, 0, 0, 1)"> v_line_len)
+                {
+                        print v_str_sub;
+                        </span><span style="color: rgba(0, 0, 255, 1)">break</span><span style="color: rgba(0, 0, 0, 1)">;
+                }
+                nLen </span>=<span style="color: rgba(0, 0, 0, 1)"> v_line_len;
+                v_ch </span>= substr(v_str_sub, nLen, <span style="color: rgba(128, 0, 128, 1)">1</span><span style="color: rgba(0, 0, 0, 1)">);
+
+                # 如果结尾不是非字母或者数字，则一直往前找，直到找到第一个非字母或者数字的字符
+                # 如果找了20个还找不到，则放弃 这样做是为了避免行尾的单词被一分为二
+                </span><span style="color: rgba(0, 0, 255, 1)">while</span> ((v_ch == <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">:</span><span style="color: rgba(128, 0, 0, 1)">"</span>) || (v_ch &gt;= <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">a</span><span style="color: rgba(128, 0, 0, 1)">"</span> &amp;&amp; v_ch &lt;= <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">z</span><span style="color: rgba(128, 0, 0, 1)">"</span>) || (v_ch &gt;= <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">A</span><span style="color: rgba(128, 0, 0, 1)">"</span> &amp;&amp; v_ch &lt;= <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">Z</span><span style="color: rgba(128, 0, 0, 1)">"</span>) || (v_ch &gt;= <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">0</span><span style="color: rgba(128, 0, 0, 1)">"</span> &amp;&amp; v_ch &lt;= <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">9</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">))
+                {
+                        </span>--<span style="color: rgba(0, 0, 0, 1)">nLen;
+                        v_ch </span>= substr(v_str_sub, nLen, <span style="color: rgba(128, 0, 128, 1)">1</span><span style="color: rgba(0, 0, 0, 1)">);
+                        </span><span style="color: rgba(0, 0, 255, 1)">if</span> (nLen &lt;= v_line_len - <span style="color: rgba(128, 0, 128, 1)">20</span><span style="color: rgba(0, 0, 0, 1)">)
+                        {
+                                nLen </span>=<span style="color: rgba(0, 0, 0, 1)"> v_line_len;
+                                </span><span style="color: rgba(0, 0, 255, 1)">break</span><span style="color: rgba(0, 0, 0, 1)">;
+                        }
+                }
+                v_str_sub </span>= substr(v_str, <span style="color: rgba(128, 0, 128, 1)">1</span><span style="color: rgba(0, 0, 0, 1)">, nLen);
+                print v_str_sub;
+                v_str </span>= substr(v_str, nLen + <span style="color: rgba(128, 0, 128, 1)">1</span><span style="color: rgba(0, 0, 0, 1)">);
+        }
+    }</span><span style="color: rgba(128, 0, 0, 1)">'
+</span>
+
+<span style="color: rgba(128, 0, 128, 1)">20190603</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天学习了makefile一个特殊变量：MAKECMDGOALS 这个变量记录了命令行参数指定的终极目标列表。
+举例：执行make debug命令，MAKECMDGOALS的值是debug。在递归脚本里面这个参数很有用。
+    make还有其它几个特殊变量，分别代表当前目录，makefile名称，make版本等
+
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190604</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天碰到一个情况：df显示磁盘空间还剩很多，但用cp命令拷贝生成新文件时提示no space left on device。
+上网查了一下，说可能是磁盘inodes空间满了，用df </span>-<span style="color: rgba(0, 0, 0, 1)">i可以查看。
+    我试了一下，果然如此。用df可以看出inodes空间占用 </span><span style="color: rgba(128, 0, 128, 1)">100</span>%<span style="color: rgba(0, 0, 0, 1)">。cd到怀疑有大量文件的目录下，ls时卡住了，无法定位是什么文件导致的。
+    没办法最后只能把目录删了重建。
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190605</span><span style="color: rgba(0, 0, 0, 1)">:
+    oracle写sql时如果需要指定转义字符（k逃逸字符），可以使用escape关键字。例如：
+</span><span style="color: rgba(0, 0, 255, 1)">select</span> owner, table_name <span style="color: rgba(0, 0, 255, 1)">from</span> all_tables <span style="color: rgba(0, 0, 255, 1)">where</span> table_name like <span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">%\_17_\_%</span><span style="color: rgba(128, 0, 0, 1)">'</span> escape <span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">\'; -- 找出所有以包含"_17?_"的表名，?代表一个任意字符</span>
+<span style="color: rgba(0, 0, 0, 1)">
+
+    fuser可以查看文件被哪些进程打开
+
+    ${</span><span style="color: rgba(128, 0, 128, 1)">0</span><span style="color: rgba(0, 0, 0, 1)">}:${LINENO} shell输出日志加上这个前缀，可以更方便定位
+    bash里面还可以使用${FUNCNAME[</span><span style="color: rgba(128, 0, 128, 1)">0</span><span style="color: rgba(0, 0, 0, 1)">]}输出当前函数名称
+
+    一个日志输出函数示例：
+    logerr() {
+    echo  </span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">error at ${BASH_LINENO[1]}${FUNCNAME[1]} $*</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)"> 
+}
+</span><span style="color: rgba(128, 0, 128, 1)">20190613</span><span style="color: rgba(0, 0, 0, 1)">:
+    由于oracle的索引是不记录NUUL值记录，所以唯一索引列是可以存在多个为NULL的记录的
+    另外，oracle的NULL和空串</span><span style="color: rgba(128, 0, 0, 1)">''</span><span style="color: rgba(0, 0, 0, 1)">是等价的
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190614</span><span style="color: rgba(0, 0, 0, 1)">:
+    写了一个方便查看文件数据的awk脚本（读取行，拆成多列显示）
+    awk </span>-F <span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">\\|@\\|</span><span style="color: rgba(128, 0, 0, 1)">'</span> <span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">{</span>
+        printf(<span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">%s:%d\n</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">, FILENAME, FNR);
+        </span><span style="color: rgba(0, 0, 255, 1)">for</span> (i = <span style="color: rgba(128, 0, 128, 1)">1</span>; i &lt;= NF; ++<span style="color: rgba(0, 0, 0, 1)">i)
+        {
+            printf(</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">% 4d:%s\n</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">, i, $i);
+        }
+        
+        getline </span>&lt; <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">-</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">;
+    }</span><span style="color: rgba(128, 0, 0, 1)">'</span>   
+
+
+<span style="color: rgba(128, 0, 128, 1)">20190616</span><span style="color: rgba(0, 0, 0, 1)">:
+    一个web请求可能需要经过的cdn，dns负载均衡，f5负载均衡，nginx反向代理，消息队列，redis，数据库（读写分离，集群），文件缓冲等这么多种缓存机制
+
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190620</span><span style="color: rgba(0, 0, 0, 1)">:
+    使用static变量时，记得注意变量之间关连关系。我这次就踩了坑：
+我在程序里面使用了两个static变量s_this_date缓存当前时间，s_next_date缓存s_this_date的下一天。
+    为减少计算时间消耗，只有当s_this_date变化时，才会计算s_next_date。
+    但代码里面有个问题，存在修改了s_this_date后，在s_next_date修改前函数就退出的情况。
+    这样就导致s_next_date有时跟s_this_date不是差一天的关系。
+    
+</span><span style="color: rgba(128, 0, 128, 1)">20190630</span><span style="color: rgba(0, 0, 0, 1)">:
+    </span><span style="color: rgba(0, 0, 255, 1)">select</span> <span style="color: rgba(0, 0, 255, 1)">for</span><span style="color: rgba(0, 0, 0, 1)"> update是上锁，不是检查有没有锁
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190701</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天使用了merge语句帮同事优化了一个语句：
+    update tab_check_task t </span><span style="color: rgba(0, 0, 255, 1)">set</span> Mcht_Name=(<span style="color: rgba(0, 0, 255, 1)">select</span> Mcht_Name <span style="color: rgba(0, 0, 255, 1)">from</span> tab_mcho_sre <span style="color: rgba(0, 0, 255, 1)">where</span> mcht_no=<span style="color: rgba(0, 0, 0, 1)">t.mrch_id );
+    13分钟没跑完
+    merge into  tab_check_task t  </span><span style="color: rgba(0, 0, 255, 1)">using</span> tab_mcho_sre  mcht on (mcht.mcht_no=t.mrch_id) when matched then update <span style="color: rgba(0, 0, 255, 1)">set</span> t.Mcht_Name =<span style="color: rgba(0, 0, 0, 1)"> mcht.Mcht_Name;
+    4分钟跑完
+
+    今天一个同事说他在.bash_profile配置了两个环境变量，但重新登录后只有其中一个生效了，问我怎么回事。
+我建议他执行sh </span>-<span style="color: rgba(0, 0, 0, 1)">x .bash_profile，看是哪里出错了。他执行后很快回复我，是.bash_profile后面加载了另一个脚本，那个脚本里面有同名变量，相互覆盖了。
+    sh </span>-<span style="color: rgba(0, 0, 0, 1)">x 是调试shell的利器。‘
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190704</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天发现time命令和\time调用的是不同的程序，\time调用的是</span>/usr/<span style="color: rgba(0, 0, 0, 1)">bin下面的time程序，而time则是调用shell内置的功能
+
+    
+    今天看到一个调试一个release程序的方法：
+    先使用</span>-<span style="color: rgba(0, 0, 0, 1)">g重新编译一次程序，然后取出变量信息
+    objcopy </span>--only-keep-<span style="color: rgba(0, 0, 0, 1)">debug projedtd projedtsymbol.dbg
+    再使用这些变量信息去调试release程序
+    gdb </span>-q symbol=projedtsymbol.dbg --exec=<span style="color: rgba(0, 0, 0, 1)">projectr
+
+    x </span>/<span style="color: rgba(0, 0, 0, 1)">10x $sp  # gdb查看当前程序栈的内容: 打印stack的前10个元素
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190705</span><span style="color: rgba(0, 0, 0, 1)">:
+    调试内存问题时，可以设置环境变量
+    export MALLOC_CHECK_</span>=<span style="color: rgba(128, 0, 128, 1)">3</span><span style="color: rgba(0, 0, 0, 1)">
+    这样程序在发现内存异常时会打印出错信息并退出
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190712</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天来上班，发现昨天晚上挂的一个crontab任务没启动。一开始没想明白是什么原因，以为是任务脚本有问题，查半天没查出来。
+后来在同事建议下，我试了加了一个简单的crontab任务，设置成1分钟后跑，发现也没启动。这才确定原来是crontab服务没启动,可以使用以下命令确认：
+    service crond status
+    
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190715</span><span style="color: rgba(0, 0, 0, 1)">:
+    proc调用存储过程，出参，也要初始化，不然使用valgrind检查时会提示未初始化的内存。
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190716</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天使用vallgrind检测程序时，出现很多内存泄漏提示。
+但其实我确认代码没写错，后来查了一下，是因为使用了glib的一些数据结构，里面使用了内存池。
+并且查到了，如果设置环境变量G_SLICE</span>=always-<span style="color: rgba(0, 0, 0, 1)">malloc这样就不会启动glib内存池。
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190717</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天看代码时发现一段逻辑，需要判断一张数据库表有没有记录，里面直接用了select count(</span>*) <span style="color: rgba(0, 0, 255, 1)">from</span><span style="color: rgba(0, 0, 0, 1)"> tab检查，其实可以使用
+</span><span style="color: rgba(0, 0, 255, 1)">select</span> count(*) <span style="color: rgba(0, 0, 255, 1)">from</span> tab <span style="color: rgba(0, 0, 255, 1)">where</span> rownum &lt; <span style="color: rgba(128, 0, 128, 1)">2</span><span style="color: rgba(0, 0, 0, 1)">，因为要检查有没有记录，只要有一条记录就可以判断，不需要全表扫一次。
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190718</span><span style="color: rgba(0, 0, 0, 1)">:
+    从csdn上保存的博文，在没有连公网时打开，总是过一会就自动重定向到csdn.net，很烦人。虽然知道肯定是某段js搞鬼，但一直没搞清楚是哪段。
+今天发现用谷歌浏览器按f12可以单步调试网页，利用这功能终于定位到了“元凶”。
+    </span>&lt;img src=<span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">https://blog.csdn.net/chuxuan909/article/details/72465748?utm_source=blogxgwz0</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)"> 
+onerror</span>=<span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">setTimeout(function()</span>
+{<span style="color: rgba(0, 0, 255, 1)">if</span>(!/(csdn.net|iteye.com|baiducontent.com|googleusercontent.com|360webcache.com|sogoucdn.com|bingj.com|baidu.com)$/<span style="color: rgba(0, 0, 0, 1)">.
+test(window.location.hostname))
+{window.location.href</span>=&amp;quot;\x68\x74\x74\x70\x73\x3a\x2f\x2f\x77\x77\x77\x2e\x63\x73\x64\x6e\x2e\x6e\x65\x74&amp;quot;}},<span style="color: rgba(128, 0, 128, 1)">3000</span><span style="color: rgba(0, 0, 0, 1)">);
+</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">&gt;</span>
+    把onerror批量替换成onerror1即可。这段代码里<span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">\x68\x74\x74\x70\x73\x3a\x2f\x2f\x77\x77\x77\x2e\x63\x73\x64\x6e\x2e\x6e\x65\x74</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">
+其实就是https:</span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">www.csdn.net</span>
+
+
+<span style="color: rgba(128, 0, 128, 1)">20190719</span><span style="color: rgba(0, 0, 0, 1)">:
+    kafka阅读心得：
+观察脏页
+cat </span>/proc/vmstat | egrep <span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">dirty|writeback</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">
+
+启动g1垃圾回收器
+
+export KAFKA_JVM_PERFORMANCE_OPTS</span>=<span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">-server -XX:+UseG1GC</span>
+-XX:MaxGCPauseMillis=<span style="color: rgba(128, 0, 128, 1)">20</span> -XX:InitiatingHeapOccupancyPercent=<span style="color: rgba(128, 0, 128, 1)">35</span> -XX:+DisableExplicitGC -Djava.awt.headless=<span style="color: rgba(0, 0, 255, 1)">true</span><span style="color: rgba(128, 0, 0, 1)">"</span> 
+kafka-server-start.sh -<span style="color: rgba(0, 0, 0, 1)">daemon server.propertities
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190724</span><span style="color: rgba(0, 0, 0, 1)">:
+    proc对匿名结构体支持不大好，建议尽量使用typedef </span><span style="color: rgba(0, 0, 255, 1)">struct</span> __StuName_t{}StuName_t;代替typedef <span style="color: rgba(0, 0, 255, 1)">struct</span><span style="color: rgba(0, 0, 0, 1)"> {}StuName_t;
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190725</span><span style="color: rgba(0, 0, 0, 1)">:
+    sqlldr加快装载速度的参数设置建议：
+    sqlldr errors</span>=<span style="color: rgba(128, 0, 128, 1)">9999999</span> control=tab.ctl log=tmp.txt sreamsize=<span style="color: rgba(128, 0, 128, 1)">256000</span> bindsize=<span style="color: rgba(128, 0, 128, 1)">2560000</span> userid=stlm_o/stlm_o@RCC8TPD2 direct=TRUE rows=<span style="color: rgba(128, 0, 128, 1)">1000</span>
+
+<span style="color: rgba(128, 0, 128, 1)">20190726</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天发现有一些商家使用退货交易套利：
+    第一天先做了一大笔消费，第二天一开门就做了退货交易。由于这时商户资金不足，为了不影响用户体验，我们系统会先垫钱给用户，后面再从商户的账户扣钱。
+    但有一些不法商户跟消费者合作，退款后立即注销商户，导致系统出现短款。
+    为了解决这个问题，我们紧急做了一个白名单功能，不在白名单的商户，当日营业额不足时不允许退货。（这种情况商家一定要退货时，需要自己先做一笔大额消费）
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190731</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天过来发现crontab任务没启动（检查crontab任务重定向输出的日志，发现不存在）。检查一下，发现因为是硬盘没空间了。这才知道原来硬盘满了会导致crontab调度异常。
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190801</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天才发现df出来的size </span>!= used + <span style="color: rgba(0, 0, 255, 1)">free</span>，查了一下，说原因有两个1 inode节点空间占用了一些磁盘空间，<span style="color: rgba(128, 0, 128, 1)">2</span> 系统会占用一些预留空间，以便出现磁盘空间满时止root用户登录处理（一般是0.<span style="color: rgba(128, 0, 128, 1)">05</span> *<span style="color: rgba(0, 0, 0, 1)"> size）。不过我的系统加上这两项空间，还是差一些，不知道是不是还有其它隐藏的占用空间情况。
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190810</span><span style="color: rgba(0, 0, 0, 1)">:
+    这段时间都在研究kafka，kafka其实就是一个分布式消息队列中间件，主要用于吞吐量高（号称每秒十万写，百万读），但业务逻辑简单（如数据同步，通知）的场景。
+    kafka借助zookeeper实现了集群，高可用特性，本身又支持多副本功能，集群少量机器出现故障时仍可正常使用。但kafka的消息一致性比较差，容易出现消息丢失或者重复消息的情况。
+    kafka支持多个不同客户端订阅同一个消息主题，这样可以做到一份消息多个场景使用，这点对于数据分析特别有利。另外，kafak的消息都是落盘存储的，所以生产者跟消费者耦合非常低，可以分别独立部署运行。
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190812</span><span style="color: rgba(0, 0, 0, 1)">:
+    这几天用glib写了一个多线程的程序，链接时报g_thread_init函数未定义（undefined reference to `g_thread_init</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">），但奇怪的是我明明有libglib-2.0.a，原来网上查了一下，原来是要额外链接libgthread-2.0.a</span>
+<span style="color: rgba(0, 0, 0, 1)">    cout从右到左计算，从左到右输出
+
+
+    lsof  </span>-<span style="color: rgba(0, 0, 0, 1)">u username # 列出用户所有打开的文件
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190814</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天编译libcjson.a，发现默认的编译选项是没有开启</span>-O2的，不知道为什么。我把它改了一下，增加-<span style="color: rgba(0, 0, 0, 1)">O2选项，发现只快了一点。
+跑10万次cJSON_test，耗时从1.15s降到0.</span><span style="color: rgba(128, 0, 128, 1)">97</span><span style="color: rgba(0, 0, 0, 1)">。又测试了5000000次的，发现分别耗时是55秒和45秒。还是有点效果的，但效果不明显，先使用默认的吧。
+
+
+    今天又出现某个bug增加打印日志 就不出现，不加就出现的情况。后来仔细看代码，是因为我有两个不同文件，同时声明了一个全局变量（名字一样），其中一个有初始化，一个未初始化，导致两个变量链接时被合并成一个，从而互相影响。
+    
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190815</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天发生一个事情，由于沟通问题，我跟同事改了同一个word文件，只能想办法跟他的合并。网上找了一下，说word的审阅选项卡下面有比较功能。
+    试了一下，确实是可以，但不是很直观。后来经同事提醒，原来svn自带启动word比较功能。
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190820</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天发现ue有一个好用的快捷键F5，作用是把大写数据库列名转成驼峰式的大小写混合的单词。例如THIS_IS_A_TEST会被变成This_Is_A_Test
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190821</span><span style="color: rgba(0, 0, 0, 1)">:
+    小知识点：free命令输出的内存使用信息里面used并不代表真正可用内存，可用内存是free </span>+ buffer +<span style="color: rgba(0, 0, 0, 1)"> cached之和
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190822</span><span style="color: rgba(0, 0, 0, 1)">:
+    </span><span style="color: rgba(0, 0, 255, 1)">extern</span> <span style="color: rgba(0, 0, 255, 1)">int</span> g_lib_flag = <span style="color: rgba(128, 0, 128, 1)">0</span>; <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">链接时报错 extern不能增加初始化</span>
+
+<span style="color: rgba(128, 0, 128, 1)">20190823</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天生产系统发现有一些交易存在冲正交易比正交易先到，导致对账不平的情况。
+    出现bug的主要原因是我们接到冲正请求时发现数据库没有正交易，直接就返回前端冲正失败（交易不存在），但没有登记流水。后面正交易过来时我们当普通交易正常处理了。但前端系统不知道，所以没有重复发起冲正请求。
+    暂时要求前端严格控制顺序发送交易，以后再出现需要考虑一些机制避免这种差异。
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190904</span><span style="color: rgba(0, 0, 0, 1)">:
+    这两天使用Loadrunner对程序进行压测，压测过程中经常提示压力机cpu使用率超过80</span>%的提示。开始时我没怎么在意，想着不是目标机80%，压力机没到100%<span style="color: rgba(0, 0, 0, 1)">应该没事。
+    后来偶然把测试脚本改一下，压力机cpu消耗下来，发现目标机tps居然有明显升高。
+    看来以后要注意一下。
+
+    oracle默认删除表后不会清除空间，而是放到回收站。如果要强制收回这些空间，可以使用select </span>* <span style="color: rgba(0, 0, 255, 1)">from</span><span style="color: rgba(0, 0, 0, 1)"> user_recyclebin;查出表名，然后使用
+    purge table </span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">表名</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">;
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20190914</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天发现一个bug：
+    我们一个程序在执行数据库查询过程中，收到信号，转去执行中断处理函数。
+结果函数里面也有数据库查询操作，导致死锁了。（proc的api对于这种情况没处理好）
+    临时解决方法是在数据库操作期间先屏蔽了信号，不过这样可能导致信号漏处理，以后需要优化。
+
+</span><span style="color: rgba(128, 0, 128, 1)">20191030</span><span style="color: rgba(0, 0, 0, 1)">:
+    之前对日志组件做了优化，使用自己写的带缓存的localTimeCache代替localTime，减少锁竞争。
+    今天写了一个测试，发现在高频调用下时，有时会出现跟localTime的秒数有差异的情况，代码如下：
+    </span><span style="color: rgba(0, 0, 255, 1)">while</span> (<span style="color: rgba(128, 0, 128, 1)">1</span><span style="color: rgba(0, 0, 0, 1)">) 
+    {
+        </span><span style="color: rgba(0, 0, 255, 1)">int</span> *pSecCache = &amp;localTimeCache(&amp;time)-&gt;<span style="color: rgba(0, 0, 0, 1)">tm_sec;
+        </span><span style="color: rgba(0, 0, 255, 1)">int</span> *pSec = &amp;localTime(&amp;time)-&gt;<span style="color: rgba(0, 0, 0, 1)">tm_sec;
+        LogInfo(</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">cache %d</span><span style="color: rgba(128, 0, 0, 1)">"</span>, *<span style="color: rgba(0, 0, 0, 1)">pSecCache); 
+        LogInfo(</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)"> nocache %d\n</span><span style="color: rgba(128, 0, 0, 1)">"</span>, *<span style="color: rgba(0, 0, 0, 1)">pSec);
+    }
+    后来仔细分析，原来LogInfo里面也会调用localTimeCache，导致pSecCache的值发生了变化。对于这种静态变量使用，需要多注意。
+
+    今天又碰上一个进程因为信号处理函数出bug的情况：在调用system函数时接到信号，转到信号处理函数时又调用了system，导致死锁。
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20191030</span><span style="color: rgba(0, 0, 0, 1)">:
+    proc查询数据库数据到char数组时，如果目标数组空间不足，则会截断（但还是会以\0会结尾）。
+如果数组空间比数据库字段长度长，则剩下的空间会以空格填充。
+
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20191114</span><span style="color: rgba(0, 0, 0, 1)">:
+    </span><span style="color: rgba(0, 0, 255, 1)">void</span> func(<span style="color: rgba(0, 0, 255, 1)">char</span> * <span style="color: rgba(0, 0, 255, 1)">const</span><span style="color: rgba(0, 0, 0, 1)"> arr[])
+    只读字符串数组
+
+    strcpy(arr[</span><span style="color: rgba(128, 0, 128, 1)">0</span>], <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">123</span><span style="color: rgba(128, 0, 0, 1)">"</span>); <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">ok</span>
+    arr[<span style="color: rgba(128, 0, 128, 1)">0</span>] = <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">123</span><span style="color: rgba(128, 0, 0, 1)">"</span>; <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)"> not ok</span>
+
+<span style="color: rgba(128, 0, 128, 1)">20191125</span><span style="color: rgba(0, 0, 0, 1)">:
+    oracle 在线压缩分区的方法：
+</span><span style="color: rgba(128, 0, 128, 1)">1</span><span style="color: rgba(0, 0, 0, 1)"> 完美方法
+使用12 c的move online功能
+
+</span><span style="color: rgba(128, 0, 128, 1)">2</span><span style="color: rgba(0, 0, 0, 1)"> 变通方法a
+先将要压缩的分区数据导出来到临时表并压缩
+把临时表的数据跟待压缩分区做在线交换（要加上with update indexes）
+从临时表里面找操作期间变更的记录，更新回压缩分区
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">3</span><span style="color: rgba(0, 0, 0, 1)"> 变通方法b（压缩分区不需要查询的情况）
+建一个空表
+把分区的数据跟空表交换
+对表做压缩
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20191126</span><span style="color: rgba(0, 0, 0, 1)">:
+    oracle做分区交换时，可以使用including indexes，在做交换分区时顺便维护local索引
+
+    float类型的变量在计算时很容易损失精度：</span><span style="color: rgba(128, 0, 128, 1)">0</span>.1循环加8次 &gt; <span style="color: rgba(128, 0, 128, 1)">0.8</span><span style="color: rgba(0, 0, 0, 1)">
+    double也会，但比float损失精度的概率会低一些。
+
+</span><span style="color: rgba(128, 0, 128, 1)">20191127</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天出现一个问题：我在程序里面一个sql使用了hint：result_cache想提高查询速度，单进程测试时发现确实有明显改善。
+但到生产机器时，多进程环境跑的时候却导致了大量lanth free事件，反而拖慢了速度。后来dba临时关闭了result_cache功能才恢复。
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20191204</span><span style="color: rgba(0, 0, 0, 1)">:
+
+进程数估计 机器cpu跑满  看是否有堵塞
+
+交易太频繁，没有发心跳 mq recv
+
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20191205</span><span style="color: rgba(0, 0, 0, 1)">:
+    oracle使用merge into有时也会因为主键冲突失败，主要是出现在高并发插入的场景。
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20191206</span><span style="color: rgba(0, 0, 0, 1)">:
+    watch命令特别方便监测进程运行情况：执行
+    watch </span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">ps aux www|grep -w -E "ProgName|TTY"</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">
+    系统会显示进程资源占用情况，并且自动每2秒刷新
+
+</span><span style="color: rgba(128, 0, 128, 1)">20191207</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天使用valgrind检测程序时，发现好多invalid write。仔细检查，发现是因为
+strptime函数没有填充目标变量的夏令时字段，导致这个字段是未知字节。然后我又拷贝了这个变量的值，就出现这个问题。
+    解决方法是strptime函数执行后再设置tm_isdst为0
+
+</span><span style="color: rgba(128, 0, 128, 1)">20191208</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天发现c</span>++<span style="color: rgba(0, 0, 0, 1)">的throw比较消耗资源,即使没触发throw部分代码。
+我写了两个程序，代码是一样的，只是一个加了try </span><span style="color: rgba(0, 0, 255, 1)">catch</span><span style="color: rgba(0, 0, 0, 1)">，另一个没有加。
+编译后运行，发现效率相差20</span>%
+
+
+<span style="color: rgba(128, 0, 128, 1)">20191210</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天使用callgrind检测程序性能时，发现我有一个函数虽然有调用，但是在callgrind输出结果却看不到实际调用情况。
+后来经过多次测试，发现原来是这个程序被编译器自动内联了。虽然我没有指定inline，也没有加</span>-<span style="color: rgba(0, 0, 0, 1)">O，但编译器还是将它内联了。
+
+
+    两个静态库的函数互相调用，会导致链接时无论怎么调整顺序，都有可能报“找不到对象”，这时可以多链接几次：
+例如我有libA.a libB.a相互调用了，写makefile时可这样：</span>-lA -lB -lA -<span style="color: rgba(0, 0, 0, 1)">lB。不过这只是临时处理方案，实际上不应该出现这样的相互调用的情况。
+
+
+    linux消息队列好像没有支持io多路复用的api，我设想了一个解决方案：
+启动一个专门的读线程，使用阻塞读消息队列，如果读到了消息，则发送一个信号给主进程监听的句柄（例如匿名管道）
+
+</span><span style="color: rgba(128, 0, 128, 1)">20191211</span><span style="color: rgba(0, 0, 0, 1)">:
+    最后生产数据库空间告警，只能把一些不常用的流水表做压缩，以节省空间。幸好oracle提供了压缩表的功能。
+
+</span><span style="color: rgba(128, 0, 128, 1)">20191212</span><span style="color: rgba(0, 0, 0, 1)">:
+    最近半年做了一个查询库同步的功能，过程还是很折腾的：
+最开始打算直接使用goldengate同上交易库的表和查询库的表，这是最方便的。
+但是运维团队说没有购买这个工具，而且有安全问题。于是只能作罢。
+后来又想着在业务库表加上触发器，把修改内容登记到一个日志表，再写一个程序根据日志表同步数据到查询库。
+但运维团队又说不能加触发器，因为触发器影响性能。
+之后有同事提出使用物化视图，但我查了一下网上，oracle的物化视图功能bug很多，没建议。
+最后偶然间，我查proc开发文件时发现oracle提供了一种returning into的语法，可以返回update</span>/<span style="color: rgba(0, 0, 0, 1)">insert修改后记录的内容。
+于是最后决定：
+</span><span style="color: rgba(128, 0, 128, 1)">1</span><span style="color: rgba(0, 0, 0, 1)"> 并且给业务表增加修改时间字段，insert或update时顺便更新这个字段。
+</span><span style="color: rgba(128, 0, 128, 1)">2</span><span style="color: rgba(0, 0, 0, 1)"> 在所有修改数据库流水表的代码增加returning into子句，把修改结果查询回来。
+</span><span style="color: rgba(128, 0, 128, 1)">3</span><span style="color: rgba(0, 0, 0, 1)"> 把返回的记录发给同步进程，同步进程把记录merge到查询库的表
+</span><span style="color: rgba(128, 0, 128, 1)">4</span><span style="color: rgba(0, 0, 0, 1)"> 为防止顺序错乱，同步查询库时需要加上判断，如果修改时间比数据库记录的时间早，则不处理
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20191216</span><span style="color: rgba(0, 0, 0, 1)">:
+    文件编码不是文件的属性之一，这是很多人没搞清楚的。他们往往会说“我文件已经保存成gbk编码，为什么传到linux上打开还是乱码”
+其实问题就是文件编码不是文件的属性，linux上的文件工具打开文件时只能“猜测”文件的编码，如果它猜错了，显示就是乱码。
+
+</span><span style="color: rgba(128, 0, 128, 1)">20191217</span><span style="color: rgba(0, 0, 0, 1)">:
+    逻辑尺：一个字段,其中的各个位,由我们自己规定为0、</span><span style="color: rgba(128, 0, 128, 1)">1</span>。 然后,用这一串0、<span style="color: rgba(128, 0, 128, 1)">1</span><span style="color: rgba(0, 0, 0, 1)">,依次去选择两种操作。 这个字节,往往有人称之为逻辑尺。
+
+</span><span style="color: rgba(128, 0, 128, 1)">20191218</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天用proc编译.pc文件时出现core，看原因是段错误。
+后来检查一下，是由于文件路径太长，超过100个字符，触发proc的bug
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20191219</span><span style="color: rgba(0, 0, 0, 1)">:
+    vim显示不了回车符解决方法：vi </span>-<span style="color: rgba(0, 0, 0, 1)">b
+
+    vim输入回车符方法：按住ctrl，再按v，再松开v按m
+
+</span><span style="color: rgba(128, 0, 128, 1)">20191220</span><span style="color: rgba(0, 0, 0, 1)">：
+    今天使用loadrunner压测的过程中，报了不少</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">server has shut down the connection</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">的错误
+观察被压测机器的接入程序，却没有发现异常。
+    猜测是由于客户端机TIME_WAIT太多造成的，不过修改后也没多大改善。具体原因暂时还不知道
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20191223</span><span style="color: rgba(0, 0, 0, 1)">：
+    Disql是DM数据库自带的数据库命令行客户端工具。类似于sqlplus，不过做得不太好。
+今天随便试用了一下，就发现一个bug：进入disql后，如果不执行sql，直接按ctrl </span>+<span style="color: rgba(0, 0, 0, 1)"> c，会导致程序退出
+
+</span><span style="color: rgba(128, 0, 128, 1)">20191225</span><span style="color: rgba(0, 0, 0, 1)">：
+    </span>%<span style="color: rgba(0, 0, 0, 1)">08s，不是用0左补齐，而是用空格
+
+</span><span style="color: rgba(128, 0, 128, 1)">20191226</span><span style="color: rgba(0, 0, 0, 1)">:
+    oracle在多个会话查询同一条记录，容易出现LanchFree竞争事件
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20191227</span><span style="color: rgba(0, 0, 0, 1)">：
+    今天做非功能测试，发现有一个交易跑一会tps就急剧下降。一开始我以为受清理日志影响，但后来把日志清理停了也一样。
+观察vmstat输出，tps下降时cpu使用wait的数据急剧上升，并且so也上升。猜测是由于内存换页影响。使用ps aux www观察，发现进程占用的内存大涨。
+
+    iostat </span>-x <span style="color: rgba(128, 0, 128, 1)">2</span> <span style="color: rgba(128, 0, 128, 1)">5</span><span style="color: rgba(0, 0, 0, 1)"> # 每隔2秒打印io信息 共5次
+
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20191228</span><span style="color: rgba(0, 0, 0, 1)">:
+    gdb打开core文件，使用where发现堆栈异常，有一些函数根本不可能调用到，但却显示在输出里面。
+    后来发现core文件生成时间比程序的修改时间还早，说明程序被修改过。后来我找了修改前的程序，重新用gdb调试，这里where输出就正常了。
+    
+
+</span><span style="color: rgba(128, 0, 128, 1)">20191230</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天启动业务系统时出现有一些进程打开监听端口时失败，重启时就好了。
+仔细分析日志，发现问题是某些进程使用的随机端口正好与监听端口冲突了。
+
+</span><span style="color: rgba(128, 0, 128, 1)">20191231</span><span style="color: rgba(0, 0, 0, 1)">：
+    今天压测时，发现tps突然下降。看vmstat，bi突然增加，wa增加。查看free，发现buffer突然减少，原来是有进程占用了太多内存导致的。
+
+</span><span style="color: rgba(128, 0, 128, 1)">20200106</span><span style="color: rgba(0, 0, 0, 1)">：
+    今天做非功能测试时，发现数据库很多</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">cursor: pin S wait on X</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">的等待事件。
+百度查了一下，出现这个等待事件的原因很多，其中一个比较常见的情况是数据库硬解析sql太多。
+但我们系统高并发的sql都是使用绑定变量的，理论上不应该出现很多硬解析。所以当时认为不是这个问题。（其实当时应该检查一下硬解析次数再下结论）
+后来偶然间发现有一些20年的流水表没建，导致sql执行时出现</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">table or veiw not exist</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">的错误，这才明白过来为什么会有很多硬解析。
+后来把表建好后再跑就没这个等待事件了。
+
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20200107</span><span style="color: rgba(0, 0, 0, 1)">：
+    看网上的实验说是rac切换时，该节点没提交事务会自动回滚
+    如果应用此时不进行rollback操作，再执行其他语句（包括commit）都会报ora</span>-<span style="color: rgba(128, 0, 128, 1)">25402</span>
+
+
+<span style="color: rgba(128, 0, 128, 1)">20200108</span><span style="color: rgba(0, 0, 0, 1)">：
+    loadrunner参数取随机值设置方法：
+Select next row: Random
+Update Value On: Each iteration
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20200109</span><span style="color: rgba(0, 0, 0, 1)">：
+    查看系统在监听的端口和对应程序名：netstat </span>-anp|<span style="color: rgba(0, 0, 0, 1)">grep LIS
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20200110</span><span style="color: rgba(0, 0, 0, 1)">：
+    数据库缓慢，执行
+         </span><span style="color: rgba(0, 0, 255, 1)">set</span> linesize <span style="color: rgba(128, 0, 128, 1)">240</span><span style="color: rgba(0, 0, 0, 1)">
+         col sid format </span><span style="color: rgba(128, 0, 128, 1)">9999</span><span style="color: rgba(0, 0, 0, 1)">
+         col s# format </span><span style="color: rgba(128, 0, 128, 1)">99999</span><span style="color: rgba(0, 0, 0, 1)">
+         col username format a15
+         col </span><span style="color: rgba(0, 0, 255, 1)">event</span><span style="color: rgba(0, 0, 0, 1)"> format a30
+         col machine format a20
+         col p123 format a18
+         col wt format </span><span style="color: rgba(128, 0, 128, 1)">999</span><span style="color: rgba(0, 0, 0, 1)">
+         col SQL_ID </span><span style="color: rgba(0, 0, 255, 1)">for</span><span style="color: rgba(0, 0, 0, 1)"> a18
+         alter session </span><span style="color: rgba(0, 0, 255, 1)">set</span> cursor_sharing=<span style="color: rgba(0, 0, 0, 1)">force;
+            SELECT  
+             S.SID,
+             S.SERIAL# S#,
+             P.SPID,
+             NVL(S.USERNAME, SUBSTR(P.PROGRAM, LENGTH(P.PROGRAM) </span>- <span style="color: rgba(128, 0, 128, 1)">6</span><span style="color: rgba(0, 0, 0, 1)">)) USERNAME,
+             S.MACHINE,
+             S.EVENT,
+             S.P1 </span>|| <span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">/</span><span style="color: rgba(128, 0, 0, 1)">'</span> || S.P2 || <span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">/</span><span style="color: rgba(128, 0, 0, 1)">'</span> ||<span style="color: rgba(0, 0, 0, 1)"> S.P3 P123,
+             S.WAIT_TIME WT,
+             NVL(SQL_ID, S.PREV_SQL_ID) SQL_ID
+              FROM V$PROCESS P, V$SESSION S
+             WHERE P.ADDR </span>=<span style="color: rgba(0, 0, 0, 1)"> S.PADDR
+               AND S.STATUS </span>= <span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">ACTIVE</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">
+               AND P.BACKGROUND IS NULL;
+
+    等待事件sga:allocation forcing component growth
+
+</span><span style="color: rgba(128, 0, 128, 1)">20200217</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天安装redis时发现一些语法比较奇怪的脚本，上网查了一下，原来是tcl脚本
+百度了一下，介绍这样的：“Tcl 是一种 脚本语言。 由John Ousterhout创建。 TCL很好学，功能很强大。TCL经常被用于 快速原型开发，脚本编程， GUI和测试等方面。”，TCL念作“踢叩” </span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">tickle</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">
+    以后有机会要了解一下
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20200220</span><span style="color: rgba(0, 0, 0, 1)">:
+    make install时可以临时指定安装目录，make PREFIX</span>=/home/huangcihui/<span style="color: rgba(0, 0, 0, 1)">local install
+
+</span><span style="color: rgba(128, 0, 128, 1)">20200225</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天测试redis性能时偶然发现redis服务设置了密码，但运行redis</span>-<span style="color: rgba(0, 0, 0, 1)">benchmark时没输入密码参数结果也能跑成功。
+后来研究了一下代码才发现，redis</span>-benchmark工具默认对返回结果不做检查，需要加上-<span style="color: rgba(0, 0, 0, 1)">e参数，才会检查redis命令执行结果是否成功。
+
+</span><span style="color: rgba(128, 0, 128, 1)">20200228</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天发现在高并发情况下，oracle的merge语句也可能会出现主键冲突。之前在低并发情况时一直用merge一次完成INSERT</span>+<span style="color: rgba(0, 0, 0, 1)">UPDATE，避免主键冲突。
+
+</span><span style="color: rgba(128, 0, 128, 1)">20200229</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天同事反映，生产上有一些交易被拒绝，报20200229日期非法。但今年是闰年，理论上不应该出现这个问题，而且奇怪的是不是所有交易都被拒绝。后来查了一下代码，里面有这样的代码：
+    </span><span style="color: rgba(0, 0, 255, 1)">char</span> year[<span style="color: rgba(128, 0, 128, 1)">5</span><span style="color: rgba(0, 0, 0, 1)">];
+    strcpy(year, dateTime, </span><span style="color: rgba(128, 0, 128, 1)">4</span><span style="color: rgba(0, 0, 0, 1)">);
+    </span><span style="color: rgba(0, 0, 255, 1)">if</span><span style="color: rgba(0, 0, 0, 1)"> (IsLeap(atoi(year)) { ... }
+    于是明白了，程序里面对于year没有做初始化，导致有时atoi结果出现异常，导致程序判断闰年错误。
+
+</span><span style="color: rgba(128, 0, 128, 1)">20200302</span><span style="color: rgba(0, 0, 0, 1)">:
+    ps aux www</span>|grep -E <span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">TTY|redis</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(0, 0, 0, 1)">，这样可以保留ps输出的标题
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">201200303</span><span style="color: rgba(0, 0, 0, 1)">:
+    当你使用sudo去执行一个程序时，处于安全的考虑，这个程序将在一个新的、最小化的环境中执行，也就是说，诸如PATH这样的环境变量，在sudo命令下已经被重置成默认状态了。
+    要想改变PATH在sudo会话中的初始值，用文本编辑器打开</span>/etc/<span style="color: rgba(0, 0, 0, 1)">sudoers文件，找到”secure_path”一行，当你执行sudo 命令时，”secure_path”中包含的路径将被当做默认PATH变量使用。 
+
+
+    sudo </span>-<span style="color: rgba(0, 0, 0, 1)">v 延长密码有效期限5分钟，这样就可以临时省去sudo输入密码的麻烦
+
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20200304</span><span style="color: rgba(0, 0, 0, 1)">:
+    redhat的屏保居然是向上拖动的，不是像windows一样点击自动消失的。
+开机后等好久一直停留在时间界面，点了没反应，我一直以为开机没完成。。。
+
+</span><span style="color: rgba(128, 0, 128, 1)">20200305</span><span style="color: rgba(0, 0, 0, 1)">:
+    新安装的redhat默认启动是进入图形界面，可以执行命令
+systemctl </span><span style="color: rgba(0, 0, 255, 1)">set</span>-<span style="color: rgba(0, 0, 255, 1)">default</span> multi-<span style="color: rgba(0, 0, 0, 1)">user.target，这样重启后优先进入命令行界面
+如果以后需要恢复回来，则执行systemctl </span><span style="color: rgba(0, 0, 255, 1)">set</span>-<span style="color: rgba(0, 0, 255, 1)">default</span><span style="color: rgba(0, 0, 0, 1)"> graphical.target即可
+    临时命令行切换至桌面命令： init </span><span style="color: rgba(128, 0, 128, 1)">5</span><span style="color: rgba(0, 0, 0, 1)">
+    临时桌面切换至命令行命令： init </span><span style="color: rgba(128, 0, 128, 1)">3</span>
+
+<span style="color: rgba(128, 0, 128, 1)">20200308</span><span style="color: rgba(0, 0, 0, 1)">:
+    redhat配置网卡自动连接，并使用dhcp配置网络地址方法：
+需要修改配置</span>/etc/sysconfig/network-scripts/ifcfg-&lt;网卡名称&gt;<span style="color: rgba(0, 0, 0, 1)">
+假设网卡名字叫eth0，则修改</span>/etc/sysconfig/network-scripts/ifcfg-<span style="color: rgba(0, 0, 0, 1)">eth0
+将BOOTPROTO改为dhcp，ONBOOT改为yes 
+    修改后使用ifup eth0启动连接</span></pre>
+</div>
+<p>&nbsp;</p>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-03-15 12:57</span>&nbsp;
+<a href="https://www.cnblogs.com/kingstarer/">皇家救星</a>&nbsp;
+阅读(<span id="post_view_count">344</span>)&nbsp;
+评论(<span id="post_comment_count">0</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12497000" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12497000);return false;">收藏</a>&nbsp;
+<a href="javascript:void(0)" onclick="reportManager.report({ currentUserId: '', targetType: 'blogPost', targetId: '12497000', targetLink: 'https://www.cnblogs.com/kingstarer/p/12497000.html', title: '《工作碰上的技术问题及处理经验》（五）' })">举报</a></div>
+        </div>
+        <script src="https://common.cnblogs.com/highlight/10.3.1/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 234136, cb_blogApp = 'kingstarer', cb_blogUserGuid = '6c01f56e-ee22-e511-b908-9dcfd8948a71';
+    var cb_entryId = 12497000, cb_entryCreatedDate = '2020-03-15 12:57', cb_postType = 1;
+    updatePostStats(
+        [cb_entryId],
+        function(id, count) { $("#post_view_count").text(count) },
+        function(id, count) { $("#post_comment_count").text(count) })
+    zoomManager.apply("#cnblogs_post_body img:not(.code_img_closed):not(.code_img_opened)");
+</script>
+        <a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <div id="cnblogs_c1" class="under-post-card">
+        <div id='div-gpt-ad-1592365906576-0' style='width: 300px; height: 250px;'></div>
+    </div>
+    <div id="under_post_card1"></div>
+    <div id="cnblogs_c2" class="under-post-card">
+        <div id='div-gpt-ad-1592366332455-0' style='width: 468px; height: 60px;'></div>
+    </div>
+    <div id="under_post_card2"></div>
+    <div id="HistoryToday" class="under-post-card"></div>
+    <script type="text/javascript">
+       var commentManager = new blogCommentManager();
+       commentManager.renderComments(0);
+       fixPostBody();
+       deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);       deliverT2();
+       deliverC1C2();
+       loadNewsAndKb();
+       loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);       LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+       GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+       loadOptUnderPost();
+       GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+
+    </div>
+</div>
+            </div>
+        </div>
+
+        <div id="sideBar">
+            <div id="sideBarMain">
+                <div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+<div id="sidebar_c3"></div>
+                <div id="calendar"><div id="blog-calendar" style="display:none"></div></div>                
+                <script>loadBlogDefaultCalendar();</script>
+                <div id="leftcontentcontainer">
+                    <!-- begin:SingleColumn -->
+                    <div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+                    <!-- end:  SingleColumn -->
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div id="footer">
+        <!--done-->
+Copyright &copy; 2021 皇家救星
+<br /><span id="poweredby">Powered by .NET 5.0 on Kubernetes</span>
+
+    </div>
+</div>
+
+    
+
+    <input type="hidden" id="antiforgery_token" value="CfDJ8L-rpLgFVEJMgssCVvNUAjudjJNNaz7kJBBXeh0Dl-IpX2uNVUIcgw-xZLhJAAkcFKZ08-uoifkZ-aHwXX4qOGK2zwf60sfcv_f_sHdExYk2QTlBdxsAFKdq1EjI5s8hcI9wC6Vskczt5m1BTBayhRk" />
+</body>
+</html>

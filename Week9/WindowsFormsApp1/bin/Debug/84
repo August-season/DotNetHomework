@@ -1,0 +1,347 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin-when-crossorigin" />
+    <meta name="description" content="proc*c,oracle,高效数据库操作" />
+    <meta property="og:description" content="proc*c,oracle,高效数据库操作" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Oracle Proc编程性能优化经验 - 皇家救星 - 博客园</title>
+    <link id="favicon" rel="shortcut icon" href="//common.cnblogs.com/favicon.svg" type="image/svg+xml" />
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=6tvK5XC6GPbg3p_sy7wzz_2291HoYACr4440iKBzQIw" />
+    <link id="MainCss" rel="stylesheet" href="/skins/simpleblue/bundle-simpleblue.min.css?v=2hjghzSZyhYA1HxvSxKnXih3JbC120DBjeO9V9T_nSs" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/simpleblue/bundle-simpleblue-mobile.min.css?v=3tvwgOOqUo3RpS6gGzEdK0LbptOPv4Bx7M85_UAnFGs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/kingstarer/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/kingstarer/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/kingstarer/wlwmanifest.xml" />
+    <script>
+        var currentBlogId = 234136;
+        var currentBlogApp = 'kingstarer';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var isBlogOwner = false;
+        var skinName = 'SimpleBlue';
+        var visitorUserId = '';
+    </script>
+        <script>
+            var currentPostDateAdded = '2019-12-01 11:00';
+        </script>
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=ZUvfwhWs5fv-s8Nv7WofCOhwKAxiDO928zdWFzhnOPk"></script>
+    
+    
+    
+</head>
+<body class="has-navbar has-bannerbar">
+    <a name="top"></a>
+            <a target="_blank" href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:pc|pp:bokeyuan-huodong-21nianzhongdacu-neiyePCtonglanbanner|pu:21nianzhongdacu-neiyePCtonglanbanner|ci:21nzdc|kw:10224545" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-pc')">
+                <div class="bannerbar aliyun forpc" style="background-size: contain; filter: brightness(0.95); background-image: url(https://img2020.cnblogs.com/blog/35695/202106/35695-20210610183724605-1725070929.jpg)">
+                </div>
+            </a>
+            <div id="bannerbar" class="bannerbar-mobile formobile">
+            <a href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:mb|pp:bokeyuan-huodong-21nianzhongdacu-neiyeyidongduantonglanbanner|pu:21nianzhongdacu-neiyeyidongduantonglanbanner|ci:21nzdc|kw:10224547" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-mobile')">
+                <img src="https://img2020.cnblogs.com/blog/35695/202106/35695-20210610184806729-1738888164.jpg" alt="" />
+            </a>
+            </div>
+    <div id="top_nav" class="navbar forpc">
+        <nav id="nav_main" class="navbar-main">
+            <ul id="nav_left" class="navbar-list navbar-left">
+                <li class="navbar-branding"><a href="https://www.cnblogs.com/" title="开发者的网上家园"><img src="/images/logo.svg?v=R9M0WmLAIPVydmdzE2keuvnjl-bPR7_35oHqtiBzGsM" alt="博客园Logo" /></a></li>
+                <li><a href="/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-sitehome')">首页</a></li>
+                <li><a href="https://news.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-news')">新闻</a></li>
+                <li><a href="https://q.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-q')">博问</a></li>
+                <li><a id="nav_brandzone" href="https://brands.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-brands')">专区</a></li>
+                <li><a href="https://ing.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-ing')">闪存</a></li>
+                <li><a href="https://edu.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-edu')">班级</a></li>
+            </ul>
+            <ul id="nav_right" class="navbar-list navbar-right">
+                <li>
+                    <form id="zzk_search" class="navbar-search" action="https://zzk.cnblogs.com/s" method="get">
+                        <input name="w" id="zzk_search_input" placeholder="代码改变世界" type="text" tabindex="3" />
+                        <button type="submit" id="zzk_search_button">
+                            <img src="/images/aggsite/search.svg" alt="搜索" />
+                        </button>
+                    </form>
+                </li>
+                <li id="navbar_login_status" class="navbar-list">
+                    <a class="navbar-user-info navbar-blog" href="https://i.cnblogs.com/EditPosts.aspx?opt=1" alt="写随笔" title="写随笔">
+                        <img id="new_post_icon" class="navbar-icon" src="/images/aggsite/newpost.svg" alt="写随笔" />
+                    </a>
+                    <a id="navblog-myblog-icon" class="navbar-user-info navbar-blog" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx" alt="我的博客" title="我的博客">
+                        <img id="myblog_icon" class="navbar-icon" src="/images/aggsite/myblog.svg" alt="我的博客" />
+                    </a>
+                    <a class="navbar-user-info navbar-message navbar-icon-wrapper" href="https://msg.cnblogs.com/" alt="短消息" title="短消息">
+                        <img id="msg_icon" class="navbar-icon" src="/images/aggsite/message.svg?v=J0WS2P2iPgaIVgXxcAhliw4AFZIpaTWxtdoNAv9eiCA" alt="短消息" />
+                        <span id="msg_count" style="display: none"></span>
+                    </a>
+                    <div id="user_info" class="navbar-user-info dropdown">
+                        <a class="dropdown-button" href="https://home.cnblogs.com/">
+                            <img id="user_icon" class="navbar-avatar" src="/images/aggsite/avatar-default.svg" alt="用户头像" />
+                        </a>
+                        <div class="dropdown-menu">
+                            <a id="navblog-myblog-text" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx">我的博客</a>
+                            <a href="https://home.cnblogs.com/">我的园子</a>
+                            <a href="https://account.cnblogs.com/settings/account">账号设置</a>
+                            <a href="javascript:void(0)" id="navbar_lite_mode_toggle" title="简洁模式会使用简洁款皮肤显示所有博客">
+    简洁模式 <img id="navbar_lite_mode_on" src="/images/lite-mode-check.svg" class="hide" /><span id="navbar_lite_mode_spinner" class="hide">...</span>
+</a>
+                            <a href="javascript:void(0)" onclick="account.logout();">退出登录</a>
+                        </div>
+                    </div>
+                    <a class="navbar-anonymous" href="https://account.cnblogs.com/signup/">注册</a>
+                    <a class="navbar-anonymous" href="javascript:void(0);" onclick="account.login()">登录</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    
+    <div id="home">
+    <div id="header">
+        <div id="blogTitle">
+            <div class="title"><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/kingstarer/">皇家救星</a>
+</div>
+<div class="subtitle"></div>
+
+        </div>
+        <div id="navigator">
+            
+<ul id="navList">
+    <li id="nav_sitehome"><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+    <li id="nav_myhome">
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/kingstarer/">
+首页</a>
+</li>
+    <li id="nav_newpost">
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+    <li id="nav_contact">
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E7%9A%87%E5%AE%B6%E6%95%91%E6%98%9F">
+联系</a></li>
+    <li id="nav_rss">
+<a id="blog_nav_rss" class="menu" href="javascript:void(0)" data-rss="https://www.cnblogs.com/kingstarer/rss/">
+订阅</a></li>
+    <li id="nav_admin">
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+            <div class="blogStats">
+                <div id="blog_stats_place_holder"><script>loadBlogStats();</script></div>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div id="mainContent">
+            <div class="forFlow">
+                <div id="post_detail">
+    <div id="topics">
+        <div class="post">
+            <h1 class="postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2 vertical-middle" href="https://www.cnblogs.com/kingstarer/p/11968247.html">
+    <span>Oracle Proc编程性能优化经验</span>
+    
+
+
+
+</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                    <div id="cnblogs_post_description" style="display: none">
+        proc*c,oracle,高效数据库操作
+    </div>
+<div id="cnblogs_post_body" class="blogpost-body blogpost-body-html">
+<p align="center">&nbsp;</p>
+<p>Proc 是Oracle提供的一种数据库操作的API。它是基于ESql技术的，需要预编译后才可以变成普通c代码，非常不直观，使用起来不太方便，阅读也存在困难。</p>
+<p>因为这些问题导致程序员平时开发中会出现一些Proc操作存在效率低下的情况，本文介绍一些Proc一些编译经验，希望能给大家提供参考。</p>
+<p>&nbsp;&nbsp;</p>
+<p><strong>下面以一个简单需求进行举例说明：</strong></p>
+<p>要求把DB1里面一张数据表tbl_hch_test的数据导出到DB2的同名表。</p>
+<p>最快的方法当然是使用oracle的数据泵工具进行压缩导出再导入，但expdp/impdp对数据库环境有特别要求，所以我们需要使用Proc编程，先从DB1取出数据，再insert到Db2里面。</p>
+<p>&nbsp;</p>
+<p><strong>简单实现：</strong></p>
+<p>打开一个游标，从DB1循环FETCH数据出来，再使用sprintf拼装成insert语句，到DB2使用exec sql指令执行插入并提交数据库。</p>
+<p>&nbsp;</p>
+<p><strong>优化：</strong></p>
+<p>虽然上面的做法可以完成需求，但在效率上存在不优化空间。下面依次进行介绍：</p>
+<p>1 使用绑定变量代替sprintf拼装sql</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 实践证明sprintf函数在对效率要求比较高的场景下容易成为性能瓶颈，使用绑定变量可以避免sprintf调用。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 并且，由于数据库里面执行的sql是相同的，不需要每次重新分析sql生成执行计划，也能大大减轻数据库负担，提高执行效率。</p>
+<p>&nbsp;</p>
+<p>2 对insert语句进行预编译，一次编译多次执行，避免使用隐性游标，每次都要重新编译。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 同上，预编译是比较消耗cpu的操作。如果sql相同，可以复用游标，减少性能开支。</p>
+<p>3 使用批量操作，每次取数和插入数据都使用数组进行绑定。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 批量操作可以减少客户端与服务器之间交互次数，加快操作数据。</p>
+<p>4 适当加大事务提交间隔（insert多行记录commit一次）</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Oracle提交数据库事务时需要将日志从内存刷回磁盘并等待磁盘操作完成才返回，提高事务提交间隔可以减少等待消耗。</p>
+<p>&nbsp;</p>
+<p><strong>优化前后效率测试对比：</strong></p>
+<p>&nbsp;<img src="https://img2018.cnblogs.com/blog/781609/201912/781609-20191201225640341-263331902.png" alt=""></p>
+<p>相同的操作，从23s降低到1.3s</p>
+<p>&nbsp;</p>
+<p><strong>其它提高效率措施：</strong></p>
+<p>以上是在编程上的一些优化，结合oracle一些特性，速度还能再提升，简单介绍几个优化技巧：</p>
+<p>1 先删除目标表索引，insert完数据后再重建</p>
+<p>2 关闭表的日志， 减少redo日志，alter table tbl_hch_test nologing。装载完数据再改回来。</p>
+<p>3 使用append HINT，在高水位上面直接插入数据，加快插入速度。</p>
+<p>4 使用并行（parallel）查询，或者使用分区查询（select * from tab parttion(par_name)）加快查询速度。</p>
+<p>5 如果可能，尽量在数据库服务器上执行程序，减少网络传输开销</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><strong>关键代码参考：</strong></p>
+<p>&nbsp;<img src="https://img2018.cnblogs.com/blog/781609/201912/781609-20191201225701705-563077555.png" alt=""></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;<img src="https://img2018.cnblogs.com/blog/781609/201912/781609-20191201225709770-751102146.png" alt=""></p>
+<p>&nbsp;</p>
+<p>&nbsp;<img src="https://img2018.cnblogs.com/blog/781609/201912/781609-20191201225718330-1729513102.png" alt=""></p>
+<p>&nbsp;</p>
+<p>&nbsp;<img src="https://img2018.cnblogs.com/blog/781609/201912/781609-20191201225732588-542607523.png" alt=""></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>另外，附上几个平时使用Proc容易出现误区。</p>
+<p>1 使用char数组保存数据库varchar2类型字段的值</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Proc的char数组对应的数据库类型是char，varchar结构体对应的类型才是varchar2。使用char数组保存数据库varchar2类型字段的值，会导致取出的数据像char类型一样，在末尾自动添加空格。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 解决方法可以使用EXEC SQL VAR/ EXEC SQL TYPE同等化变量或者数据类型。或者在预编译时指定CHAR_MAP=string一劳永役</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>2 需要注意proc的一些命令是预编译命令，只在预编译期间生效，与C语言的宏十分相似。例如以下命令：。</p>
+<p>EXEC SQL CONTEXT USE</p>
+<p>ESEC SQL Whenever Sqlerror Do</p>
+<p>&nbsp;</p>
+<p>下面举一个常见的错误进行说明：</p>
+<p>&nbsp;<img src="https://img2018.cnblogs.com/blog/781609/201912/781609-20191201225744558-1091043611.png" alt=""></p>
+<p>要完全搞明白proc的原理，建议多分析.pc文件与porc预编译后生成的.c文件代码区别。</p>
+<p>&nbsp;</p>
+<p>3 proc指针变量</p>
+<p>Proc可以正确识别指针与普通变量，使用指针做为绑定变量与使用普通变量的方法一样，在变量前面加上冒号即可。</p>
+<p>官方文档是这样说的：</p>
+<p>&nbsp;<img src="https://img2018.cnblogs.com/blog/781609/201912/781609-20191201225759360-877128020.png" alt=""></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>有一些程序员不清楚怎么在proc使用指针，会使用memcpy把数据复制多一遍，增加无谓消耗。</p>
+<p>&nbsp;</p>
+<p>&nbsp;<img src="https://img2018.cnblogs.com/blog/781609/201912/781609-20191201225845832-1640054635.png" alt=""></p>
+<p>&nbsp;</p>
+<p>4 proc与C语言宏</p>
+<p>Proc能识别C语言的一些简单的宏，但如果有复杂的宏（如不定参数宏），proc在预编译时会报错。</p>
+<p>此时可以考虑使用gcc –E先对.pc文件进行预处理，之后再使用proc进行预编译。</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>如果对于proc编程还有什么其它疑惑的地方，欢迎大家与我讨论，或者查阅官方帮助文档。《Oracle Proc官方文档.pdf》</p>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2019-12-01 23:00</span>&nbsp;
+<a href="https://www.cnblogs.com/kingstarer/">皇家救星</a>&nbsp;
+阅读(<span id="post_view_count">496</span>)&nbsp;
+评论(<span id="post_comment_count">0</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11968247" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(11968247);return false;">收藏</a>&nbsp;
+<a href="javascript:void(0)" onclick="reportManager.report({ currentUserId: '', targetType: 'blogPost', targetId: '11968247', targetLink: 'https://www.cnblogs.com/kingstarer/p/11968247.html', title: 'Oracle Proc编程性能优化经验' })">举报</a></div>
+        </div>
+        <script src="https://common.cnblogs.com/highlight/10.3.1/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 234136, cb_blogApp = 'kingstarer', cb_blogUserGuid = '6c01f56e-ee22-e511-b908-9dcfd8948a71';
+    var cb_entryId = 11968247, cb_entryCreatedDate = '2019-12-01 23:00', cb_postType = 1;
+    updatePostStats(
+        [cb_entryId],
+        function(id, count) { $("#post_view_count").text(count) },
+        function(id, count) { $("#post_comment_count").text(count) })
+    zoomManager.apply("#cnblogs_post_body img:not(.code_img_closed):not(.code_img_opened)");
+</script>
+        <a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <div id="cnblogs_c1" class="under-post-card">
+        <div id='div-gpt-ad-1592365906576-0' style='width: 300px; height: 250px;'></div>
+    </div>
+    <div id="under_post_card1"></div>
+    <div id="cnblogs_c2" class="under-post-card">
+        <div id='div-gpt-ad-1592366332455-0' style='width: 468px; height: 60px;'></div>
+    </div>
+    <div id="under_post_card2"></div>
+    <div id="HistoryToday" class="under-post-card"></div>
+    <script type="text/javascript">
+       var commentManager = new blogCommentManager();
+       commentManager.renderComments(0);
+       fixPostBody();
+       deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);       deliverT2();
+       deliverC1C2();
+       loadNewsAndKb();
+       loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);       LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+       GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+       loadOptUnderPost();
+       GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+
+    </div>
+</div>
+            </div>
+        </div>
+
+        <div id="sideBar">
+            <div id="sideBarMain">
+                <div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+<div id="sidebar_c3"></div>
+                <div id="calendar"><div id="blog-calendar" style="display:none"></div></div>                
+                <script>loadBlogDefaultCalendar();</script>
+                <div id="leftcontentcontainer">
+                    <!-- begin:SingleColumn -->
+                    <div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+                    <!-- end:  SingleColumn -->
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div id="footer">
+        <!--done-->
+Copyright &copy; 2021 皇家救星
+<br /><span id="poweredby">Powered by .NET 5.0 on Kubernetes</span>
+
+    </div>
+</div>
+
+    
+
+    <input type="hidden" id="antiforgery_token" value="CfDJ8L-rpLgFVEJMgssCVvNUAjt0hhP1FuE8soiQPeZ8XS4AwfaVTi7WqQ1HpC5X5kEdvVRd_1-tCyGfqb51A_eQICXshcAYG6rcNfGtBQU49vBj1FJpinvxDEqG1qpiDHO8GycQm1l22RU6Lk6NQ9i5VjA" />
+</body>
+</html>

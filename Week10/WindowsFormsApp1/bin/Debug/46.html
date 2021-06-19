@@ -1,0 +1,628 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin-when-crossorigin" />
+    <meta name="description" content="&amp;#128018;求候选键： 只出现在函数依赖（FD）左边的，或者没出现在 FD 中的属性一定是主属性。（组成候选键的属性都叫主属性） 只出现在函数依赖右边的属性一定是非主属性。（不是主属性即为非主属" />
+    <meta property="og:description" content="&amp;#128018;求候选键： 只出现在函数依赖（FD）左边的，或者没出现在 FD 中的属性一定是主属性。（组成候选键的属性都叫主属性） 只出现在函数依赖右边的属性一定是非主属性。（不是主属性即为非主属" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>【数据库】关系模式的范式的简明判断 - RioTian - 博客园</title>
+    <link id="favicon" rel="shortcut icon" href="//common.cnblogs.com/favicon.svg" type="image/svg+xml" />
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=6tvK5XC6GPbg3p_sy7wzz_2291HoYACr4440iKBzQIw" />
+    
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/RioTian/custom.css?v=YkIw&#x2B;KzxA1HExcGzgpfdiaPmqFs=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/SimpleMemory/bundle-SimpleMemory-mobile.min.css" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/RioTian/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/RioTian/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/RioTian/wlwmanifest.xml" />
+    <script>
+        var currentBlogId = 568589;
+        var currentBlogApp = 'RioTian';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var isBlogOwner = false;
+        var skinName = 'SimpleMemory';
+        var visitorUserId = '';
+    </script>
+        <script>
+            var currentPostDateAdded = '2021-06-19 09:54';
+        </script>
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=ZUvfwhWs5fv-s8Nv7WofCOhwKAxiDO928zdWFzhnOPk"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML&amp;v=20200504"></script>
+    
+</head>
+<body class="no-navbar">
+    <a name="top"></a>
+            <div id="bannerbar" class="bannerbar-mobile formobile">
+            <a href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:mb|pp:bokeyuan-huodong-21nianzhongdacu-neiyeyidongduantonglanbanner|pu:21nianzhongdacu-neiyeyidongduantonglanbanner|ci:21nzdc|kw:10224547" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-mobile')">
+                <img src="https://img2020.cnblogs.com/blog/35695/202106/35695-20210610184806729-1738888164.jpg" alt="" />
+            </a>
+            </div>
+    <div id="top_nav" class="navbar forpc navbar-custom">
+        <nav id="nav_main" class="navbar-main">
+            <ul id="nav_left" class="navbar-list navbar-left">
+                <li class="navbar-branding"><a href="https://www.cnblogs.com/" title="开发者的网上家园"><img src="/images/logo.svg?v=R9M0WmLAIPVydmdzE2keuvnjl-bPR7_35oHqtiBzGsM" alt="博客园Logo" /></a></li>
+                <li><a href="/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-sitehome')">首页</a></li>
+                <li><a href="https://news.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-news')">新闻</a></li>
+                <li><a href="https://q.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-q')">博问</a></li>
+                <li><a id="nav_brandzone" href="https://brands.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-brands')">专区</a></li>
+                <li><a href="https://ing.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-ing')">闪存</a></li>
+                <li><a href="https://edu.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-edu')">班级</a></li>
+            </ul>
+            <ul id="nav_right" class="navbar-list navbar-right">
+                <li>
+                    <form id="zzk_search" class="navbar-search" action="https://zzk.cnblogs.com/s" method="get">
+                        <input name="w" id="zzk_search_input" placeholder="代码改变世界" type="text" tabindex="3" />
+                        <button type="submit" id="zzk_search_button">
+                            <img src="/images/aggsite/search.svg" alt="搜索" />
+                        </button>
+                    </form>
+                </li>
+                <li id="navbar_login_status" class="navbar-list">
+                    <a class="navbar-user-info navbar-blog" href="https://i.cnblogs.com/EditPosts.aspx?opt=1" alt="写随笔" title="写随笔">
+                        <img id="new_post_icon" class="navbar-icon" src="/images/aggsite/newpost.svg" alt="写随笔" />
+                    </a>
+                    <a id="navblog-myblog-icon" class="navbar-user-info navbar-blog" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx" alt="我的博客" title="我的博客">
+                        <img id="myblog_icon" class="navbar-icon" src="/images/aggsite/myblog.svg" alt="我的博客" />
+                    </a>
+                    <a class="navbar-user-info navbar-message navbar-icon-wrapper" href="https://msg.cnblogs.com/" alt="短消息" title="短消息">
+                        <img id="msg_icon" class="navbar-icon" src="/images/aggsite/message.svg?v=J0WS2P2iPgaIVgXxcAhliw4AFZIpaTWxtdoNAv9eiCA" alt="短消息" />
+                        <span id="msg_count" style="display: none"></span>
+                    </a>
+                    <div id="user_info" class="navbar-user-info dropdown">
+                        <a class="dropdown-button" href="https://home.cnblogs.com/">
+                            <img id="user_icon" class="navbar-avatar" src="/images/aggsite/avatar-default.svg" alt="用户头像" />
+                        </a>
+                        <div class="dropdown-menu">
+                            <a id="navblog-myblog-text" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx">我的博客</a>
+                            <a href="https://home.cnblogs.com/">我的园子</a>
+                            <a href="https://account.cnblogs.com/settings/account">账号设置</a>
+                            <a href="javascript:void(0)" id="navbar_lite_mode_toggle" title="简洁模式会使用简洁款皮肤显示所有博客">
+    简洁模式 <img id="navbar_lite_mode_on" src="/images/lite-mode-check.svg" class="hide" /><span id="navbar_lite_mode_spinner" class="hide">...</span>
+</a>
+                            <a href="javascript:void(0)" onclick="account.logout();">退出登录</a>
+                        </div>
+                    </div>
+                    <a class="navbar-anonymous" href="https://account.cnblogs.com/signup/">注册</a>
+                    <a class="navbar-anonymous" href="javascript:void(0);" onclick="account.login()">登录</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <div id="page_begin_html">
+        <script>loadPageBeginHtml();</script>
+    </div>
+    <!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/RioTian/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/RioTian/"><p style="font-family: RocknRoll One">RioTian の 博客</p></a>
+</h1>
+<h2><link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=RocknRoll+One&amp;display=swap" rel="stylesheet">
+<p style="font-family: RocknRoll One">本科CS系蒟蒻，算法学习半吊子。Student. Compilers &amp; TT. Powered by love. Etc. He/His <br>（In
+    addition: 猫の耳とくすんだ髪は共存できません）</p></h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/RioTian/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/RioTian">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="javascript:void(0)" data-rss="https://www.cnblogs.com/RioTian/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			<div id="blog_stats_place_holder"><script>loadBlogStats();</script></div>
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2 vertical-middle" href="https://www.cnblogs.com/RioTian/p/14905074.html">
+    <span>【数据库】关系模式的范式的简明判断</span>
+    
+
+
+
+</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                <div id="cnblogs_post_body" class="blogpost-body cnblogs-markdown">
+<h3 id="求候选键：">🐒求候选键：</h3>
+<ul>
+<li><strong>只</strong>出现在函数依赖（FD）左边的，或者没出现在 FD 中的属性一定是<strong>主属性</strong>。（组成候选键的属性都叫主属性）</li>
+<li><strong>只</strong>出现在函数依赖右边的属性一定是<strong>非主属性</strong>。（不是主属性即为非主属性）</li>
+<li>如果一个<strong>只</strong>出现在函数依赖左边的属性它的闭包包含了所有的属性，则它是唯一候选键</li>
+</ul>
+<h5 id="例：">例：</h5>
+<p>设关系模式 <span class="math inline">\(R(ABCDEG),F = \{A → D,E → D,D → B,CD → A\}\)</span></p>
+<blockquote>
+<p><strong>照理先求 <span class="math inline">\(F_{min}\)</span> ，但是不巧，这里的 <span class="math inline">\(F\)</span> 已经是 <span class="math inline">\(min\)</span> 了。</strong></p>
+</blockquote>
+<p>求 R 的候选键：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center">只出现在左边</th>
+<th style="text-align: center">两边都出现</th>
+<th style="text-align: center">只出现在右边</th>
+<th style="text-align: center">均未出现</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center">C、E</td>
+<td style="text-align: center">A、D</td>
+<td style="text-align: center">B</td>
+<td style="text-align: center">G</td>
+</tr>
+</tbody>
+</table>
+<p>可得 C、E、G 一定是主属性，这时分别求它们的闭包，发现：C+ = {C}； E+ = {EDB}；都 ≠ U。但是：CE+ = {CEDBA}， 那么 CEG 就是 R 的候选键，相应的，C、E、G 都是主属性。</p>
+<h3 id="-判断范式步骤">🖊 判断范式步骤</h3>
+<p><em>以上面的题为例</em></p>
+<ol>
+<li>先求 <span class="math inline">\(F_{min}\)</span></li>
+<li><strong>再求出候选键</strong><br>
+CEG</li>
+<li><strong>每个 FD 的左部都是超键——BCNF</strong><br>
+FD 中没有左部包含 CEG 的依赖，故 R 不是 BCNF</li>
+<li><strong>每一个属性都不依赖于其它非主属性——3NF</strong><br>
+C、E、G 是主属性，FD 中有 A → D，D → B，CD → A；这些都依赖于非主属性，故 R 不是 3NF</li>
+<li><strong>每一个非主属性都完全依赖于 R 的候选键——2NF</strong><br>
+可知非主属性 A、B、D， FD 中有 E → D，由于 E ⊂ CEG，所以非主属性 D 不完全依赖于 CEG，故 R 不是 2NF</li>
+<li><strong>否则是 1NF</strong></li>
+</ol>
+<p>上面例题可以判断，应该是 1NF。</p>
+<h3 id="完全函数依赖：">👫完全函数依赖：</h3>
+<p>对于函数依赖 W → A，如果还有 X ⊂ W （X 是 W 中的一个属性（真子集））使得 X → A 成立，那么 W → A 就是一个局部依赖；否则 W → A 为完全依赖。</p>
+<blockquote>
+<p>隐含所有属性都依赖于候选键</p>
+</blockquote>
+<h3 id="-第一范式（1nf）">👶 第一范式（1NF）</h3>
+<h5 id="定义：">定义：</h5>
+<ul>
+<li>关系模式 R 的所有属性都是不可分的原子属性，则 R 是 1NF。属性不可拆。</li>
+</ul>
+<h3 id="第二范式（2nf）">👨第二范式（2NF）</h3>
+<h5 id="定义：-1">定义：</h5>
+<ul>
+<li>若关系模式 R 是 1NF，并且每个<strong>非主属性都完全依赖于 R 的候选键</strong>，则 R 是 2NF</li>
+</ul>
+<h3 id="第三范式（3nf）">👴第三范式（3NF）</h3>
+<h5 id="定义：-2">定义：</h5>
+<ul>
+<li>
+<p>关系模式 R 是 2NF，且每个<strong>非主属性都不传递依赖于 R 的候选键</strong>。</p>
+</li>
+<li>
+<p>百度上有一句对第 3NF 非常经典的解释：“简而言之，第三范式就是每一个属性都不依赖于其它非主属性。”</p>
+</li>
+</ul>
+<blockquote>
+<p><strong>传递函数依赖</strong>：指如果存在 X → Y，Y → Z，且 Y !→ X，Z ∉ Y， 则 Z 传递函数依赖于 X。</p>
+</blockquote>
+<h3 id="bcnf范式">👪BCNF范式</h3>
+<h5 id="定义：-3">定义：</h5>
+<ul>
+<li>若关系模式 R 是 1NF，并且<strong>每个属性都不传递依赖于 R 的候选键</strong>，则 R 是 BCNF。</li>
+<li>还有这个等价定义：对 FD 中每个非平凡的 X → Y（非平凡表示：Y ∉ X），都有 X 是 R 的超键。</li>
+<li>常用的判断方式是：每一个属性都依赖于超键，则 R 是 BCNF。</li>
+</ul>
+<h3 id="例题">📚例题</h3>
+<p>判断下列关系模式的范式：</p>
+<ol>
+<li><strong>R1(ABC)， F={AB→C}</strong><br>
+候选键：AB，FD 的左部都是超键（包含 AB），故为 BCNF。</li>
+<li><strong>R2(ABC)， F={A→B,A→C}</strong><br>
+候选键：A，FD 的左部都是超键，故为 BCNF。</li>
+<li><strong>R3(ABC)， F={AC→B,B→C}</strong><br>
+候选键：AC，左部不都是超键，不是 BCNF；C 依赖于非主属性 B，不是 3NF；每个非主属性完全依赖于 AC，故为 2NF。</li>
+<li><strong>R4(ABCD)， F={AB→C,B→D}</strong><br>
+候选键：AB，可知不是 BCNF；每一个属性都不依赖于非主属性，故为 3NF。</li>
+<li><strong>R5(ABC)， F={A→BC,B→A,B→C}</strong><br>
+候选键：A、B；左部都是超键（包含 A、B），故为 BCNF。</li>
+<li><strong>R6(ABC)， F={A→B,B→C,C→A}</strong><br>
+候选键：A、B、C；左部都是超键（包含 A、B、C），故为 BCNF。</li>
+</ol>
+<p>📕做完了，<a href="https://music.163.com/" target="_blank">来一大碗宽面！🍜</a></p>
+
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2021-06-19 21:54</span>&nbsp;
+<a href="https://www.cnblogs.com/RioTian/">RioTian</a>&nbsp;
+阅读(<span id="post_view_count">0</span>)&nbsp;
+评论(<span id="post_comment_count">0</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14905074" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(14905074);return false;">收藏</a>&nbsp;
+<a href="javascript:void(0)" onclick="reportManager.report({ currentUserId: '', targetType: 'blogPost', targetId: '14905074', targetLink: 'https://www.cnblogs.com/RioTian/p/14905074.html', title: '【数据库】关系模式的范式的简明判断' })">举报</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/10.3.1/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 568589, cb_blogApp = 'RioTian', cb_blogUserGuid = '1879b1d0-0b82-43fc-9a4e-08d753a9a8fd';
+    var cb_entryId = 14905074, cb_entryCreatedDate = '2021-06-19 21:54', cb_postType = 1;
+    updatePostStats(
+        [cb_entryId],
+        function(id, count) { $("#post_view_count").text(count) },
+        function(id, count) { $("#post_comment_count").text(count) })
+    zoomManager.apply("#cnblogs_post_body img:not(.code_img_closed):not(.code_img_opened)");
+</script>
+<a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <div id="cnblogs_c1" class="under-post-card">
+        <div id='div-gpt-ad-1592365906576-0' style='width: 300px; height: 250px;'></div>
+    </div>
+    <div id="under_post_card1"></div>
+    <div id="cnblogs_c2" class="under-post-card">
+        <div id='div-gpt-ad-1592366332455-0' style='width: 468px; height: 60px;'></div>
+    </div>
+    <div id="under_post_card2"></div>
+    <div id="HistoryToday" class="under-post-card"></div>
+    <script type="text/javascript">
+       var commentManager = new blogCommentManager();
+       commentManager.renderComments(0);
+       fixPostBody();
+       deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);       deliverT2();
+       deliverC1C2();
+       loadNewsAndKb();
+       loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);       LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+       GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+       loadOptUnderPost();
+       GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+	<div id="sideBar">
+		<div id="sideBarMain">
+			<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+<div id="sidebar_c3"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2021 RioTian
+<br /><span id="poweredby">Powered by .NET 5.0 on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    <div id="page_end_html">
+        <!-- 生成博客目录的JS代码，两级目录 -->
+<script type="text/javascript">
+    /*  
+        这段代码按H2、H3格式生成两级菜单
+        写博客按H2、H3格式写，不然生成不了
+        Markdown写作按##、###两级目录写
+        当然你也可以改写代码成三级菜单
+    */
+    var BlogDirectory = {
+        /* 获取元素位置，距浏览器左边界的距离（left）和距浏览器上边界的距离（top）*/
+        getElementPosition: function (ele) {
+            var topPosition = 0;
+            var leftPosition = 0;
+            while (ele) {
+                topPosition += ele.offsetTop;
+                leftPosition += ele.offsetLeft;
+                ele = ele.offsetParent;
+            }
+            return {
+                top: topPosition,
+                left: leftPosition
+            };
+        },
+        /*获取滚动条当前位置 */
+        getScrollBarPosition: function () {
+            var scrollBarPosition = document.body.scrollTop || document.documentElement.scrollTop;
+            return scrollBarPosition;
+        },
+        /* 移动滚动条，finalPos 为目的位置，internal 为移动速度 */
+        moveScrollBar: function (finalpos, interval) {
+            //若不支持此方法，则退出
+            if (!window.scrollTo) {
+                return false;
+            }
+
+            //窗体滚动时，禁用鼠标滚轮
+            window.onmousewheel = function () {
+                return false;
+            };
+
+            //清除计时
+            if (document.body.movement) {
+                clearTimeout(document.body.movement);
+            }
+
+            //获取滚动条当前位置
+            var currentpos = BlogDirectory.getScrollBarPosition();
+
+            var dist = 0;
+            //到达预定位置，则解禁鼠标滚轮，并退出
+            if (currentpos == finalpos) {
+                window.onmousewheel = function () {
+                    return true;
+                }
+                return true;
+            }
+            //未到达，则计算下一步所要移动的距离
+            if (currentpos < finalpos) {
+                dist = Math.ceil((finalpos - currentpos) / 10);
+                currentpos += dist;
+            }
+            if (currentpos > finalpos) {
+                dist = Math.ceil((currentpos - finalpos) / 10);
+                currentpos -= dist;
+            }
+
+            var scrTop = BlogDirectory.getScrollBarPosition(); //获取滚动条当前位置
+            window.scrollTo(0, currentpos); //移动窗口
+            if (BlogDirectory.getScrollBarPosition() == scrTop) //若已到底部，则解禁鼠标滚轮，并退出
+            {
+                window.onmousewheel = function () {
+                    return true;
+                }
+                return true;
+            }
+
+            //进行下一步移动
+            var repeat = "BlogDirectory.moveScrollBar(" + finalpos + "," + interval + ")";
+            document.body.movement = setTimeout(repeat, interval);
+        },
+
+        htmlDecode: function (text) {
+            var temp = document.createElement("div");
+            temp.innerHTML = text;
+            var output = temp.innerText || temp.textContent;
+            temp = null;
+            return output;
+        },
+
+        /*
+        创建博客目录，id表示包含博文正文的 div 容器的 id，
+        mt 和 st 分别表示主标题和次级标题的标签名称（如 H2、H3，大写或小写都可以！），
+        interval 表示移动的速度
+        */
+        createBlogDirectory: function (id, mt, st, interval) {
+            //获取博文正文div容器
+            var elem = document.getElementById(id);
+            if (!elem) return false;
+            //获取div中所有元素结点
+            var nodes = elem.getElementsByTagName("*");
+            //创建博客目录的div容器
+            var divSideBar = document.createElement('DIV');
+            divSideBar.className = 'uprightsideBar';
+            divSideBar.setAttribute('id', 'uprightsideBar');
+
+            var divSideBarTab = document.createElement('DIV');
+            divSideBarTab.setAttribute('id', 'sideBarTab');
+
+            var p = document.createElement('p');
+            divSideBarTab.appendChild(p);
+            var txt = document.createTextNode('📖目录');
+            p.setAttribute('id', 'catalogHeadTitle');
+            p.appendChild(txt);
+
+            var divSideBarContents = document.createElement('DIV');
+            divSideBarContents.style.display = 'none';
+            divSideBarContents.setAttribute('id', 'sideBarContents');
+
+            divSideBar.appendChild(divSideBarTab);
+            divSideBar.appendChild(divSideBarContents);
+
+            //创建自定义列表
+            var dlist = document.createElement("dl");
+            divSideBarContents.appendChild(dlist);
+            var num = 0; //统计找到的mt和st
+            mt = mt.toUpperCase(); //转化成大写
+            st = st.toUpperCase(); //转化成大写
+            //遍历所有元素结点
+            for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].nodeName == mt || nodes[i].nodeName == st) {
+                    //获取标题文本
+                    var nodetext = nodes[i].innerHTML.replace(/<\/?[^>]+>/g,
+                        ""); //innerHTML里面的内容可能有HTML标签，所以用正则表达式去除HTML的标签
+                    // nodetext = nodetext.replace(/ /ig, "");//替换掉所有的空格
+                    nodetext = BlogDirectory.htmlDecode(nodetext);
+                    //插入锚
+                    nodes[i].setAttribute("id", "blogTitle" + num);
+                    var item;
+                    switch (nodes[i].nodeName) {
+                        case mt: //若为主标题
+                            item = document.createElement("dt");
+                            var itemtext = document.createTextNode(nodetext);
+                            break;
+                        case st: //若为子标题
+                            item = document.createElement("dd");
+                            var itemtext = document.createTextNode('• ' + nodetext);
+                            break;
+                    }
+
+                    //创建锚链接
+                    item.appendChild(itemtext);
+                    item.setAttribute("name", num);
+                    //添加鼠标点击触发函数
+                    item.onclick = function () {
+                        var pos = BlogDirectory.getElementPosition(document.getElementById("blogTitle" +
+                            this.getAttribute("name")));
+                        if (!BlogDirectory.moveScrollBar(pos.top, interval)) return false;
+                    };
+                    //将自定义表项加入自定义列表中
+                    dlist.appendChild(item);
+                    num++;
+                }
+            }
+
+            if (num == 0) return false;
+            // 如果是移动端，通过点击的方式来显示或隐藏目录
+            // 如果是PC端，通过鼠标聚焦的方式来显示或隐藏
+            if (isMobile()) {
+                divSideBarContents.style.borderRadius = '0px 6px 6px 6px';
+                divSideBar.onclick = function () {
+                    var status = divSideBarContents.style.display;
+                    if (status == 'block') {
+                        document.getElementById('catalogHeadTitle').innerText = '📖目录';
+                        divSideBarTab.style.borderRadius = '6px';
+                        divSideBarContents.style.display = 'none';
+                    } else if (status == 'none') {
+                        document.getElementById('catalogHeadTitle').innerText = '❎关闭';
+                        divSideBarTab.style.borderRadius = '6px 0px 0px 6px';
+                        divSideBarContents.style.display = 'block';
+                    }
+                }
+            } else {
+                /* 鼠标进入时的事件处理 */
+                divSideBarTab.onmouseenter = function () {
+                    divSideBarContents.style.display = 'block';
+                }
+                /* 鼠标离开时的事件处理 */
+                divSideBar.onmouseleave = function () {
+                    divSideBarContents.style.display = 'none';
+                }
+            }
+            document.body.appendChild(divSideBar);
+        }
+
+    };
+
+    // 判断浏览器函数
+    function isMobile() {
+        if (window.navigator.userAgent.match(
+                /(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
+            )) {
+            return true; // 移动端
+        } else {
+            return false; // PC端
+        }
+    }
+
+    window.onload = function () {
+        /* 页面加载完成之后生成博客目录 */
+        BlogDirectory.createBlogDirectory("cnblogs_post_body", "h2", "h3", 20);
+    }
+</script>
+
+<!-- 返回顶部功能-->
+<script type="text/javascript">
+    (function () {
+        var $backToTopTxt = "返回顶部",
+            $backToTopEle = $('<div class="backToTop"></div>').appendTo($("body"))
+            .text($backToTopTxt).attr("title", $backToTopTxt).click(function () {
+                $("html, body").animate({
+                    scrollTop: 0
+                }, 120);
+            }),
+            $backToTopFun = function () {
+                var st = $(document).scrollTop(),
+                    winh = $(window).height();
+                (st > 0) ? $backToTopEle.show(): $backToTopEle.hide();
+                //IE6下的定位
+                if (!window.XMLHttpRequest) {
+                    $backToTopEle.css("top", st + winh - 166);
+                }
+            };
+        $(window).bind("scroll", $backToTopFun);
+        $(function () {
+            $backToTopFun();
+        });
+    })();
+</script>
+
+
+    </div>
+
+    <input type="hidden" id="antiforgery_token" value="CfDJ8L-rpLgFVEJMgssCVvNUAjtdPK_Xzb5TTpMmpfTZwrLM-rlQil_n1H6aMry91QnznX1sTQoKg8G-M75mN5jfgUdFisfX8AGZ9PUb2Aov1RFF7wSoB3178f1ZmreWezqRXRdnKbiJTaI0NHJjm2K2YFM" />
+</body>
+</html>

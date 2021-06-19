@@ -1,0 +1,345 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin-when-crossorigin" />
+    <meta name="description" content="给定一个未排序的整数数组，找出其中没有出现的最小的正整数。 示例&amp;#160;1: 输入: [1,2,0]输出: 3示例&amp;#160;2: 输入: [3,4,-1,1]输出: 2示例&amp;#160;3: 输入" />
+    <meta property="og:description" content="给定一个未排序的整数数组，找出其中没有出现的最小的正整数。 示例&amp;#160;1: 输入: [1,2,0]输出: 3示例&amp;#160;2: 输入: [3,4,-1,1]输出: 2示例&amp;#160;3: 输入" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>leetcode之缺失的第一个正数 - 皇家救星 - 博客园</title>
+    <link id="favicon" rel="shortcut icon" href="//common.cnblogs.com/favicon.svg" type="image/svg+xml" />
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=6tvK5XC6GPbg3p_sy7wzz_2291HoYACr4440iKBzQIw" />
+    <link id="MainCss" rel="stylesheet" href="/skins/simpleblue/bundle-simpleblue.min.css?v=2hjghzSZyhYA1HxvSxKnXih3JbC120DBjeO9V9T_nSs" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/simpleblue/bundle-simpleblue-mobile.min.css?v=3tvwgOOqUo3RpS6gGzEdK0LbptOPv4Bx7M85_UAnFGs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/kingstarer/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/kingstarer/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/kingstarer/wlwmanifest.xml" />
+    <script>
+        var currentBlogId = 234136;
+        var currentBlogApp = 'kingstarer';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var isBlogOwner = false;
+        var skinName = 'SimpleBlue';
+        var visitorUserId = '';
+    </script>
+        <script>
+            var currentPostDateAdded = '2019-11-16 08:39';
+        </script>
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=ZUvfwhWs5fv-s8Nv7WofCOhwKAxiDO928zdWFzhnOPk"></script>
+    
+    
+    
+</head>
+<body class="has-navbar has-bannerbar">
+    <a name="top"></a>
+            <a target="_blank" href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:pc|pp:bokeyuan-huodong-21nianzhongdacu-neiyePCtonglanbanner|pu:21nianzhongdacu-neiyePCtonglanbanner|ci:21nzdc|kw:10224545" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-pc')">
+                <div class="bannerbar aliyun forpc" style="background-size: contain; filter: brightness(0.95); background-image: url(https://img2020.cnblogs.com/blog/35695/202106/35695-20210610183724605-1725070929.jpg)">
+                </div>
+            </a>
+            <div id="bannerbar" class="bannerbar-mobile formobile">
+            <a href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:mb|pp:bokeyuan-huodong-21nianzhongdacu-neiyeyidongduantonglanbanner|pu:21nianzhongdacu-neiyeyidongduantonglanbanner|ci:21nzdc|kw:10224547" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-mobile')">
+                <img src="https://img2020.cnblogs.com/blog/35695/202106/35695-20210610184806729-1738888164.jpg" alt="" />
+            </a>
+            </div>
+    <div id="top_nav" class="navbar forpc">
+        <nav id="nav_main" class="navbar-main">
+            <ul id="nav_left" class="navbar-list navbar-left">
+                <li class="navbar-branding"><a href="https://www.cnblogs.com/" title="开发者的网上家园"><img src="/images/logo.svg?v=R9M0WmLAIPVydmdzE2keuvnjl-bPR7_35oHqtiBzGsM" alt="博客园Logo" /></a></li>
+                <li><a href="/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-sitehome')">首页</a></li>
+                <li><a href="https://news.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-news')">新闻</a></li>
+                <li><a href="https://q.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-q')">博问</a></li>
+                <li><a id="nav_brandzone" href="https://brands.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-brands')">专区</a></li>
+                <li><a href="https://ing.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-ing')">闪存</a></li>
+                <li><a href="https://edu.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-edu')">班级</a></li>
+            </ul>
+            <ul id="nav_right" class="navbar-list navbar-right">
+                <li>
+                    <form id="zzk_search" class="navbar-search" action="https://zzk.cnblogs.com/s" method="get">
+                        <input name="w" id="zzk_search_input" placeholder="代码改变世界" type="text" tabindex="3" />
+                        <button type="submit" id="zzk_search_button">
+                            <img src="/images/aggsite/search.svg" alt="搜索" />
+                        </button>
+                    </form>
+                </li>
+                <li id="navbar_login_status" class="navbar-list">
+                    <a class="navbar-user-info navbar-blog" href="https://i.cnblogs.com/EditPosts.aspx?opt=1" alt="写随笔" title="写随笔">
+                        <img id="new_post_icon" class="navbar-icon" src="/images/aggsite/newpost.svg" alt="写随笔" />
+                    </a>
+                    <a id="navblog-myblog-icon" class="navbar-user-info navbar-blog" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx" alt="我的博客" title="我的博客">
+                        <img id="myblog_icon" class="navbar-icon" src="/images/aggsite/myblog.svg" alt="我的博客" />
+                    </a>
+                    <a class="navbar-user-info navbar-message navbar-icon-wrapper" href="https://msg.cnblogs.com/" alt="短消息" title="短消息">
+                        <img id="msg_icon" class="navbar-icon" src="/images/aggsite/message.svg?v=J0WS2P2iPgaIVgXxcAhliw4AFZIpaTWxtdoNAv9eiCA" alt="短消息" />
+                        <span id="msg_count" style="display: none"></span>
+                    </a>
+                    <div id="user_info" class="navbar-user-info dropdown">
+                        <a class="dropdown-button" href="https://home.cnblogs.com/">
+                            <img id="user_icon" class="navbar-avatar" src="/images/aggsite/avatar-default.svg" alt="用户头像" />
+                        </a>
+                        <div class="dropdown-menu">
+                            <a id="navblog-myblog-text" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx">我的博客</a>
+                            <a href="https://home.cnblogs.com/">我的园子</a>
+                            <a href="https://account.cnblogs.com/settings/account">账号设置</a>
+                            <a href="javascript:void(0)" id="navbar_lite_mode_toggle" title="简洁模式会使用简洁款皮肤显示所有博客">
+    简洁模式 <img id="navbar_lite_mode_on" src="/images/lite-mode-check.svg" class="hide" /><span id="navbar_lite_mode_spinner" class="hide">...</span>
+</a>
+                            <a href="javascript:void(0)" onclick="account.logout();">退出登录</a>
+                        </div>
+                    </div>
+                    <a class="navbar-anonymous" href="https://account.cnblogs.com/signup/">注册</a>
+                    <a class="navbar-anonymous" href="javascript:void(0);" onclick="account.login()">登录</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    
+    <div id="home">
+    <div id="header">
+        <div id="blogTitle">
+            <div class="title"><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/kingstarer/">皇家救星</a>
+</div>
+<div class="subtitle"></div>
+
+        </div>
+        <div id="navigator">
+            
+<ul id="navList">
+    <li id="nav_sitehome"><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+    <li id="nav_myhome">
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/kingstarer/">
+首页</a>
+</li>
+    <li id="nav_newpost">
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+    <li id="nav_contact">
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E7%9A%87%E5%AE%B6%E6%95%91%E6%98%9F">
+联系</a></li>
+    <li id="nav_rss">
+<a id="blog_nav_rss" class="menu" href="javascript:void(0)" data-rss="https://www.cnblogs.com/kingstarer/rss/">
+订阅</a></li>
+    <li id="nav_admin">
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+            <div class="blogStats">
+                <div id="blog_stats_place_holder"><script>loadBlogStats();</script></div>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div id="mainContent">
+            <div class="forFlow">
+                <div id="post_detail">
+    <div id="topics">
+        <div class="post">
+            <h1 class="postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2 vertical-middle" href="https://www.cnblogs.com/kingstarer/p/11870522.html">
+    <span>leetcode之缺失的第一个正数</span>
+    
+
+
+
+</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                <div id="cnblogs_post_body" class="blogpost-body blogpost-body-html">
+<p>给定一个未排序的整数数组，找出其中没有出现的最小的正整数。</p>
+<p><span style="background-color: rgba(136, 136, 136, 1)">示例&nbsp;1:</span></p>
+<p><span style="background-color: rgba(136, 136, 136, 1)">输入: [1,2,0]</span><br><span style="background-color: rgba(136, 136, 136, 1)">输出: 3</span><br><span style="background-color: rgba(136, 136, 136, 1)">示例&nbsp;2:</span></p>
+<p><span style="background-color: rgba(136, 136, 136, 1)">输入: [3,4,-1,1]</span><br><span style="background-color: rgba(136, 136, 136, 1)">输出: 2</span><br><span style="background-color: rgba(136, 136, 136, 1)">示例&nbsp;3:</span></p>
+<p><span style="background-color: rgba(136, 136, 136, 1)">输入: [7,8,9,11,12]</span><br><span style="background-color: rgba(136, 136, 136, 1)">输出: 1</span><br>说明:</p>
+<p><strong>你的算法的时间复杂度应为O(n)，并且只能使用常数级别的空间。</strong></p>
+<p>来源：力扣（LeetCode）<br>链接：https://leetcode-cn.com/problems/first-missing-positive<br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<div class="cnblogs_code">
+<pre><span style="color: rgba(0, 128, 128, 1)"> 1</span> <span style="color: rgba(0, 0, 255, 1)">class</span><span style="color: rgba(0, 0, 0, 1)"> Solution {
+</span><span style="color: rgba(0, 128, 128, 1)"> 2</span> <span style="color: rgba(0, 0, 255, 1)">public</span><span style="color: rgba(0, 0, 0, 1)">:
+</span><span style="color: rgba(0, 128, 128, 1)"> 3</span>     <span style="color: rgba(0, 0, 255, 1)">int</span> firstMissingPositive(vector&lt;<span style="color: rgba(0, 0, 255, 1)">int</span>&gt;&amp;<span style="color: rgba(0, 0, 0, 1)"> nums) {
+</span><span style="color: rgba(0, 128, 128, 1)"> 4</span>         <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">这是看了解答后的代码 满足题意 但速度没提高太多</span>
+<span style="color: rgba(0, 128, 128, 1)"> 5</span>         <span style="color: rgba(0, 0, 255, 1)">int</span> size =<span style="color: rgba(0, 0, 0, 1)"> nums.size();
+</span><span style="color: rgba(0, 128, 128, 1)"> 6</span> 
+<span style="color: rgba(0, 128, 128, 1)"> 7</span>         <span style="color: rgba(0, 0, 255, 1)">int</span> *<span style="color: rgba(0, 0, 0, 1)">numsHash;
+</span><span style="color: rgba(0, 128, 128, 1)"> 8</span>         <span style="color: rgba(0, 0, 255, 1)">int</span> size_hash = size +<span style="color: rgba(128, 0, 128, 1)">1</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)"> 9</span> 
+<span style="color: rgba(0, 128, 128, 1)">10</span>         <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">创建一个哈希表 初始化为0</span>
+<span style="color: rgba(0, 128, 128, 1)">11</span>         numsHash = <span style="color: rgba(0, 0, 255, 1)">new</span> <span style="color: rgba(0, 0, 255, 1)">int</span><span style="color: rgba(0, 0, 0, 1)">[size_hash]();
+</span><span style="color: rgba(0, 128, 128, 1)">12</span>         <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">遍历nums 对于小于数组长度的元素在哈希表中打个标记
+</span><span style="color: rgba(0, 128, 128, 1)">13</span>         <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">对于比数组长度大的数据可以忽略，因为第一个缺失的正数没这么大</span>
+<span style="color: rgba(0, 128, 128, 1)">14</span>         <span style="color: rgba(0, 0, 255, 1)">for</span> (<span style="color: rgba(0, 0, 255, 1)">int</span> i = <span style="color: rgba(128, 0, 128, 1)">0</span>; i &lt; size; ++<span style="color: rgba(0, 0, 0, 1)">i)
+</span><span style="color: rgba(0, 128, 128, 1)">15</span> <span style="color: rgba(0, 0, 0, 1)">        {
+</span><span style="color: rgba(0, 128, 128, 1)">16</span>             <span style="color: rgba(0, 0, 255, 1)">if</span> (nums[i] &gt; <span style="color: rgba(128, 0, 128, 1)">0</span> &amp;&amp; nums[i] &lt;<span style="color: rgba(0, 0, 0, 1)"> size_hash)
+</span><span style="color: rgba(0, 128, 128, 1)">17</span> <span style="color: rgba(0, 0, 0, 1)">            {
+</span><span style="color: rgba(0, 128, 128, 1)">18</span>                 numsHash[nums[i]] = <span style="color: rgba(128, 0, 128, 1)">1</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)">19</span> <span style="color: rgba(0, 0, 0, 1)">            }    
+</span><span style="color: rgba(0, 128, 128, 1)">20</span> <span style="color: rgba(0, 0, 0, 1)">        }
+</span><span style="color: rgba(0, 128, 128, 1)">21</span> 
+<span style="color: rgba(0, 128, 128, 1)">22</span>         <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">遍历哈希表 找出第一个没打标记的</span>
+<span style="color: rgba(0, 128, 128, 1)">23</span>         <span style="color: rgba(0, 0, 255, 1)">int</span> *end_pos = numsHash +<span style="color: rgba(0, 0, 0, 1)"> size_hash;
+</span><span style="color: rgba(0, 128, 128, 1)">24</span>         <span style="color: rgba(0, 0, 255, 1)">for</span> (<span style="color: rgba(0, 0, 255, 1)">int</span> *p = numsHash + <span style="color: rgba(128, 0, 128, 1)">1</span>; p != end_pos; ++<span style="color: rgba(0, 0, 0, 1)">p)
+</span><span style="color: rgba(0, 128, 128, 1)">25</span> <span style="color: rgba(0, 0, 0, 1)">        {
+</span><span style="color: rgba(0, 128, 128, 1)">26</span>             <span style="color: rgba(0, 0, 255, 1)">if</span> (*p == <span style="color: rgba(128, 0, 128, 1)">0</span><span style="color: rgba(0, 0, 0, 1)">)
+</span><span style="color: rgba(0, 128, 128, 1)">27</span> <span style="color: rgba(0, 0, 0, 1)">            {
+</span><span style="color: rgba(0, 128, 128, 1)">28</span>                 <span style="color: rgba(0, 0, 255, 1)">return</span> p -<span style="color: rgba(0, 0, 0, 1)"> numsHash;
+</span><span style="color: rgba(0, 128, 128, 1)">29</span> <span style="color: rgba(0, 0, 0, 1)">            }
+</span><span style="color: rgba(0, 128, 128, 1)">30</span> <span style="color: rgba(0, 0, 0, 1)">        }
+</span><span style="color: rgba(0, 128, 128, 1)">31</span> 
+<span style="color: rgba(0, 128, 128, 1)">32</span>         <span style="color: rgba(0, 0, 255, 1)">return</span><span style="color: rgba(0, 0, 0, 1)"> size_hash;
+</span><span style="color: rgba(0, 128, 128, 1)">33</span> <span style="color: rgba(0, 0, 0, 1)">    }
+</span><span style="color: rgba(0, 128, 128, 1)">34</span> 
+<span style="color: rgba(0, 128, 128, 1)">35</span>     <span style="color: rgba(0, 0, 255, 1)">int</span> firstMissingPositiveNew(vector&lt;<span style="color: rgba(0, 0, 255, 1)">int</span>&gt;&amp;<span style="color: rgba(0, 0, 0, 1)"> nums) {
+</span><span style="color: rgba(0, 128, 128, 1)">36</span> 
+<span style="color: rgba(0, 128, 128, 1)">37</span>         <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">这是我自己想的答案，不符合题目O(n)要求，但排名也挺高
+</span><span style="color: rgba(0, 128, 128, 1)">38</span>         <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">排序  然后找出第一个大于0的数字
+</span><span style="color: rgba(0, 128, 128, 1)">39</span>         <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">顺序查找下去，直到发现本元数比上一个元素大1就说明找到了</span>
+<span style="color: rgba(0, 128, 128, 1)">40</span> <span style="color: rgba(0, 0, 0, 1)">        sort(nums.begin(), nums.end());<br>　　　　　　 //从1开始找出第一个不在数组里面的正数  慢
+</span><span style="color: rgba(0, 128, 128, 1)">41</span>         <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">for (int i = 1; i &lt;= INT_MAX; ++i)
+</span><span style="color: rgba(0, 128, 128, 1)">42</span>         <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">{
+</span><span style="color: rgba(0, 128, 128, 1)">43</span>         <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">    if (!binary_search(nums.begin(), nums.end(), i))
+</span><span style="color: rgba(0, 128, 128, 1)">44</span>         <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">    {
+</span><span style="color: rgba(0, 128, 128, 1)">45</span>         <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">        return i;
+</span><span style="color: rgba(0, 128, 128, 1)">46</span>         <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">    }
+</span><span style="color: rgba(0, 128, 128, 1)">47</span>         <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">}</span>
+<span style="color: rgba(0, 128, 128, 1)">48</span> 
+<span style="color: rgba(0, 128, 128, 1)">49</span>         auto it = upper_bound(nums.begin(), nums.end(), <span style="color: rgba(128, 0, 128, 1)">0</span><span style="color: rgba(0, 0, 0, 1)">);
+</span><span style="color: rgba(0, 128, 128, 1)">50</span>     
+<span style="color: rgba(0, 128, 128, 1)">51</span>         <span style="color: rgba(0, 0, 255, 1)">if</span> (it == nums.end() || *it != <span style="color: rgba(128, 0, 128, 1)">1</span>) <span style="color: rgba(0, 0, 255, 1)">return</span> <span style="color: rgba(128, 0, 128, 1)">1</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)">52</span> 
+<span style="color: rgba(0, 128, 128, 1)">53</span>         <span style="color: rgba(0, 0, 255, 1)">for</span> (++it; it != nums.end(); ++<span style="color: rgba(0, 0, 0, 1)">it)
+</span><span style="color: rgba(0, 128, 128, 1)">54</span> <span style="color: rgba(0, 0, 0, 1)">        {
+</span><span style="color: rgba(0, 128, 128, 1)">55</span>             <span style="color: rgba(0, 0, 255, 1)">if</span> ((*it - *(it - <span style="color: rgba(128, 0, 128, 1)">1</span>)) &gt; <span style="color: rgba(128, 0, 128, 1)">1</span><span style="color: rgba(0, 0, 0, 1)">)
+</span><span style="color: rgba(0, 128, 128, 1)">56</span> <span style="color: rgba(0, 0, 0, 1)">            {
+</span><span style="color: rgba(0, 128, 128, 1)">57</span>                 <span style="color: rgba(0, 0, 255, 1)">return</span> *(it - <span style="color: rgba(128, 0, 128, 1)">1</span>) + <span style="color: rgba(128, 0, 128, 1)">1</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)">58</span> <span style="color: rgba(0, 0, 0, 1)">            }
+</span><span style="color: rgba(0, 128, 128, 1)">59</span> <span style="color: rgba(0, 0, 0, 1)">        }
+</span><span style="color: rgba(0, 128, 128, 1)">60</span> 
+<span style="color: rgba(0, 128, 128, 1)">61</span>         <span style="color: rgba(0, 0, 255, 1)">return</span> *(it - <span style="color: rgba(128, 0, 128, 1)">1</span>) + <span style="color: rgba(128, 0, 128, 1)">1</span><span style="color: rgba(0, 0, 0, 1)">;
+</span><span style="color: rgba(0, 128, 128, 1)">62</span> <span style="color: rgba(0, 0, 0, 1)">    }
+</span><span style="color: rgba(0, 128, 128, 1)">63</span> };</pre>
+</div>
+<div class="css-1tg8pov-Result e5i1odf2">执行结果：
+<div class="css-mzyely-SubmissionResult e5i1odf0">通过</div>
+<div class="css-1bdxkfz-DetailLink e5i1odf0">显示详情</div>
+</div>
+<div class="css-fap0zx-ResultInfo e5i1odf3">执行用时 :4 ms, 在所有&nbsp;cpp&nbsp;提交中击败了83.16%的用户</div>
+<div class="css-fap0zx-ResultInfo e5i1odf3">内存消耗 :8.7 MB, 在所有&nbsp;cpp&nbsp;提交中击败了73.72%的用户</div>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2019-11-16 08:39</span>&nbsp;
+<a href="https://www.cnblogs.com/kingstarer/">皇家救星</a>&nbsp;
+阅读(<span id="post_view_count">319</span>)&nbsp;
+评论(<span id="post_comment_count">0</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11870522" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(11870522);return false;">收藏</a>&nbsp;
+<a href="javascript:void(0)" onclick="reportManager.report({ currentUserId: '', targetType: 'blogPost', targetId: '11870522', targetLink: 'https://www.cnblogs.com/kingstarer/p/11870522.html', title: 'leetcode之缺失的第一个正数' })">举报</a></div>
+        </div>
+        <script src="https://common.cnblogs.com/highlight/10.3.1/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 234136, cb_blogApp = 'kingstarer', cb_blogUserGuid = '6c01f56e-ee22-e511-b908-9dcfd8948a71';
+    var cb_entryId = 11870522, cb_entryCreatedDate = '2019-11-16 08:39', cb_postType = 1;
+    updatePostStats(
+        [cb_entryId],
+        function(id, count) { $("#post_view_count").text(count) },
+        function(id, count) { $("#post_comment_count").text(count) })
+    zoomManager.apply("#cnblogs_post_body img:not(.code_img_closed):not(.code_img_opened)");
+</script>
+        <a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <div id="cnblogs_c1" class="under-post-card">
+        <div id='div-gpt-ad-1592365906576-0' style='width: 300px; height: 250px;'></div>
+    </div>
+    <div id="under_post_card1"></div>
+    <div id="cnblogs_c2" class="under-post-card">
+        <div id='div-gpt-ad-1592366332455-0' style='width: 468px; height: 60px;'></div>
+    </div>
+    <div id="under_post_card2"></div>
+    <div id="HistoryToday" class="under-post-card"></div>
+    <script type="text/javascript">
+       var commentManager = new blogCommentManager();
+       commentManager.renderComments(0);
+       fixPostBody();
+       deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);       deliverT2();
+       deliverC1C2();
+       loadNewsAndKb();
+       loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);       LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+       GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+       loadOptUnderPost();
+       GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+
+    </div>
+</div>
+            </div>
+        </div>
+
+        <div id="sideBar">
+            <div id="sideBarMain">
+                <div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+<div id="sidebar_c3"></div>
+                <div id="calendar"><div id="blog-calendar" style="display:none"></div></div>                
+                <script>loadBlogDefaultCalendar();</script>
+                <div id="leftcontentcontainer">
+                    <!-- begin:SingleColumn -->
+                    <div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+                    <!-- end:  SingleColumn -->
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div id="footer">
+        <!--done-->
+Copyright &copy; 2021 皇家救星
+<br /><span id="poweredby">Powered by .NET 5.0 on Kubernetes</span>
+
+    </div>
+</div>
+
+    
+
+    <input type="hidden" id="antiforgery_token" value="CfDJ8L-rpLgFVEJMgssCVvNUAjv81xK4MXSTkuo-hrrKVEZQ7TSlk2oM-Dk9DX2eEXCj3gJ9WFR1j4ObF5bWZfNVyTKNLLmG5HhyOLisP4Rba34GQzAfW6sgV2ZBtzyWFEVJZhCJp7MGHinaoNtsts0RyXQ" />
+</body>
+</html>

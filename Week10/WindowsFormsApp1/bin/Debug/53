@@ -1,0 +1,392 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin-when-crossorigin" />
+    <meta name="description" content="达梦存储过程的语法与oracle的高度相似，但有好多细节还是有差异。我在这次项目迁移中踩过不少小坑，在这里给大家分享一下。 说明一下，我用的版本是达梦8，迁移时碰到的问题有些我已经反馈给达梦的官方群管" />
+    <meta property="og:description" content="达梦存储过程的语法与oracle的高度相似，但有好多细节还是有差异。我在这次项目迁移中踩过不少小坑，在这里给大家分享一下。 说明一下，我用的版本是达梦8，迁移时碰到的问题有些我已经反馈给达梦的官方群管" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>oracle存储过程转达梦8存储过程时踩过的坑 - 皇家救星 - 博客园</title>
+    <link id="favicon" rel="shortcut icon" href="//common.cnblogs.com/favicon.svg" type="image/svg+xml" />
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=6tvK5XC6GPbg3p_sy7wzz_2291HoYACr4440iKBzQIw" />
+    <link id="MainCss" rel="stylesheet" href="/skins/simpleblue/bundle-simpleblue.min.css?v=2hjghzSZyhYA1HxvSxKnXih3JbC120DBjeO9V9T_nSs" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/simpleblue/bundle-simpleblue-mobile.min.css?v=3tvwgOOqUo3RpS6gGzEdK0LbptOPv4Bx7M85_UAnFGs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/kingstarer/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/kingstarer/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/kingstarer/wlwmanifest.xml" />
+    <script>
+        var currentBlogId = 234136;
+        var currentBlogApp = 'kingstarer';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var isBlogOwner = false;
+        var skinName = 'SimpleBlue';
+        var visitorUserId = '';
+    </script>
+        <script>
+            var currentPostDateAdded = '2020-07-26 02:31';
+        </script>
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=ZUvfwhWs5fv-s8Nv7WofCOhwKAxiDO928zdWFzhnOPk"></script>
+    
+    
+    
+</head>
+<body class="has-navbar has-bannerbar">
+    <a name="top"></a>
+            <a target="_blank" href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:pc|pp:bokeyuan-huodong-21nianzhongdacu-neiyePCtonglanbanner|pu:21nianzhongdacu-neiyePCtonglanbanner|ci:21nzdc|kw:10224545" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-pc')">
+                <div class="bannerbar aliyun forpc" style="background-size: contain; filter: brightness(0.95); background-image: url(https://img2020.cnblogs.com/blog/35695/202106/35695-20210610183724605-1725070929.jpg)">
+                </div>
+            </a>
+            <div id="bannerbar" class="bannerbar-mobile formobile">
+            <a href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:mb|pp:bokeyuan-huodong-21nianzhongdacu-neiyeyidongduantonglanbanner|pu:21nianzhongdacu-neiyeyidongduantonglanbanner|ci:21nzdc|kw:10224547" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-mobile')">
+                <img src="https://img2020.cnblogs.com/blog/35695/202106/35695-20210610184806729-1738888164.jpg" alt="" />
+            </a>
+            </div>
+    <div id="top_nav" class="navbar forpc">
+        <nav id="nav_main" class="navbar-main">
+            <ul id="nav_left" class="navbar-list navbar-left">
+                <li class="navbar-branding"><a href="https://www.cnblogs.com/" title="开发者的网上家园"><img src="/images/logo.svg?v=R9M0WmLAIPVydmdzE2keuvnjl-bPR7_35oHqtiBzGsM" alt="博客园Logo" /></a></li>
+                <li><a href="/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-sitehome')">首页</a></li>
+                <li><a href="https://news.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-news')">新闻</a></li>
+                <li><a href="https://q.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-q')">博问</a></li>
+                <li><a id="nav_brandzone" href="https://brands.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-brands')">专区</a></li>
+                <li><a href="https://ing.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-ing')">闪存</a></li>
+                <li><a href="https://edu.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-edu')">班级</a></li>
+            </ul>
+            <ul id="nav_right" class="navbar-list navbar-right">
+                <li>
+                    <form id="zzk_search" class="navbar-search" action="https://zzk.cnblogs.com/s" method="get">
+                        <input name="w" id="zzk_search_input" placeholder="代码改变世界" type="text" tabindex="3" />
+                        <button type="submit" id="zzk_search_button">
+                            <img src="/images/aggsite/search.svg" alt="搜索" />
+                        </button>
+                    </form>
+                </li>
+                <li id="navbar_login_status" class="navbar-list">
+                    <a class="navbar-user-info navbar-blog" href="https://i.cnblogs.com/EditPosts.aspx?opt=1" alt="写随笔" title="写随笔">
+                        <img id="new_post_icon" class="navbar-icon" src="/images/aggsite/newpost.svg" alt="写随笔" />
+                    </a>
+                    <a id="navblog-myblog-icon" class="navbar-user-info navbar-blog" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx" alt="我的博客" title="我的博客">
+                        <img id="myblog_icon" class="navbar-icon" src="/images/aggsite/myblog.svg" alt="我的博客" />
+                    </a>
+                    <a class="navbar-user-info navbar-message navbar-icon-wrapper" href="https://msg.cnblogs.com/" alt="短消息" title="短消息">
+                        <img id="msg_icon" class="navbar-icon" src="/images/aggsite/message.svg?v=J0WS2P2iPgaIVgXxcAhliw4AFZIpaTWxtdoNAv9eiCA" alt="短消息" />
+                        <span id="msg_count" style="display: none"></span>
+                    </a>
+                    <div id="user_info" class="navbar-user-info dropdown">
+                        <a class="dropdown-button" href="https://home.cnblogs.com/">
+                            <img id="user_icon" class="navbar-avatar" src="/images/aggsite/avatar-default.svg" alt="用户头像" />
+                        </a>
+                        <div class="dropdown-menu">
+                            <a id="navblog-myblog-text" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx">我的博客</a>
+                            <a href="https://home.cnblogs.com/">我的园子</a>
+                            <a href="https://account.cnblogs.com/settings/account">账号设置</a>
+                            <a href="javascript:void(0)" id="navbar_lite_mode_toggle" title="简洁模式会使用简洁款皮肤显示所有博客">
+    简洁模式 <img id="navbar_lite_mode_on" src="/images/lite-mode-check.svg" class="hide" /><span id="navbar_lite_mode_spinner" class="hide">...</span>
+</a>
+                            <a href="javascript:void(0)" onclick="account.logout();">退出登录</a>
+                        </div>
+                    </div>
+                    <a class="navbar-anonymous" href="https://account.cnblogs.com/signup/">注册</a>
+                    <a class="navbar-anonymous" href="javascript:void(0);" onclick="account.login()">登录</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    
+    <div id="home">
+    <div id="header">
+        <div id="blogTitle">
+            <div class="title"><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/kingstarer/">皇家救星</a>
+</div>
+<div class="subtitle"></div>
+
+        </div>
+        <div id="navigator">
+            
+<ul id="navList">
+    <li id="nav_sitehome"><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+    <li id="nav_myhome">
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/kingstarer/">
+首页</a>
+</li>
+    <li id="nav_newpost">
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+    <li id="nav_contact">
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E7%9A%87%E5%AE%B6%E6%95%91%E6%98%9F">
+联系</a></li>
+    <li id="nav_rss">
+<a id="blog_nav_rss" class="menu" href="javascript:void(0)" data-rss="https://www.cnblogs.com/kingstarer/rss/">
+订阅</a></li>
+    <li id="nav_admin">
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+            <div class="blogStats">
+                <div id="blog_stats_place_holder"><script>loadBlogStats();</script></div>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div id="mainContent">
+            <div class="forFlow">
+                <div id="post_detail">
+    <div id="topics">
+        <div class="post">
+            <h1 class="postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2 vertical-middle" href="https://www.cnblogs.com/kingstarer/p/13379053.html">
+    <span>oracle存储过程转达梦8存储过程时踩过的坑</span>
+    
+
+
+
+</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                <div id="cnblogs_post_body" class="blogpost-body cnblogs-markdown">
+<p>达梦存储过程的语法与oracle的高度相似，但有好多细节还是有差异。我在这次项目迁移中踩过不少小坑，在这里给大家分享一下。</p>
+<p>说明一下，我用的版本是达梦8，迁移时碰到的问题有些我已经反馈给达梦的官方群管理员，估计以后会有修复。</p>
+<h1 id="rpad问题">rpad问题</h1>
+<p>达梦的rpad函数，<strong>计算中文时永远是认为一个中文字符中两个字节</strong>，即使数据库设置的字符集是utf8（目前就发现rpad/lpad函数有这个问题，其它字符串函数都能正确识别，当字符集是utf8时能识别出来一个字符中3个字节）</p>
+<p>测试代码：</p>
+<pre><code class="language-sql">select rpad('我是hch', 6), lengthb('我是hch') from dual -- 达梦输出"我是hc 9"
+union all
+select rpad('我是hch', 5), length('我是hch') from dual -- 达梦输出"我是h 5" 
+union all
+select rpad('我是hch', 3), length('我是hch') from dual; -- 达梦输出"我 5"
+</code></pre>
+<p>这个问题达梦的工作人员说以后会修复，目前我的解决方法是自己写一个rpad函数</p>
+<pre><code class="language-sql"> function rpad_dm(string varchar2, padded_length number, pad_string varchar2 := ' ')
+    return varchar2 IS
+    v_len number := lengthb(string);
+  BEGIN
+  	    dbms_output.put_line('v_len - padded_length = ' );
+  	if padded_length &lt; v_len THEN
+  		return substrb(string, 1, padded_length); --如果输入长度小于原字符串长度，则调用substrb截断
+  	elsif padded_length = v_len THEN
+  		return string; --如果长度相等直接返回原串即可
+  	else
+  		return string || rpad(' ', padded_length - v_len, pad_string); --如果长度大于原字符串，则在后面补空格
+  	end if;
+  END;
+</code></pre>
+<h1 id="短路问题">短路问题</h1>
+<p>一般编程语言都会提供短路功能，在计算与或逻辑时，如果前半段逻辑已经能确定真假时，后半段逻辑不会执行。</p>
+<p>plsql里面也实现了短路功能，我们一般会利用这个特性减少一些代码，例如先判断变量是否为空，如果不为空再使用变量做运算：</p>
+<blockquote>
+<p>if (var is not null and va.exists('error') ) then dbms_output.put_line('yes');  fi;</p>
+</blockquote>
+<p>但在达梦的存储过程，短路却没有实现。上面的代码不管var是否为空，都会进行va.exists('error')这个逻辑。如果不幸var的变量是空的，就会导致运行异常。</p>
+<p>测试代码1：</p>
+<pre><code class="language-sql">dbms_output.enable;
+declare
+  v_flag boolean;
+begin
+  -- 请问这个存储过程执行异常，报"非法的参数数据"  是不是达梦的bug oracle下是可以正常运行的
+  -- 还是有什么设置可以让存储过程正常执行
+  if  (to_number('1') != 1) and to_number('abc') = 1 then
+    dbms_output.put_line('yes');
+  end if;
+  dbms_output.put_line('ok');
+end;
+</code></pre>
+<p>测试代码2：</p>
+<pre><code class="language-sql">dbms_output.enable;
+declare
+       TYPE TEST_RPT_LIST IS TABLE OF number INDEX BY PLS_INTEGER;
+       o_demo_list TEST_RPT_LIST;
+       i_report_id number := 17410491;
+BEGIN
+  -- 验证达梦8 if短路
+  select 1 BULK COLLECT INTO o_demo_list from dual;
+  dbms_output.put_line('o_demo_list(1) = ' || o_demo_list(1));
+
+
+  if o_demo_list(1) = 1 or o_demo_list(2) = 2 THEN -- or 短路没问题
+  	dbms_output.put_line('or yes'); -- or yes能正常输出
+  end if;
+
+  if o_demo_list(1) != 1 and o_demo_list(2) = 2 THEN -- o_demo_list(1) != 1 不成立  为什么还要执行o_demo_list(2) = 2判断
+    dbms_output.put_line('and yes'); -- 这里永远不应该输出
+  end if;
+
+  dbms_output.put_line('done'); -- 走不到done
+EXCEPTION
+  WHEN no_data_found THEN
+     dbms_output.put_line('no_data_found tbl_demo_tab ' || 'ID ' || to_char(i_report_id));
+  WHEN OTHERS THEN
+    -- RAISE;
+    dbms_output.put_line('err:' || sqlcode || sqlerrm);
+END;
+
+</code></pre>
+<p><strong>不只是if有短路问题，decode，case when等类似的都会有短路问题。</strong></p>
+<p>"case 判断 when 表达式1 else 表达式2 end" 在oracle是如果条件成立则执行条件1并返回其值，而在达梦是同时执行表达式1和表达式2，并根据判断结果返回一个值。</p>
+<p>解决方法是不要偷懒，不依赖短路实现，多写几个if判断，或者把decode拆成多个if else语句。</p>
+<h1 id="深浅拷贝问题">深浅拷贝问题</h1>
+<p><strong>oracle的table数组变量的赋值，默认是值复制（即深拷贝），而达梦默认是引用复制（即浅拷贝）。</strong></p>
+<p>也就是说在oracle使用 tmpArr := arr (tmpArr 和arr 都是数组)，然后对这个tmpArr操作，不会影响arr的值，而在达梦，修改tmpArr数组元素的内容就是在修改arr</p>
+<p>测试代码</p>
+<pre><code class="language-sql">        FOR vv IN 1 .. 5 -- crontab 初始化赋值
+        LOOP                
+                CASE vv
+                WHEN 1 THEN
+                        v_obj.minutes := tmpArr;
+                WHEN 2 THEN
+                        v_obj.hours := tmpArr;
+                WHEN 3 THEN
+                        v_obj.days := tmpArr;
+                WHEN 4 THEN
+                        v_obj.months := tmpArr;
+                WHEN 5 THEN
+                        v_obj.weeks := tmpArr;
+                END CASE;
+        END LOOP;
+</code></pre>
+<p>在oracle对v_obj这样赋值后，v_obj.minutes和v_obj.hours是两个不同的变量，分别对两个变量修改，相互之间不会出现干扰。而在达梦8，v_obj下面所有变量都指向同一个数组，<strong>对v_obj任意一个成员修改，都会同时影响其它成员的值。</strong></p>
+<p>解决方法是自己写一个数组拷贝函数，例如这样：</p>
+<pre><code class="language-sql">function copy1kList(v_input t_str_list) return t_str_list IS
+    v_tmplist t_str_list;
+    v_ind PLS_INTEGER;
+  begin
+    --TYPE t_str_list  IS TABLE OF VARCHAR2(1024) INDEX BY PLS_INTEGER;
+  	if v_input.count &gt; 0 then
+  		/*
+  		//在v_input里面的元素不连续时，这样会有bug
+  		for vv in v_input.first .. v_input.last LOOP
+  			v_tmplist(vv) := v_input(vv);
+  		end loop;
+  		*/
+  		v_ind = v_input.first;
+  		while v_ind is not null
+  		loop
+  			v_tmplist(v_ind) := v_input(v_ind);
+  			v_ind = v_input.next(v_ind);
+  		end loop;
+  	end if;
+  	return v_tmplist;
+  end;
+</code></pre>
+<p>使用这个函数代替数组变量赋值就能维持代码行为与oracle一致。</p>
+<p>今天暂时先分享这三个问题，后面有时间再整理其它坑。这些坑比较隐蔽，花了我不少时间调试才发现，我把它们总结出来，希望能对你有所帮助。</p>
+<p><img src="https://img2020.cnblogs.com/blog/781609/202007/781609-20200726023037074-459193679.png" alt="" loading="lazy"></p>
+
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-07-26 02:31</span>&nbsp;
+<a href="https://www.cnblogs.com/kingstarer/">皇家救星</a>&nbsp;
+阅读(<span id="post_view_count">811</span>)&nbsp;
+评论(<span id="post_comment_count">2</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=13379053" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(13379053);return false;">收藏</a>&nbsp;
+<a href="javascript:void(0)" onclick="reportManager.report({ currentUserId: '', targetType: 'blogPost', targetId: '13379053', targetLink: 'https://www.cnblogs.com/kingstarer/p/13379053.html', title: 'oracle存储过程转达梦8存储过程时踩过的坑' })">举报</a></div>
+        </div>
+        <script src="https://common.cnblogs.com/highlight/10.3.1/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 234136, cb_blogApp = 'kingstarer', cb_blogUserGuid = '6c01f56e-ee22-e511-b908-9dcfd8948a71';
+    var cb_entryId = 13379053, cb_entryCreatedDate = '2020-07-26 02:31', cb_postType = 1;
+    updatePostStats(
+        [cb_entryId],
+        function(id, count) { $("#post_view_count").text(count) },
+        function(id, count) { $("#post_comment_count").text(count) })
+    zoomManager.apply("#cnblogs_post_body img:not(.code_img_closed):not(.code_img_opened)");
+</script>
+        <a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <div id="cnblogs_c1" class="under-post-card">
+        <div id='div-gpt-ad-1592365906576-0' style='width: 300px; height: 250px;'></div>
+    </div>
+    <div id="under_post_card1"></div>
+    <div id="cnblogs_c2" class="under-post-card">
+        <div id='div-gpt-ad-1592366332455-0' style='width: 468px; height: 60px;'></div>
+    </div>
+    <div id="under_post_card2"></div>
+    <div id="HistoryToday" class="under-post-card"></div>
+    <script type="text/javascript">
+       var commentManager = new blogCommentManager();
+       commentManager.renderComments(0);
+       fixPostBody();
+       deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);       deliverT2();
+       deliverC1C2();
+       loadNewsAndKb();
+       loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);       LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+       GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+       loadOptUnderPost();
+       GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+
+    </div>
+</div>
+            </div>
+        </div>
+
+        <div id="sideBar">
+            <div id="sideBarMain">
+                <div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+<div id="sidebar_c3"></div>
+                <div id="calendar"><div id="blog-calendar" style="display:none"></div></div>                
+                <script>loadBlogDefaultCalendar();</script>
+                <div id="leftcontentcontainer">
+                    <!-- begin:SingleColumn -->
+                    <div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+                    <!-- end:  SingleColumn -->
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div id="footer">
+        <!--done-->
+Copyright &copy; 2021 皇家救星
+<br /><span id="poweredby">Powered by .NET 5.0 on Kubernetes</span>
+
+    </div>
+</div>
+
+    
+
+    <input type="hidden" id="antiforgery_token" value="CfDJ8L-rpLgFVEJMgssCVvNUAjtjCcrGpMhEftctYKbqXQh76zvXdWUSBoRlw37usVDLXWmlUIdN-GDB_n4IAWgDPw1e1ce6fTyLB3hMATszu6cceg0xxRblvDj_bF7wgpCElBEoHYW7mpq2Nm2PwUG_tqI" />
+</body>
+</html>

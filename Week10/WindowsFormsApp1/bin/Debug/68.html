@@ -1,0 +1,488 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin-when-crossorigin" />
+    <meta name="description" content="详细介绍了通过CGAL对复杂多边形进行三角剖分的过程。" />
+    <meta property="og:description" content="详细介绍了通过CGAL对复杂多边形进行三角剖分的过程。" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>复杂多边形的三角剖分 - charlee44 - 博客园</title>
+    <link id="favicon" rel="shortcut icon" href="//common.cnblogs.com/favicon.svg" type="image/svg+xml" />
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=6tvK5XC6GPbg3p_sy7wzz_2291HoYACr4440iKBzQIw" />
+    <link id="MainCss" rel="stylesheet" href="/skins/simplememory/bundle-simplememory.min.css?v=uknaX_hejnSu-njQgx4Hj1R0JiPLwUhFPUlwWNmWyB4" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/SimpleMemory/bundle-SimpleMemory-mobile.min.css" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/charlee44/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/charlee44/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/charlee44/wlwmanifest.xml" />
+    <script>
+        var currentBlogId = 296808;
+        var currentBlogApp = 'charlee44';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var isBlogOwner = false;
+        var skinName = 'SimpleMemory';
+        var visitorUserId = '';
+    </script>
+        <script>
+            var currentPostDateAdded = '2021-06-19 05:56';
+        </script>
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=ZUvfwhWs5fv-s8Nv7WofCOhwKAxiDO928zdWFzhnOPk"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML&amp;v=20200504"></script>
+    
+</head>
+<body class="has-navbar has-bannerbar">
+    <a name="top"></a>
+            <a target="_blank" href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:pc|pp:bokeyuan-huodong-21nianzhongdacu-neiyePCtonglanbanner|pu:21nianzhongdacu-neiyePCtonglanbanner|ci:21nzdc|kw:10224545" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-pc')">
+                <div class="bannerbar aliyun forpc" style="background-size: contain; filter: brightness(0.95); background-image: url(https://img2020.cnblogs.com/blog/35695/202106/35695-20210610183724605-1725070929.jpg)">
+                </div>
+            </a>
+            <div id="bannerbar" class="bannerbar-mobile formobile">
+            <a href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:mb|pp:bokeyuan-huodong-21nianzhongdacu-neiyeyidongduantonglanbanner|pu:21nianzhongdacu-neiyeyidongduantonglanbanner|ci:21nzdc|kw:10224547" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-mobile')">
+                <img src="https://img2020.cnblogs.com/blog/35695/202106/35695-20210610184806729-1738888164.jpg" alt="" />
+            </a>
+            </div>
+    <div id="top_nav" class="navbar forpc">
+        <nav id="nav_main" class="navbar-main">
+            <ul id="nav_left" class="navbar-list navbar-left">
+                <li class="navbar-branding"><a href="https://www.cnblogs.com/" title="开发者的网上家园"><img src="/images/logo.svg?v=R9M0WmLAIPVydmdzE2keuvnjl-bPR7_35oHqtiBzGsM" alt="博客园Logo" /></a></li>
+                <li><a href="/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-sitehome')">首页</a></li>
+                <li><a href="https://news.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-news')">新闻</a></li>
+                <li><a href="https://q.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-q')">博问</a></li>
+                <li><a id="nav_brandzone" href="https://brands.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-brands')">专区</a></li>
+                <li><a href="https://ing.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-ing')">闪存</a></li>
+                <li><a href="https://edu.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-edu')">班级</a></li>
+            </ul>
+            <ul id="nav_right" class="navbar-list navbar-right">
+                <li>
+                    <form id="zzk_search" class="navbar-search" action="https://zzk.cnblogs.com/s" method="get">
+                        <input name="w" id="zzk_search_input" placeholder="代码改变世界" type="text" tabindex="3" />
+                        <button type="submit" id="zzk_search_button">
+                            <img src="/images/aggsite/search.svg" alt="搜索" />
+                        </button>
+                    </form>
+                </li>
+                <li id="navbar_login_status" class="navbar-list">
+                    <a class="navbar-user-info navbar-blog" href="https://i.cnblogs.com/EditPosts.aspx?opt=1" alt="写随笔" title="写随笔">
+                        <img id="new_post_icon" class="navbar-icon" src="/images/aggsite/newpost.svg" alt="写随笔" />
+                    </a>
+                    <a id="navblog-myblog-icon" class="navbar-user-info navbar-blog" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx" alt="我的博客" title="我的博客">
+                        <img id="myblog_icon" class="navbar-icon" src="/images/aggsite/myblog.svg" alt="我的博客" />
+                    </a>
+                    <a class="navbar-user-info navbar-message navbar-icon-wrapper" href="https://msg.cnblogs.com/" alt="短消息" title="短消息">
+                        <img id="msg_icon" class="navbar-icon" src="/images/aggsite/message.svg?v=J0WS2P2iPgaIVgXxcAhliw4AFZIpaTWxtdoNAv9eiCA" alt="短消息" />
+                        <span id="msg_count" style="display: none"></span>
+                    </a>
+                    <div id="user_info" class="navbar-user-info dropdown">
+                        <a class="dropdown-button" href="https://home.cnblogs.com/">
+                            <img id="user_icon" class="navbar-avatar" src="/images/aggsite/avatar-default.svg" alt="用户头像" />
+                        </a>
+                        <div class="dropdown-menu">
+                            <a id="navblog-myblog-text" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx">我的博客</a>
+                            <a href="https://home.cnblogs.com/">我的园子</a>
+                            <a href="https://account.cnblogs.com/settings/account">账号设置</a>
+                            <a href="javascript:void(0)" id="navbar_lite_mode_toggle" title="简洁模式会使用简洁款皮肤显示所有博客">
+    简洁模式 <img id="navbar_lite_mode_on" src="/images/lite-mode-check.svg" class="hide" /><span id="navbar_lite_mode_spinner" class="hide">...</span>
+</a>
+                            <a href="javascript:void(0)" onclick="account.logout();">退出登录</a>
+                        </div>
+                    </div>
+                    <a class="navbar-anonymous" href="https://account.cnblogs.com/signup/">注册</a>
+                    <a class="navbar-anonymous" href="javascript:void(0);" onclick="account.login()">登录</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    
+    <!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/charlee44/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/charlee44/">人生海海 山山而川</a>
+</h1>
+<h2>分说，不分说，不由分说！</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/charlee44/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/charlee44">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="javascript:void(0)" data-rss="https://www.cnblogs.com/charlee44/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			<div id="blog_stats_place_holder"><script>loadBlogStats();</script></div>
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2 vertical-middle" href="https://www.cnblogs.com/charlee44/p/14903754.html">
+    <span>复杂多边形的三角剖分</span>
+    
+
+
+
+</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                    <div id="cnblogs_post_description" style="display: none">
+        详细介绍了通过CGAL对复杂多边形进行三角剖分的过程。
+    </div>
+<div id="cnblogs_post_body" class="blogpost-body cnblogs-markdown">
+<p></p><div class="toc"><div class="toc-container-header">目录</div><ul><li><a href="#1-概述">1. 概述</a><ul><li><a href="#11-多边形分类">1.1. 多边形分类</a></li><li><a href="#12-三角剖分">1.2. 三角剖分</a></li></ul></li><li><a href="#2-详论">2. 详论</a></li><li><a href="#3-参考">3. 参考</a></li></ul></div><p></p>
+<h1 id="1-概述">1. 概述</h1>
+<h2 id="11-多边形分类">1.1. 多边形分类</h2>
+<p>需要首先明确的是多边形的分类，第一种是最简单的凸多边形：</p>
+<p><img src="https://img2020.cnblogs.com/blog/1000410/202106/1000410-20210619175254135-790010821.jpg" alt="imglink1" loading="lazy"></p>
+<p>凸多边形的每个内角都是锐角或钝角，这种多边形最普通也最常见。如果至少存在一个角是优角(大于180度小于360度)，那么就是凹多边形了：</p>
+<p><img src="https://img2020.cnblogs.com/blog/1000410/202106/1000410-20210619175303723-1847258536.jpg" alt="imglink2" loading="lazy"></p>
+<p>以上多边形有一个共同特征就是由单个环线的边界组成。如果存在一个外环和多个内环组成多边形，那么就是带洞多变形了：</p>
+<p><img src="https://img2020.cnblogs.com/blog/1000410/202106/1000410-20210619175318360-2132770189.jpg" alt="imglink3" loading="lazy"></p>
+<p>如上图所示的多边形是由一个外环和两个内环组成的，两个内环造成了外环多边形的孔洞，也就是带洞多边形了。</p>
+<h2 id="12-三角剖分">1.2. 三角剖分</h2>
+<p>三角剖分也叫做三角化，或者分格化（tessellation/triangulation），将复杂的多边形剖分成多个三角形。这在图形学上有非常多的好处，便于绘制和计算。这类算法往往与Delaunay三角网算法相关，多边形的边界作为Delaunay三角网的边界约束，从而得到比较好的三角网。</p>
+<h1 id="2-详论">2. 详论</h1>
+<p>我曾经在<a href="https://www.cnblogs.com/charlee44/p/12513931.html" target="_blank">《通过CGAL将一个多边形剖分成Delaunay三角网》</a>这篇文章中，通过CGAL实现了一个多边形的剖分，不过这个文章介绍的算法内容不支持凹多边形和带洞多边形（这也是很多其他算法实现的问题）。所以我继续翻了CGAL的官方文档，在《2D Triangulation》这一章中确实介绍了带洞多边形的三角剖分的案例。由于带洞多边形最复杂，那么我通过这个案例，来实现一下带洞多边形的三角剖分。</p>
+<pre><code class="language-cpp">#include &lt;CGAL/Exact_predicates_inexact_constructions_kernel.h&gt;
+#include &lt;CGAL/Constrained_Delaunay_triangulation_2.h&gt;
+#include &lt;CGAL/Triangulation_face_base_with_info_2.h&gt;
+#include &lt;CGAL/Polygon_2.h&gt;
+#include &lt;iostream&gt;
+
+#include &lt;gdal_priv.h&gt;
+#include &lt;ogrsf_frmts.h&gt;
+
+struct FaceInfo2
+{
+	FaceInfo2() {}
+	int nesting_level;
+	bool in_domain() {
+		return nesting_level % 2 == 1;
+	}
+};
+
+typedef CGAL::Exact_predicates_inexact_constructions_kernel       K;
+typedef CGAL::Triangulation_vertex_base_2&lt;K&gt;                      Vb;
+typedef CGAL::Triangulation_face_base_with_info_2&lt;FaceInfo2, K&gt;    Fbb;
+typedef CGAL::Constrained_triangulation_face_base_2&lt;K, Fbb&gt;        Fb;
+typedef CGAL::Triangulation_data_structure_2&lt;Vb, Fb&gt;               TDS;
+typedef CGAL::Exact_predicates_tag                                Itag;
+typedef CGAL::Constrained_Delaunay_triangulation_2&lt;K, TDS, Itag&gt;  CDT;
+typedef CDT::Point                                                Point;
+typedef CGAL::Polygon_2&lt;K&gt;                                        Polygon_2;
+typedef CDT::Face_handle                                          Face_handle;
+
+void
+mark_domains(CDT&amp; ct,
+	Face_handle start,
+	int index,
+	std::list&lt;CDT::Edge&gt;&amp; border)
+{
+	if (start-&gt;info().nesting_level != -1) {
+		return;
+	}
+	std::list&lt;Face_handle&gt; queue;
+	queue.push_back(start);
+	while (!queue.empty()) {
+		Face_handle fh = queue.front();
+		queue.pop_front();
+		if (fh-&gt;info().nesting_level == -1) {
+			fh-&gt;info().nesting_level = index;
+			for (int i = 0; i &lt; 3; i++) {
+				CDT::Edge e(fh, i);
+				Face_handle n = fh-&gt;neighbor(i);
+				if (n-&gt;info().nesting_level == -1) {
+					if (ct.is_constrained(e)) border.push_back(e);
+					else queue.push_back(n);
+				}
+			}
+		}
+	}
+}
+//explore set of facets connected with non constrained edges,
+//and attribute to each such set a nesting level.
+//We start from facets incident to the infinite vertex, with a nesting
+//level of 0. Then we recursively consider the non-explored facets incident
+//to constrained edges bounding the former set and increase the nesting level by 1.
+//Facets in the domain are those with an odd nesting level.
+void
+mark_domains(CDT&amp; cdt)
+{
+	for (CDT::Face_handle f : cdt.all_face_handles()) {
+		f-&gt;info().nesting_level = -1;
+	}
+	std::list&lt;CDT::Edge&gt; border;
+	mark_domains(cdt, cdt.infinite_face(), 0, border);
+	while (!border.empty()) {
+		CDT::Edge e = border.front();
+		border.pop_front();
+		Face_handle n = e.first-&gt;neighbor(e.second);
+		if (n-&gt;info().nesting_level == -1) {
+			mark_domains(cdt, n, e.first-&gt;info().nesting_level + 1, border);
+		}
+	}
+}
+
+
+int main()
+{
+	//创建三个不相交的嵌套多边形
+	Polygon_2 polygon1;
+	polygon1.push_back(Point(-0.558868038740926, -0.38960351089588));
+	polygon1.push_back(Point(2.77833686440678, 5.37465950363197));
+	polygon1.push_back(Point(6.97052814769976, 8.07751967312349));
+	polygon1.push_back(Point(13.9207400121065, 5.65046156174335));
+	polygon1.push_back(Point(15.5755523607748,-1.98925544794189));
+	polygon1.push_back(Point(6.36376361985472, -6.18144673123487));	 
+
+	Polygon_2 polygon2;
+	polygon2.push_back(Point(2.17935556413387, 1.4555590039808));
+	polygon2.push_back(Point(3.75630057749723, 4.02942327866582));
+	polygon2.push_back(Point(5.58700685737883, 4.71820385921534));
+	polygon2.push_back(Point(6.54767450919789, 1.76369768475295));
+	polygon2.push_back(Point(5.71388749063795, -0.900795613688593));
+	polygon2.push_back(Point(3.21252643495814, -0.320769861646896));
+
+	Polygon_2 polygon3;
+	polygon3.push_back(Point(7.74397762278389, 0.821155837685192));
+	polygon3.push_back(Point(9.13966458863422, 4.24693293568146));
+	polygon3.push_back(Point(10.1909612642098, 1.83620090375816));
+	polygon3.push_back(Point(12.1485481773505, 4.84508449247446));
+	polygon3.push_back(Point(11.4416417920497, -2.29648257953892));
+	polygon3.push_back(Point(10.1547096547072, 0.712401009177374));
+
+	//将多边形插入受约束的三角剖分
+	CDT cdt;
+	cdt.insert_constraint(polygon1.vertices_begin(), polygon1.vertices_end(), true);
+	cdt.insert_constraint(polygon2.vertices_begin(), polygon2.vertices_end(), true);
+	cdt.insert_constraint(polygon3.vertices_begin(), polygon3.vertices_end(), true);
+
+	//标记由多边形界定的域内的面
+	mark_domains(cdt);
+	
+	//遍历所有的面
+	int count = 0;
+	for (Face_handle f : cdt.finite_face_handles())
+	{
+		if (f-&gt;info().in_domain()) ++count;
+	}
+	std::cout &lt;&lt; "There are " &lt;&lt; count &lt;&lt; " facets in the domain." &lt;&lt; std::endl;
+
+	//将结果输出成shp文件，方便查看
+	{
+		GDALAllRegister();
+
+		GDALDriver* driver = GetGDALDriverManager()-&gt;GetDriverByName("ESRI Shapefile");
+		if (!driver)
+		{
+			printf("Get Driver ESRI Shapefile Error！\n");
+			return false;
+		}
+
+		const char *filePath = "D:/test.shp";
+		GDALDataset* dataset = driver-&gt;Create(filePath, 0, 0, 0, GDT_Unknown, NULL);
+		OGRLayer* poLayer = dataset-&gt;CreateLayer("test", NULL, wkbPolygon, NULL);
+
+		//创建面要素
+		for (Face_handle f : cdt.finite_face_handles())
+		{
+			if (f-&gt;info().in_domain())
+			{
+				OGRFeature *poFeature = new OGRFeature(poLayer-&gt;GetLayerDefn());
+								
+				OGRLinearRing ogrring;
+				for (int i = 0; i &lt; 3; i++)
+				{			
+					ogrring.setPoint(i, f-&gt;vertex(i)-&gt;point().x(), f-&gt;vertex(i)-&gt;point().y());
+				}
+				ogrring.closeRings();
+
+				OGRPolygon polygon;
+				polygon.addRing(&amp;ogrring);
+				poFeature-&gt;SetGeometry(&amp;polygon);
+
+				if (poLayer-&gt;CreateFeature(poFeature) != OGRERR_NONE)
+				{
+					printf("Failed to create feature in shapefile.\n");
+					return false;
+				} 
+			}
+		}
+
+		//释放
+		GDALClose(dataset);
+		dataset = nullptr;
+	}
+
+	
+	return 0;
+}
+</code></pre>
+<p>在代码的最后，我将生成的三角网输出成shp文件，叠加到原来的多边形中：<br>
+<img src="https://img2020.cnblogs.com/blog/1000410/202106/1000410-20210619175327769-1422868727.jpg" alt="imglink4" loading="lazy"><br>
+效果似乎不是很明显，那么我将原来的两个内环范围涂黑：<br>
+<img src="https://img2020.cnblogs.com/blog/1000410/202106/1000410-20210619175338476-93647236.jpg" alt="imglink5" loading="lazy"></p>
+<p>说明这个算法可以适配于凹多边形以及带洞多边形的三角网剖分，不得不说CGAL这个库真的非常强大。可惜就是这个库太难以使用了，需要一定的计算几何知识和Cpp高级特性的知识，才能运用自如，值得深入学习。</p>
+<h1 id="3-参考">3. 参考</h1>
+<p><a href="https://doc.cgal.org/latest/Triangulation_2/index.html" target="_blank">CGAL 5.2.2 - 2D Triangulation</a></p>
+
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2021-06-19 17:56</span>&nbsp;
+<a href="https://www.cnblogs.com/charlee44/">charlee44</a>&nbsp;
+阅读(<span id="post_view_count">10</span>)&nbsp;
+评论(<span id="post_comment_count">0</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14903754" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(14903754);return false;">收藏</a>&nbsp;
+<a href="javascript:void(0)" onclick="reportManager.report({ currentUserId: '', targetType: 'blogPost', targetId: '14903754', targetLink: 'https://www.cnblogs.com/charlee44/p/14903754.html', title: '复杂多边形的三角剖分' })">举报</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/10.3.1/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 296808, cb_blogApp = 'charlee44', cb_blogUserGuid = '5374fc98-d354-e611-9fc1-ac853d9f53cc';
+    var cb_entryId = 14903754, cb_entryCreatedDate = '2021-06-19 17:56', cb_postType = 1;
+    updatePostStats(
+        [cb_entryId],
+        function(id, count) { $("#post_view_count").text(count) },
+        function(id, count) { $("#post_comment_count").text(count) })
+    zoomManager.apply("#cnblogs_post_body img:not(.code_img_closed):not(.code_img_opened)");
+</script>
+<a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <div id="cnblogs_c1" class="under-post-card">
+        <div id='div-gpt-ad-1592365906576-0' style='width: 300px; height: 250px;'></div>
+    </div>
+    <div id="under_post_card1"></div>
+    <div id="cnblogs_c2" class="under-post-card">
+        <div id='div-gpt-ad-1592366332455-0' style='width: 468px; height: 60px;'></div>
+    </div>
+    <div id="under_post_card2"></div>
+    <div id="HistoryToday" class="under-post-card"></div>
+    <script type="text/javascript">
+       var commentManager = new blogCommentManager();
+       commentManager.renderComments(0);
+       fixPostBody();
+       deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);       deliverT2();
+       deliverC1C2();
+       loadNewsAndKb();
+       loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);       LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+       GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+       loadOptUnderPost();
+       GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+	<div id="sideBar">
+		<div id="sideBarMain">
+			<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+<div id="sidebar_c3"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2021 charlee44
+<br /><span id="poweredby">Powered by .NET 5.0 on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+
+    <input type="hidden" id="antiforgery_token" value="CfDJ8L-rpLgFVEJMgssCVvNUAjsjSknumjusOJiMO9LScFi82I69RX9f0T57TUD6Zm2Zdn37gFUmdNQvWlV6w7eO1-d8Pr_lne1871EwzBC2S3UpcmC8i0V1m8o_ucHFI5vBNVK57Yd6RvjUIb62W9P-3Yo" />
+</body>
+</html>

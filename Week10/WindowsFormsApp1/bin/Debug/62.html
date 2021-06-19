@@ -1,0 +1,365 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin-when-crossorigin" />
+    <meta name="description" content="在ThoughtWorks经历过几个项目后，我从一个只会莽code的糙汉子变成了一个会写UT的糙汉子。写过UT，也写过集成测试，也实践过TDD，发现了一些有趣的地方，跟大家分享下。 一些基础的概念 作" />
+    <meta property="og:description" content="在ThoughtWorks经历过几个项目后，我从一个只会莽code的糙汉子变成了一个会写UT的糙汉子。写过UT，也写过集成测试，也实践过TDD，发现了一些有趣的地方，跟大家分享下。 一些基础的概念 作" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>摒弃无意义的单元测试 - 废土王大锤 - 博客园</title>
+    <link id="favicon" rel="shortcut icon" href="//common.cnblogs.com/favicon.svg" type="image/svg+xml" />
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=6tvK5XC6GPbg3p_sy7wzz_2291HoYACr4440iKBzQIw" />
+    <link id="MainCss" rel="stylesheet" href="/skins/coffee/bundle-coffee.min.css?v=BgguPR_JbmA1HKLJOLqLtHq5pt8a1UlO6ibCA_xgwdI" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/coffee/bundle-coffee-mobile.min.css?v=gcYNuAuJkNMICFERxhZCtKHGitYmBYNTxm9W97H2O2g" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/hallwong/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/hallwong/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/hallwong/wlwmanifest.xml" />
+    <script>
+        var currentBlogId = 435666;
+        var currentBlogApp = 'hallwong';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var isBlogOwner = false;
+        var skinName = 'coffee';
+        var visitorUserId = '';
+    </script>
+        <script>
+            var currentPostDateAdded = '2021-06-19 06:32';
+        </script>
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=ZUvfwhWs5fv-s8Nv7WofCOhwKAxiDO928zdWFzhnOPk"></script>
+    
+    
+    
+</head>
+<body class="has-navbar has-bannerbar">
+    <a name="top"></a>
+            <a target="_blank" href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:pc|pp:bokeyuan-huodong-21nianzhongdacu-neiyePCtonglanbanner|pu:21nianzhongdacu-neiyePCtonglanbanner|ci:21nzdc|kw:10224545" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-pc')">
+                <div class="bannerbar aliyun forpc" style="background-size: contain; filter: brightness(0.95); background-image: url(https://img2020.cnblogs.com/blog/35695/202106/35695-20210610183724605-1725070929.jpg)">
+                </div>
+            </a>
+            <div id="bannerbar" class="bannerbar-mobile formobile">
+            <a href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:mb|pp:bokeyuan-huodong-21nianzhongdacu-neiyeyidongduantonglanbanner|pu:21nianzhongdacu-neiyeyidongduantonglanbanner|ci:21nzdc|kw:10224547" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-mobile')">
+                <img src="https://img2020.cnblogs.com/blog/35695/202106/35695-20210610184806729-1738888164.jpg" alt="" />
+            </a>
+            </div>
+    <div id="top_nav" class="navbar forpc">
+        <nav id="nav_main" class="navbar-main">
+            <ul id="nav_left" class="navbar-list navbar-left">
+                <li class="navbar-branding"><a href="https://www.cnblogs.com/" title="开发者的网上家园"><img src="/images/logo.svg?v=R9M0WmLAIPVydmdzE2keuvnjl-bPR7_35oHqtiBzGsM" alt="博客园Logo" /></a></li>
+                <li><a href="/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-sitehome')">首页</a></li>
+                <li><a href="https://news.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-news')">新闻</a></li>
+                <li><a href="https://q.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-q')">博问</a></li>
+                <li><a id="nav_brandzone" href="https://brands.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-brands')">专区</a></li>
+                <li><a href="https://ing.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-ing')">闪存</a></li>
+                <li><a href="https://edu.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-edu')">班级</a></li>
+            </ul>
+            <ul id="nav_right" class="navbar-list navbar-right">
+                <li>
+                    <form id="zzk_search" class="navbar-search" action="https://zzk.cnblogs.com/s" method="get">
+                        <input name="w" id="zzk_search_input" placeholder="代码改变世界" type="text" tabindex="3" />
+                        <button type="submit" id="zzk_search_button">
+                            <img src="/images/aggsite/search.svg" alt="搜索" />
+                        </button>
+                    </form>
+                </li>
+                <li id="navbar_login_status" class="navbar-list">
+                    <a class="navbar-user-info navbar-blog" href="https://i.cnblogs.com/EditPosts.aspx?opt=1" alt="写随笔" title="写随笔">
+                        <img id="new_post_icon" class="navbar-icon" src="/images/aggsite/newpost.svg" alt="写随笔" />
+                    </a>
+                    <a id="navblog-myblog-icon" class="navbar-user-info navbar-blog" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx" alt="我的博客" title="我的博客">
+                        <img id="myblog_icon" class="navbar-icon" src="/images/aggsite/myblog.svg" alt="我的博客" />
+                    </a>
+                    <a class="navbar-user-info navbar-message navbar-icon-wrapper" href="https://msg.cnblogs.com/" alt="短消息" title="短消息">
+                        <img id="msg_icon" class="navbar-icon" src="/images/aggsite/message.svg?v=J0WS2P2iPgaIVgXxcAhliw4AFZIpaTWxtdoNAv9eiCA" alt="短消息" />
+                        <span id="msg_count" style="display: none"></span>
+                    </a>
+                    <div id="user_info" class="navbar-user-info dropdown">
+                        <a class="dropdown-button" href="https://home.cnblogs.com/">
+                            <img id="user_icon" class="navbar-avatar" src="/images/aggsite/avatar-default.svg" alt="用户头像" />
+                        </a>
+                        <div class="dropdown-menu">
+                            <a id="navblog-myblog-text" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx">我的博客</a>
+                            <a href="https://home.cnblogs.com/">我的园子</a>
+                            <a href="https://account.cnblogs.com/settings/account">账号设置</a>
+                            <a href="javascript:void(0)" id="navbar_lite_mode_toggle" title="简洁模式会使用简洁款皮肤显示所有博客">
+    简洁模式 <img id="navbar_lite_mode_on" src="/images/lite-mode-check.svg" class="hide" /><span id="navbar_lite_mode_spinner" class="hide">...</span>
+</a>
+                            <a href="javascript:void(0)" onclick="account.logout();">退出登录</a>
+                        </div>
+                    </div>
+                    <a class="navbar-anonymous" href="https://account.cnblogs.com/signup/">注册</a>
+                    <a class="navbar-anonymous" href="javascript:void(0);" onclick="account.login()">登录</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+	<a href="https://www.cnblogs.com/hallwong/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>			
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/hallwong/">废土王大锤</a>
+</h1>
+<h2></h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="navigator">
+			
+<ul id="navList">
+	<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+	<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/hallwong/">
+首页</a>
+</li>
+	<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+	<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E5%BA%9F%E5%9C%9F%E7%8E%8B%E5%A4%A7%E9%94%A4">
+联系</a></li>
+	<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+	<li>
+<a id="blog_nav_rss" class="menu" href="javascript:void(0)" data-rss="https://www.cnblogs.com/hallwong/rss/">
+订阅</a>
+	
+<a id="blog_nav_rss_image" href="https://www.cnblogs.com/hallwong/rss/">
+    <img src="/skins/coffee/images/xml.gif" alt="订阅" />
+</a></li>
+</ul>
+
+
+
+			<div class="blogStats">
+				
+				<div id="blog_stats_place_holder"><script>loadBlogStats();</script></div>
+				
+			</div><!--end: blogStats -->
+		</div><!--end: navigator 博客导航栏 -->
+		<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class="post">
+		<h1 class = "postTitle">
+			
+<a id="cb_post_title_url" class="postTitle2 vertical-middle" href="https://www.cnblogs.com/hallwong/p/14903869.html">
+    <span>摒弃无意义的单元测试</span>
+    
+
+
+
+</a>
+
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body" class="blogpost-body cnblogs-markdown">
+<p>在ThoughtWorks经历过几个项目后，我从一个只会莽code的糙汉子变成了一个会写UT的糙汉子。写过UT，也写过集成测试，也实践过TDD，发现了一些有趣的地方，跟大家分享下。</p>
+<h2 id="一些基础的概念">一些基础的概念</h2>
+<p>作为一个开发，我对测试理解偏向在开发人员编写的自动测试上。其中，最常见的是单元测试（UT）和集成测试（Integration Test），另外也有维护接口契约的契约测试等等。但在这篇博客里，主要讨论的是最常见的单元测试和集成测试。</p>
+<p><strong>单元测试</strong>，覆盖的范围比较小，只针对一个组件（比如类），测试的目标往往是这个组件的公开方法。测试方法往往使用的是<strong>白盒测试</strong>。对于这个组件所需要的依赖，可以通过测试框架来模拟（mock）。</p>
+<p><strong>集成测试</strong>，覆盖的范围比较大，会将系统内的多个组件，按照实际运行时组装，运行在测试框架内，测试这些组件集成后，是否能完成业务逻辑。测试的方法也更偏向使用<strong>黑盒测试</strong>。对于这些组件所需要的依赖或外部服务，可以通过测试框架来模拟，也可以编写专门的测试类，或者直接使用专门的服务（比如内存数据库）。</p>
+<h2 id="一些实践的发现">一些实践的发现</h2>
+<p>事情源自我对一次返工的思考。当时的项目，因为历史原因，只在项目中采用了单元测试，所以对于开发编写的SQL语句，是否可以在数据库中正确执行，是无法在只有单元测试的自动测试阶段中检验出来的。</p>
+<p>当时在准备Desk Check的我，望着全绿的测试报告陷入沉思：为什么还有漏网之鱼？！</p>
+<p>从这个例子可以看出，在应用服务的开发的过程中，我们无法避免我们的应用与外部服务（例如数据库、Web Service等）的交互。而对这些外部服务的交互，我们往往依赖于框架。我们可以mock框架里接口的输出，但是无法确保我们的输入是否正确。比如，开发编写的一条SQL，除非将其运行在真正的数据库服务中，否则我们无法保证这条SQL是否可以正确的运行，或者满足我们的业务需求。</p>
+<p>单元测试的局限性不仅仅这一点，AOP做为OOP的重要补充，广泛的应用在我们的开发过程中。针对AOP逻辑（比如参数校验、权限校验等）的测试，是无法通过单元测试完成的，因为AOP的代码在被测试代码之外。</p>
+<p>还有，单元测试往往使用白盒测试的方法，比如在Controller的单元测试中，会检查是否调用了某个Service的某个方法。但如果在重构中，这个Service的这方法的签名，或者返回值发生了变化，面对着测试中几十上百个编译错误，你是否突然觉得原来的代码也挺眉清目秀的？</p>
+<p>最后，我在重构的过程中，发现了很多方法中的部分分支，只会在单元测试中被调用，并没有在实际业务中运行过。也就是说，我辛辛苦苦看明白的一大段代码，<strong>没！卵！用！</strong>结果，只能在沧海桑田的感慨中，含泪删除。</p>
+<p>所以，从我经历过的例子中可以看出，如果仅仅依靠单元测试来保证应用服务的正确性，那么就会出现以下问题：</p>
+<ol>
+<li>对于外部系统的调用，无法保证相关接口输入的正确性；</li>
+<li>无法保证AOP功能的正确性；</li>
+<li>重构难度大，不适合敏捷实践；</li>
+<li>缺乏大局观，存在过度设计的可能；</li>
+</ol>
+<p>那么，在采用集成测试后，情况是否能得到好转呢？</p>
+<h2 id="集成测试的应用">集成测试的应用</h2>
+<p>一开始，我使用集成测试，只是为了检查编写的SQL是否可以正确的运行：将H2内存数据库集成到测试中，启动Spring容器，只加载Repository实例并运行。</p>
+<p>然后我就发现：我可以将连接着H2数据库的Repository实例注入到Service中，这样我就可以省去一些在ServiceTest中对于Repository的mock。</p>
+<p>接着，我又尝试将注入了真实Repository的Service注入到Controller中，也就是说几乎将应用服务完整的运行在测试容器中。那么我只需要拼接一个HTTP请求并传入，就可以从这个运行在测试容器的应用服务中得到HTTP响应。</p>
+<p>这时，我意识到：<strong>如果把应用服务看作一个大的组件，把它对外提供的RESTFul API看作组件的公开方法。那么我们更应该关注这些公开方法的输入输出，而不是其内部组件的实现。那么我们更应该mock的是应用服务所依赖的外部服务，而不是内部的私有方法。</strong></p>
+<p>如此看来，那些针对Controller、Service、Repository的单元测试，<strong>通通可以摒弃！</strong>只需要拼接一个HTTP请求，发送到运行在测试容器中的应用服务，校验返回值，检查内存数据库中数据的变更。这些测试用例，是可以参考QA小姐姐们的。依据TDD的理论指导，我们应该<strong>优先完成测试用例的编写，再去动手实现</strong>。</p>
+<p>那么再来看下之前单元测试遇到的四个问题：</p>
+<ol>
+<li>
+<blockquote>
+<p>对于外部系统的调用，无法保证正确性；</p>
+</blockquote>
+<p>对于数据库服务来说，在集成测试中，往往会引入H2内存数据库来模拟真实环境中的数据库服务。一般不是太特殊的SQL，都可以在H2内存数据库中运行。</p>
+<p>对于Web Service，我暂时还没有很好的解决方案。之前有过CXF的项目经历，在测试环境中，魔改了client，从测试文件中读取XML响应体。但这么做也无法确保我们应用的对外调用参数是否输入正确。</p>
+</li>
+<li>
+<blockquote>
+<p>无法保证AOP功能的正确性；</p>
+</blockquote>
+<p>在集成测试中，整个应用服务都已经运行起来，所有AOP都是正常工作的，通过调整请求中的参数和头信息，就可以触发AOP的拦截，进而检查AOP逻辑的正确性。</p>
+</li>
+<li>
+<blockquote>
+<p>重构难度大，不适合敏捷实践；</p>
+</blockquote>
+<p>在集成测试中，所有的测试用例只在应用服务的外部检查，并不依赖内部的实现，所以如果重构时，对外的接口没有变化，<strong>无需修改测试用例</strong>，只需要完成实现的重构即可。</p>
+</li>
+<li>
+<blockquote>
+<p>缺乏大局观，存在过度设计的可能；</p>
+</blockquote>
+<p>如果我们的测试用例完整的覆盖了业务需求，那么运行过这些测试用例后，还存在着没有行覆盖到的代码，那么这些代码就是过度设计的代码，可以考虑删除或者检查测试用例是否存在缺失。</p>
+</li>
+</ol>
+<h2 id="带来的挑战">带来的挑战</h2>
+<p>集成测试可以解决很多单元测试无法解决的问题，但也会带来新的挑战：</p>
+<ol>
+<li>
+<p>对于卡片，要拆分为前端卡与后端卡甚至更多的有着更多技术细节的子卡。在这些子卡中，BA需要清楚地认识到，想要达成业务需求，接口的格式应该是怎样，接口调用前后的数据变化。这些技术细节可以依赖团队里的TL或Sr Dev。</p>
+<p>这样的实践，有些传统开发中概要设计的味道。虽然很多情况下，我们不会将卡片拆至如此细的粒度，但是这么做，可以更早的意识到这张卡的依赖项，同时也可以方便QA，针对这个接口设计测试用例。</p>
+</li>
+<li>
+<p>由于集成测试中的测试用例可以完全来自QA，如果这些测试用例完全来自QA，可能需要QA摸索出一条新的工作节奏。如果这些测试用例完全来自开发，QA再独立写一套，那么可能会存在重复工作的现象。如果测试用例由开发编写，再由QA审核，这可能是个好实践，但我还没有尝试过。</p>
+</li>
+<li>
+<p>在后端技术栈中，我们会使用数据库版本管理工具来管理数据库版本。在Java的技术栈中，通常我们会使用Flyway。但Flyway的一个局限性是就是过度依赖SQL，这使得一些DDL可以运行在真实环境中数据库，但却无法运行在H2数据库。所以在这里，我推荐<a href="https://www.liquibase.org/" target="_blank">Liquibase</a>，这个框架会对数据库的更新做出自己的抽象，可以做到一个脚本运行在多种厂商的数据库，更适合集成测试的场景。</p>
+</li>
+<li>
+<p>由于集成测试要启动一个真实的容器，所以自动测试时间也会更长，构建时间也会更长，不过还是在可以接受的范围内。</p>
+</li>
+</ol>
+<h2 id="重申下适用范围">重申下适用范围</h2>
+<p>尽管我这篇博客的主题是呼吁大家摒弃无意义的单元测试，但这是建立在我们所经历的大部分工作，都是针对接口的开发。在这样的工作中，单元测试有着很大的局限性，而集成测试有着更好的匹配度。</p>
+<p>但如果你在开发一个类库，或者在DDD建模的早期，在这些场景中，单元测试才是更好的选择。</p>
+
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+		</div>
+		<div class="postDesc">posted @ 
+<span id="post-date">2021-06-19 18:32</span>&nbsp;
+<a href="https://www.cnblogs.com/hallwong/">废土王大锤</a>&nbsp;
+阅读(<span id="post_view_count">71</span>)&nbsp;
+评论(<span id="post_comment_count">0</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14903869" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(14903869);return false;">收藏</a>&nbsp;
+<a href="javascript:void(0)" onclick="reportManager.report({ currentUserId: '', targetType: 'blogPost', targetId: '14903869', targetLink: 'https://www.cnblogs.com/hallwong/p/14903869.html', title: '摒弃无意义的单元测试' })">举报</a></div>
+	</div>
+	
+	
+</div><!--end: topics 文章、评论容器-->
+<script src="https://common.cnblogs.com/highlight/10.3.1/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 435666, cb_blogApp = 'hallwong', cb_blogUserGuid = '3494732d-bb69-4a87-b33a-08d5c68e6275';
+    var cb_entryId = 14903869, cb_entryCreatedDate = '2021-06-19 18:32', cb_postType = 1;
+    updatePostStats(
+        [cb_entryId],
+        function(id, count) { $("#post_view_count").text(count) },
+        function(id, count) { $("#post_comment_count").text(count) })
+    zoomManager.apply("#cnblogs_post_body img:not(.code_img_closed):not(.code_img_opened)");
+</script>
+<a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <div id="cnblogs_c1" class="under-post-card">
+        <div id='div-gpt-ad-1592365906576-0' style='width: 300px; height: 250px;'></div>
+    </div>
+    <div id="under_post_card1"></div>
+    <div id="cnblogs_c2" class="under-post-card">
+        <div id='div-gpt-ad-1592366332455-0' style='width: 468px; height: 60px;'></div>
+    </div>
+    <div id="under_post_card2"></div>
+    <div id="HistoryToday" class="under-post-card"></div>
+    <script type="text/javascript">
+       var commentManager = new blogCommentManager();
+       commentManager.renderComments(0);
+       fixPostBody();
+       deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);       deliverT2();
+       deliverC1C2();
+       loadNewsAndKb();
+       loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);       LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+       GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+       loadOptUnderPost();
+       GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+
+</div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+<div id="sidebar_c3"></div>
+			<div id="calendar"><div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script></div>
+			
+			<DIV id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</DIV>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2021 废土王大锤
+<br /><span id="poweredby">Powered by .NET 5.0 on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+
+    <input type="hidden" id="antiforgery_token" value="CfDJ8L-rpLgFVEJMgssCVvNUAjtPcBz56TFWdgzRYwd7XcvqcZXBMdSQ8JMgzscakmTt9fAeinfK-D7PJ6DhKEtD0um9puQBrEd2N6NTEZRR3zROHdKujgBi1csbCVVLMQig1LKoRSvAx9C3dnOXcowWBXA" />
+</body>
+</html>

@@ -1,0 +1,493 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin-when-crossorigin" />
+    <meta name="description" content="核心观点：类型约定了对数据的解释方式 信息和数据 来自 wikipedia 的定义 https://en.wikipedia.org/wiki/Information https://en.wikip" />
+    <meta property="og:description" content="核心观点：类型约定了对数据的解释方式 信息和数据 来自 wikipedia 的定义 https://en.wikipedia.org/wiki/Information https://en.wikip" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>类型的本质：对变量、类型、指针的理解 - 机智的小小帅 - 博客园</title>
+    <link id="favicon" rel="shortcut icon" href="//common.cnblogs.com/favicon.svg" type="image/svg+xml" />
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=6tvK5XC6GPbg3p_sy7wzz_2291HoYACr4440iKBzQIw" />
+    <link id="MainCss" rel="stylesheet" href="/skins/darkgreentrip/bundle-darkgreentrip.min.css?v=eoZATbPKwJCL5eWVDTQIYC6CIxJPcFz191dkzN2tSyQ" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/XiaoXiaoShuai-/custom.css?v=Ph7bj3TQyXeqJ7AQFbNwZGCQY94=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/darkgreentrip/bundle-darkgreentrip-mobile.min.css?v=lU86o8mZVn3FOSdFt7nHKYTD8gzeKaiQIIZ6lSjEFyo" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/XiaoXiaoShuai-/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/XiaoXiaoShuai-/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/XiaoXiaoShuai-/wlwmanifest.xml" />
+    <script>
+        var currentBlogId = 490532;
+        var currentBlogApp = 'XiaoXiaoShuai-';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var isBlogOwner = false;
+        var skinName = 'darkgreentrip';
+        var visitorUserId = '';
+    </script>
+        <script>
+            var currentPostDateAdded = '2021-06-19 05:19';
+        </script>
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=ZUvfwhWs5fv-s8Nv7WofCOhwKAxiDO928zdWFzhnOPk"></script>
+    
+    
+    
+</head>
+<body class="no-navbar">
+    <a name="top"></a>
+            <div id="bannerbar" class="bannerbar-mobile formobile">
+            <a href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:mb|pp:bokeyuan-huodong-21nianzhongdacu-neiyeyidongduantonglanbanner|pu:21nianzhongdacu-neiyeyidongduantonglanbanner|ci:21nzdc|kw:10224547" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-mobile')">
+                <img src="https://img2020.cnblogs.com/blog/35695/202106/35695-20210610184806729-1738888164.jpg" alt="" />
+            </a>
+            </div>
+    <div id="top_nav" class="navbar forpc navbar-custom">
+        <nav id="nav_main" class="navbar-main">
+            <ul id="nav_left" class="navbar-list navbar-left">
+                <li class="navbar-branding"><a href="https://www.cnblogs.com/" title="开发者的网上家园"><img src="/images/logo.svg?v=R9M0WmLAIPVydmdzE2keuvnjl-bPR7_35oHqtiBzGsM" alt="博客园Logo" /></a></li>
+                <li><a href="/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-sitehome')">首页</a></li>
+                <li><a href="https://news.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-news')">新闻</a></li>
+                <li><a href="https://q.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-q')">博问</a></li>
+                <li><a id="nav_brandzone" href="https://brands.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-brands')">专区</a></li>
+                <li><a href="https://ing.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-ing')">闪存</a></li>
+                <li><a href="https://edu.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-edu')">班级</a></li>
+            </ul>
+            <ul id="nav_right" class="navbar-list navbar-right">
+                <li>
+                    <form id="zzk_search" class="navbar-search" action="https://zzk.cnblogs.com/s" method="get">
+                        <input name="w" id="zzk_search_input" placeholder="代码改变世界" type="text" tabindex="3" />
+                        <button type="submit" id="zzk_search_button">
+                            <img src="/images/aggsite/search.svg" alt="搜索" />
+                        </button>
+                    </form>
+                </li>
+                <li id="navbar_login_status" class="navbar-list">
+                    <a class="navbar-user-info navbar-blog" href="https://i.cnblogs.com/EditPosts.aspx?opt=1" alt="写随笔" title="写随笔">
+                        <img id="new_post_icon" class="navbar-icon" src="/images/aggsite/newpost.svg" alt="写随笔" />
+                    </a>
+                    <a id="navblog-myblog-icon" class="navbar-user-info navbar-blog" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx" alt="我的博客" title="我的博客">
+                        <img id="myblog_icon" class="navbar-icon" src="/images/aggsite/myblog.svg" alt="我的博客" />
+                    </a>
+                    <a class="navbar-user-info navbar-message navbar-icon-wrapper" href="https://msg.cnblogs.com/" alt="短消息" title="短消息">
+                        <img id="msg_icon" class="navbar-icon" src="/images/aggsite/message.svg?v=J0WS2P2iPgaIVgXxcAhliw4AFZIpaTWxtdoNAv9eiCA" alt="短消息" />
+                        <span id="msg_count" style="display: none"></span>
+                    </a>
+                    <div id="user_info" class="navbar-user-info dropdown">
+                        <a class="dropdown-button" href="https://home.cnblogs.com/">
+                            <img id="user_icon" class="navbar-avatar" src="/images/aggsite/avatar-default.svg" alt="用户头像" />
+                        </a>
+                        <div class="dropdown-menu">
+                            <a id="navblog-myblog-text" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx">我的博客</a>
+                            <a href="https://home.cnblogs.com/">我的园子</a>
+                            <a href="https://account.cnblogs.com/settings/account">账号设置</a>
+                            <a href="javascript:void(0)" id="navbar_lite_mode_toggle" title="简洁模式会使用简洁款皮肤显示所有博客">
+    简洁模式 <img id="navbar_lite_mode_on" src="/images/lite-mode-check.svg" class="hide" /><span id="navbar_lite_mode_spinner" class="hide">...</span>
+</a>
+                            <a href="javascript:void(0)" onclick="account.logout();">退出登录</a>
+                        </div>
+                    </div>
+                    <a class="navbar-anonymous" href="https://account.cnblogs.com/signup/">注册</a>
+                    <a class="navbar-anonymous" href="javascript:void(0);" onclick="account.login()">登录</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <div id="page_begin_html">
+        <script>loadPageBeginHtml();</script>
+    </div>
+    <!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/XiaoXiaoShuai-/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/XiaoXiaoShuai-/">机智的小小帅</a>
+</h1>
+<h2></h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/XiaoXiaoShuai-/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E6%9C%BA%E6%99%BA%E7%9A%84%E5%B0%8F%E5%B0%8F%E5%B8%85">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="javascript:void(0)" data-rss="https://www.cnblogs.com/XiaoXiaoShuai-/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			<div id="blog_stats_place_holder"><script>loadBlogStats();</script></div>
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2 vertical-middle" href="https://www.cnblogs.com/XiaoXiaoShuai-/p/14903578.html">
+    <span>类型的本质：对变量、类型、指针的理解</span>
+    
+
+
+
+</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                <div id="cnblogs_post_body" class="blogpost-body cnblogs-markdown">
+<h3 id="核心观点：类型约定了对数据的解释方式">核心观点：类型约定了对数据的解释方式</h3>
+<h3 id="信息和数据">信息和数据</h3>
+<p>来自 wikipedia 的定义</p>
+<blockquote>
+<p><a href="https://en.wikipedia.org/wiki/Information" target="_blank">https://en.wikipedia.org/wiki/Information</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Data" target="_blank">https://en.wikipedia.org/wiki/Data</a></p>
+</blockquote>
+<p>wikipedia 上的定义真的是太晦涩了</p>
+<p>在我的理解中，数据就是不带有任何属性的数字。例如一个数字1，就是一个单纯的数据。</p>
+<p>仅通过一个数字 1，你是无法得到任何信息的，因为你不知道这个1到底代表什么意思。只有结合具体的语境，你才能从中获得有用的信息。</p>
+<p>例如1本书、1个人、1头猪等等</p>
+<p>上面的书、人、猪实际上就是对数据的解释方式。他们分别将 1 解释为书的数量、人的数量、猪的数量。</p>
+<p>因此为了获取信息，除了知道数据本身外，你还得需要知道对数据的解释方式。</p>
+<p>所以，<strong><u>信息 = 数据 + 数据的解释方式</u></strong></p>
+<p>想一想谍战片子里面的电报机，电报机所发送的实际上是一些长短不一的摩尔斯电码，这些摩尔斯电码就是数据，外部人员不知道这些电码代表的是啥，但是专业的谍报人员对其翻译后，就可以从其中获取到有用的信息。这里的翻译实际上就是在对数据进行解释。翻译工作可能是依靠一个密码本来进行的，密码本上约定了数据的解释方式。</p>
+<h6 id="例子">例子</h6>
+<pre><code>l i v e
+</code></pre>
+<p>这四个字母，如果用从左至右的方式来解释，将是 live，如果用从右至左的方式来解释，将是 evil。</p>
+<pre><code>1 0 1 1
+</code></pre>
+<p>这四个数字，如果每两个一组进行解释，将会得到</p>
+<pre><code>10 11
+</code></pre>
+<p>如果每四个一组进行解释，将会得到</p>
+<pre><code>1011
+</code></pre>
+<p>同样的数据，使用不同的解释方式，就能得到不一样的信息。</p>
+<h3 id="类型约定了对数据的解释方式">类型约定了对数据的解释方式</h3>
+<p>c 语言中有如下一些基础数据类型，摘自https://www.runoob.com/cprogramming/c-data-types.html</p>
+<p><strong>整数类型</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left">类型</th>
+<th style="text-align: left">存储大小</th>
+<th style="text-align: left">值范围</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left">char</td>
+<td style="text-align: left">1 字节</td>
+<td style="text-align: left">-128 到 127 或 0 到 255</td>
+</tr>
+<tr>
+<td style="text-align: left">unsigned char</td>
+<td style="text-align: left">1 字节</td>
+<td style="text-align: left">0 到 255</td>
+</tr>
+<tr>
+<td style="text-align: left">signed char</td>
+<td style="text-align: left">1 字节</td>
+<td style="text-align: left">-128 到 127</td>
+</tr>
+<tr>
+<td style="text-align: left">int</td>
+<td style="text-align: left">2 或 4 字节</td>
+<td style="text-align: left">-32,768 到 32,767 或 -2,147,483,648 到 2,147,483,647</td>
+</tr>
+<tr>
+<td style="text-align: left">unsigned int</td>
+<td style="text-align: left">2 或 4 字节</td>
+<td style="text-align: left">0 到 65,535 或 0 到 4,294,967,295</td>
+</tr>
+<tr>
+<td style="text-align: left">short</td>
+<td style="text-align: left">2 字节</td>
+<td style="text-align: left">-32,768 到 32,767</td>
+</tr>
+<tr>
+<td style="text-align: left">unsigned short</td>
+<td style="text-align: left">2 字节</td>
+<td style="text-align: left">0 到 65,535</td>
+</tr>
+<tr>
+<td style="text-align: left">long</td>
+<td style="text-align: left">4 字节</td>
+<td style="text-align: left">-2,147,483,648 到 2,147,483,647</td>
+</tr>
+<tr>
+<td style="text-align: left">unsigned long</td>
+<td style="text-align: left">4 字节</td>
+<td style="text-align: left">0 到 4,294,967,295</td>
+</tr>
+</tbody>
+</table>
+<p><strong>浮点类型</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left">类型</th>
+<th style="text-align: left">存储大小</th>
+<th style="text-align: left">值范围</th>
+<th style="text-align: left">精度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left">float</td>
+<td style="text-align: left">4 字节</td>
+<td style="text-align: left">1.2E-38 到 3.4E+38</td>
+<td style="text-align: left">6 位小数</td>
+</tr>
+<tr>
+<td style="text-align: left">double</td>
+<td style="text-align: left">8 字节</td>
+<td style="text-align: left">2.3E-308 到 1.7E+308</td>
+<td style="text-align: left">15 位小数</td>
+</tr>
+<tr>
+<td style="text-align: left">long double</td>
+<td style="text-align: left">16 字节</td>
+<td style="text-align: left">3.4E-4932 到 1.1E+4932</td>
+<td style="text-align: left">19 位小数</td>
+</tr>
+</tbody>
+</table>
+<p>再回顾一下我的核心观点：<strong><u>类型约定了对数据的解释方式</u></strong></p>
+<p>在这里我就取 char 类型和 short 类型来解释。char 类型的大小是 1 字节，short 类型的大小是 2 字节。一字节 byte 等于 8 bit，一个 bit 就是一个二进制位，值为 0 或 1。实际上 char 约定了以 8 个 bit 为一组来解释，而 short 则约束了以 16 个 bit 为一组来解释。</p>
+<p>现在有一个 16 个 bit 大小的空间，空间里的内容为：</p>
+<pre><code>0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1
+</code></pre>
+<p>如果用 char （每 8 个 bit 为一组）来解释，则可以解释为两个 char，char0 = 00000000 = 0，char1 = 00000001 = 1。</p>
+<p>如果用 short （每 16 个 bit 为一组）来解释，则可以解释为 1 个 short，short0 = 0000000000000001 = 1。</p>
+<h3 id="变量variable--地址address--类型type">变量(variable) = 地址(address) + 类型(type)</h3>
+<p>一个变量由两个要素组成，分别是变量的地址，以及变量的类型。</p>
+<p>address 确定了存放变量的字面值的空间位置</p>
+<p>type 约定了如何解释这段空间</p>
+<p>在 c 语言中，初始化一个变量的方式是：</p>
+<pre><code class="language-c">char a = 1;
+</code></pre>
+<p>例如在这里，</p>
+<ul>
+<li>变量 a 的 address 是 &amp;a</li>
+<li>类型是 char，它决定了将会以 8 个 bit 为单位解释 address 中的内容</li>
+<li>a 的字面值是 1，字面值是通过 address 和 char 通过得到的</li>
+</ul>
+<p>在 address 处存放了数据本体，利用 type 来解释数据，最终得到字面值这个信息。</p>
+<h3 id="对变量的访问是通过访问该变量的地址来完成的">对变量的访问是通过访问该变量的地址来完成的</h3>
+<p>在 c 语言中，对于变量的访问实际上都是通过访问该变量的地址来完成的。但是只有地址还不够，如何解释这篇地址的内容，是以 8 个 bit 为单位亦或者是以 16 个 bit 为单位，这就需要用到类型了。</p>
+<p>变量在初始化时，会被分配一个地址。这个地址就是变量的家，变量的地址是不会发生改变的，它一辈子只会有一个家，不会搬家。</p>
+<h6 id="变量的初始化">变量的初始化</h6>
+<pre><code class="language-c">char c = 1;
+</code></pre>
+<p>在这行代码里，实际上会有如下两步操作：</p>
+<ol>
+<li>
+<p>为变量 c 分配一个空间，这个空间就是 c 的家，假设 c 住在地球一号村，二号楼0号房间吧，就用 0x120 来表示 c 的地址吧。</p>
+</li>
+<li>
+<p>将 0x120 ~ 0x128 这 8 个 bit 的空间里的内容初始化为 1（其实 c 里面地址的单位是 1 个 byte，而非 bit），变成下面这个样子：</p>
+<p><img src="https://img2020.cnblogs.com/blog/1525850/202106/1525850-20210619171748718-1745412902.png" alt="image" loading="lazy"></p>
+<p>为何是 8 个 bit 而不是其他数字的 bit？这是 c 的类型所决定的，因为类型是 char，所以是 8 个 bit。</p>
+</li>
+</ol>
+<h6 id="对-c-的修改">对 c 的修改</h6>
+<pre><code class="language-c">c = 2
+</code></pre>
+<p>实际上还是分为两步：</p>
+<ol>
+<li>
+<p>第一步还是先得到 c 的地址，之前说过变量的地址是不会发送改变的，因此这里变量 c 的地址也就是 0x120</p>
+</li>
+<li>
+<p>将 0x120 ~ 0x128 这 8 个 bit 的空间里的内容初始化为 2，变成了下面这样：</p>
+<p><img src="https://img2020.cnblogs.com/blog/1525850/202106/1525850-20210619171807712-1976137939.png" alt="image" loading="lazy"></p>
+</li>
+</ol>
+<h6 id="对-c-的访问">对 c 的访问</h6>
+<pre><code class="language-c">char i = c;
+</code></pre>
+<ol>
+<li>得到 c 的地址 0x120</li>
+<li>对 0x120 ~ 0x128 这 8 个 bit 大小的空间进行解释。类型约定了对数据的解释方式，而这里的类型是 char，所以用 8 个 bit 的方式来解释。</li>
+<li>对 i 的操作也是类似的...</li>
+</ol>
+<h3 id="指针">指针</h3>
+<p>指针变量本质和普通的变量没有太大区别，依旧由值和类型组成，同样也会被分配一个地址。</p>
+<p>但是它相比普通变量多了一个 <code>*</code> (dereference) 操作。dereference 是指针变量所特有的操作，普通的变量是无法进行 dereference 操作的，否则会发生编译错误。</p>
+<h6 id="定义一个指针变量">定义一个指针变量</h6>
+<pre><code class="language-c">char* p = 0x120;
+</code></pre>
+<p>p 的值是 0x120 ，p 的类型是 char* （指向 char 类型的指针）。</p>
+<pre><code>char* = char + *
+* 表明这个变量是一个指针，因此有 dereference 能力
+char 约定了在 dereference 时，它将会以 8 个 bit为 单位来解释
+</code></pre>
+<h6 id="deference">deference</h6>
+<p>通过 dereference ，可以对地址中的内容进行操作。</p>
+<pre><code class="language-c">*p = 1
+</code></pre>
+<p>这句代码将会把 0x120 ~ 0x128 这 8 个 bit 的空间里的内容置为 1。</p>
+<p><img src="https://img2020.cnblogs.com/blog/1525850/202106/1525850-20210619171633406-652998571.png" alt="image" loading="lazy"></p>
+<h6 id="对指针变量的修改">对指针变量的修改</h6>
+<pre><code class="language-c">p = 2
+</code></pre>
+<p>与上面所说的变量的修改过程是一样。</p>
+<h3 id="一些具体的例子">一些具体的例子</h3>
+<h6 id="基本原则">基本原则</h6>
+<ol>
+<li>变量 = address + type</li>
+<li>变量会被分配一个地址，且这个地址是固定的</li>
+<li>对变量的访问是通过访问变量的地址来完成的，变量的类型约定了对地址中内容的解释方式</li>
+</ol>
+<h6 id="例子1：通过指针来修改变量的值">例子1：通过指针来修改变量的值</h6>
+<pre><code class="language-c">char c = 1;			// 为 c 分配地址，假设 c 的地址是 0x120，c 的值是 1，0x120 ~ 0x128 这 8 个 bit 的内容是 1
+char* pc = &amp;c;		// pc 是一个指针，它的值是 c 的地址，则 pc 的值是 0x120
+*pc = 2;			// dereference 操作，将 0x120 ~ 0x128 这 8 个 bit 的内容设置为 2
+printf("%d",c);		// 取 0x120 ~ 0x128 这 8 个 bit 的内容进行解释，得到 2，因此输出 2
+</code></pre>
+<h6 id="例子2：指向指针的指针">例子2：指向指针的指针</h6>
+<pre><code class="language-c">char* pc = null;	// 为 pc 分配地址，假设 pc 的地址是 0x1200，pc 的值是 0，0x1200 ~ 0x1220 这 32 个 bit 的内容是 0（在 32 为环境下，指针的大小是 32 bit）
+char** ppc = &amp;pc;  // ppc 的值为 0x1200
+char c = 1;		   // 为 c 分配地址，假设 c 的地址是 0x120，c 的值是 1，0x120 ~ 0x128 这 8 个 bit 的内容是 1
+*ppc = &amp;c;		   // 将 0x1200 ~ 0x1220 这 32 个 bit(char*) 的内容设置为 0x120，此时 pc 的值为 0x120 了
+*pc = 2;		   // 取 0x120 ~ 0x128 这 8 个 bit(char) 的内容设置为 2, 此时 c 的值变成 2 了
+</code></pre>
+
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2021-06-19 17:19</span>&nbsp;
+<a href="https://www.cnblogs.com/XiaoXiaoShuai-/">机智的小小帅</a>&nbsp;
+阅读(<span id="post_view_count">12</span>)&nbsp;
+评论(<span id="post_comment_count">0</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14903578" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(14903578);return false;">收藏</a>&nbsp;
+<a href="javascript:void(0)" onclick="reportManager.report({ currentUserId: '', targetType: 'blogPost', targetId: '14903578', targetLink: 'https://www.cnblogs.com/XiaoXiaoShuai-/p/14903578.html', title: '类型的本质：对变量、类型、指针的理解' })">举报</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/10.3.1/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 490532, cb_blogApp = 'XiaoXiaoShuai-', cb_blogUserGuid = '3756375f-dd25-42ad-183e-08d63e099413';
+    var cb_entryId = 14903578, cb_entryCreatedDate = '2021-06-19 17:19', cb_postType = 1;
+    updatePostStats(
+        [cb_entryId],
+        function(id, count) { $("#post_view_count").text(count) },
+        function(id, count) { $("#post_comment_count").text(count) })
+    zoomManager.apply("#cnblogs_post_body img:not(.code_img_closed):not(.code_img_opened)");
+</script>
+<a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <div id="cnblogs_c1" class="under-post-card">
+        <div id='div-gpt-ad-1592365906576-0' style='width: 300px; height: 250px;'></div>
+    </div>
+    <div id="under_post_card1"></div>
+    <div id="cnblogs_c2" class="under-post-card">
+        <div id='div-gpt-ad-1592366332455-0' style='width: 468px; height: 60px;'></div>
+    </div>
+    <div id="under_post_card2"></div>
+    <div id="HistoryToday" class="under-post-card"></div>
+    <script type="text/javascript">
+       var commentManager = new blogCommentManager();
+       commentManager.renderComments(0);
+       fixPostBody();
+       deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);       deliverT2();
+       deliverC1C2();
+       loadNewsAndKb();
+       loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);       LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+       GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+       loadOptUnderPost();
+       GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+	<div id="sideBar">
+		<div id="sideBarMain">
+			<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+<div id="sidebar_c3"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2021 机智的小小帅
+<br /><span id="poweredby">Powered by .NET 5.0 on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+
+    <input type="hidden" id="antiforgery_token" value="CfDJ8L-rpLgFVEJMgssCVvNUAjvO4mELqtPl0tiJ98nIPKAgF6S04ASIbeYe_lJR3ZrpsYy3rAUHA7os-wNvY5egSGroUmo5ralH4HRu_osNvX64or3Ud7iwVw-Qc77Pid4OZ7AjS9Mr0uPqv7LQ0BIIBSM" />
+</body>
+</html>

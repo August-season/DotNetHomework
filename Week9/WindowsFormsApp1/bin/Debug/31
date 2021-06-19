@@ -1,0 +1,640 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin-when-crossorigin" />
+    <meta name="description" content="之前写过一篇文章总结了oracle存储过程转达梦8存储过程时踩过的坑（https://www.cnblogs.com/kingstarer/p/13379053.html） 当时里面只总结了3个大坑，" />
+    <meta property="og:description" content="之前写过一篇文章总结了oracle存储过程转达梦8存储过程时踩过的坑（https://www.cnblogs.com/kingstarer/p/13379053.html） 当时里面只总结了3个大坑，" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>oracle存储过程转达梦8存储过程时踩过的坑2（完结篇） - 皇家救星 - 博客园</title>
+    <link id="favicon" rel="shortcut icon" href="//common.cnblogs.com/favicon.svg" type="image/svg+xml" />
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=6tvK5XC6GPbg3p_sy7wzz_2291HoYACr4440iKBzQIw" />
+    <link id="MainCss" rel="stylesheet" href="/skins/simpleblue/bundle-simpleblue.min.css?v=2hjghzSZyhYA1HxvSxKnXih3JbC120DBjeO9V9T_nSs" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/simpleblue/bundle-simpleblue-mobile.min.css?v=3tvwgOOqUo3RpS6gGzEdK0LbptOPv4Bx7M85_UAnFGs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/kingstarer/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/kingstarer/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/kingstarer/wlwmanifest.xml" />
+    <script>
+        var currentBlogId = 234136;
+        var currentBlogApp = 'kingstarer';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var isBlogOwner = false;
+        var skinName = 'SimpleBlue';
+        var visitorUserId = '';
+    </script>
+        <script>
+            var currentPostDateAdded = '2020-12-10 11:10';
+        </script>
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=ZUvfwhWs5fv-s8Nv7WofCOhwKAxiDO928zdWFzhnOPk"></script>
+    
+    
+    
+</head>
+<body class="has-navbar has-bannerbar">
+    <a name="top"></a>
+            <a target="_blank" href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:pc|pp:bokeyuan-huodong-21nianzhongdacu-neiyePCtonglanbanner|pu:21nianzhongdacu-neiyePCtonglanbanner|ci:21nzdc|kw:10224545" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-pc')">
+                <div class="bannerbar aliyun forpc" style="background-size: contain; filter: brightness(0.95); background-image: url(https://img2020.cnblogs.com/blog/35695/202106/35695-20210610183724605-1725070929.jpg)">
+                </div>
+            </a>
+            <div id="bannerbar" class="bannerbar-mobile formobile">
+            <a href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:mb|pp:bokeyuan-huodong-21nianzhongdacu-neiyeyidongduantonglanbanner|pu:21nianzhongdacu-neiyeyidongduantonglanbanner|ci:21nzdc|kw:10224547" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-mobile')">
+                <img src="https://img2020.cnblogs.com/blog/35695/202106/35695-20210610184806729-1738888164.jpg" alt="" />
+            </a>
+            </div>
+    <div id="top_nav" class="navbar forpc">
+        <nav id="nav_main" class="navbar-main">
+            <ul id="nav_left" class="navbar-list navbar-left">
+                <li class="navbar-branding"><a href="https://www.cnblogs.com/" title="开发者的网上家园"><img src="/images/logo.svg?v=R9M0WmLAIPVydmdzE2keuvnjl-bPR7_35oHqtiBzGsM" alt="博客园Logo" /></a></li>
+                <li><a href="/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-sitehome')">首页</a></li>
+                <li><a href="https://news.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-news')">新闻</a></li>
+                <li><a href="https://q.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-q')">博问</a></li>
+                <li><a id="nav_brandzone" href="https://brands.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-brands')">专区</a></li>
+                <li><a href="https://ing.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-ing')">闪存</a></li>
+                <li><a href="https://edu.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-edu')">班级</a></li>
+            </ul>
+            <ul id="nav_right" class="navbar-list navbar-right">
+                <li>
+                    <form id="zzk_search" class="navbar-search" action="https://zzk.cnblogs.com/s" method="get">
+                        <input name="w" id="zzk_search_input" placeholder="代码改变世界" type="text" tabindex="3" />
+                        <button type="submit" id="zzk_search_button">
+                            <img src="/images/aggsite/search.svg" alt="搜索" />
+                        </button>
+                    </form>
+                </li>
+                <li id="navbar_login_status" class="navbar-list">
+                    <a class="navbar-user-info navbar-blog" href="https://i.cnblogs.com/EditPosts.aspx?opt=1" alt="写随笔" title="写随笔">
+                        <img id="new_post_icon" class="navbar-icon" src="/images/aggsite/newpost.svg" alt="写随笔" />
+                    </a>
+                    <a id="navblog-myblog-icon" class="navbar-user-info navbar-blog" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx" alt="我的博客" title="我的博客">
+                        <img id="myblog_icon" class="navbar-icon" src="/images/aggsite/myblog.svg" alt="我的博客" />
+                    </a>
+                    <a class="navbar-user-info navbar-message navbar-icon-wrapper" href="https://msg.cnblogs.com/" alt="短消息" title="短消息">
+                        <img id="msg_icon" class="navbar-icon" src="/images/aggsite/message.svg?v=J0WS2P2iPgaIVgXxcAhliw4AFZIpaTWxtdoNAv9eiCA" alt="短消息" />
+                        <span id="msg_count" style="display: none"></span>
+                    </a>
+                    <div id="user_info" class="navbar-user-info dropdown">
+                        <a class="dropdown-button" href="https://home.cnblogs.com/">
+                            <img id="user_icon" class="navbar-avatar" src="/images/aggsite/avatar-default.svg" alt="用户头像" />
+                        </a>
+                        <div class="dropdown-menu">
+                            <a id="navblog-myblog-text" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx">我的博客</a>
+                            <a href="https://home.cnblogs.com/">我的园子</a>
+                            <a href="https://account.cnblogs.com/settings/account">账号设置</a>
+                            <a href="javascript:void(0)" id="navbar_lite_mode_toggle" title="简洁模式会使用简洁款皮肤显示所有博客">
+    简洁模式 <img id="navbar_lite_mode_on" src="/images/lite-mode-check.svg" class="hide" /><span id="navbar_lite_mode_spinner" class="hide">...</span>
+</a>
+                            <a href="javascript:void(0)" onclick="account.logout();">退出登录</a>
+                        </div>
+                    </div>
+                    <a class="navbar-anonymous" href="https://account.cnblogs.com/signup/">注册</a>
+                    <a class="navbar-anonymous" href="javascript:void(0);" onclick="account.login()">登录</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    
+    <div id="home">
+    <div id="header">
+        <div id="blogTitle">
+            <div class="title"><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/kingstarer/">皇家救星</a>
+</div>
+<div class="subtitle"></div>
+
+        </div>
+        <div id="navigator">
+            
+<ul id="navList">
+    <li id="nav_sitehome"><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+    <li id="nav_myhome">
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/kingstarer/">
+首页</a>
+</li>
+    <li id="nav_newpost">
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+    <li id="nav_contact">
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E7%9A%87%E5%AE%B6%E6%95%91%E6%98%9F">
+联系</a></li>
+    <li id="nav_rss">
+<a id="blog_nav_rss" class="menu" href="javascript:void(0)" data-rss="https://www.cnblogs.com/kingstarer/rss/">
+订阅</a></li>
+    <li id="nav_admin">
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+            <div class="blogStats">
+                <div id="blog_stats_place_holder"><script>loadBlogStats();</script></div>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div id="mainContent">
+            <div class="forFlow">
+                <div id="post_detail">
+    <div id="topics">
+        <div class="post">
+            <h1 class="postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2 vertical-middle" href="https://www.cnblogs.com/kingstarer/p/14113209.html">
+    <span>oracle存储过程转达梦8存储过程时踩过的坑2（完结篇）</span>
+    
+
+
+
+</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                <div id="cnblogs_post_body" class="blogpost-body cnblogs-markdown">
+<p>之前写过一篇文章总结了oracle存储过程转达梦8存储过程时踩过的坑（<a href="https://www.cnblogs.com/kingstarer/p/13379053.html%EF%BC%89" target="_blank">https://www.cnblogs.com/kingstarer/p/13379053.html）</a></p>
+<p>当时里面只总结了3个大坑，实际上我还碰到过不少小坑</p>
+<p>因为这段时间，我们项目组决定使用java重写旧系统，放弃了原来使用存储过程那一套，所以最近就一直没再去整理之前的小坑。</p>
+<p>今天正好记起来这事，就花点时间整理一下。虽然我已经不用到这些经验了，但希望对其他人有帮助。</p>
+<p>（用java写逻辑比用存储过程方便好多，建议大家还是尽量放弃存储过程吧）</p>
+<h1 id="时区问题">时区问题</h1>
+<p>达梦8安装后默认的时区，不是操作系统的时区，而是0时区。这会导致sysdate返回时间有误，需要修改/etc/dm_svc.conf文件，在文件中添加TIME_ZONE=(480)才正常，如下：</p>
+<blockquote>
+<p>[root@ecs-htgx-0003 etc]# vi /etc/dm_svc.conf<br>
+# 以#开头的行表示是注释<br>
+# 全局配置区 dm_svc.conf<br>
+TIME_ZONE=(480)<br>
+LANGUAGE=(cn)</p>
+<p>DMHTGX=（192.168.0.137:5236)</p>
+<p># 服务配置区<br>
+[DMHTGX]<br>
+LOGIN_MODE=(2)</p>
+</blockquote>
+<h1 id="regexp_replace">regexp_replace</h1>
+<p>达梦的正则匹配有问题，我踩的一个坑是这个：</p>
+<hr>
+<p>select regexp_replace('CC4.city', '([(+-*/|&gt;&lt;=,]|^)(.+)', '\2', 1, 1, 'i') from dual;</p>
+<p>这个语句执行结果oracle跟达梦不一样</p>
+<hr>
+<p>select regexp_replace('CC4.city', '([+-*]|^)(.+)', '\2', 1, 1, 'i') from dual; --输出 C4.city<br>
+--把+和-调换位置  oracle输出结果是一样的，但达梦却是不一样<br>
+select regexp_replace('CC4.city', '([-+*]|^)(.+)', '\2', 1, 1, 'i') from dual; --输出 CC4.city</p>
+<hr>
+<p><strong>仔细分析一下，是因为达梦把[]里面的+号字符，认为是正则表达式的元字符+（匹配前面的子表达式一次或多次）</strong></p>
+<h1 id="级联删除问题">级联删除问题</h1>
+<p>oracle用户迁移到达梦数据库后，发现多了好多触发器。仔细看了一下代码，应该是实现外键case delete的。估计是达梦不支持外键级联删除，在迁移时自动把这些级联删除改成触发器。</p>
+<p>不过改成触发器后，就无法实现oracle的延迟约束功能了（alter session set constraints=deferred）</p>
+<p>这个问题无解</p>
+<h1 id="bulk-collect问题">BULK COLLECT问题</h1>
+<p>使用BULK COLLECT的查询语句，查不到记录时行为不同：oracle的BULK COLLECT查询默认是不会抛出no_data_found异常的，而达梦会。</p>
+<p>解决方法是捕获no_data_found异常后做忽略处理。</p>
+<h1 id="dbms_sql包问题">DBMS_SQL包问题</h1>
+<p>DBMS_SQL有bug呀，获取出来的col_max_len是0，例子如下：</p>
+<pre><code class="language-sql"> create table mydual as
+ select * from dual;
+
+ declare
+  v_col_cnt           NUMBER;
+  v_cursorid          NUMBER;
+  v_desc_t            DBMS_SQL.desc_tab2;
+ begin
+ 	dbms_output.enable;
+  	v_cursorid := DBMS_SQL.open_cursor;
+ 	DBMS_SQL.parse(v_cursorid, 'select ''123'' c1, DUMMY c2 from mydual', dbms_sql.native);
+    DBMS_SQL.describe_columns(v_cursorid, v_col_cnt, v_desc_t);
+    FOR i IN 1..v_col_cnt LOOP
+		dbms_output.put_line('i ' || i || ' name = ' || v_desc_t(i).col_name || 
+			' col_max_len = ' || v_desc_t(i).col_max_len);
+	END LOOP;
+ end;
+</code></pre>
+<p><strong>DBMS_SQL这个包还有其它好多bug</strong>，具体我没记下来，大家使用小心点了。</p>
+<h1 id="prior和next问题">prior和next问题</h1>
+<p>当下标值在容器中找不到时，达梦无法正确获取prior和next，验证的存储过程如下：</p>
+<pre><code class="language-sql">declare
+    type v_mp_type is table of number index by PLS_INTEGER;
+    v_mp v_mp_type;
+begin
+    dbms_output.enable;
+	v_mp(1) := 1;
+	v_mp(3) := 2;
+	-- oracle输出1 达梦输出空
+	dbms_output.put_line('v_mp.prior(2) = ' || v_mp.prior(2));
+end;
+</code></pre>
+<p>解决方法是自己写prior和next函数：</p>
+<pre><code class="language-sql">-- 需要写函数代替oracle的prior和next
+function get_prior_index(v_mp IN v_mp_type, v_ind IN PLS_INTEGER) return PLS_INTEGER
+is 
+    v_vv_last PLS_INTEGER := null;
+	vv PLS_INTEGER := v_mp.first;
+begin
+	-- 遍历v_mp 做比较 
+	while vv is not null
+	loop
+		-- 如果发现某个下标值比传进来的v_ind大或者相等 则返回上一个下标值
+		-- (如果是第一个下标则返回NULL)
+	    if (vv &gt;= v_ind) then return v_vv_last; end if;
+	    v_vv_last := vv;
+		vv := v_mp.next(vv);
+	end loop;
+	
+
+	-- 如果遍历完所有下标，仍未找到大于等于v_ind的值，则返回最大的下标v_mp.last
+	return v_vv_last;
+
+end;
+
+function get_next_index(v_mp IN v_mp_type, v_ind IN PLS_INTEGER) return PLS_INTEGER
+is 
+	v_vv_last PLS_INTEGER := null;
+	vv PLS_INTEGER := v_mp.last;
+begin
+	-- 反序遍历v_mp 做比较 
+	while vv is not null
+	loop
+		-- 如果发现某个下标值小于等于v_ind 则返回上一个下标值
+		--（如果是最大的下标则返回NULL）
+		if (vv &lt;= v_ind) then return v_vv_last; end if;
+		v_vv_last := vv;
+		vv := v_mp.prior(vv);
+	end loop;
+	
+
+	-- 如果反序遍历完所有下标，仍未找到小于等于v_ind的值，则返回最小的下标v_mp.first
+	return v_vv_last;
+
+end;
+
+
+
+
+</code></pre>
+<h1 id="日期计算问题">日期计算问题</h1>
+<p>这个网上有很多文章介绍过了，达梦默认两个整数相除，结果类型还是整数，而oracle是小数。</p>
+<p>所以在oracle我们可以使用trunc(v_date)-1/86400获取1秒前的时间，但在达梦，这样写跟trunc(v_date) - 0是一样的。</p>
+<p>解决方法是改成trunc(v_date)-1.0/86400</p>
+<h1 id="出参问题">出参问题</h1>
+<p>如果把一个变量传给一个函数做为函数出参，以获取函数返回值，oracle默认会把这个函数清空，而达梦不会。</p>
+<p>这就导致一个问题，</p>
+<p>验证代码如下：</p>
+<pre><code class="language-sql">/*测试出参  在oracle期待输出为空 但是达梦会出现error*/
+create or replace procedure testKinstarerOutParam(str OUT varchar2) as
+begin
+    dbms_output.put_line('str = ' || str);
+    if (str is not null) THEN
+        RAISE_APPLICATION_ERROR(-20001, '出参没有清空');
+    end if;
+end;
+/
+
+create or replace procedure testKinstarerCallOutParam as
+       strIn varchar2(64) := 'error';
+begin
+       testKinstarerOutParam(strIn);
+end;
+/
+
+dbms_output.enable;
+begin testKinstarerCallOutParam(); end;
+</code></pre>
+<h1 id="lob支持问题">lob支持问题</h1>
+<p>oracle可以使用to_char函数对lob类型字段操作，但在达梦，有时这样操作会失败，报错为DBMS_LOB.READ line 1157</p>
+<h1 id="diutil包缺失">diutil包缺失</h1>
+<p>不知道为什么，达梦没有提供diutil包。里面有一些函数，挺方便，没有真可惜。所以我自己写了一个</p>
+<pre><code class="language-sql">CREATE OR REPLACE PACKAGE diutil IS
+
+
+  -- bool_to_int:  translates 3-valued BOOLEAN TO NUMBER FOR USE
+  --               IN sending BOOLEAN parameter / RETURN VALUES
+  --               BETWEEN pls v1 (client) AND pls v2. since sqlnet
+  --               has no BOOLEAN bind variable TYPE, we encode
+  --               booleans AS false = 0, true = 1, NULL = NULL FOR
+  --               network transfer AS NUMBER
+  --
+  FUNCTION bool_to_int( b BOOLEAN) RETURN NUMBER;
+  
+    -- int_to_bool:  translates 3-valued NUMBER encoding TO BOOLEAN FOR USE
+  --               IN sending BOOLEAN parameter / RETURN VALUES
+  --               BETWEEN pls v1 (client) AND pls v2. since sqlnet
+  --               has no BOOLEAN bind variable TYPE, we encode
+  --               booleans AS false = 0, true = 1, NULL = NULL FOR
+  --               network transfer AS NUMBER
+  --
+  function int_to_bool( n NUMBER) return boolean;
+  
+  function get_sql_hash(name IN varchar2, v_hash OUT RAW,
+                        pre10ihash OUT number)
+    return number;
+
+  function rpad_dm(string varchar2, padded_length number, pad_string varchar2 := ' ')
+    return varchar2;
+  
+  function copy1kList(v_input ua_utl_def.t_str_1k_list) return ua_utl_def.t_str_1k_list;
+end diutil;
+
+CREATE OR REPLACE PACKAGE BODY diutil IS
+  --------------------
+  -- bool_to_int
+  --------------------
+  FUNCTION bool_to_int(b BOOLEAN) RETURN NUMBER IS
+  BEGIN
+    IF b THEN
+      RETURN 1;
+    ELSIF NOT b THEN
+      RETURN 0;
+    ELSE
+      RETURN NULL;
+    END IF;
+  END bool_to_int;
+  
+    --------------------
+  -- int_to_bool
+  --------------------
+  FUNCTION int_to_bool(n NUMBER) RETURN BOOLEAN IS
+  BEGIN
+    IF n IS NULL THEN
+      RETURN NULL;
+    ELSIF n = 1 THEN
+      RETURN true;
+    ELSIF n = 0 THEN
+      RETURN false;
+    ELSE
+      RAISE value_error;
+    END IF;
+  END int_to_bool;
+  
+  function get_sql_hash(name IN varchar2, v_hash OUT RAW,
+                        pre10ihash OUT number)
+    return number IS
+    v_hash_varchar2 VARCHAR2(128);
+    v_hash_tmp VARCHAR2(128);
+  BEGIN
+    --  Compute a hash value for the given string using md5 algo
+  --  Input arguments:
+  --    name  - The string to be hashed.
+  --    hash  - An optional field to store all 16 bytes of returned
+  --            hash value.
+  --    pre10ihash - An optional field to store the pre 10i database
+  --                 version hash value.
+  --  Returns:
+  --    A hash value (last 4 bytes)  based on the input string.
+  --    The md5 hash algorithm computes a 16 byte hash value, but
+  --    we only return the last 4 bytes so that we can return an
+  --    actual number.  One could use an optional RAW parameter to
+  --    get all 16 bytes and to store the pre 10i hash value of 4
+  --    4 bytes in the pre10ihash optional parameter.
+  	-- Utl_Raw.Cast_To_Raw(
+  	
+  	v_hash_varchar2 := DBMS_OBFUSCATION_TOOLKIT.MD5(name);
+  	v_hash := Utl_Raw.cast_to_raw(v_hash_varchar2);
+  	v_hash_tmp := substrb(v_hash, 13, 4);
+  	
+  	pre10ihash := to_number(v_hash_tmp, 'XXXXXXXXXX');  --TODO: 这里实现有问题 pre10ihash是啥意思我没看懂
+  	
+  	-- select Utl_Raw.Cast_To_Raw(DBMS_OBFUSCATION_TOOLKIT.MD5(input_string =&gt;'abc')) a from Dual
+  	return to_number(v_hash_tmp, 'XXXXXXXXXX'); 
+  END;
+  
+  function rpad_dm(string varchar2, padded_length number, pad_string varchar2 := ' ')
+    return varchar2 IS
+    v_len number := lengthb(string);
+  BEGIN
+  	    dbms_output.put_line('v_len - padded_length = ' );
+  	if padded_length &lt; v_len THEN
+  		return substrb(string, 1, padded_length); --如果输入长度小于原字符串长度，则调用substrb截断
+  	elsif padded_length = v_len THEN
+  		return string; --如果长度相等直接返回原串即可
+  	else
+  		return string || rpad(' ', padded_length - v_len, pad_string); --如果长度大于原字符串，则在后面补空格
+  	end if;
+  END;
+
+
+  function copy1kList(v_input ua_utl_def.t_str_1k_list) return ua_utl_def.t_str_1k_list IS
+    v_tmplist ua_utl_def.t_str_1k_list;
+    v_ind PLS_INTEGER;
+  begin
+  	if v_input.count &gt; 0 then
+  		/*
+  		for vv in v_input.first .. v_input.last LOOP
+  			v_tmplist(vv) := v_input(vv);
+  		end loop;
+  		*/
+  		v_ind = v_input.first;
+  		while v_ind is not null
+  		loop
+  			v_tmplist(v_ind) := v_input(v_ind);
+  			v_ind = v_input.next(v_ind);
+  		end loop;
+  	end if;
+  	return v_tmplist;
+  end;
+end diutil;
+</code></pre>
+<h1 id="存储过程建失败不会提示">存储过程建失败不会提示</h1>
+<p>在达梦客户端执行新建存储过程时需要注意，即使创建成功了，也只代表语法正确。很可能存储过程有其它问题导致没建成功，仍是无效状态。</p>
+<p>解决方法是创建存储过程之后再手动执行 alter PROCEDURE 存储过程名称 compile;</p>
+<h1 id="format_error_backtrace没有调用处行号问题">FORMAT_ERROR_BACKTRACE没有调用处行号问题</h1>
+<p>众所周知，oracle提供一个函数dbms_utility.format_error_backtrace，用于获取异常模块处理时调用，获取函数堆栈信息，里面会有明确的函数名称和源码位置信息</p>
+<p>但达梦调用这个函数返回的是一堆看不懂的内部符号</p>
+<p>这个问题对我迁移造成不少困扰，因为我们业务的主要逻辑就是在存储过程里面实现的。我们需要在程序出异常时登记日志，记录函数堆栈信息，以方便跟踪。</p>
+<p>经过我不懈研究，终于解决了达梦无法获取堆栈信息的问题，这里跟大家分享一下解决方法：</p>
+<pre><code class="language-sql">dbms_output.enable;
+select * from  q$log order by 1 desc;
+select * from q$error_instance order by 1 desc;
+
+CREATE OR REPLACE PROCEDURE logIntoDb(loglevel PLS_INTEGER, inf IN varchar2, callStack IN varchar2)
+IS
+    PRAGMA AUTONOMOUS_TRANSACTION; --日志登记需要使用自治事务
+BEGIN
+	-- loglevel 0 debug 10 inf 20 err
+	INSERT INTO q$log
+          (id, "CONTEXT", text, call_stack, created_on, created_by, app_system, app_module)
+        VALUES
+          (q$log_seq.nextval,
+           decode(logLevel, 0, 'debug', 'other'),
+           inf,
+           callStack,
+           SYSDATE,
+           USER,
+           'unify_audit',
+           'logIntoDb');
+    commit;
+END;
+alter PROCEDURE logIntoDb compile;
+
+CREATE OR REPLACE FUNCTION getErrorBackTrace() return varchar2
+IS
+	-- 达梦不能直接获取堆栈信息，需要套在函数里面 
+	c_stack VARCHAR2(6000) := DBMS_UTILITY.FORMAT_ERROR_BACKTRACE;
+BEGIN
+    return c_stack;
+END;
+/
+alter FUNCTION getErrorBackTrace COMPILE;
+
+CREATE OR REPLACE PROCEDURE debugHt(inf IN varchar2)
+IS
+	-- 默认不使用异常 这样不能记录行号
+	-- 使用异常可以记录行号但性能会下降，用于调试
+	v_useException boolean := true;
+BEGIN
+	if (v_useException) then
+		-- 主动创建一个异常，这样才可以FORMAT_ERROR_BACKTRACE函数才有值
+		RAISE_APPLICATION_ERROR(-20001, 'debug');
+	else
+		logIntoDb(0, inf, DBMS_UTILITY.format_call_stack);
+	end if;
+exception
+  when others then
+    -- 达梦的DBMS_UTILITY.FORMAT_ERROR_BACKTRACE函数必须隔位获取
+    -- 不然只能获取当前函数的堆栈信息
+	logIntoDb(0, inf, getErrorBackTrace());
+END;
+/
+alter PROCEDURE debugHt COMPILE;
+
+
+CREATE OR REPLACE PROCEDURE proc2
+IS
+BEGIN
+    debugHt('hello log');
+	execute immediate 'delete * from dual1233';
+exception 
+    when others then
+    	debugHt('hello exp');
+END;
+/
+alter PROCEDURE proc2 COMPILE;
+
+CREATE OR REPLACE PROCEDURE proc3
+IS
+BEGIN
+    proc2();
+END;
+/
+
+CREATE OR REPLACE PROCEDURE proc4
+IS
+BEGIN
+    proc3();
+END;
+/
+
+begin proc4(); end;
+
+
+</code></pre>
+
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-12-10 11:10</span>&nbsp;
+<a href="https://www.cnblogs.com/kingstarer/">皇家救星</a>&nbsp;
+阅读(<span id="post_view_count">667</span>)&nbsp;
+评论(<span id="post_comment_count">0</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14113209" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(14113209);return false;">收藏</a>&nbsp;
+<a href="javascript:void(0)" onclick="reportManager.report({ currentUserId: '', targetType: 'blogPost', targetId: '14113209', targetLink: 'https://www.cnblogs.com/kingstarer/p/14113209.html', title: 'oracle存储过程转达梦8存储过程时踩过的坑2（完结篇）' })">举报</a></div>
+        </div>
+        <script src="https://common.cnblogs.com/highlight/10.3.1/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 234136, cb_blogApp = 'kingstarer', cb_blogUserGuid = '6c01f56e-ee22-e511-b908-9dcfd8948a71';
+    var cb_entryId = 14113209, cb_entryCreatedDate = '2020-12-10 11:10', cb_postType = 1;
+    updatePostStats(
+        [cb_entryId],
+        function(id, count) { $("#post_view_count").text(count) },
+        function(id, count) { $("#post_comment_count").text(count) })
+    zoomManager.apply("#cnblogs_post_body img:not(.code_img_closed):not(.code_img_opened)");
+</script>
+        <a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <div id="cnblogs_c1" class="under-post-card">
+        <div id='div-gpt-ad-1592365906576-0' style='width: 300px; height: 250px;'></div>
+    </div>
+    <div id="under_post_card1"></div>
+    <div id="cnblogs_c2" class="under-post-card">
+        <div id='div-gpt-ad-1592366332455-0' style='width: 468px; height: 60px;'></div>
+    </div>
+    <div id="under_post_card2"></div>
+    <div id="HistoryToday" class="under-post-card"></div>
+    <script type="text/javascript">
+       var commentManager = new blogCommentManager();
+       commentManager.renderComments(0);
+       fixPostBody();
+       deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);       deliverT2();
+       deliverC1C2();
+       loadNewsAndKb();
+       loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);       LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+       GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+       loadOptUnderPost();
+       GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+
+    </div>
+</div>
+            </div>
+        </div>
+
+        <div id="sideBar">
+            <div id="sideBarMain">
+                <div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+<div id="sidebar_c3"></div>
+                <div id="calendar"><div id="blog-calendar" style="display:none"></div></div>                
+                <script>loadBlogDefaultCalendar();</script>
+                <div id="leftcontentcontainer">
+                    <!-- begin:SingleColumn -->
+                    <div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+                    <!-- end:  SingleColumn -->
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div id="footer">
+        <!--done-->
+Copyright &copy; 2021 皇家救星
+<br /><span id="poweredby">Powered by .NET 5.0 on Kubernetes</span>
+
+    </div>
+</div>
+
+    
+
+    <input type="hidden" id="antiforgery_token" value="CfDJ8L-rpLgFVEJMgssCVvNUAjvFGmqKd0TqcAkhbOzcIByhjMlY8Svk1zbRpVWoRN3e0DaN0-qHxYyPkHE7z5xHIsnJfZdGnz9D1k3dk2gThtjq5DQCbnLsW_IX1xjYwtQp9hyIP9e9xaGOXsG7yIxhrlc" />
+</body>
+</html>

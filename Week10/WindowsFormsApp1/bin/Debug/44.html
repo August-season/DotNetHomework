@@ -1,0 +1,358 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin-when-crossorigin" />
+    <meta name="description" content="欢迎来到微软机器人编辑器使用教程，从这里开始，创建一个简单的机器人。 在该系列文章中，每一篇都将通过添加更多的功能来构建机器人。当完成教程中的全部内容后，你将成功的创建一个天气机器人(Weather " />
+    <meta property="og:description" content="欢迎来到微软机器人编辑器使用教程，从这里开始，创建一个简单的机器人。 在该系列文章中，每一篇都将通过添加更多的功能来构建机器人。当完成教程中的全部内容后，你将成功的创建一个天气机器人(Weather " />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>【Azure 机器人】微软Azure Bot 编辑器系列(4) : 使用语言生成功能[LG: Language Generation] (The Bot Framework Composer tutorials) - 路边两盏灯 - 博客园</title>
+    <link id="favicon" rel="shortcut icon" href="//common.cnblogs.com/favicon.svg" type="image/svg+xml" />
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=6tvK5XC6GPbg3p_sy7wzz_2291HoYACr4440iKBzQIw" />
+    <link id="MainCss" rel="stylesheet" href="/skins/darkgreentrip/bundle-darkgreentrip.min.css?v=eoZATbPKwJCL5eWVDTQIYC6CIxJPcFz191dkzN2tSyQ" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/lulight/custom.css?v=PgZ9WC6bYbA3bs&#x2B;kJWk8GqHltOk=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/darkgreentrip/bundle-darkgreentrip-mobile.min.css?v=lU86o8mZVn3FOSdFt7nHKYTD8gzeKaiQIIZ6lSjEFyo" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/lulight/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/lulight/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/lulight/wlwmanifest.xml" />
+    <script>
+        var currentBlogId = 624264;
+        var currentBlogApp = 'lulight';
+        var cb_enable_mathjax = true;
+        var isLogined = false;
+        var isBlogOwner = false;
+        var skinName = 'darkgreentrip';
+        var visitorUserId = '';
+    </script>
+        <script>
+            var currentPostDateAdded = '2021-06-19 10:28';
+        </script>
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=ZUvfwhWs5fv-s8Nv7WofCOhwKAxiDO928zdWFzhnOPk"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'math', processEscapes: true },
+        TeX: {
+        equationNumbers: { autoNumber: ['AMS'], useLabelIds: true },
+        extensions: ['extpfeil.js', 'mediawiki-texvc.js'],
+        Macros: {bm: "\\boldsymbol"}
+        },
+        'HTML-CSS': { linebreaks: { automatic: true } },
+        SVG: { linebreaks: { automatic: true } }
+        });
+    </script>
+    <script src="https://mathjax.cnblogs.com/2_7_5/MathJax.js?config=TeX-AMS-MML_HTMLorMML&amp;v=20200504"></script>
+    
+</head>
+<body class="no-navbar">
+    <a name="top"></a>
+            <div id="bannerbar" class="bannerbar-mobile formobile">
+            <a href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:mb|pp:bokeyuan-huodong-21nianzhongdacu-neiyeyidongduantonglanbanner|pu:21nianzhongdacu-neiyeyidongduantonglanbanner|ci:21nzdc|kw:10224547" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-mobile')">
+                <img src="https://img2020.cnblogs.com/blog/35695/202106/35695-20210610184806729-1738888164.jpg" alt="" />
+            </a>
+            </div>
+    <div id="top_nav" class="navbar forpc navbar-custom">
+        <nav id="nav_main" class="navbar-main">
+            <ul id="nav_left" class="navbar-list navbar-left">
+                <li class="navbar-branding"><a href="https://www.cnblogs.com/" title="开发者的网上家园"><img src="/images/logo.svg?v=R9M0WmLAIPVydmdzE2keuvnjl-bPR7_35oHqtiBzGsM" alt="博客园Logo" /></a></li>
+                <li><a href="/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-sitehome')">首页</a></li>
+                <li><a href="https://news.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-news')">新闻</a></li>
+                <li><a href="https://q.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-q')">博问</a></li>
+                <li><a id="nav_brandzone" href="https://brands.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-brands')">专区</a></li>
+                <li><a href="https://ing.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-ing')">闪存</a></li>
+                <li><a href="https://edu.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-edu')">班级</a></li>
+            </ul>
+            <ul id="nav_right" class="navbar-list navbar-right">
+                <li>
+                    <form id="zzk_search" class="navbar-search" action="https://zzk.cnblogs.com/s" method="get">
+                        <input name="w" id="zzk_search_input" placeholder="代码改变世界" type="text" tabindex="3" />
+                        <button type="submit" id="zzk_search_button">
+                            <img src="/images/aggsite/search.svg" alt="搜索" />
+                        </button>
+                    </form>
+                </li>
+                <li id="navbar_login_status" class="navbar-list">
+                    <a class="navbar-user-info navbar-blog" href="https://i.cnblogs.com/EditPosts.aspx?opt=1" alt="写随笔" title="写随笔">
+                        <img id="new_post_icon" class="navbar-icon" src="/images/aggsite/newpost.svg" alt="写随笔" />
+                    </a>
+                    <a id="navblog-myblog-icon" class="navbar-user-info navbar-blog" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx" alt="我的博客" title="我的博客">
+                        <img id="myblog_icon" class="navbar-icon" src="/images/aggsite/myblog.svg" alt="我的博客" />
+                    </a>
+                    <a class="navbar-user-info navbar-message navbar-icon-wrapper" href="https://msg.cnblogs.com/" alt="短消息" title="短消息">
+                        <img id="msg_icon" class="navbar-icon" src="/images/aggsite/message.svg?v=J0WS2P2iPgaIVgXxcAhliw4AFZIpaTWxtdoNAv9eiCA" alt="短消息" />
+                        <span id="msg_count" style="display: none"></span>
+                    </a>
+                    <div id="user_info" class="navbar-user-info dropdown">
+                        <a class="dropdown-button" href="https://home.cnblogs.com/">
+                            <img id="user_icon" class="navbar-avatar" src="/images/aggsite/avatar-default.svg" alt="用户头像" />
+                        </a>
+                        <div class="dropdown-menu">
+                            <a id="navblog-myblog-text" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx">我的博客</a>
+                            <a href="https://home.cnblogs.com/">我的园子</a>
+                            <a href="https://account.cnblogs.com/settings/account">账号设置</a>
+                            <a href="javascript:void(0)" id="navbar_lite_mode_toggle" title="简洁模式会使用简洁款皮肤显示所有博客">
+    简洁模式 <img id="navbar_lite_mode_on" src="/images/lite-mode-check.svg" class="hide" /><span id="navbar_lite_mode_spinner" class="hide">...</span>
+</a>
+                            <a href="javascript:void(0)" onclick="account.logout();">退出登录</a>
+                        </div>
+                    </div>
+                    <a class="navbar-anonymous" href="https://account.cnblogs.com/signup/">注册</a>
+                    <a class="navbar-anonymous" href="javascript:void(0);" onclick="account.login()">登录</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    
+    <!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/lulight/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/lulight/">云中一盏灯，路边形影重</a>
+</h1>
+<h2>Microsoft Azure问题集散处，记录，分享使用PaaS服务遇见的各种问题及解决之道。Microsoft Azure： https://docs.azure.cn/zh-cn/</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/lulight/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E8%B7%AF%E8%BE%B9%E4%B8%A4%E7%9B%8F%E7%81%AF">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="javascript:void(0)" data-rss="https://www.cnblogs.com/lulight/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			<div id="blog_stats_place_holder"><script>loadBlogStats();</script></div>
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2 vertical-middle" href="https://www.cnblogs.com/lulight/p/14902657.html">
+    <span>【Azure 机器人】微软Azure Bot 编辑器系列(4) : 使用语言生成功能[LG: Language Generation] (The Bot Framework Composer tutorials)</span>
+    
+
+
+
+</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                <div id="cnblogs_post_body" class="blogpost-body blogpost-body-html">
+<p>欢迎来到微软机器人编辑器使用教程，从这里开始，创建一个简单的机器人。</p>
+<p>在该系列文章中，每一篇都将通过添加更多的功能来构建机器人。当完成教程中的全部内容后，你将成功的创建一个天气机器人(Weather Bot)。在本系列中将学会以下内容：</p>
+<p>&nbsp;</p>
+<p style="margin-left: 30px"><span style="color: rgba(0, 0, 128, 1); background-color: rgba(255, 255, 255, 1)"><em>1）<a href="https://www.cnblogs.com/lulight/p/14891002.html" target="_blank">创建一个简单的对话天气机器人</a></em></span></p>
+<p style="margin-left: 30px"><span style="color: rgba(0, 0, 128, 1)"><em>2）<a href="https://www.cnblogs.com/lulight/p/14897260.html" target="_blank">在机器人中提出问题，并获取从HTTP API获取响应</a></em></span></p>
+<p style="margin-left: 30px"><span style="color: rgba(0, 0, 128, 1)"><em>3）<a href="https://www.cnblogs.com/lulight/p/14902267.html" target="_blank">在机器人中增加帮助提示和取消功能</a></em></span></p>
+<p style="margin-left: 30px"><span style="color: rgba(0, 128, 0, 1); background-color: rgba(255, 153, 0, 1)"><em>4）使用语言生成功能（LG: Language Generation)</em></span></p>
+<p style="margin-left: 30px"><span style="color: rgba(0, 0, 128, 1)"><em>5）把机器人的回复转换为卡片</em></span></p>
+<p style="margin-left: 30px"><span style="color: rgba(0, 0, 128, 1)"><em>6）添加LUIS功能，理解自然语言</em></span></p>
+<p>&nbsp;</p>
+<h2><span style="color: rgba(51, 51, 153, 1)">准备条件</span></h2>
+<ul>
+<li>完成系列(1，2)中的简单对话机器人创建（<a href="https://www.cnblogs.com/lulight/p/14891002.html" target="_blank">https://www.cnblogs.com/lulight/p/14891002.html</a>）与 发送HTTP请求（<a class="ng-star-inserted" href="https://www.cnblogs.com/lulight/p/14897260.html" target="_blank">https://www.cnblogs.com/lulight/p/14897260.html</a>）</li>
+<li>LG: Language Generation (<a href="https://docs.microsoft.com/en-us/composer/concept-language-generation?tabs=v2x" target="_blank">https://docs.microsoft.com/en-us/composer/concept-language-generation?tabs=v2x</a>) 在Bot中定义多种形式的短语，根据机器人运行时的参数组合生成回复内容。</li>
+</ul>
+<p>&nbsp;</p>
+<p>开发机器人面临的主要问题之一：<em>就是如何让机器人理解用户在对话和整个上下文中的意思，然后用有效信息进行回复？</em>为了能够实现这些复杂任务，Bot Composer集成了Lanaguage Generation库。它可以更好地控制机器人如何处理用户输入并提供有意义的响应。本文展示了如何在机器人中使用LG(语言生成)。</p>
+<p>&nbsp;</p>
+<h2>Language generation 语言生产</h2>
+<p>让我们从修改单调的“Welcome Message”入手。</p>
+<p><strong>第一步</strong>：启动Bot编辑器，打开 weather_bot 项目</p>
+<p><strong>第二步</strong>：在“Geeting问候语”触发器组件中，选中True分支下的“Send a response”任务</p>
+<p><strong>第三步</strong>：在任务的右边属性栏中，依次点击“Add alternative”，在新出现的文本框中依次加入下面的问候语(Welcome Message)</p>
+<div class="cnblogs_code">
+<pre>Hi! I'm a friendly bot that can help with the weather. Try saying WEATHER.
+
+Hello! I am Weather Bot! Say WEATHER to get the current conditions.
+
+Howdy! Weather bot is my name and weather is my game. Try saying WEATHER.
+
+兄台，请说“天气”! 敬天爱人从知天始。</pre>
+</div>
+<p>注：机器人在回复用户时，随机选择以上的语句进行问候。设置完成后，效果图如下：</p>
+<p><img src="https://img2020.cnblogs.com/blog/2127802/202106/2127802-20210619145523169-1069930747.png" width="520" height="327" loading="lazy" style="border: 2px solid rgba(255, 0, 0, 1)"></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h2>添加LG: Language Generation</h2>
+<p>当前，机器人报告天气的方式还是非常机械化的。我们可以通过利用LG功能改进机器人的回复内容。</p>
+<p><strong>第一步</strong>：在Bot编辑器左边导航目录中选择“机器人响应 Bot responses”。（你会注意到之前添加的所有消息都将出现在这里。同理，在这里进行修改也会同步到机器人中）</p>
+<p><strong>第二步</strong>：选中“<strong>GetWeather</strong>”，然后点击右边栏中的“显示代码”按钮，以文件格式的方式来添加新的语言片段。并在文末中增加新的LG。</p>
+<div class="cnblogs_code">
+<pre># DescribeWeather(weather)
+- It is "${dialog.weather}" in ${user.postalcode} and the temperature is ${dialog.fahrenheit}&amp;deg;F or ${dialog.celsius}&amp;deg;C. Have a nice day.</pre>
+</div>
+<p>注：新的LG模板名为<em>DescribeWeather</em>。这里会根据weather这个对象的内容填充模板，生成有好的回复。</p>
+<p><strong>第三步</strong>：回到Bot的编辑区域，选择“getWeather”的BeginDialog组件，并选中“<strong>Send a response</strong>”任务块。</p>
+<p><strong>第四步</strong>：把原来的回复内容用LG模板替换掉</p>
+<ul>
+<li>删除旧的回复消息</li>
+<li>输入“&nbsp;<span style="background-color: rgba(192, 192, 192, 1)">${DescribeWeather(dialog.weather)}</span>&nbsp;”。这种语法允许将 DescribeWeather 模板嵌套在另一个模板中，可以通过这种组合 LG 模板方式以创建更复杂的模板。</li>
+</ul>
+<p>&nbsp;</p>
+<p>好了，LG模板的创建以及使用步骤完成。请查看演示动画：&nbsp;</p>
+<p><img src="https://img2020.cnblogs.com/blog/2127802/202106/2127802-20210619145340465-1186177702.gif" width="999" height="627" loading="lazy"></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h2><span style="color: rgba(51, 51, 0, 1)">测试机器人</span></h2>
+<p><strong>第一步：</strong>在编辑器的右上角点击 “<strong>Start Bot</strong>”按钮，启动机器人</p>
+<p><strong>第二步：</strong>启动后，会弹出一个“Local bot runtime manager”的窗口，选择“Open Web Chat”，打开一个页面聊天窗口</p>
+<p><strong>第三步：</strong>在对话框中输入“<em><strong>weather</strong></em>” 或者“<em><strong>天气</strong></em>”来触发机器人的对话</p>
+<p><strong>第四步</strong>：输入“98052”观察Bot的返回内容</p>
+<p><img src="https://img2020.cnblogs.com/blog/2127802/202106/2127802-20210619145310183-1167168272.gif" width="999" height="627" loading="lazy"></p>
+<p>在下一篇中将演示：<strong><em><em><em><em>把机器人的回复转换为卡片</em></em></em></em></strong></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><span style="color: rgba(255, 0, 255, 1)"><em>(以上内容均是参考微软官方的机器人文档进行的中文操作步骤，原文连接见参考资料)</em></span></p>
+<p>&nbsp;</p>
+<h3>参考资料</h3>
+<p id="tutorial-add-language-generation-to-your-bot"><strong>Tutorial: Add language generation to your bot：</strong><a href="https://docs.microsoft.com/en-us/composer/tutorial/tutorial-language-generation?tabs=v2x" target="_blank">https://docs.microsoft.com/en-us/composer/tutorial/tutorial-language-generation?tabs=v2x</a></p>
+<p id="language-generation"><strong>Language generation:</strong>&nbsp;<a href="https://docs.microsoft.com/en-us/composer/concept-language-generation?tabs=v2x" target="_blank">https://docs.microsoft.com/en-us/composer/concept-language-generation?tabs=v2x</a></p>
+<p>&nbsp;</p>
+<p>[完]</p>
+<p>&nbsp;</p>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2021-06-19 22:28</span>&nbsp;
+<a href="https://www.cnblogs.com/lulight/">路边两盏灯</a>&nbsp;
+阅读(<span id="post_view_count">0</span>)&nbsp;
+评论(<span id="post_comment_count">0</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14902657" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(14902657);return false;">收藏</a>&nbsp;
+<a href="javascript:void(0)" onclick="reportManager.report({ currentUserId: '', targetType: 'blogPost', targetId: '14902657', targetLink: 'https://www.cnblogs.com/lulight/p/14902657.html', title: '【Azure 机器人】微软Azure Bot 编辑器系列(4) : 使用语言生成功能[LG: Language Generation] (The Bot Framework Composer tutorials)' })">举报</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/10.3.1/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 624264, cb_blogApp = 'lulight', cb_blogUserGuid = 'b48ec7ea-4319-4684-fd87-08d83ba20c85';
+    var cb_entryId = 14902657, cb_entryCreatedDate = '2021-06-19 22:28', cb_postType = 1;
+    updatePostStats(
+        [cb_entryId],
+        function(id, count) { $("#post_view_count").text(count) },
+        function(id, count) { $("#post_comment_count").text(count) })
+    zoomManager.apply("#cnblogs_post_body img:not(.code_img_closed):not(.code_img_opened)");
+</script>
+<a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <div id="cnblogs_c1" class="under-post-card">
+        <div id='div-gpt-ad-1592365906576-0' style='width: 300px; height: 250px;'></div>
+    </div>
+    <div id="under_post_card1"></div>
+    <div id="cnblogs_c2" class="under-post-card">
+        <div id='div-gpt-ad-1592366332455-0' style='width: 468px; height: 60px;'></div>
+    </div>
+    <div id="under_post_card2"></div>
+    <div id="HistoryToday" class="under-post-card"></div>
+    <script type="text/javascript">
+       var commentManager = new blogCommentManager();
+       commentManager.renderComments(0);
+       fixPostBody();
+       deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);       deliverT2();
+       deliverC1C2();
+       loadNewsAndKb();
+       loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);       LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+       GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+       loadOptUnderPost();
+       GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+	<div id="sideBar">
+		<div id="sideBarMain">
+			<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+<div id="sidebar_c3"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2021 路边两盏灯
+<br /><span id="poweredby">Powered by .NET 5.0 on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+
+    <input type="hidden" id="antiforgery_token" value="CfDJ8L-rpLgFVEJMgssCVvNUAjvzln04WmTKi_3bvjWMGAmJbiEufbPZwkhxqFr7EmTdYEri4FUL0OiqGUAfx4rpybPqvA8ZMYChvg-S_zskQTSxj8e_QIcvTPiTRztQfSlxymDwPJ-mYhhMmfF-dwgST-I" />
+</body>
+</html>

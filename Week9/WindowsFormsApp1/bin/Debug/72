@@ -1,0 +1,944 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin-when-crossorigin" />
+    <meta name="description" content="项目的代码是在linux上运行的，但我比较习惯在vs上写代码。由于linux下有不少函数在windows上是没有的，所以在vs直接编译是不行的。 为了方便在vs上编译项目代码，我把一些常用的linux" />
+    <meta property="og:description" content="项目的代码是在linux上运行的，但我比较习惯在vs上写代码。由于linux下有不少函数在windows上是没有的，所以在vs直接编译是不行的。 为了方便在vs上编译项目代码，我把一些常用的linux" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>windows上编译linux程序代码需要用到的头文件 - 皇家救星 - 博客园</title>
+    <link id="favicon" rel="shortcut icon" href="//common.cnblogs.com/favicon.svg" type="image/svg+xml" />
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=6tvK5XC6GPbg3p_sy7wzz_2291HoYACr4440iKBzQIw" />
+    <link id="MainCss" rel="stylesheet" href="/skins/simpleblue/bundle-simpleblue.min.css?v=2hjghzSZyhYA1HxvSxKnXih3JbC120DBjeO9V9T_nSs" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/simpleblue/bundle-simpleblue-mobile.min.css?v=3tvwgOOqUo3RpS6gGzEdK0LbptOPv4Bx7M85_UAnFGs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/kingstarer/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/kingstarer/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/kingstarer/wlwmanifest.xml" />
+    <script>
+        var currentBlogId = 234136;
+        var currentBlogApp = 'kingstarer';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var isBlogOwner = false;
+        var skinName = 'SimpleBlue';
+        var visitorUserId = '';
+    </script>
+        <script>
+            var currentPostDateAdded = '2020-03-06 05:56';
+        </script>
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=ZUvfwhWs5fv-s8Nv7WofCOhwKAxiDO928zdWFzhnOPk"></script>
+    
+    
+    
+</head>
+<body class="has-navbar has-bannerbar">
+    <a name="top"></a>
+            <a target="_blank" href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:pc|pp:bokeyuan-huodong-21nianzhongdacu-neiyePCtonglanbanner|pu:21nianzhongdacu-neiyePCtonglanbanner|ci:21nzdc|kw:10224545" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-pc')">
+                <div class="bannerbar aliyun forpc" style="background-size: contain; filter: brightness(0.95); background-image: url(https://img2020.cnblogs.com/blog/35695/202106/35695-20210610183724605-1725070929.jpg)">
+                </div>
+            </a>
+            <div id="bannerbar" class="bannerbar-mobile formobile">
+            <a href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:mb|pp:bokeyuan-huodong-21nianzhongdacu-neiyeyidongduantonglanbanner|pu:21nianzhongdacu-neiyeyidongduantonglanbanner|ci:21nzdc|kw:10224547" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-mobile')">
+                <img src="https://img2020.cnblogs.com/blog/35695/202106/35695-20210610184806729-1738888164.jpg" alt="" />
+            </a>
+            </div>
+    <div id="top_nav" class="navbar forpc">
+        <nav id="nav_main" class="navbar-main">
+            <ul id="nav_left" class="navbar-list navbar-left">
+                <li class="navbar-branding"><a href="https://www.cnblogs.com/" title="开发者的网上家园"><img src="/images/logo.svg?v=R9M0WmLAIPVydmdzE2keuvnjl-bPR7_35oHqtiBzGsM" alt="博客园Logo" /></a></li>
+                <li><a href="/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-sitehome')">首页</a></li>
+                <li><a href="https://news.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-news')">新闻</a></li>
+                <li><a href="https://q.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-q')">博问</a></li>
+                <li><a id="nav_brandzone" href="https://brands.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-brands')">专区</a></li>
+                <li><a href="https://ing.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-ing')">闪存</a></li>
+                <li><a href="https://edu.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-edu')">班级</a></li>
+            </ul>
+            <ul id="nav_right" class="navbar-list navbar-right">
+                <li>
+                    <form id="zzk_search" class="navbar-search" action="https://zzk.cnblogs.com/s" method="get">
+                        <input name="w" id="zzk_search_input" placeholder="代码改变世界" type="text" tabindex="3" />
+                        <button type="submit" id="zzk_search_button">
+                            <img src="/images/aggsite/search.svg" alt="搜索" />
+                        </button>
+                    </form>
+                </li>
+                <li id="navbar_login_status" class="navbar-list">
+                    <a class="navbar-user-info navbar-blog" href="https://i.cnblogs.com/EditPosts.aspx?opt=1" alt="写随笔" title="写随笔">
+                        <img id="new_post_icon" class="navbar-icon" src="/images/aggsite/newpost.svg" alt="写随笔" />
+                    </a>
+                    <a id="navblog-myblog-icon" class="navbar-user-info navbar-blog" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx" alt="我的博客" title="我的博客">
+                        <img id="myblog_icon" class="navbar-icon" src="/images/aggsite/myblog.svg" alt="我的博客" />
+                    </a>
+                    <a class="navbar-user-info navbar-message navbar-icon-wrapper" href="https://msg.cnblogs.com/" alt="短消息" title="短消息">
+                        <img id="msg_icon" class="navbar-icon" src="/images/aggsite/message.svg?v=J0WS2P2iPgaIVgXxcAhliw4AFZIpaTWxtdoNAv9eiCA" alt="短消息" />
+                        <span id="msg_count" style="display: none"></span>
+                    </a>
+                    <div id="user_info" class="navbar-user-info dropdown">
+                        <a class="dropdown-button" href="https://home.cnblogs.com/">
+                            <img id="user_icon" class="navbar-avatar" src="/images/aggsite/avatar-default.svg" alt="用户头像" />
+                        </a>
+                        <div class="dropdown-menu">
+                            <a id="navblog-myblog-text" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx">我的博客</a>
+                            <a href="https://home.cnblogs.com/">我的园子</a>
+                            <a href="https://account.cnblogs.com/settings/account">账号设置</a>
+                            <a href="javascript:void(0)" id="navbar_lite_mode_toggle" title="简洁模式会使用简洁款皮肤显示所有博客">
+    简洁模式 <img id="navbar_lite_mode_on" src="/images/lite-mode-check.svg" class="hide" /><span id="navbar_lite_mode_spinner" class="hide">...</span>
+</a>
+                            <a href="javascript:void(0)" onclick="account.logout();">退出登录</a>
+                        </div>
+                    </div>
+                    <a class="navbar-anonymous" href="https://account.cnblogs.com/signup/">注册</a>
+                    <a class="navbar-anonymous" href="javascript:void(0);" onclick="account.login()">登录</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    
+    <div id="home">
+    <div id="header">
+        <div id="blogTitle">
+            <div class="title"><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/kingstarer/">皇家救星</a>
+</div>
+<div class="subtitle"></div>
+
+        </div>
+        <div id="navigator">
+            
+<ul id="navList">
+    <li id="nav_sitehome"><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+    <li id="nav_myhome">
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/kingstarer/">
+首页</a>
+</li>
+    <li id="nav_newpost">
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+    <li id="nav_contact">
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E7%9A%87%E5%AE%B6%E6%95%91%E6%98%9F">
+联系</a></li>
+    <li id="nav_rss">
+<a id="blog_nav_rss" class="menu" href="javascript:void(0)" data-rss="https://www.cnblogs.com/kingstarer/rss/">
+订阅</a></li>
+    <li id="nav_admin">
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+            <div class="blogStats">
+                <div id="blog_stats_place_holder"><script>loadBlogStats();</script></div>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div id="mainContent">
+            <div class="forFlow">
+                <div id="post_detail">
+    <div id="topics">
+        <div class="post">
+            <h1 class="postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2 vertical-middle" href="https://www.cnblogs.com/kingstarer/p/12427962.html">
+    <span>windows上编译linux程序代码需要用到的头文件</span>
+    
+
+
+
+</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                <div id="cnblogs_post_body" class="blogpost-body blogpost-body-html">
+<p>　　项目的代码是在linux上运行的，但我比较习惯在vs上写代码。由于linux下有不少函数在windows上是没有的，所以在vs直接编译是不行的。</p>
+<p>为了方便在vs上编译项目代码，我把一些常用的linux函数原型整理成一个特殊的头文件。只要在代码前面引用上这个头文件，就可以很方便地编译代码。</p>
+<p>完整的教程可以参考我的头条号文章： https://www.toutiao.com/i6599068854754738695/&nbsp; &nbsp;《在vs2010编译linux下C语言项目的解决方案》</p>
+<div class="cnblogs_code">
+<pre><span style="color: rgba(0, 0, 0, 1)">#ifndef __HCH_COMPLIE_ON_WIN__
+</span><span style="color: rgba(0, 0, 255, 1)">#define</span> __HCH_COMPLIE_ON_WIN__<span style="color: rgba(0, 0, 0, 1)">
+
+
+
+#ifdef WIN32
+
+#ifdef __cplusplus
+</span><span style="color: rgba(0, 0, 255, 1)">extern</span> <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">C</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)"> {
+</span><span style="color: rgba(0, 0, 255, 1)">#endif</span>
+
+<span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">定义一些windows上没有的函数或者类型，方便在vs上写程序</span>
+typedef <span style="color: rgba(0, 0, 255, 1)">int</span><span style="color: rgba(0, 0, 0, 1)"> pid_t;
+typedef </span><span style="color: rgba(0, 0, 255, 1)">long</span><span style="color: rgba(0, 0, 0, 1)"> key_t;
+typedef unsigned </span><span style="color: rgba(0, 0, 255, 1)">long</span><span style="color: rgba(0, 0, 0, 1)"> msgqnum_t;
+typedef unsigned </span><span style="color: rgba(0, 0, 255, 1)">long</span><span style="color: rgba(0, 0, 0, 1)"> msglen_t;
+typedef unsigned </span><span style="color: rgba(0, 0, 255, 1)">int</span><span style="color: rgba(0, 0, 0, 1)"> uint32_t;
+
+typedef unsigned uid_t;
+typedef unsigned gid_t;
+
+#include </span>&lt;stddef.h&gt;<span style="color: rgba(0, 0, 0, 1)">
+#include </span>&lt;stdio.h&gt;<span style="color: rgba(0, 0, 0, 1)">
+#include </span>&lt;time.h&gt;<span style="color: rgba(0, 0, 0, 1)">
+#include </span>&lt;signal.h&gt;<span style="color: rgba(0, 0, 0, 1)">
+#include </span>&lt;io.h&gt;<span style="color: rgba(0, 0, 0, 1)">
+#include </span>&lt;WinSock2.h&gt;<span style="color: rgba(0, 0, 0, 1)">
+#include </span>&lt;sys/stat.h&gt;
+
+<span style="color: rgba(0, 0, 255, 1)">#define</span> __U32_TYPE            unsigned int<span style="color: rgba(0, 0, 0, 1)">
+typedef __U32_TYPE socklen_t;
+
+
+</span><span style="color: rgba(0, 0, 255, 1)">struct</span><span style="color: rgba(0, 0, 0, 1)"> ipc_perm
+{
+    </span><span style="color: rgba(0, 0, 255, 1)">int</span><span style="color: rgba(0, 0, 0, 1)"> __key;
+    </span><span style="color: rgba(0, 0, 255, 1)">int</span><span style="color: rgba(0, 0, 0, 1)"> uid;
+    </span><span style="color: rgba(0, 0, 255, 1)">int</span><span style="color: rgba(0, 0, 0, 1)"> gid;
+    </span><span style="color: rgba(0, 0, 255, 1)">int</span><span style="color: rgba(0, 0, 0, 1)"> cuid;
+    </span><span style="color: rgba(0, 0, 255, 1)">int</span><span style="color: rgba(0, 0, 0, 1)"> cgid;
+    unsigned </span><span style="color: rgba(0, 0, 255, 1)">short</span><span style="color: rgba(0, 0, 0, 1)"> mode;
+    unsigned </span><span style="color: rgba(0, 0, 255, 1)">short</span><span style="color: rgba(0, 0, 0, 1)"> __pad1;
+    unsigned </span><span style="color: rgba(0, 0, 255, 1)">short</span><span style="color: rgba(0, 0, 0, 1)"> __seq;
+    unsigned </span><span style="color: rgba(0, 0, 255, 1)">short</span><span style="color: rgba(0, 0, 0, 1)"> __pad2;
+    unsigned </span><span style="color: rgba(0, 0, 255, 1)">short</span><span style="color: rgba(0, 0, 0, 1)"> __unused1;
+    unsigned </span><span style="color: rgba(0, 0, 255, 1)">short</span><span style="color: rgba(0, 0, 0, 1)"> __unused2;
+};
+
+
+</span><span style="color: rgba(0, 128, 0, 1)">/*</span><span style="color: rgba(0, 128, 0, 1)"> semop flags </span><span style="color: rgba(0, 128, 0, 1)">*/</span>
+<span style="color: rgba(0, 0, 255, 1)">#define</span> SEM_UNDO        0x1000  /* undo the operation on exit */
+
+<span style="color: rgba(0, 128, 0, 1)">/*</span><span style="color: rgba(0, 128, 0, 1)"> semctl Command Definitions. </span><span style="color: rgba(0, 128, 0, 1)">*/</span>
+<span style="color: rgba(0, 0, 255, 1)">#define</span> GETPID  11       /* get sempid */
+<span style="color: rgba(0, 0, 255, 1)">#define</span> GETVAL  12       /* get semval */
+<span style="color: rgba(0, 0, 255, 1)">#define</span> GETALL  13       /* get all semval's */
+<span style="color: rgba(0, 0, 255, 1)">#define</span> GETNCNT 14       /* get semncnt */
+<span style="color: rgba(0, 0, 255, 1)">#define</span> GETZCNT 15       /* get semzcnt */
+<span style="color: rgba(0, 0, 255, 1)">#define</span> SETVAL  16       /* set semval */
+<span style="color: rgba(0, 0, 255, 1)">#define</span> SETALL  17       /* set all semval's */
+
+<span style="color: rgba(0, 128, 0, 1)">/*</span><span style="color: rgba(0, 128, 0, 1)"> ipcs ctl cmds </span><span style="color: rgba(0, 128, 0, 1)">*/</span>
+<span style="color: rgba(0, 0, 255, 1)">#define</span> SEM_STAT 18
+<span style="color: rgba(0, 0, 255, 1)">#define</span> SEM_INFO 19
+
+<span style="color: rgba(0, 0, 255, 1)">struct</span><span style="color: rgba(0, 0, 0, 1)"> shmid_ds {
+    </span><span style="color: rgba(0, 0, 255, 1)">struct</span><span style="color: rgba(0, 0, 0, 1)"> ipc_perm shm_perm;
+    </span><span style="color: rgba(0, 0, 255, 1)">int</span><span style="color: rgba(0, 0, 0, 1)"> shm_segsz;
+    time_t shm_atme;
+    time_t shm_dtime;
+    time_t shm_ctime;
+    pid_t shm_cpid;
+    pid_t shm_lpid;
+    unsigned </span><span style="color: rgba(0, 0, 255, 1)">short</span><span style="color: rgba(0, 0, 0, 1)"> shm_nattch;
+    unsigned </span><span style="color: rgba(0, 0, 255, 1)">short</span><span style="color: rgba(0, 0, 0, 1)"> shm_unused;
+    </span><span style="color: rgba(0, 0, 255, 1)">void</span> *<span style="color: rgba(0, 0, 0, 1)">shm_unused2;
+    </span><span style="color: rgba(0, 0, 255, 1)">void</span> *<span style="color: rgba(0, 0, 0, 1)">shm_unused3;
+};
+
+</span><span style="color: rgba(0, 0, 255, 1)">struct</span><span style="color: rgba(0, 0, 0, 1)"> tms
+{
+    clock_t tms_utime;
+    clock_t tms_stime;
+    clock_t tms_cutime;
+    clock_t tms_cstime;
+};
+
+</span><span style="color: rgba(0, 128, 0, 1)">/*</span><span style="color: rgba(0, 128, 0, 1)"> Structure used for argument to `semop' to describe operations.  </span><span style="color: rgba(0, 128, 0, 1)">*/</span>
+<span style="color: rgba(0, 0, 255, 1)">struct</span><span style="color: rgba(0, 0, 0, 1)"> sembuf
+{
+    unsigned </span><span style="color: rgba(0, 0, 255, 1)">short</span> <span style="color: rgba(0, 0, 255, 1)">int</span> sem_num;   <span style="color: rgba(0, 128, 0, 1)">/*</span><span style="color: rgba(0, 128, 0, 1)"> semaphore number </span><span style="color: rgba(0, 128, 0, 1)">*/</span>
+    <span style="color: rgba(0, 0, 255, 1)">short</span> <span style="color: rgba(0, 0, 255, 1)">int</span> sem_op;             <span style="color: rgba(0, 128, 0, 1)">/*</span><span style="color: rgba(0, 128, 0, 1)"> semaphore operation </span><span style="color: rgba(0, 128, 0, 1)">*/</span>
+    <span style="color: rgba(0, 0, 255, 1)">short</span> <span style="color: rgba(0, 0, 255, 1)">int</span> sem_flg;            <span style="color: rgba(0, 128, 0, 1)">/*</span><span style="color: rgba(0, 128, 0, 1)"> operation flag </span><span style="color: rgba(0, 128, 0, 1)">*/</span><span style="color: rgba(0, 0, 0, 1)">
+};
+
+</span><span style="color: rgba(0, 0, 255, 1)">int</span> semop(<span style="color: rgba(0, 0, 255, 1)">int</span> semid, <span style="color: rgba(0, 0, 255, 1)">struct</span> sembuf *<span style="color: rgba(0, 0, 0, 1)">sops, unsigned nsops);
+
+           </span><span style="color: rgba(0, 0, 255, 1)">struct</span><span style="color: rgba(0, 0, 0, 1)"> msginfo {
+                      </span><span style="color: rgba(0, 0, 255, 1)">int</span> msgpool; <span style="color: rgba(0, 128, 0, 1)">/*</span><span style="color: rgba(0, 128, 0, 1)"> Size in kibibytes of buffer pool
+                                      used to hold message data;
+                                      unused within kernel </span><span style="color: rgba(0, 128, 0, 1)">*/</span>
+                      <span style="color: rgba(0, 0, 255, 1)">int</span> msgmap;  <span style="color: rgba(0, 128, 0, 1)">/*</span><span style="color: rgba(0, 128, 0, 1)"> Maximum number of entries in message
+                                      map; unused within kernel </span><span style="color: rgba(0, 128, 0, 1)">*/</span>
+                      <span style="color: rgba(0, 0, 255, 1)">int</span> msgmax;  <span style="color: rgba(0, 128, 0, 1)">/*</span><span style="color: rgba(0, 128, 0, 1)"> Maximum number of bytes that can be
+                                      written in a single message </span><span style="color: rgba(0, 128, 0, 1)">*/</span>
+                      <span style="color: rgba(0, 0, 255, 1)">int</span> msgmnb;  <span style="color: rgba(0, 128, 0, 1)">/*</span><span style="color: rgba(0, 128, 0, 1)"> Maximum number of bytes that can be
+                                      written to queue; used to initialize
+                                      msg_qbytes during queue creation
+                                      (msgget(2)) </span><span style="color: rgba(0, 128, 0, 1)">*/</span>
+                      <span style="color: rgba(0, 0, 255, 1)">int</span> msgmni;  <span style="color: rgba(0, 128, 0, 1)">/*</span><span style="color: rgba(0, 128, 0, 1)"> Maximum number of message queues </span><span style="color: rgba(0, 128, 0, 1)">*/</span>
+                      <span style="color: rgba(0, 0, 255, 1)">int</span> msgssz;  <span style="color: rgba(0, 128, 0, 1)">/*</span><span style="color: rgba(0, 128, 0, 1)"> Message segment size;
+                                      unused within kernel </span><span style="color: rgba(0, 128, 0, 1)">*/</span>
+                      <span style="color: rgba(0, 0, 255, 1)">int</span> msgtql;  <span style="color: rgba(0, 128, 0, 1)">/*</span><span style="color: rgba(0, 128, 0, 1)"> Maximum number of messages on all queues
+                                      in system; unused within kernel </span><span style="color: rgba(0, 128, 0, 1)">*/</span><span style="color: rgba(0, 0, 0, 1)">
+                      unsigned </span><span style="color: rgba(0, 0, 255, 1)">short</span> <span style="color: rgba(0, 0, 255, 1)">int</span><span style="color: rgba(0, 0, 0, 1)"> msgseg;
+                                   </span><span style="color: rgba(0, 128, 0, 1)">/*</span><span style="color: rgba(0, 128, 0, 1)"> Maximum number of segments;
+                                      unused within kernel </span><span style="color: rgba(0, 128, 0, 1)">*/</span><span style="color: rgba(0, 0, 0, 1)">
+                  };
+                  
+           </span><span style="color: rgba(0, 0, 255, 1)">struct</span><span style="color: rgba(0, 0, 0, 1)"> msqid_ds {
+               </span><span style="color: rgba(0, 0, 255, 1)">struct</span> ipc_perm msg_perm;     <span style="color: rgba(0, 128, 0, 1)">/*</span><span style="color: rgba(0, 128, 0, 1)"> Ownership and permissions </span><span style="color: rgba(0, 128, 0, 1)">*/</span><span style="color: rgba(0, 0, 0, 1)">
+               time_t          msg_stime;    </span><span style="color: rgba(0, 128, 0, 1)">/*</span><span style="color: rgba(0, 128, 0, 1)"> Time of last msgsnd(2) </span><span style="color: rgba(0, 128, 0, 1)">*/</span><span style="color: rgba(0, 0, 0, 1)">
+               time_t          msg_rtime;    </span><span style="color: rgba(0, 128, 0, 1)">/*</span><span style="color: rgba(0, 128, 0, 1)"> Time of last msgrcv(2) </span><span style="color: rgba(0, 128, 0, 1)">*/</span><span style="color: rgba(0, 0, 0, 1)">
+               time_t          msg_ctime;    </span><span style="color: rgba(0, 128, 0, 1)">/*</span><span style="color: rgba(0, 128, 0, 1)"> Time of last change </span><span style="color: rgba(0, 128, 0, 1)">*/</span><span style="color: rgba(0, 0, 0, 1)">
+               unsigned </span><span style="color: rgba(0, 0, 255, 1)">long</span>   __msg_cbytes; <span style="color: rgba(0, 128, 0, 1)">/*</span><span style="color: rgba(0, 128, 0, 1)"> Current number of bytes in
+                                                queue (nonstandard) </span><span style="color: rgba(0, 128, 0, 1)">*/</span><span style="color: rgba(0, 0, 0, 1)">
+               msgqnum_t       msg_qnum;     </span><span style="color: rgba(0, 128, 0, 1)">/*</span><span style="color: rgba(0, 128, 0, 1)"> Current number of messages
+                                                in queue </span><span style="color: rgba(0, 128, 0, 1)">*/</span><span style="color: rgba(0, 0, 0, 1)">
+               msglen_t        msg_qbytes;   </span><span style="color: rgba(0, 128, 0, 1)">/*</span><span style="color: rgba(0, 128, 0, 1)"> Maximum number of bytes
+                                                allowed in queue </span><span style="color: rgba(0, 128, 0, 1)">*/</span><span style="color: rgba(0, 0, 0, 1)">
+               pid_t           msg_lspid;    </span><span style="color: rgba(0, 128, 0, 1)">/*</span><span style="color: rgba(0, 128, 0, 1)"> PID of last msgsnd(2) </span><span style="color: rgba(0, 128, 0, 1)">*/</span><span style="color: rgba(0, 0, 0, 1)">
+               pid_t           msg_lrpid;    </span><span style="color: rgba(0, 128, 0, 1)">/*</span><span style="color: rgba(0, 128, 0, 1)"> PID of last msgrcv(2) </span><span style="color: rgba(0, 128, 0, 1)">*/</span><span style="color: rgba(0, 0, 0, 1)">
+           };
+
+</span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">          struct ipc_perm {
+</span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">              key_t          __key;       /* Key supplied to msgget(2) */
+</span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">              uid_t          uid;         /* Effective UID of owner */
+</span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">              gid_t          gid;         /* Effective GID of owner */
+</span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">              uid_t          cuid;        /* Effective UID of creator */
+</span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">              gid_t          cgid;        /* Effective GID of creator */
+</span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">              unsigned short mode;        /* Permissions */
+</span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">              unsigned short __seq;       /* Sequence number */
+</span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">          };</span>
+           
+           <span style="color: rgba(0, 0, 255, 1)">int</span> msgctl(<span style="color: rgba(0, 0, 255, 1)">int</span> msqid, <span style="color: rgba(0, 0, 255, 1)">int</span> cmd, <span style="color: rgba(0, 0, 255, 1)">struct</span> msqid_ds *<span style="color: rgba(0, 0, 0, 1)">buf);
+           
+</span><span style="color: rgba(0, 0, 255, 1)">int</span> kill(pid_t, <span style="color: rgba(0, 0, 255, 1)">int</span><span style="color: rgba(0, 0, 0, 1)">);
+unsigned sleep(</span><span style="color: rgba(0, 0, 255, 1)">int</span><span style="color: rgba(0, 0, 0, 1)">);
+unsigned usleep(</span><span style="color: rgba(0, 0, 255, 1)">int</span><span style="color: rgba(0, 0, 0, 1)">);
+pid_t wait (</span><span style="color: rgba(0, 0, 255, 1)">int</span> *<span style="color: rgba(0, 0, 0, 1)">);
+pid_t fork();
+pid_t getpid();
+</span><span style="color: rgba(0, 0, 255, 1)">int</span> pipe(<span style="color: rgba(0, 0, 255, 1)">int</span> *<span style="color: rgba(0, 0, 0, 1)">fd);
+</span><span style="color: rgba(0, 0, 255, 1)">int</span><span style="color: rgba(0, 0, 0, 1)"> getpgrp();
+</span><span style="color: rgba(0, 0, 255, 1)">int</span> killpg(<span style="color: rgba(0, 0, 255, 1)">int</span>, <span style="color: rgba(0, 0, 255, 1)">int</span><span style="color: rgba(0, 0, 0, 1)">);
+</span><span style="color: rgba(0, 0, 255, 1)">int</span> gettimeofday(<span style="color: rgba(0, 0, 255, 1)">struct</span> timeval *tp, <span style="color: rgba(0, 0, 255, 1)">void</span> *<span style="color: rgba(0, 0, 0, 1)">tzp);
+</span><span style="color: rgba(0, 0, 255, 1)">int</span><span style="color: rgba(0, 0, 0, 1)"> random();
+</span><span style="color: rgba(0, 0, 255, 1)">void</span> srandom(unsigned <span style="color: rgba(0, 0, 255, 1)">int</span><span style="color: rgba(0, 0, 0, 1)"> seed);
+key_t ftok(</span><span style="color: rgba(0, 0, 255, 1)">const</span> <span style="color: rgba(0, 0, 255, 1)">char</span> *path_name, <span style="color: rgba(0, 0, 255, 1)">int</span><span style="color: rgba(0, 0, 0, 1)"> proj_id);
+
+</span><span style="color: rgba(0, 0, 255, 1)">int</span> shmget(key_t key, size_t size, <span style="color: rgba(0, 0, 255, 1)">int</span><span style="color: rgba(0, 0, 0, 1)"> shmflg);
+</span><span style="color: rgba(0, 0, 255, 1)">int</span> shmctl(<span style="color: rgba(0, 0, 255, 1)">int</span> shmid, <span style="color: rgba(0, 0, 255, 1)">int</span> cmd, <span style="color: rgba(0, 0, 255, 1)">struct</span> shmid_ds *<span style="color: rgba(0, 0, 0, 1)">buf);
+</span><span style="color: rgba(0, 0, 255, 1)">void</span> *shmat(<span style="color: rgba(0, 0, 255, 1)">int</span> shmid, <span style="color: rgba(0, 0, 255, 1)">const</span> <span style="color: rgba(0, 0, 255, 1)">void</span> *shmaddr, <span style="color: rgba(0, 0, 255, 1)">int</span><span style="color: rgba(0, 0, 0, 1)"> shmflg);
+</span><span style="color: rgba(0, 0, 255, 1)">int</span> shmdt(<span style="color: rgba(0, 0, 255, 1)">const</span> <span style="color: rgba(0, 0, 255, 1)">void</span> *<span style="color: rgba(0, 0, 0, 1)">shmaddr);
+
+</span><span style="color: rgba(0, 0, 255, 1)">int</span> msgget(key_t key, <span style="color: rgba(0, 0, 255, 1)">int</span><span style="color: rgba(0, 0, 0, 1)"> msgflg);
+</span><span style="color: rgba(0, 0, 255, 1)">int</span> msgsnd(<span style="color: rgba(0, 0, 255, 1)">int</span> msqid, <span style="color: rgba(0, 0, 255, 1)">const</span> <span style="color: rgba(0, 0, 255, 1)">void</span> *msgp, size_t msgsz, <span style="color: rgba(0, 0, 255, 1)">int</span><span style="color: rgba(0, 0, 0, 1)"> msgflg);
+size_t msgrcv(</span><span style="color: rgba(0, 0, 255, 1)">int</span> msqid, <span style="color: rgba(0, 0, 255, 1)">void</span> *msgp, size_t msgsz, <span style="color: rgba(0, 0, 255, 1)">long</span> msgtyp, <span style="color: rgba(0, 0, 255, 1)">int</span><span style="color: rgba(0, 0, 0, 1)"> msgflg);
+
+</span><span style="color: rgba(0, 0, 255, 1)">void</span> *dlopen(<span style="color: rgba(0, 0, 255, 1)">const</span> <span style="color: rgba(0, 0, 255, 1)">char</span> *filename, <span style="color: rgba(0, 0, 255, 1)">int</span><span style="color: rgba(0, 0, 0, 1)"> flag);
+</span><span style="color: rgba(0, 0, 255, 1)">int</span> dlclose(<span style="color: rgba(0, 0, 255, 1)">void</span> *<span style="color: rgba(0, 0, 0, 1)">handle);
+</span><span style="color: rgba(0, 0, 255, 1)">char</span> *<span style="color: rgba(0, 0, 0, 1)">dlerror();
+</span><span style="color: rgba(0, 0, 255, 1)">void</span> *dlsym(<span style="color: rgba(0, 0, 255, 1)">void</span> *hadle, <span style="color: rgba(0, 0, 255, 1)">const</span> <span style="color: rgba(0, 0, 255, 1)">char</span> *<span style="color: rgba(0, 0, 0, 1)">symbol);
+unsigned </span><span style="color: rgba(0, 0, 255, 1)">int</span> alarm(unsigned <span style="color: rgba(0, 0, 255, 1)">int</span><span style="color: rgba(0, 0, 0, 1)"> seconds);
+</span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)"> int dup(int oldfd);
+</span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)"> int dup2(int oldfd, int newfd);</span>
+
+<span style="color: rgba(0, 0, 255, 1)">int</span> mkdir(<span style="color: rgba(0, 0, 255, 1)">const</span> <span style="color: rgba(0, 0, 255, 1)">char</span> *path, <span style="color: rgba(0, 0, 255, 1)">int</span><span style="color: rgba(0, 0, 0, 1)"> mode);
+
+</span><span style="color: rgba(0, 0, 255, 1)">char</span> *strsep(<span style="color: rgba(0, 0, 255, 1)">char</span> **stringp, <span style="color: rgba(0, 0, 255, 1)">const</span> <span style="color: rgba(0, 0, 255, 1)">char</span> *<span style="color: rgba(0, 0, 0, 1)">delim);
+
+</span><span style="color: rgba(0, 0, 255, 1)">#define</span> dup2 _dup2
+
+<span style="color: rgba(0, 0, 255, 1)">#define</span> open _open
+<span style="color: rgba(0, 0, 255, 1)">#define</span> read _read
+<span style="color: rgba(0, 0, 255, 1)">#define</span> close _close
+<span style="color: rgba(0, 0, 255, 1)">#define</span> write _write<span style="color: rgba(0, 0, 0, 1)">
+
+typedef </span><span style="color: rgba(0, 0, 255, 1)">void</span> (*sighandler_t)(<span style="color: rgba(0, 0, 255, 1)">int</span><span style="color: rgba(0, 0, 0, 1)">);
+
+sighandler_t sigset(</span><span style="color: rgba(0, 0, 255, 1)">int</span><span style="color: rgba(0, 0, 0, 1)"> sig, sighandler_t disp);
+
+</span><span style="color: rgba(0, 0, 255, 1)">int</span> sighold(<span style="color: rgba(0, 0, 255, 1)">int</span><span style="color: rgba(0, 0, 0, 1)"> sig);
+
+</span><span style="color: rgba(0, 0, 255, 1)">int</span> sigrelse(<span style="color: rgba(0, 0, 255, 1)">int</span><span style="color: rgba(0, 0, 0, 1)"> sig);
+
+</span><span style="color: rgba(0, 0, 255, 1)">int</span> sigignore(<span style="color: rgba(0, 0, 255, 1)">int</span><span style="color: rgba(0, 0, 0, 1)"> sig);
+
+
+clock_t times(</span><span style="color: rgba(0, 0, 255, 1)">struct</span> tms *<span style="color: rgba(0, 0, 0, 1)">buf);
+#ifdef __cplusplus
+}
+</span><span style="color: rgba(0, 0, 255, 1)">#endif</span>
+
+<span style="color: rgba(0, 0, 255, 1)">#define</span> snprintf _snprintf
+<span style="color: rgba(0, 0, 255, 1)">#define</span> popen _popen
+<span style="color: rgba(0, 0, 255, 1)">#define</span> pclose _pclose
+
+<span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">信号常量</span><span style="color: rgba(0, 128, 0, 1)">
+/*</span><span style="color: rgba(0, 128, 0, 1)">
+const int SIGHUP    = 15;
+const int SIGQUIT    = 15;
+const int SIGPWR    = 15;
+const int SIGUSR2    = 15;
+const int SIGALRM    = 15;
+
+const int SIGUSR1 = 10; 
+const int SIGURG = 30; 
+const int SIGCHLD = 17;
+const int SIGPIPE = 13;
+</span><span style="color: rgba(0, 128, 0, 1)">*/</span><span style="color: rgba(0, 0, 0, 1)">
+#ifndef RTLD_LAZY
+</span><span style="color: rgba(0, 0, 255, 1)">#define</span>  RTLD_LAZY 1
+<span style="color: rgba(0, 0, 255, 1)">#endif</span><span style="color: rgba(0, 0, 0, 1)">
+#ifndef EINTR
+</span><span style="color: rgba(0, 0, 255, 1)">#define</span> EINTR 4
+<span style="color: rgba(0, 0, 255, 1)">#endif</span>
+
+<span style="color: rgba(0, 0, 255, 1)">#define</span> SIGHUP 1
+<span style="color: rgba(0, 0, 255, 1)">#define</span> SIGINT 2
+<span style="color: rgba(0, 0, 255, 1)">#define</span> SIGQUIT 3
+<span style="color: rgba(0, 0, 255, 1)">#define</span> SIGILL 4
+<span style="color: rgba(0, 0, 255, 1)">#define</span> SIGTRAP 5<span style="color: rgba(0, 0, 0, 1)">
+#ifndef SIGABRT
+</span><span style="color: rgba(0, 0, 255, 1)">#define</span> SIGABRT 6
+<span style="color: rgba(0, 0, 255, 1)">#endif</span>
+<span style="color: rgba(0, 0, 255, 1)">#define</span> SIGIOT 6
+<span style="color: rgba(0, 0, 255, 1)">#define</span> SIGBUS 7
+<span style="color: rgba(0, 0, 255, 1)">#define</span> SIGEPE 8
+<span style="color: rgba(0, 0, 255, 1)">#define</span> SIGKILL 9
+<span style="color: rgba(0, 0, 255, 1)">#define</span> SIGUSR1 10
+<span style="color: rgba(0, 0, 255, 1)">#define</span> SIGSEGV 11
+<span style="color: rgba(0, 0, 255, 1)">#define</span> SIGUSR2 12
+<span style="color: rgba(0, 0, 255, 1)">#define</span> SIGPIPE 13
+<span style="color: rgba(0, 0, 255, 1)">#define</span> SIGALRM 14
+<span style="color: rgba(0, 0, 255, 1)">#define</span> SIGTERM 15
+<span style="color: rgba(0, 0, 255, 1)">#define</span> SIGSTKFLT 16
+<span style="color: rgba(0, 0, 255, 1)">#define</span> SIGCHLD 17
+<span style="color: rgba(0, 0, 255, 1)">#define</span> SIGCLD SIGCHLD
+<span style="color: rgba(0, 0, 255, 1)">#define</span> SIGCONT 18
+<span style="color: rgba(0, 0, 255, 1)">#define</span> SIGSTOP 19
+<span style="color: rgba(0, 0, 255, 1)">#define</span> SIGTSTP 20
+<span style="color: rgba(0, 0, 255, 1)">#define</span> SIGTTIN 21
+<span style="color: rgba(0, 0, 255, 1)">#define</span> SIGTTOU 22
+<span style="color: rgba(0, 0, 255, 1)">#define</span> SIGURG 23
+<span style="color: rgba(0, 0, 255, 1)">#define</span> SIGXCPU 24
+<span style="color: rgba(0, 0, 255, 1)">#define</span> SIGXFSZ 25
+<span style="color: rgba(0, 0, 255, 1)">#define</span> SIGVTALRM 26
+<span style="color: rgba(0, 0, 255, 1)">#define</span> SIGPROF 27
+<span style="color: rgba(0, 0, 255, 1)">#define</span> SIGWINCH 28
+<span style="color: rgba(0, 0, 255, 1)">#define</span> SIGIO 29
+<span style="color: rgba(0, 0, 255, 1)">#define</span> SIGPWR 30
+<span style="color: rgba(0, 0, 255, 1)">#define</span> SIGSYS 31
+<span style="color: rgba(0, 0, 255, 1)">#define</span> SIGUNUSED 31
+<span style="color: rgba(0, 0, 255, 1)">#define</span> SIGRTMIN 32<span style="color: rgba(0, 0, 0, 1)">
+
+#ifndef SIGEMT
+</span><span style="color: rgba(0, 0, 255, 1)">#define</span> SIGEMT 1122
+<span style="color: rgba(0, 0, 255, 1)">#endif</span>
+
+<span style="color: rgba(0, 0, 255, 1)">#define</span> R_OK 4
+<span style="color: rgba(0, 0, 255, 1)">#define</span> W_OK 2
+<span style="color: rgba(0, 0, 255, 1)">#define</span> X_OK 1
+<span style="color: rgba(0, 0, 255, 1)">#define</span> F_OK 0
+
+<span style="color: rgba(0, 0, 255, 1)">#define</span> IPC_STAT 0
+<span style="color: rgba(0, 0, 255, 1)">#define</span> IPC_SET 1
+<span style="color: rgba(0, 0, 255, 1)">#define</span> IPC_RMID 2
+
+<span style="color: rgba(0, 0, 255, 1)">#define</span> IPC_CREAT 01000
+<span style="color: rgba(0, 0, 255, 1)">#define</span> IPC_EXCL  02000
+<span style="color: rgba(0, 0, 255, 1)">#define</span> IPC_NOWAIT 00004000   /* return error on wait */
+<span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">#define IPC_RMID  0</span>
+
+<span style="color: rgba(0, 0, 255, 1)">#define</span> SHM_RDONLY 010000
+
+<span style="color: rgba(0, 0, 255, 1)">#define</span> WNOHANG 0x00000001
+
+<span style="color: rgba(0, 0, 255, 1)">#define</span> STDIN_FILENO 0
+<span style="color: rgba(0, 0, 255, 1)">#define</span> STDOUT_FILENO 1
+<span style="color: rgba(0, 0, 255, 1)">#define</span> STDERR_FILENO 2
+
+<span style="color: rgba(0, 0, 255, 1)">#define</span> close _close <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">减少warning C4996警告</span>
+<span style="color: rgba(0, 0, 255, 1)">#define</span> access _access <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">减少warning C4996警告</span>
+
+<span style="color: rgba(0, 0, 255, 1)">void</span> herror(<span style="color: rgba(0, 0, 255, 1)">const</span> <span style="color: rgba(0, 0, 255, 1)">char</span> *s); <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">gethostbyname出错时调用</span>
+<span style="color: rgba(0, 0, 255, 1)">void</span> bzero(<span style="color: rgba(0, 0, 255, 1)">void</span> *<span style="color: rgba(0, 0, 0, 1)">s, size_t n);
+
+#ifndef WIFEXITED
+</span><span style="color: rgba(0, 0, 255, 1)">#define</span> WIFEXITED(status)    (((status) &amp; 0xff) == 0)
+<span style="color: rgba(0, 0, 255, 1)">#endif</span> /* !defined WIFEXITED */<span style="color: rgba(0, 0, 0, 1)">
+#ifndef WEXITSTATUS
+</span><span style="color: rgba(0, 0, 255, 1)">#define</span> WEXITSTATUS(status)    (((status) &gt;&gt; 8) &amp; 0xff)
+<span style="color: rgba(0, 0, 255, 1)">#endif</span> /* !defined WEXITSTATUS */<span style="color: rgba(0, 0, 0, 1)">
+#ifndef WIFSIGNALED 
+</span><span style="color: rgba(0, 0, 255, 1)">#define</span> WIFSIGNALED(X) ((((X) &amp; 255) != 0x255 &amp;&amp; ((X) &amp; 255) != 0)) 
+<span style="color: rgba(0, 0, 255, 1)">#endif</span> /* !defined WIFSIGNALED */<span style="color: rgba(0, 0, 0, 1)">
+#ifndef WTERMSIG 
+</span><span style="color: rgba(0, 0, 255, 1)">#define</span> WTERMSIG(X) ((X) &amp; 255) 
+<span style="color: rgba(0, 0, 255, 1)">#endif</span> /* !defined WTERMSIG */
+
+<span style="color: rgba(0, 0, 255, 1)">struct</span><span style="color: rgba(0, 0, 0, 1)">  sockaddr_un {
+    </span><span style="color: rgba(0, 0, 255, 1)">short</span>   sun_family;             <span style="color: rgba(0, 128, 0, 1)">/*</span><span style="color: rgba(0, 128, 0, 1)"> AF_UNIX </span><span style="color: rgba(0, 128, 0, 1)">*/</span>
+    <span style="color: rgba(0, 0, 255, 1)">char</span>    sun_path[<span style="color: rgba(128, 0, 128, 1)">108</span>];          <span style="color: rgba(0, 128, 0, 1)">/*</span><span style="color: rgba(0, 128, 0, 1)"> path name (gag) </span><span style="color: rgba(0, 128, 0, 1)">*/</span><span style="color: rgba(0, 0, 0, 1)">
+};
+
+
+</span><span style="color: rgba(0, 0, 255, 1)">#endif</span> <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">WIN32</span>
+
+<span style="color: rgba(0, 128, 0, 1)">/*</span><span style="color: rgba(0, 128, 0, 1)">定义电话支付特别参数</span><span style="color: rgba(0, 128, 0, 1)">*/</span><span style="color: rgba(0, 0, 0, 1)">
+#ifdef WIN32
+</span><span style="color: rgba(0, 128, 0, 1)">/*</span><span style="color: rgba(0, 128, 0, 1)">定义主共享内存的大小</span><span style="color: rgba(0, 128, 0, 1)">*/</span><span style="color: rgba(0, 0, 0, 1)">
+#ifdef GR_SHM_SIZE
+</span><span style="color: rgba(0, 0, 255, 1)">#undef</span> GR_SHM_SIZE
+<span style="color: rgba(0, 0, 255, 1)">#endif</span>
+
+<span style="color: rgba(0, 0, 255, 1)">#define</span> GR_SHM_SIZE     2048 + ( sizeof( DEVINFO ) * 2048 ) + ( sizeof( SOCKINFO ) * 256 )
+<span style="color: rgba(0, 0, 255, 1)">#define</span> ATMINFO_OFFSET  2048
+<span style="color: rgba(0, 0, 255, 1)">#define</span> DEVINFO_OFFSET  2048
+<span style="color: rgba(0, 0, 255, 1)">#define</span> SOCKINFO_OFFSET ATMINFO_OFFSET + sizeof( DEVINFO ) * 2048
+
+<span style="color: rgba(0, 128, 0, 1)">/*</span><span style="color: rgba(0, 128, 0, 1)">定义前置机的信息键值</span><span style="color: rgba(0, 128, 0, 1)">*/</span>
+<span style="color: rgba(0, 0, 255, 1)">#define</span> KEYGET(A)       ftok( getenv( "HOME" ), A )
+
+<span style="color: rgba(0, 0, 255, 1)">#define</span> SHM_KEY         KEYGET( 10 )    /*前置机管理器的共享内存的键值*/
+
+<span style="color: rgba(0, 0, 255, 1)">#define</span> CRD_KEY         KEYGET( 11 )    /*C端读队列的键值 -- 指前端调度程序而言*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> CWT_KEY         KEYGET( 12 )    /*C端写队列的键值 -- 指前端调度程序而言*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> HRD_KEY         KEYGET( 13 )    /*H端读队列的键值 -- 指后台调度程序而言*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> HWT_KEY         KEYGET( 14 )    /*H端写队列的键值 -- 指后台调度程序而言*/
+
+<span style="color: rgba(0, 0, 255, 1)">#define</span> MON_KEY         KEYGET( 15 )    /*Unix交易显示队列的键值*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> TRN_MON_KEY     KEYGET( 16 )    /*监控信息传送服务队列的键值*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> TRN_SHM_KEY     KEYGET( 17 )    /*监控信息传送服务共享内存的键值*/
+
+<span style="color: rgba(0, 0, 255, 1)">#define</span> SHM_DICT_KEY    KEYGET( 18 )    /*数据字典的共享内存的键值*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> FIREWALL_KEY    KEYGET( 19 )    /*防火墙标志的键值*/
+
+<span style="color: rgba(0, 0, 255, 1)">#define</span> CPROC_ID        KEYGET( 0  )    /*Ｃ端处理系统的ＩＤ，必须有*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> KPROC_ID        KEYGET( 1  )    /*Ｋ端处理系统的ＩＤ，它可以有，可以没有*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> HPROC_ID        KEYGET( 2  )    /*Ｈ端处理系统的ＩＤ，必须有*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> MONITOR_ID      KEYGET( 3  )    /*Ｕｉｎｘ监控的ＩＤ，可有可无*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> MONCLI_ID       KEYGET( 4  )    /*交易转发系统的ＩＤ，可有可无*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> SYSSEMP_KEY     KEYGET( 30 )    /*定义系统信号量的键值*/
+
+<span style="color: rgba(0, 0, 255, 1)">#define</span> CRE_SHM_KEY     KEYGET( 40 )    /*管理中心的共享内存的键值*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> CLI_MON_KEY     KEYGET( 41 )    /*管理中心队列的键值*/
+
+<span style="color: rgba(0, 128, 0, 1)">/*</span><span style="color: rgba(0, 128, 0, 1)">冠融前置机系统XML的固定路径的定义，特定的模块的配置文件的名字为：模块名（大写字母或原名）+“.XML”</span><span style="color: rgba(0, 128, 0, 1)">*/</span>
+<span style="color: rgba(0, 0, 255, 1)">#define</span> DBGFLG          KEYGET( 127 )     /*调试信息设定*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> SERVINFO_KEY    KEYGET( 126 )     /*系统信息*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> SERVINFO_SIZE   8192              /*最大为255个信息*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> DEVINFO_KEY     KEYGET( 125 )     /*设备接入信息*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> SOCKINFO_KEY    KEYGET( 124 )     /*SOCKINFO信息，用于长链管理*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> ACCESS_SN_KEY   KEYGET( 123 )     /*访问平台流水的KEY，用于信号量*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> DEVINFO_SIZE    sizeof( DEVINFO ) * 2048
+<span style="color: rgba(0, 0, 255, 1)">#define</span> SOCKINFO_SIZE   sizeof( SOCKINFO ) * 256
+
+<span style="color: rgba(0, 128, 0, 1)">/*</span><span style="color: rgba(0, 128, 0, 1)">集成平台新加的定义</span><span style="color: rgba(0, 128, 0, 1)">*/</span>
+<span style="color: rgba(0, 0, 255, 1)">#define</span> DBGFILE         "GR_DEBUG_FILE"        /*缺省的调试信息文件*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> GRSYSCONF       "GR_SYS_CONF"       /*系统配置路径的环境变量*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> GRDBGCONF       "GR_DEBUG_PATH"     /*调试信息存放路径的环境变量*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> GRLOGCONF       "GR_LOG_PATH"       /*LOG日志存放的路径的环境变量*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> TRTMP           "GR_TMP_PATH"       /*交易临时文件的路径*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> GRFILE          "GR_FILES"          /*文件所在的路径*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> GRBKFILE        "GR_BACKFILE"       /*备份文件所在的路径*/
+
+<span style="color: rgba(0, 128, 0, 1)">/*</span><span style="color: rgba(0, 128, 0, 1)">增强型调试信息</span><span style="color: rgba(0, 128, 0, 1)">*/</span>
+<span style="color: rgba(0, 0, 255, 1)">#define</span> DBGOPEN         "GR_DEBUG_ON"       /*调试信息是否开启0不开启*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> LOGOPEN         "GR_LOG_ON"         /*调试信息是否开启0不开启*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> DBGLEVEL        "GR_DEBUG_LEVEL"    /*定义调试信息的级别，默认的情况下为5级，5级输出所有的信息，兼容原来的调试程序*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> DBGL1FILE        "GR_DEBUG_L1"        /*定义调试信息一级的文件名*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> DBGL2FILE        "GR_DEBUG_L2"        /*定义调试信息二级的文件名*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> DBGL3FILE        "GR_DEBUG_L3"        /*定义调试信息三级的文件名*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> DBGL4FILE        "GR_DEBUG_L4"        /*定义调试信息四级的文件名*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> DBGL5FILE        "GR_DEBUG_L5"        /*定义调试信息五级的文件名*/
+<span style="color: rgba(0, 128, 0, 1)">/*</span><span style="color: rgba(0, 128, 0, 1)">#define WRITEBYDAY      "WRITEBYDAY"  </span><span style="color: rgba(0, 128, 0, 1)">*/</span>      <span style="color: rgba(0, 128, 0, 1)">/*</span><span style="color: rgba(0, 128, 0, 1)">按日输出调试信息</span><span style="color: rgba(0, 128, 0, 1)">*/</span>
+
+<span style="color: rgba(0, 0, 255, 1)">#define</span> LOGLEVEL        "GR_LOG_LEVEL"      /*定义LOG的级别*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> LOGL1FILE       "GR_LOG_L1"         /*定义LOG的一级文件名*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> LOGL2FILE       "GR_LOG_L2"         /*定义LOG的二级文件名*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> LOGL3FILE       "GR_LOG_L3"         /*定义LOG的三级文件名*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> LOGL4FILE       "GR_LOG_L4"         /*定义LOG的四级文件名*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> LOGL5FILE       "GR_LOG_L5"         /*定义LOG的五级文件名*/
+
+<span style="color: rgba(0, 128, 0, 1)">/*</span><span style="color: rgba(0, 128, 0, 1)">定义系统中固定配置信息的节点名</span><span style="color: rgba(0, 128, 0, 1)">*/</span>
+<span style="color: rgba(0, 0, 255, 1)">#define</span> CFGROOT         "&lt;GR&gt;"              /*在所有的配置文件中的根结点*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> BRDADDR         "&lt;BroadCastAddr&gt;"  /*广播地址*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> BRDNAME         "&lt;BroadName&gt;"      /*绑定广播端口的服务名，在/etc/services中配置的名字*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> SVRADDR         "&lt;SvrAddr&gt;"        /*交易报文需要写入的IP地址，非模块间通讯的IP地址*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> SVRPORT         "&lt;SvrPort&gt;"        /*交易报文件需要写入的端口，非模块间通讯的端口*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> SVRTIMEOUT      "&lt;SvrTimeOut&gt;"     /*Server读写超时，单位为秒*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> CLITIMEOUT      "&lt;ClrTimeOut&gt;"     /*Client读写超时，单位为秒*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> SVRIDLE         "&lt;SvrIDLETime&gt;"    /*空闲最长时间，单位为秒*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> CLIIDLE         "&lt;CliIDLETime&gt;"    /*Client空闲最长时间，单位为秒*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> LNKSTYLE        "&lt;LinkStyle&gt;"      /*接入或请求的链路形式*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> ILLEGAL         "&lt;NoneIP&gt;"         /*非法的接入*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> REFUSES         "&lt;NotAllow&gt;"       /*不允许接入的次数*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> SHMLOAD         "&lt;ShmFile&gt;"        /*装入共享内存的文件名*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> FIXEDKEY        "&lt;FixedKey&gt;"       /*固定主密钥*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> LNCHKTIME       "&lt;LnChkTime&gt;"      /*链路检测时间*/
+
+<span style="color: rgba(0, 128, 0, 1)">/*</span><span style="color: rgba(0, 128, 0, 1)">守护进程所使用的参数</span><span style="color: rgba(0, 128, 0, 1)">*/</span>
+<span style="color: rgba(0, 0, 255, 1)">#define</span> SRVNAME         "&lt;ServicesName&gt;"    /*前置机绑定服务端口的服务名，在/etc/services中配置的名字*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> FIREWALLEN      "&lt;FireWallEnabled&gt;"/*防火墙使能，1为能，0为不能*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> MAXLNKCNT       "&lt;MaxLinkCount&gt;"   /*最大接入数，默认值为512，最大不超过2048*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> SOCKSEND        "&lt;SockSendVal&gt;"    /*通讯的SOCKET是否按传值进入子进程*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> SCHEDULERFLG    "&lt;SchFlag&gt;"        /*是否启用调度程式标志*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> SCHEDULERNAM    "&lt;SchName&gt;"        /*调度进程的名字*/
+
+<span style="color: rgba(0, 128, 0, 1)">/*</span><span style="color: rgba(0, 128, 0, 1)">交易调度系统所用的参数 CScheduler.c中用到的信息</span><span style="color: rgba(0, 128, 0, 1)">*/</span>
+<span style="color: rgba(0, 0, 255, 1)">#define</span> SNDMON          "&lt;Datagram&gt;/&lt;MonTag&gt;"       /*是否发往监控*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> CODESW          "&lt;Datagram&gt;/&lt;DgCodeChg&gt;"    /*字符的转换模式*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> CODEDLL         "&lt;Datagram&gt;/&lt;DgExtChgLib&gt;"  /*外置转换程式的库名*/
+
+<span style="color: rgba(0, 0, 255, 1)">#define</span> DGTYPE          "&lt;Datagram&gt;/&lt;DgType&gt;"       /*报文类型*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> DGHDLEN         "&lt;Datagram&gt;/&lt;DgHeadLen&gt;"    /*报文头长度*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> DGVERIFY        "&lt;Datagram&gt;/&lt;DgVerify&gt;"     /*报文头是否验证*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> DGCONFIRM       "&lt;Datagram&gt;/&lt;DgConfirm&gt;"    /*报文头验证信息*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> DGLNSTA         "&lt;Datagram&gt;/&lt;DgLenStyle&gt;"   /*报文长度标识*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> DGFLAG          "&lt;Datagram&gt;/&lt;DgFlag&gt;"       /*报文具信息，如长度、结束符等*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> TRSTYLE         "&lt;Datagram&gt;/&lt;TrStyle&gt;"      /*交易码的特点*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> TRPOS           "&lt;Datagram&gt;/&lt;TrStartPos&gt;"   /*交易码的起始位置*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> TRLEN           "&lt;Datagram&gt;/&lt;TrCodeLen&gt;"    /*交易码的长度*/
+
+<span style="color: rgba(0, 0, 255, 1)">#define</span> COMMTYPE        "&lt;COMMTYPE%d&gt;"              /*构成通讯类型*/
+
+<span style="color: rgba(0, 128, 0, 1)">/*</span><span style="color: rgba(0, 128, 0, 1)">---------TransInfo----------</span><span style="color: rgba(0, 128, 0, 1)">*/</span>
+<span style="color: rgba(0, 0, 255, 1)">#define</span> ANSTYPE         "&lt;T%s&gt;/&lt;MustAnswer&gt;"        /*此交易是否必须返回数据*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> ANSTRCODE       "&lt;T%s&gt;/&lt;AnswerCode&gt;"        /*交易的应答交易码*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> ANSRTNAME       "&lt;T%s&gt;/&lt;RootName&gt;"          /*应答交易的XML报文的根节点*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> TRPROC          "&lt;T%s&gt;/&lt;Proc&gt;"              /*交易后处理模块的函数名*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> TRCORR          "&lt;T%s&gt;/&lt;AutoCorection&gt;"     /*自动冲正标志*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> TSWLIB          "&lt;T%s&gt;/&lt;TSWLib&gt;"            /*交易处理的动态库名*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> TRCRPROC        "&lt;T%s&gt;/&lt;CorProc&gt;"           /*交易自动冲正的函数名*/
+
+<span style="color: rgba(0, 0, 255, 1)">#define</span> MKNODE( BUFF, NODE, TRANS ) sprintf( BUFF, NODE, TRANS ) /*构造交易信息节点名*/
+
+<span style="color: rgba(0, 0, 255, 1)">#if</span> 0
+<span style="color: rgba(0, 0, 255, 1)">struct</span><span style="color: rgba(0, 0, 0, 1)"> timeb
+{
+    time_t time;
+    unsigned </span><span style="color: rgba(0, 0, 255, 1)">short</span><span style="color: rgba(0, 0, 0, 1)"> millitm;
+    </span><span style="color: rgba(0, 0, 255, 1)">short</span><span style="color: rgba(0, 0, 0, 1)"> timezone;
+    </span><span style="color: rgba(0, 0, 255, 1)">short</span><span style="color: rgba(0, 0, 0, 1)"> dstflag;
+};
+
+</span><span style="color: rgba(0, 0, 255, 1)">int</span> ftime(<span style="color: rgba(0, 0, 255, 1)">struct</span> timeb *<span style="color: rgba(0, 0, 0, 1)">tp);
+</span><span style="color: rgba(0, 0, 255, 1)">#endif</span><span style="color: rgba(0, 0, 0, 1)">
+
+
+# define FAPPEND        O_APPEND
+# define FFSYNC         O_FSYNC
+# define FASYNC         O_ASYNC
+# define FNONBLOCK      O_NONBLOCK
+# define FNDELAY        O_NDELAY
+
+
+#ifndef _ASM_GENERIC_FCNTL_H
+</span><span style="color: rgba(0, 0, 255, 1)">#define</span> _ASM_GENERIC_FCNTL_H
+
+<span style="color: rgba(0, 128, 0, 1)">/*</span><span style="color: rgba(0, 128, 0, 1)">
+ * FMODE_EXEC is 0x20
+ * FMODE_NONOTIFY is 0x1000000
+ * These cannot be used by userspace O_* until internal and external open
+ * flags are split.
+ * -Eric Paris
+ </span><span style="color: rgba(0, 128, 0, 1)">*/</span>
+
+<span style="color: rgba(0, 128, 0, 1)">/*</span><span style="color: rgba(0, 128, 0, 1)">
+ * When introducing new O_* bits, please check its uniqueness in fcntl_init().
+ </span><span style="color: rgba(0, 128, 0, 1)">*/</span>
+
+<span style="color: rgba(0, 0, 255, 1)">#define</span> O_ACCMODE       00000003
+<span style="color: rgba(0, 0, 255, 1)">#define</span> O_RDONLY        00000000
+<span style="color: rgba(0, 0, 255, 1)">#define</span> O_WRONLY        00000001
+<span style="color: rgba(0, 0, 255, 1)">#define</span> O_RDWR          00000002<span style="color: rgba(0, 0, 0, 1)">
+#ifndef O_CREAT
+</span><span style="color: rgba(0, 0, 255, 1)">#define</span> O_CREAT         00000100        /* not fcntl */
+<span style="color: rgba(0, 0, 255, 1)">#endif</span><span style="color: rgba(0, 0, 0, 1)">
+#ifndef O_EXCL
+</span><span style="color: rgba(0, 0, 255, 1)">#define</span> O_EXCL          00000200        /* not fcntl */
+<span style="color: rgba(0, 0, 255, 1)">#endif</span><span style="color: rgba(0, 0, 0, 1)">
+#ifndef O_NOCTTY
+</span><span style="color: rgba(0, 0, 255, 1)">#define</span> O_NOCTTY        00000400        /* not fcntl */
+<span style="color: rgba(0, 0, 255, 1)">#endif</span><span style="color: rgba(0, 0, 0, 1)">
+#ifndef O_TRUNC
+</span><span style="color: rgba(0, 0, 255, 1)">#define</span> O_TRUNC         00001000        /* not fcntl */
+<span style="color: rgba(0, 0, 255, 1)">#endif</span><span style="color: rgba(0, 0, 0, 1)">
+#ifndef O_APPEND
+</span><span style="color: rgba(0, 0, 255, 1)">#define</span> O_APPEND        00002000
+<span style="color: rgba(0, 0, 255, 1)">#endif</span><span style="color: rgba(0, 0, 0, 1)">
+#ifndef O_NONBLOCK
+</span><span style="color: rgba(0, 0, 255, 1)">#define</span> O_NONBLOCK      00004000
+<span style="color: rgba(0, 0, 255, 1)">#endif</span><span style="color: rgba(0, 0, 0, 1)">
+#ifndef O_DSYNC
+</span><span style="color: rgba(0, 0, 255, 1)">#define</span> O_DSYNC         00010000        /* used to be O_SYNC, see below */
+<span style="color: rgba(0, 0, 255, 1)">#endif</span><span style="color: rgba(0, 0, 0, 1)">
+#ifndef FASYNC
+</span><span style="color: rgba(0, 0, 255, 1)">#define</span> FASYNC          00020000        /* fcntl, for BSD compatibility */
+<span style="color: rgba(0, 0, 255, 1)">#endif</span><span style="color: rgba(0, 0, 0, 1)">
+#ifndef O_DIRECT
+</span><span style="color: rgba(0, 0, 255, 1)">#define</span> O_DIRECT        00040000        /* direct disk access hint */
+<span style="color: rgba(0, 0, 255, 1)">#endif</span><span style="color: rgba(0, 0, 0, 1)">
+#ifndef O_LARGEFILE
+</span><span style="color: rgba(0, 0, 255, 1)">#define</span> O_LARGEFILE     00100000
+<span style="color: rgba(0, 0, 255, 1)">#endif</span><span style="color: rgba(0, 0, 0, 1)">
+#ifndef O_DIRECTORY
+</span><span style="color: rgba(0, 0, 255, 1)">#define</span> O_DIRECTORY     00200000        /* must be a directory */
+<span style="color: rgba(0, 0, 255, 1)">#endif</span><span style="color: rgba(0, 0, 0, 1)">
+#ifndef O_NOFOLLOW
+</span><span style="color: rgba(0, 0, 255, 1)">#define</span> O_NOFOLLOW      00400000        /* don't follow links */
+<span style="color: rgba(0, 0, 255, 1)">#endif</span><span style="color: rgba(0, 0, 0, 1)">
+#ifndef O_NOATIME
+</span><span style="color: rgba(0, 0, 255, 1)">#define</span> O_NOATIME       01000000
+<span style="color: rgba(0, 0, 255, 1)">#endif</span><span style="color: rgba(0, 0, 0, 1)">
+#ifndef O_CLOEXEC
+</span><span style="color: rgba(0, 0, 255, 1)">#define</span> O_CLOEXEC       02000000        /* set close_on_exec */
+<span style="color: rgba(0, 0, 255, 1)">#endif</span>
+
+<span style="color: rgba(0, 128, 0, 1)">/*</span><span style="color: rgba(0, 128, 0, 1)">
+ * Before Linux 2.6.33 only O_DSYNC semantics were implemented, but using
+ * the O_SYNC flag.  We continue to use the existing numerical value
+ * for O_DSYNC semantics now, but using the correct symbolic name for it.
+ * This new value is used to request true Posix O_SYNC semantics.  It is
+ * defined in this strange way to make sure applications compiled against
+ * new headers get at least O_DSYNC semantics on older kernels.
+ *
+ * This has the nice side-effect that we can simply test for O_DSYNC
+ * wherever we do not care if O_DSYNC or O_SYNC is used.
+ *
+ * Note: __O_SYNC must never be used directly.
+ </span><span style="color: rgba(0, 128, 0, 1)">*/</span><span style="color: rgba(0, 0, 0, 1)">
+#ifndef O_SYNC
+</span><span style="color: rgba(0, 0, 255, 1)">#define</span> __O_SYNC        04000000
+<span style="color: rgba(0, 0, 255, 1)">#define</span> O_SYNC          (__O_SYNC|O_DSYNC)
+<span style="color: rgba(0, 0, 255, 1)">#endif</span><span style="color: rgba(0, 0, 0, 1)">
+
+#ifndef O_PATH
+</span><span style="color: rgba(0, 0, 255, 1)">#define</span> O_PATH          010000000
+<span style="color: rgba(0, 0, 255, 1)">#endif</span><span style="color: rgba(0, 0, 0, 1)">
+
+#ifndef O_NDELAY
+</span><span style="color: rgba(0, 0, 255, 1)">#define</span> O_NDELAY        O_NONBLOCK
+<span style="color: rgba(0, 0, 255, 1)">#endif</span>
+
+<span style="color: rgba(0, 0, 255, 1)">#define</span> F_DUPFD         0       /* dup */
+<span style="color: rgba(0, 0, 255, 1)">#define</span> F_GETFD         1       /* get close_on_exec */
+<span style="color: rgba(0, 0, 255, 1)">#define</span> F_SETFD         2       /* set/clear close_on_exec */
+<span style="color: rgba(0, 0, 255, 1)">#define</span> F_GETFL         3       /* get file-&gt;f_flags */
+<span style="color: rgba(0, 0, 255, 1)">#define</span> F_SETFL         4       /* set file-&gt;f_flags */<span style="color: rgba(0, 0, 0, 1)">
+#ifndef F_GETLK
+</span><span style="color: rgba(0, 0, 255, 1)">#define</span> F_GETLK         5
+<span style="color: rgba(0, 0, 255, 1)">#define</span> F_SETLK         6
+<span style="color: rgba(0, 0, 255, 1)">#define</span> F_SETLKW        7
+<span style="color: rgba(0, 0, 255, 1)">#endif</span><span style="color: rgba(0, 0, 0, 1)">
+#ifndef F_SETOWN
+</span><span style="color: rgba(0, 0, 255, 1)">#define</span> F_SETOWN        8       /* for sockets. */
+<span style="color: rgba(0, 0, 255, 1)">#define</span> F_GETOWN        9       /* for sockets. */
+<span style="color: rgba(0, 0, 255, 1)">#endif</span><span style="color: rgba(0, 0, 0, 1)">
+#ifndef F_SETSIG
+</span><span style="color: rgba(0, 0, 255, 1)">#define</span> F_SETSIG        10      /* for sockets. */
+<span style="color: rgba(0, 0, 255, 1)">#define</span> F_GETSIG        11      /* for sockets. */
+<span style="color: rgba(0, 0, 255, 1)">#endif</span><span style="color: rgba(0, 0, 0, 1)">
+
+#ifndef CONFIG_64BIT
+#ifndef F_GETLK64
+</span><span style="color: rgba(0, 0, 255, 1)">#define</span> F_GETLK64       12      /*  using 'struct flock64' */
+<span style="color: rgba(0, 0, 255, 1)">#define</span> F_SETLK64       13
+<span style="color: rgba(0, 0, 255, 1)">#define</span> F_SETLKW64      14
+<span style="color: rgba(0, 0, 255, 1)">#endif</span>
+<span style="color: rgba(0, 0, 255, 1)">#endif</span><span style="color: rgba(0, 0, 0, 1)">
+
+#ifndef F_SETOWN_EX
+</span><span style="color: rgba(0, 0, 255, 1)">#define</span> F_SETOWN_EX     15
+<span style="color: rgba(0, 0, 255, 1)">#define</span> F_GETOWN_EX     16
+<span style="color: rgba(0, 0, 255, 1)">#endif</span><span style="color: rgba(0, 0, 0, 1)">
+
+#ifndef F_GETOWNER_UIDS
+</span><span style="color: rgba(0, 0, 255, 1)">#define</span> F_GETOWNER_UIDS 17
+<span style="color: rgba(0, 0, 255, 1)">#endif</span>
+
+<span style="color: rgba(0, 0, 255, 1)">#define</span> F_OWNER_TID     0
+<span style="color: rgba(0, 0, 255, 1)">#define</span> F_OWNER_PID     1
+<span style="color: rgba(0, 0, 255, 1)">#define</span> F_OWNER_PGRP    2
+
+
+<span style="color: rgba(0, 128, 0, 1)">/*</span><span style="color: rgba(0, 128, 0, 1)"> for F_[GET|SET]FL </span><span style="color: rgba(0, 128, 0, 1)">*/</span>
+<span style="color: rgba(0, 0, 255, 1)">#define</span> FD_CLOEXEC      1       /* actually anything with low bit set goes */
+
+<span style="color: rgba(0, 128, 0, 1)">/*</span><span style="color: rgba(0, 128, 0, 1)"> for posix fcntl() and lockf() </span><span style="color: rgba(0, 128, 0, 1)">*/</span><span style="color: rgba(0, 0, 0, 1)">
+#ifndef F_RDLCK
+</span><span style="color: rgba(0, 0, 255, 1)">#define</span> F_RDLCK         0
+<span style="color: rgba(0, 0, 255, 1)">#define</span> F_WRLCK         1
+<span style="color: rgba(0, 0, 255, 1)">#define</span> F_UNLCK         2
+<span style="color: rgba(0, 0, 255, 1)">#endif</span>
+
+<span style="color: rgba(0, 0, 255, 1)">struct</span><span style="color: rgba(0, 0, 0, 1)"> flock {
+    </span><span style="color: rgba(0, 0, 255, 1)">short</span><span style="color: rgba(0, 0, 0, 1)">   l_type;
+    </span><span style="color: rgba(0, 0, 255, 1)">short</span><span style="color: rgba(0, 0, 0, 1)">   l_whence;
+    size_t  l_start;
+    size_t  l_len;
+    size_t  l_pid;
+};
+
+</span><span style="color: rgba(0, 128, 0, 1)">/*</span><span style="color: rgba(0, 128, 0, 1)"> for old implementation of bsd flock () </span><span style="color: rgba(0, 128, 0, 1)">*/</span><span style="color: rgba(0, 0, 0, 1)">
+#ifndef F_EXLCK
+</span><span style="color: rgba(0, 0, 255, 1)">#define</span> F_EXLCK         4       /* or 3 */
+<span style="color: rgba(0, 0, 255, 1)">#define</span> F_SHLCK         8       /* or 4 */
+<span style="color: rgba(0, 0, 255, 1)">#endif</span>
+
+<span style="color: rgba(0, 128, 0, 1)">/*</span><span style="color: rgba(0, 128, 0, 1)"> operations for bsd flock(), also used by the kernel implementation </span><span style="color: rgba(0, 128, 0, 1)">*/</span>
+<span style="color: rgba(0, 0, 255, 1)">#define</span> LOCK_SH         1       /* shared lock */
+<span style="color: rgba(0, 0, 255, 1)">#define</span> LOCK_EX         2       /* exclusive lock */
+<span style="color: rgba(0, 0, 255, 1)">#define</span> LOCK_NB         4       /* or'd with one of the above to prevent<span style="color: rgba(0, 0, 0, 1)">
+                                   blocking </span>*/
+<span style="color: rgba(0, 0, 255, 1)">#define</span> LOCK_UN         8       /* remove lock */
+
+<span style="color: rgba(0, 0, 255, 1)">#define</span> LOCK_MAND       32      /* This is a mandatory flock ... */
+<span style="color: rgba(0, 0, 255, 1)">#define</span> LOCK_READ       64      /* which allows concurrent read operations */
+<span style="color: rgba(0, 0, 255, 1)">#define</span> LOCK_WRITE      128     /* which allows concurrent write operations */
+<span style="color: rgba(0, 0, 255, 1)">#define</span> LOCK_RW         192     /* which allows concurrent read &amp; write ops */
+
+<span style="color: rgba(0, 0, 255, 1)">#define</span> F_LINUX_SPECIFIC_BASE   1024
+
+
+
+<span style="color: rgba(0, 0, 255, 1)">#endif</span> /* _ASM_GENERIC_FCNTL_H */
+
+<span style="color: rgba(0, 0, 255, 1)">#else</span><span style="color: rgba(0, 0, 0, 1)">
+
+#include </span>&lt;sys/socket.h&gt;<span style="color: rgba(0, 0, 0, 1)">
+#include </span>&lt;netinet/<span style="color: rgba(0, 0, 255, 1)">in</span>.h&gt;<span style="color: rgba(0, 0, 0, 1)">
+#include </span>&lt;arpa/inet.h&gt;<span style="color: rgba(0, 0, 0, 1)">
+#include </span>&lt;unistd.h&gt;<span style="color: rgba(0, 0, 0, 1)">
+#include </span>&lt;sys/types.h&gt;<span style="color: rgba(0, 0, 0, 1)">
+#ifdef _XOPEN_SOURCE
+#include </span>&lt;sys/ipc.h&gt; 
+<span style="color: rgba(0, 0, 255, 1)">#endif</span><span style="color: rgba(0, 0, 0, 1)">
+#include </span>&lt;netinet/<span style="color: rgba(0, 0, 255, 1)">in</span>.h&gt;<span style="color: rgba(0, 0, 0, 1)">
+#include </span>&lt;sys/shm.h&gt;<span style="color: rgba(0, 0, 0, 1)">
+#include </span>&lt;sys/sem.h&gt;<span style="color: rgba(0, 0, 0, 1)">
+#include </span>&lt;sys/timeb.h&gt;<span style="color: rgba(0, 0, 0, 1)">
+#include </span>&lt;sys/ioctl.h&gt;<span style="color: rgba(0, 0, 0, 1)">
+#include </span>&lt;sys/types.h&gt;<span style="color: rgba(0, 0, 0, 1)">
+#include </span>&lt;sys/socket.h&gt;<span style="color: rgba(0, 0, 0, 1)">
+#include </span>&lt;sys/times.h&gt;<span style="color: rgba(0, 0, 0, 1)">
+#include </span>&lt;sys/<span style="color: rgba(0, 0, 255, 1)">select</span>.h&gt;<span style="color: rgba(0, 0, 0, 1)">
+#include </span>&lt;sys/un.h&gt;<span style="color: rgba(0, 0, 0, 1)">
+#include </span>&lt;sys/ipc.h&gt;<span style="color: rgba(0, 0, 0, 1)">
+#include </span>&lt;sys/msg.h&gt;<span style="color: rgba(0, 0, 0, 1)">
+# ifdef _XOPEN_SOURCE_EXTENDED
+#  include </span>&lt;arpa/inet.h&gt;<span style="color: rgba(0, 0, 0, 1)">
+# endif
+#include </span>&lt;sys/socket.h&gt;
+
+
+<span style="color: rgba(0, 0, 255, 1)">#endif</span> <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">WIN32</span>
+
+<span style="color: rgba(0, 0, 255, 1)">#define</span> XML_INDEX_TEST 1
+<span style="color: rgba(0, 0, 255, 1)">#define</span> Sleep SleepCustom
+
+<span style="color: rgba(0, 0, 255, 1)">#endif</span> <span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">__HCH_COMPLIE_ON_WIN__</span></pre>
+</div>
+<p>&nbsp;</p>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2020-03-06 17:56</span>&nbsp;
+<a href="https://www.cnblogs.com/kingstarer/">皇家救星</a>&nbsp;
+阅读(<span id="post_view_count">1096</span>)&nbsp;
+评论(<span id="post_comment_count">0</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=12427962" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(12427962);return false;">收藏</a>&nbsp;
+<a href="javascript:void(0)" onclick="reportManager.report({ currentUserId: '', targetType: 'blogPost', targetId: '12427962', targetLink: 'https://www.cnblogs.com/kingstarer/p/12427962.html', title: 'windows上编译linux程序代码需要用到的头文件' })">举报</a></div>
+        </div>
+        <script src="https://common.cnblogs.com/highlight/10.3.1/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 234136, cb_blogApp = 'kingstarer', cb_blogUserGuid = '6c01f56e-ee22-e511-b908-9dcfd8948a71';
+    var cb_entryId = 12427962, cb_entryCreatedDate = '2020-03-06 17:56', cb_postType = 1;
+    updatePostStats(
+        [cb_entryId],
+        function(id, count) { $("#post_view_count").text(count) },
+        function(id, count) { $("#post_comment_count").text(count) })
+    zoomManager.apply("#cnblogs_post_body img:not(.code_img_closed):not(.code_img_opened)");
+</script>
+        <a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <div id="cnblogs_c1" class="under-post-card">
+        <div id='div-gpt-ad-1592365906576-0' style='width: 300px; height: 250px;'></div>
+    </div>
+    <div id="under_post_card1"></div>
+    <div id="cnblogs_c2" class="under-post-card">
+        <div id='div-gpt-ad-1592366332455-0' style='width: 468px; height: 60px;'></div>
+    </div>
+    <div id="under_post_card2"></div>
+    <div id="HistoryToday" class="under-post-card"></div>
+    <script type="text/javascript">
+       var commentManager = new blogCommentManager();
+       commentManager.renderComments(0);
+       fixPostBody();
+       deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);       deliverT2();
+       deliverC1C2();
+       loadNewsAndKb();
+       loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);       LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+       GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+       loadOptUnderPost();
+       GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+
+    </div>
+</div>
+            </div>
+        </div>
+
+        <div id="sideBar">
+            <div id="sideBarMain">
+                <div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+<div id="sidebar_c3"></div>
+                <div id="calendar"><div id="blog-calendar" style="display:none"></div></div>                
+                <script>loadBlogDefaultCalendar();</script>
+                <div id="leftcontentcontainer">
+                    <!-- begin:SingleColumn -->
+                    <div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+                    <!-- end:  SingleColumn -->
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div id="footer">
+        <!--done-->
+Copyright &copy; 2021 皇家救星
+<br /><span id="poweredby">Powered by .NET 5.0 on Kubernetes</span>
+
+    </div>
+</div>
+
+    
+
+    <input type="hidden" id="antiforgery_token" value="CfDJ8L-rpLgFVEJMgssCVvNUAjvqAU_M-SDiOj1ULbH03CIfFxHPnjZVobvZVbI_IGsyRXrrMK76OlOe1LpKyQMu8Pj6rnQ9AnhA8GVn0yM07-vu2Y3Hgr8_hLmENsOh5iqTkE0vHHjvosuLEYqZ3ZOEE2o" />
+</body>
+</html>

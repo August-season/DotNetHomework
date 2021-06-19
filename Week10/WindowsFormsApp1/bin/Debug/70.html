@@ -1,0 +1,384 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin-when-crossorigin" />
+    <meta name="description" content="MySQL8.0性能优化，引擎、分表 / 拆表 / 分库 / 分盘、索引优化、脚本SQL优化、InnoDB缓冲池优化、连接池优化、MySQL日志" />
+    <meta property="og:description" content="MySQL8.0性能优化，引擎、分表 / 拆表 / 分库 / 分盘、索引优化、脚本SQL优化、InnoDB缓冲池优化、连接池优化、MySQL日志" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>MySQL8.0性能优化 - Sol·wang - 博客园</title>
+    <link id="favicon" rel="shortcut icon" href="//common.cnblogs.com/favicon.svg" type="image/svg+xml" />
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=6tvK5XC6GPbg3p_sy7wzz_2291HoYACr4440iKBzQIw" />
+    <link id="MainCss" rel="stylesheet" href="/skins/codinglife/bundle-codinglife.min.css?v=2uJkpdACLVfstRQ7zeCFK19brTwKuDEaNBLgKz9nm3A" />
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/Sol-wang/custom.css?v=bknuz8SPPFN8iLd3KxXJVEdDB&#x2B;c=" />
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/codinglife/bundle-codinglife-mobile.min.css?v=DwDRKMd1bmjnJZ4iQqrTCO9QLlYb6OZaUAzHoHIIihg" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/Sol-wang/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/Sol-wang/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/Sol-wang/wlwmanifest.xml" />
+    <script>
+        var currentBlogId = 678188;
+        var currentBlogApp = 'Sol-wang';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var isBlogOwner = false;
+        var skinName = 'CodingLife';
+        var visitorUserId = '';
+    </script>
+        <script>
+            var currentPostDateAdded = '2021-06-19 05:55';
+        </script>
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=ZUvfwhWs5fv-s8Nv7WofCOhwKAxiDO928zdWFzhnOPk"></script>
+    
+    
+    
+</head>
+<body class="has-navbar has-bannerbar">
+    <a name="top"></a>
+            <a target="_blank" href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:pc|pp:bokeyuan-huodong-21nianzhongdacu-neiyePCtonglanbanner|pu:21nianzhongdacu-neiyePCtonglanbanner|ci:21nzdc|kw:10224545" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-pc')">
+                <div class="bannerbar aliyun forpc" style="background-size: contain; filter: brightness(0.95); background-image: url(https://img2020.cnblogs.com/blog/35695/202106/35695-20210610183724605-1725070929.jpg)">
+                </div>
+            </a>
+            <div id="bannerbar" class="bannerbar-mobile formobile">
+            <a href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:mb|pp:bokeyuan-huodong-21nianzhongdacu-neiyeyidongduantonglanbanner|pu:21nianzhongdacu-neiyeyidongduantonglanbanner|ci:21nzdc|kw:10224547" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-mobile')">
+                <img src="https://img2020.cnblogs.com/blog/35695/202106/35695-20210610184806729-1738888164.jpg" alt="" />
+            </a>
+            </div>
+    <div id="top_nav" class="navbar forpc">
+        <nav id="nav_main" class="navbar-main">
+            <ul id="nav_left" class="navbar-list navbar-left">
+                <li class="navbar-branding"><a href="https://www.cnblogs.com/" title="开发者的网上家园"><img src="/images/logo.svg?v=R9M0WmLAIPVydmdzE2keuvnjl-bPR7_35oHqtiBzGsM" alt="博客园Logo" /></a></li>
+                <li><a href="/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-sitehome')">首页</a></li>
+                <li><a href="https://news.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-news')">新闻</a></li>
+                <li><a href="https://q.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-q')">博问</a></li>
+                <li><a id="nav_brandzone" href="https://brands.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-brands')">专区</a></li>
+                <li><a href="https://ing.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-ing')">闪存</a></li>
+                <li><a href="https://edu.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-edu')">班级</a></li>
+            </ul>
+            <ul id="nav_right" class="navbar-list navbar-right">
+                <li>
+                    <form id="zzk_search" class="navbar-search" action="https://zzk.cnblogs.com/s" method="get">
+                        <input name="w" id="zzk_search_input" placeholder="代码改变世界" type="text" tabindex="3" />
+                        <button type="submit" id="zzk_search_button">
+                            <img src="/images/aggsite/search.svg" alt="搜索" />
+                        </button>
+                    </form>
+                </li>
+                <li id="navbar_login_status" class="navbar-list">
+                    <a class="navbar-user-info navbar-blog" href="https://i.cnblogs.com/EditPosts.aspx?opt=1" alt="写随笔" title="写随笔">
+                        <img id="new_post_icon" class="navbar-icon" src="/images/aggsite/newpost.svg" alt="写随笔" />
+                    </a>
+                    <a id="navblog-myblog-icon" class="navbar-user-info navbar-blog" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx" alt="我的博客" title="我的博客">
+                        <img id="myblog_icon" class="navbar-icon" src="/images/aggsite/myblog.svg" alt="我的博客" />
+                    </a>
+                    <a class="navbar-user-info navbar-message navbar-icon-wrapper" href="https://msg.cnblogs.com/" alt="短消息" title="短消息">
+                        <img id="msg_icon" class="navbar-icon" src="/images/aggsite/message.svg?v=J0WS2P2iPgaIVgXxcAhliw4AFZIpaTWxtdoNAv9eiCA" alt="短消息" />
+                        <span id="msg_count" style="display: none"></span>
+                    </a>
+                    <div id="user_info" class="navbar-user-info dropdown">
+                        <a class="dropdown-button" href="https://home.cnblogs.com/">
+                            <img id="user_icon" class="navbar-avatar" src="/images/aggsite/avatar-default.svg" alt="用户头像" />
+                        </a>
+                        <div class="dropdown-menu">
+                            <a id="navblog-myblog-text" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx">我的博客</a>
+                            <a href="https://home.cnblogs.com/">我的园子</a>
+                            <a href="https://account.cnblogs.com/settings/account">账号设置</a>
+                            <a href="javascript:void(0)" id="navbar_lite_mode_toggle" title="简洁模式会使用简洁款皮肤显示所有博客">
+    简洁模式 <img id="navbar_lite_mode_on" src="/images/lite-mode-check.svg" class="hide" /><span id="navbar_lite_mode_spinner" class="hide">...</span>
+</a>
+                            <a href="javascript:void(0)" onclick="account.logout();">退出登录</a>
+                        </div>
+                    </div>
+                    <a class="navbar-anonymous" href="https://account.cnblogs.com/signup/">注册</a>
+                    <a class="navbar-anonymous" href="javascript:void(0);" onclick="account.login()">登录</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    
+    <!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/Sol-wang/"><img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/Sol-wang/">Sol·wang</a>
+</h1>
+<h2></h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/Sol-wang/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/Sol%C2%B7wang">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="javascript:void(0)" data-rss="https://www.cnblogs.com/Sol-wang/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			<div id="blog_stats_place_holder"><script>loadBlogStats();</script></div>
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class = "postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2 vertical-middle" href="https://www.cnblogs.com/Sol-wang/p/14792751.html">
+    <span>MySQL8.0性能优化</span>
+    
+
+
+
+</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                    <div id="cnblogs_post_description" style="display: none">
+        MySQL8.0性能优化，引擎、分表 / 拆表 / 分库 / 分盘、索引优化、脚本SQL优化、InnoDB缓冲池优化、连接池优化、MySQL日志
+    </div>
+<div id="cnblogs_post_body" class="blogpost-body cnblogs-markdown">
+<h3 class="h3">MySQL8.0 引擎：</h3>
+<p>来看看MySQL8提供的引擎：<br>
+<img src="https://img2020.cnblogs.com/blog/2320729/202106/2320729-20210613142458652-1822385136.png" alt="MySQL8.0 引擎" loading="lazy"></p>
+<h5 class="h5">常用引擎：</h5>
+<p>InnoDB：支持事务，行级锁，外键，崩溃修复，多版本并发控制；读写效率相对较差，内存使用相对较高，占用数据空间相对较大。</p>
+<p>MyISAM：不支持事务，不支持外键，仅支持非聚集索引，支持全文索引，仅支持到表级锁，支持数据压缩，占用空间相对小，内存使用相对较低，读写性能相对极佳。</p>
+<p>Memory：依赖于内存空间，数据处理速度快，仅支持到表级锁。</p>
+<h5 class="h5">应用场景：</h5>
+<p>InnoDB：依赖于 事务，回滚，并发，大数据量，外键，行级锁 的场景。</p>
+<p>MyISAM：过多的大数据量的频繁的查询优势。</p>
+<p>Memory：临时性的，大数据量表的查询优势。</p>
+<p>在创建表的时候，可依据应用场景选择合适的引擎。</p>
+<p>&nbsp;</p>
+<h3 class="h3">分表 / 拆表 / 分库 / 分盘</h3>
+<p>分表：解决单表数据量过大的性能瓶颈，小范围的数据处理，避免过多数据扫描；可按业务类型数据、时间跨度等实际场景分表。</p>
+<p>拆表：按场景合理的将大表分为多个小表来降低锁竞争</p>
+<p>分库：分实例分别各自处理，量与性能的分散优化处理，欠缺的事务一致性，可按实际场景合理分库。</p>
+<p>分盘：主要解决磁盘IO瓶颈，多磁盘分散并行运行。</p>
+<p>&nbsp;</p>
+<h3 class="h3">索引</h3>
+<h5 class="h5">索引分类</h5>
+<p>普通索引：无限制</p>
+<p>主键索引：表中只能有一个，不能为NULL</p>
+<p>唯一索引：值不能重复</p>
+<p>全文索引：仅MyISAM支持，仅支持 char、varchar、text 类型</p>
+<p>组合索引：多列一起创建的合并索引，非单列分别创建的索引</p>
+<p>&nbsp;</p>
+<p>所有存储引擎对每个表至少支持了16个索引。</p>
+<p>&nbsp;</p>
+<h5 class="h5">索引设计原则：</h5>
+<p>为经常需要排序、分组或联合操作的字段建立索引，经常需要使用 order by、group by、distinct、uninon 等的操作字段</p>
+<p>为经常查询出的列建立索引，为经常作为查询条件的字段建立索引</p>
+<p>推荐长度较少的列建索引，推荐列使用固定长度。</p>
+<p>过多的索引建立对表数据变更操作的性能下降的影响</p>
+<p>删除不再使用或很少使用的索引，减少索引对更新时的影响</p>
+<p>索引覆盖，索引下推，避免回表查询（以下介绍）</p>
+<p>&nbsp;</p>
+<h5 class="h5">索引命中：</h5>
+<p>依据索引查询，查询条件常以索引列开始</p>
+<p>组合索引的最左原则：必须以组合索引列的首列开始的条件查询，按序依次。</p>
+<p>索引覆盖，推荐要查询出的字段全部为索引列。假如页面列表呈现出个别主要的字段内容的场景；具体的详细内容在详细页呈现，透过主键查询单条数据。</p>
+<p>避免回表查询：MySQL首先查出带索引的列数据，再透过主键列去查询非索引列的数据信息，把两次查询的数据组合后返回客户端。所以推荐索引覆盖。</p>
+<p>&nbsp;</p>
+<h3 class="h3">脚本优化</h3>
+<p>尽量避免嵌套子查询，改用JOIN方式。</p>
+<p>尽量减少 查询中的全表扫描次数 ，尤其是对于大表，如采用EXISTS、WHERE的条件顺序等。</p>
+<p>避免字段以难以理解的方式转换查询，采用更为合理的转换方式。</p>
+<p>去除不必要的括号，避免复杂逻辑查询。如 <code>(1=1 and (b&gt;a and b=c)) and a=5</code> 推荐为 <code>b&gt;5 and b=c and a=5</code></p>
+<p>简化减少WHERE条件范围区间的重叠部分。如 <code>(key1 &lt; 'abc' and 1=1) or (key1 &lt; 'bar') or (false)</code> 推荐为 <code>key1 &lt; 'bar'</code></p>
+<p>避免WHERE后用函数临时的计算，可事先生成结果列或虚拟列。</p>
+<p>推荐WHERE中首次出现的IS NULL赋予更大的作用，因为MySQL8仅对首次出现的IS NULL做大量优化。</p>
+<p>某些场景对索引的失效或破坏，FORCE INDEX：指明优先使用的索引并生效；常用于JOIN。</p>
+<p>IN的嵌套查询改为EXISTS的嵌套查询。</p>
+<p>INNER JOIN 时，STRAIGHT_JOIN 指明优先检索的主表，使其特定场景中达到我们的预期效果。</p>
+<p>被嵌套的查询更多的筛选和处理，使其减少外表查询的数据基数。</p>
+<p>批量INSERT使用包含多个VALUES列表的语句一次插入多行，量越大效果越明显。（加大 bulk_insert_buffer_size、Max_allowed_packet、Net_buffer_length 的值，满足更大量的处理）</p>
+<p>推荐默认值列，非显示的插入减少必要的解析。</p>
+<p>某些场景下，replace into 的使用，代替 insert/update，成为单一的原子操作。</p>
+<p>SQL片段WITH AS的运用，Memory Table 的利用。</p>
+<p>查询仅返回需要的字段，避免 *，避免回表查询；仅返回需要的数据量。</p>
+<p>&nbsp;</p>
+<h3 class="h3">InnoDB缓冲池</h3>
+<p>一个称为缓冲池的存储区域，用于在内存中缓存数据和索引，利用它将经常访问的数据保存在内存中，减少了SQL执行及磁盘IO的资源消耗。为了更多的需要暂存空间，满足更大数据量的暂存。</p>
+<h5 class="h5">参数设置：</h5>
+<p>innodb_buffer_pool_size：缓冲池的承载总量，建议设为系统内存的50%-70%</p>
+<p>innodb_buffer_pool_chunk_size：缓冲池每块大小，默认128M</p>
+<p>innodb_buffer_pool_instances：多线程缓冲池实例并行运行，默认1实例，最大64实例</p>
+<h5 class="h5">设置规则：</h5>
+<p>innodb_buffer_pool_size = （innodb_buffer_pool_chunk_size * {N}块 ）*&nbsp;innodb_buffer_pool_instances</p>
+<p>也就是说，innodb_buffer_pool_size 必须是&nbsp;innodb_buffer_pool_chunk_size 的倍数</p>
+<h5 class="h5">举例说明：</h5>
+<p>符合的例子：innodb_buffer_pool_size=8G，innodb_buffer_pool_chunk_size=128M，innodb_buffer_pool_instances=16</p>
+<p>不符的例子：innodb_buffer_pool_size=9G，innodb_buffer_pool_chunk_size=128M，innodb_buffer_pool_instances=16</p>
+<p>对于以上非倍数的状况：</p>
+<p>MySQL会自动将 innodb_buffer_pool_size 调整为&nbsp;innodb_buffer_pool_chunk_size 的倍数；所以会变为 innodb_buffer_pool_size = 10G</p>
+<h5 class="h5">运行机制：</h5>
+<p>缓冲区分为 热数据区 / 冷数据区，两者空间占比约为 7/3，每区中的数据集依使用频率按顺序依次排列。</p>
+<p>当一个新的查询结果出现后，首先考虑存放到冷数据区，当冷数据区的结果集使用达到一定频率，会被改存到热数据区，使用频率最好的数据集会被存放到热区的首位，当然也有热区转到冷区的状况。</p>
+<p>&nbsp;</p>
+<p style="color: rgba(153, 153, 153, 1)">MySQL8 去除了 [查询缓存] query_cache_type、query_cache_size、query_cache_limit</p>
+<p>&nbsp;</p>
+<h3 class="h3">连接池</h3>
+<p>MySQL连接器中的连接池，用以提高数据库密集型应用程序的性能和可扩展性。默认启用。MySQL连接器负责管理连接池中的多个连接，自动创建、打开、关闭和破坏连接，多个连接的创建，可满足多客户端的频繁连接，连接的重复使用获得最佳性能。<br>
+MySQL连接器 每三分钟运行一次后台作业，并从池中删除闲置（未使用）超过三分钟的连接。池清理释放客户端和服务器端的资源。这是因为在客户端每个连接都使用一个Socket，而在服务器端每个连接都使用一个Socket和一个线程。</p>
+<h5 class="h5">透过连接字符串参数对连接池的设定调整其性能特点：</h5>
+<ul>
+<li>开启连接池：Pooling=true，默认开启</li>
+<li>复用时重置连接状态：ConnectionReset=True</li>
+<li>保持连接设置：CacheServerProperties=True</li>
+<li>连接超时回收(秒)：ConnectionLifeTime=300</li>
+<li>支持的最大连接数量：Max Pool Size=100</li>
+<li>保持最小的连接数量：Min Pool Size=10</li>
+</ul>
+<p>&nbsp;</p>
+<h3 class="h3">日志</h3>
+<p>MySQL在运行时，会有各种不同日志的记录，大量的各种类型的日志产生，会对资源的开销产生严重的影响，必要的时候我们选择性的开启。但在生产环境时，有些日志并不是必须，以下列出MySQL各种日志信息：</p>
+<ul>
+<li>错误日志：启动、关闭、运行时 产生的异常记录，建议开启，设置 log_error</li>
+<li>查询日志：客户端连接和执行的脚本，建议关闭，设置 general_log</li>
+<li>慢查询日志：记录超时的查询，记录不适用索引的查询等，建议关闭，设置 slow_query_log</li>
+<li>二进制日志：用于数据同步复制，需发送的数据日志，多用于集群，如需开启，设置 log_bin</li>
+<li>中继日志：用于数据同步复制时，接收到的数据日志，多用于集群，如需开启，设置 relay_log</li>
+</ul>
+<p>&nbsp;</p>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2021-06-19 17:55</span>&nbsp;
+<a href="https://www.cnblogs.com/Sol-wang/">Sol·wang</a>&nbsp;
+阅读(<span id="post_view_count">15</span>)&nbsp;
+评论(<span id="post_comment_count">0</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=14792751" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(14792751);return false;">收藏</a>&nbsp;
+<a href="javascript:void(0)" onclick="reportManager.report({ currentUserId: '', targetType: 'blogPost', targetId: '14792751', targetLink: 'https://www.cnblogs.com/Sol-wang/p/14792751.html', title: 'MySQL8.0性能优化' })">举报</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="https://common.cnblogs.com/highlight/10.3.1/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 678188, cb_blogApp = 'Sol-wang', cb_blogUserGuid = '58d198e8-22e2-4e73-9512-08d8d71b5727';
+    var cb_entryId = 14792751, cb_entryCreatedDate = '2021-06-19 17:55', cb_postType = 1;
+    updatePostStats(
+        [cb_entryId],
+        function(id, count) { $("#post_view_count").text(count) },
+        function(id, count) { $("#post_comment_count").text(count) })
+    zoomManager.apply("#cnblogs_post_body img:not(.code_img_closed):not(.code_img_opened)");
+</script>
+<a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <div id="cnblogs_c1" class="under-post-card">
+        <div id='div-gpt-ad-1592365906576-0' style='width: 300px; height: 250px;'></div>
+    </div>
+    <div id="under_post_card1"></div>
+    <div id="cnblogs_c2" class="under-post-card">
+        <div id='div-gpt-ad-1592366332455-0' style='width: 468px; height: 60px;'></div>
+    </div>
+    <div id="under_post_card2"></div>
+    <div id="HistoryToday" class="under-post-card"></div>
+    <script type="text/javascript">
+       var commentManager = new blogCommentManager();
+       commentManager.renderComments(0);
+       fixPostBody();
+       deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);       deliverT2();
+       deliverC1C2();
+       loadNewsAndKb();
+       loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);       LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+       GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+       loadOptUnderPost();
+       GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+	<div id="sideBar">
+		<div id="sideBarMain">
+			<div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+<div id="sidebar_c3"></div>
+			<div id="blog-calendar" style="display:none"></div><script>loadBlogDefaultCalendar();</script>			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright &copy; 2021 Sol·wang
+<br /><span id="poweredby">Powered by .NET 5.0 on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+
+    <input type="hidden" id="antiforgery_token" value="CfDJ8L-rpLgFVEJMgssCVvNUAjuz_v3isv5nw7j9BTGxhNXSM7PBffBdU6lbF_QMPQl-UR7_GSxULNV_BXYPKEBR-tIptdKXPM69DzwaUbcx6hZqE4tS1u94ABVCUYeSjxZLcLySRxt38Dq9Vt8fN2p03H4" />
+</body>
+</html>

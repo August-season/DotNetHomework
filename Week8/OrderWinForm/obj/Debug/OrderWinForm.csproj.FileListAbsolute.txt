@@ -1,0 +1,17 @@
+C:\Users\10987\source\repos\Week8\OrderWinForm\bin\Debug\OrderWinForm.exe.config
+C:\Users\10987\source\repos\Week8\OrderWinForm\bin\Debug\OrderWinForm.exe
+C:\Users\10987\source\repos\Week8\OrderWinForm\bin\Debug\OrderWinForm.pdb
+C:\Users\10987\source\repos\Week8\OrderWinForm\obj\Debug\OrderWinForm.csprojAssemblyReference.cache
+C:\Users\10987\source\repos\Week8\OrderWinForm\obj\Debug\OrderWinForm.Properties.Resources.resources
+C:\Users\10987\source\repos\Week8\OrderWinForm\obj\Debug\OrderWinForm.csproj.GenerateResource.cache
+C:\Users\10987\source\repos\Week8\OrderWinForm\obj\Debug\OrderWinForm.csproj.CoreCompileInputs.cache
+C:\Users\10987\source\repos\Week8\OrderWinForm\obj\Debug\OrderWinForm.exe
+C:\Users\10987\source\repos\Week8\OrderWinForm\obj\Debug\OrderWinForm.pdb
+C:\Users\10987\source\repos\Week8\OrderWinForm\bin\Debug\OrderApp.exe
+C:\Users\10987\source\repos\Week8\OrderWinForm\bin\Debug\OrderApp.pdb
+C:\Users\10987\source\repos\Week8\OrderWinForm\bin\Debug\OrderApp.exe.config
+C:\Users\10987\source\repos\Week8\OrderWinForm\obj\Debug\OrderWinForm.csproj.CopyComplete
+C:\Users\10987\source\repos\Week8\OrderWinForm\obj\Debug\OrderWinForm.MainForm.resources
+C:\Users\10987\source\repos\Week8\OrderWinForm\obj\Debug\OrderWinForm.DetailEditForm.resources
+C:\Users\10987\source\repos\Week8\OrderWinForm\obj\Debug\OrderWinForm.EditForm.resources
+C:\Users\10987\source\repos\Week8\OrderWinForm\obj\Debug\OrderWinForm.ParentForm.resources

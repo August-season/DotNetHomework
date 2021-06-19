@@ -1,0 +1,440 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin-when-crossorigin" />
+    <meta name="description" content="续上一篇随笔： https://www.cnblogs.com/kingstarer/p/8469016.html 《工作碰上的技术问题及处理经验》 由于内容有很多空格，如果直接在正文粘贴，发表后空格" />
+    <meta property="og:description" content="续上一篇随笔： https://www.cnblogs.com/kingstarer/p/8469016.html 《工作碰上的技术问题及处理经验》 由于内容有很多空格，如果直接在正文粘贴，发表后空格" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>工作碰上的技术问题及处理经验（二） - 皇家救星 - 博客园</title>
+    <link id="favicon" rel="shortcut icon" href="//common.cnblogs.com/favicon.svg" type="image/svg+xml" />
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=6tvK5XC6GPbg3p_sy7wzz_2291HoYACr4440iKBzQIw" />
+    <link id="MainCss" rel="stylesheet" href="/skins/simpleblue/bundle-simpleblue.min.css?v=2hjghzSZyhYA1HxvSxKnXih3JbC120DBjeO9V9T_nSs" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/simpleblue/bundle-simpleblue-mobile.min.css?v=3tvwgOOqUo3RpS6gGzEdK0LbptOPv4Bx7M85_UAnFGs" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/kingstarer/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/kingstarer/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/kingstarer/wlwmanifest.xml" />
+    <script>
+        var currentBlogId = 234136;
+        var currentBlogApp = 'kingstarer';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var isBlogOwner = false;
+        var skinName = 'SimpleBlue';
+        var visitorUserId = '';
+    </script>
+        <script>
+            var currentPostDateAdded = '2019-06-16 12:12';
+        </script>
+    <script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+    <script src="/js/blog-common.min.js?v=ZUvfwhWs5fv-s8Nv7WofCOhwKAxiDO928zdWFzhnOPk"></script>
+    
+    
+    
+</head>
+<body class="has-navbar has-bannerbar">
+    <a name="top"></a>
+            <a target="_blank" href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:pc|pp:bokeyuan-huodong-21nianzhongdacu-neiyePCtonglanbanner|pu:21nianzhongdacu-neiyePCtonglanbanner|ci:21nzdc|kw:10224545" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-pc')">
+                <div class="bannerbar aliyun forpc" style="background-size: contain; filter: brightness(0.95); background-image: url(https://img2020.cnblogs.com/blog/35695/202106/35695-20210610183724605-1725070929.jpg)">
+                </div>
+            </a>
+            <div id="bannerbar" class="bannerbar-mobile formobile">
+            <a href="https://cloud.baidu.com/campaign/2021mid/index.html?track=cp:bokeyuan|pf:mb|pp:bokeyuan-huodong-21nianzhongdacu-neiyeyidongduantonglanbanner|pu:21nianzhongdacu-neiyeyidongduantonglanbanner|ci:21nzdc|kw:10224547" onclick="ga('send', 'event', 'Link', 'click', 'baidu-cpa-blog-bannerbar-mobile')">
+                <img src="https://img2020.cnblogs.com/blog/35695/202106/35695-20210610184806729-1738888164.jpg" alt="" />
+            </a>
+            </div>
+    <div id="top_nav" class="navbar forpc">
+        <nav id="nav_main" class="navbar-main">
+            <ul id="nav_left" class="navbar-list navbar-left">
+                <li class="navbar-branding"><a href="https://www.cnblogs.com/" title="开发者的网上家园"><img src="/images/logo.svg?v=R9M0WmLAIPVydmdzE2keuvnjl-bPR7_35oHqtiBzGsM" alt="博客园Logo" /></a></li>
+                <li><a href="/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-sitehome')">首页</a></li>
+                <li><a href="https://news.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-news')">新闻</a></li>
+                <li><a href="https://q.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-q')">博问</a></li>
+                <li><a id="nav_brandzone" href="https://brands.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-brands')">专区</a></li>
+                <li><a href="https://ing.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-ing')">闪存</a></li>
+                <li><a href="https://edu.cnblogs.com/" onclick="ga('send', 'event', 'Link', 'click', 'skin-navbar-edu')">班级</a></li>
+            </ul>
+            <ul id="nav_right" class="navbar-list navbar-right">
+                <li>
+                    <form id="zzk_search" class="navbar-search" action="https://zzk.cnblogs.com/s" method="get">
+                        <input name="w" id="zzk_search_input" placeholder="代码改变世界" type="text" tabindex="3" />
+                        <button type="submit" id="zzk_search_button">
+                            <img src="/images/aggsite/search.svg" alt="搜索" />
+                        </button>
+                    </form>
+                </li>
+                <li id="navbar_login_status" class="navbar-list">
+                    <a class="navbar-user-info navbar-blog" href="https://i.cnblogs.com/EditPosts.aspx?opt=1" alt="写随笔" title="写随笔">
+                        <img id="new_post_icon" class="navbar-icon" src="/images/aggsite/newpost.svg" alt="写随笔" />
+                    </a>
+                    <a id="navblog-myblog-icon" class="navbar-user-info navbar-blog" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx" alt="我的博客" title="我的博客">
+                        <img id="myblog_icon" class="navbar-icon" src="/images/aggsite/myblog.svg" alt="我的博客" />
+                    </a>
+                    <a class="navbar-user-info navbar-message navbar-icon-wrapper" href="https://msg.cnblogs.com/" alt="短消息" title="短消息">
+                        <img id="msg_icon" class="navbar-icon" src="/images/aggsite/message.svg?v=J0WS2P2iPgaIVgXxcAhliw4AFZIpaTWxtdoNAv9eiCA" alt="短消息" />
+                        <span id="msg_count" style="display: none"></span>
+                    </a>
+                    <div id="user_info" class="navbar-user-info dropdown">
+                        <a class="dropdown-button" href="https://home.cnblogs.com/">
+                            <img id="user_icon" class="navbar-avatar" src="/images/aggsite/avatar-default.svg" alt="用户头像" />
+                        </a>
+                        <div class="dropdown-menu">
+                            <a id="navblog-myblog-text" href="https://passport.cnblogs.com/GetBlogApplyStatus.aspx">我的博客</a>
+                            <a href="https://home.cnblogs.com/">我的园子</a>
+                            <a href="https://account.cnblogs.com/settings/account">账号设置</a>
+                            <a href="javascript:void(0)" id="navbar_lite_mode_toggle" title="简洁模式会使用简洁款皮肤显示所有博客">
+    简洁模式 <img id="navbar_lite_mode_on" src="/images/lite-mode-check.svg" class="hide" /><span id="navbar_lite_mode_spinner" class="hide">...</span>
+</a>
+                            <a href="javascript:void(0)" onclick="account.logout();">退出登录</a>
+                        </div>
+                    </div>
+                    <a class="navbar-anonymous" href="https://account.cnblogs.com/signup/">注册</a>
+                    <a class="navbar-anonymous" href="javascript:void(0);" onclick="account.login()">登录</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    
+    <div id="home">
+    <div id="header">
+        <div id="blogTitle">
+            <div class="title"><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/kingstarer/">皇家救星</a>
+</div>
+<div class="subtitle"></div>
+
+        </div>
+        <div id="navigator">
+            
+<ul id="navList">
+    <li id="nav_sitehome"><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+    <li id="nav_myhome">
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/kingstarer/">
+首页</a>
+</li>
+    <li id="nav_newpost">
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+    <li id="nav_contact">
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E7%9A%87%E5%AE%B6%E6%95%91%E6%98%9F">
+联系</a></li>
+    <li id="nav_rss">
+<a id="blog_nav_rss" class="menu" href="javascript:void(0)" data-rss="https://www.cnblogs.com/kingstarer/rss/">
+订阅</a></li>
+    <li id="nav_admin">
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+            <div class="blogStats">
+                <div id="blog_stats_place_holder"><script>loadBlogStats();</script></div>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div id="mainContent">
+            <div class="forFlow">
+                <div id="post_detail">
+    <div id="topics">
+        <div class="post">
+            <h1 class="postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2 vertical-middle" href="https://www.cnblogs.com/kingstarer/p/11031121.html">
+    <span>工作碰上的技术问题及处理经验（二）</span>
+    
+
+
+
+</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                <div id="cnblogs_post_body" class="blogpost-body blogpost-body-html">
+<p>续上一篇随笔： https://www.cnblogs.com/kingstarer/p/8469016.html 《工作碰上的技术问题及处理经验》</p>
+<p>&nbsp;</p>
+<p>由于内容有很多空格，如果直接在正文粘贴，发表后空格会消失，导致版本看起来比较难看。</p>
+<p>所以我把主要内容做为代码发表。</p>
+<p>我觉得每天把工作碰上的问题做一个简单的笔记挺不错的，一来可以锻炼自己的表达能力，二来也方便自己以后复查，因为以后工作很可能再碰上同样的问题。</p>
+<p>由于我每次记录笔记时，可能只是记录了关键字，而要发出来做为共享随笔，只有这些关键字肯定是不行的，大家看了一头雾水。</p>
+<p>所以发表前需要二次整理，目前只整理到了20180424，还有一年多的笔记，后面会继续整理，陆续发表出来。</p>
+<p>希望能对大家有所帮助。</p>
+<div class="cnblogs_code">
+<pre><span style="color: rgba(128, 0, 128, 1)">20171226</span><span style="color: rgba(0, 0, 0, 1)">:
+    socket被子进程close父进程还能用，但是被shutdown父进程则无法用。
+    shutdown后还需要close。close计数为0时会自动shutdown。
+
+    recv函数参数含义:
+    msg_peek recv 只读数据 不取出
+    msg_waitall recv 等到所有数据读取完毕才返回
+    msg_confirm send 等到对方收到数据才返回
+    MSG_NOSIGNAL send 对方关闭socket时不发送sigpipe信号（还是会返回出错）
+    TCP_NODELAY,出现40ms延时最大的可能就是由于没有设置TCP_NODELAY 在长连接的交互中,有些时候一个发送的数据包非常的小,
+    加上一个数据包的头部就会导致浪费,而且由于传输的数据多了,就可能会造成网络拥塞的情况, 在系统底层默认采用了Nagle算法,可以把连续发送的多个小包组装为一个更大的数据包然后再进行发送. 但是对于我们交互性的应用程序意义就不大了,在这种情况下我们发送一个小数据包的请求,就会立刻进行等待,不会还有后面的数据包一起发送
+    下一个数据包,这个时候服务端出现了延时返回的问题.对于这个问题可以通过设置server端TCP_QUICKACK选项来解决. TCP_QUICKACK可以让服务端尽快的响应这个ack包.  
+    采用writev方式发送多个小数据包
+    一台机器上的端口是有限，最多65535(一个unsigned </span><span style="color: rgba(0, 0, 255, 1)">char</span>)个，在系统文件/proc/sys/net/ipv4/ip_local_port_range 　中我们一般可以看到32768 <span style="color: rgba(128, 0, 128, 1)">61000</span><span style="color: rgba(0, 0, 0, 1)"> 的结果，这里表示这台机器可以使用的端口范围是32768到61000,
+     小提示: 一般的服务模式都是服务端一个端口，客户端使用不同的端口进行连接，但是其实我们也是可以把这个过程倒过来，我们客户端只用一个端但是服务端确是不同的端口，客户端做下面的修改原有的方式　socket分配句柄</span>-&gt; connect　分配的句柄　改为 socket分配句柄 -&gt;对socket设置SO_REUSEADDR选项-&gt;像服务端一样bind某个端口-&gt;<span style="color: rgba(0, 0, 0, 1)">connect 就可以实现  
+    不过这种应用相对比较少，对于像网络爬虫这种情况可能相对会比较适用，只不过6w连接已经够多了，继续增加的意义不一定那么大就是了．  
+    这个要根据情况来看， 一般情况connect一个不存在的ip地址，发起连接的服务需要等待ack的返回，由于ip地址不存在，不会有返回，这个时候会一直等到超时才返回。如果连接的是一个存在的ip，但是相应的端口没有服务，这个时候会马上得到返回，收到一个ECONNREFUSED（Connection refused）的结果。  
+    但是在我们的网络会存在一些有限制的路由器，比如我们一些机器不允许访问外网，这个时候如果访问的ip是一个外网ip(无论是否存在），这个时候也会马上返回得到一个Network </span><span style="color: rgba(0, 0, 255, 1)">is</span><span style="color: rgba(0, 0, 0, 1)"> unreachable的错误，不需要等待。
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20180108</span><span style="color: rgba(0, 0, 0, 1)">:
+    g_trash_stack_push会破坏存到栈里面的内容
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20180110</span><span style="color: rgba(0, 0, 0, 1)">:
+    经验:多磁盘系统可能出现热点磁盘，可以考虑使用条带化使得文件系统均匀分布
+
+</span><span style="color: rgba(128, 0, 128, 1)">20180112</span><span style="color: rgba(0, 0, 0, 1)">:
+    Linux堆栈是向下扩展的，所以如果出现数组写越界，破坏数组变量之前定义的一个变量的内容。（但是同一个结构体里面则是按声明顺序从小到大分配空间）
+
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20180115</span><span style="color: rgba(0, 0, 0, 1)">:
+    网络编程时，服务器接收数据需要防止客户端发送数据不完整。最好让客户端在发送数据前先发送包长度。
+
+</span><span style="color: rgba(128, 0, 128, 1)">20180116</span><span style="color: rgba(0, 0, 0, 1)">:
+    linux下，select函数超时后会修改入参struct timeval参数，需要重置成需要的超时时间
+
+    读取文件尾部: </span><span style="color: rgba(0, 0, 255, 1)">if</span> (<span style="color: rgba(128, 0, 128, 1)">0</span> &gt; (fd = open(strLogFile, O_APPEND | O_WRONLY | O_CREAT | O_TEXT, <span style="color: rgba(128, 0, 128, 1)">0644</span><span style="color: rgba(0, 0, 0, 1)">)))
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20180201</span><span style="color: rgba(0, 0, 0, 1)">:
+    如果出现退格键不能删除字符，终端显示不全等问题，一般可以观察是否stty参数设置异常:stty </span>-<span style="color: rgba(0, 0, 0, 1)">a
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20180228</span><span style="color: rgba(0, 0, 0, 1)">:
+    最近定位了系统传输给P9的数据出现入库失败的问题。
+    先说一下背景:
+    我们数据库字符编码是GBK，P9数据库编码是UTF8。每天我们系统有一些数据需要导出成文件，传给他们系统入库。
+    我们做法是先导出GBK编码的文件再通过iconv转换成UTF8格式文件传给他们。
+    约定文件列分隔符是</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">|@|</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">
+    出现的问题:
+    由于某个库表有个字段长度不足，我们入库时需要先substr再入库，导致有些数据出现半个中文问题。
+    这种数据导出到文件再用iconv转换成utf8格式时会把后面的竖线与半个中文合并成一个新的中文。
+    结果会导致转换后的数据缺失一列，对方系统入库失败。
+    解决方法:
+    字段导出时就转换成UTF8格式，如果碰上转换异常的字符忽略。
+
+</span><span style="color: rgba(128, 0, 128, 1)">20180301</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天一个网友系统短信验证码被刷了，虽然控制了ip和手机号码发送频率，但是还是被人用n多肉鸡攻击。
+    当初项目上线为了用户体验，没有先验证图文验证码就直接发短信造成的祸端。
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20180310</span><span style="color: rgba(0, 0, 0, 1)">:
+    everything默认不搜索c盘，需要强制它搜索。工具</span>-&gt;选项-&gt;索引-&gt;<span style="color: rgba(0, 0, 0, 1)">文件夹新增需要搜索的用户目录。
+
+</span><span style="color: rgba(128, 0, 128, 1)">20180312</span><span style="color: rgba(0, 0, 0, 1)">:
+    sqlplus的set term off可以不显示sql执行结果（） 脚本
+
+</span><span style="color: rgba(128, 0, 128, 1)">20180316</span><span style="color: rgba(0, 0, 0, 1)">:
+    vim打开混合编码的文件，容易出现中文乱码的情况。可以强制vim把文件当成utf8格式打开:e </span>++enc=utf-<span style="color: rgba(128, 0, 128, 1)">8</span>
+
+
+
+<span style="color: rgba(128, 0, 128, 1)">20180318</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天编译代码时报错，提示error C2065: “HANDLE_TIMEOUT”: 未声明的标识符。
+但我明明在前面有定义HANDLE_TIMEOUT宏:</span><span style="color: rgba(0, 0, 255, 1)">#define</span> HANDLE_TIMEOUT()  <span style="color: rgba(0, 0, 0, 1)">
+    原以为是编译器有bug，后来发现原来要用宏函数的写法才对:HANDLE_TIMEOUT()，我原来直接写了HANDLE_TIMEOUT
+
+</span><span style="color: rgba(128, 0, 128, 1)">20180318</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天用plsql同时执行多条insert语句时报错:ora</span>-<span style="color: rgba(128, 0, 128, 1)">0091</span><span style="color: rgba(0, 0, 0, 1)">  无效字符
+后来我把语句前后厍上BEGIN和END;就可以了
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20180319</span><span style="color: rgba(0, 0, 0, 1)">:
+    select返回可读，但recv返回0，这种情况一般是因为对方关闭socket
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20180322</span><span style="color: rgba(0, 0, 0, 1)">:
+    sourceinsight在括号前双击可以快速跳转到对应的另一个括号位置。
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20180408</span><span style="color: rgba(0, 0, 0, 1)">:
+    release版本 gdb看不出来 加上</span>-<span style="color: rgba(0, 0, 0, 1)">g重新编译
+
+</span><span style="color: rgba(128, 0, 128, 1)">20180410</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天发现一个命令ss，据说比netstat快很多。netstat </span>-anp &lt;=&gt; ss -<span style="color: rgba(0, 0, 0, 1)">tanp
+
+    ue高亮单词的方法: shift </span>+<span style="color: rgba(0, 0, 0, 1)"> 双击单词
+
+</span><span style="color: rgba(128, 0, 128, 1)">20180411</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天有同事说突然登录不了oracle，使用sqlplus user</span>/pwd@dbname报错:“ora-<span style="color: rgba(128, 0, 128, 1)">12154</span><span style="color: rgba(0, 0, 0, 1)">: tns:could not resolve the connect identifier specified”，让我帮他看一下。
+    我过去他机器执行tnsping dbname，提示</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">tns-12533: tns:illegal address parameters</span><span style="color: rgba(128, 0, 0, 1)">"</span>，感觉是tns没配置好。但是查看tns配置${ORACLE_HOME}/network/admin/<span style="color: rgba(0, 0, 0, 1)">tnsnames.ora，里面的配置没问题。
+    后来才发现昨天有人在.profile设置了TNS_ADMIN，把tns配置指向了另一个目录，那里面tns配置错了。我之前没检查这个变量，查看了默认目录${ORACLE_HOME}</span>/network/admin/<span style="color: rgba(0, 0, 0, 1)">，所以没找出原因。
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20180412</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天用sftp上传文件时报错</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">fail to upload failure</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)">，以为是文件有问题，查了半天没发现。后来发现原来是目标机器硬盘空间满了。
+
+    今天有gdb调试程序，学习了几个技巧: </span><span style="color: rgba(128, 0, 128, 1)">1</span> 调试机器源码目录与编译机器源码目录不同，可以用set substitutes-path /xxa /<span style="color: rgba(0, 0, 0, 1)">xxb指示gdb到指定目录找源码文件。
+    .gdbinit </span><span style="color: rgba(0, 0, 255, 1)">set</span> auto-load safe-path /<span style="color: rgba(0, 0, 0, 1)">
+     print命令可以修改变量值，用法: print x</span>=<span style="color: rgba(128, 0, 128, 1)">4</span><span style="color: rgba(0, 0, 0, 1)">
+    使用watch命令可以让gdb在变量被修改时自动断点:watch </span>*(<span style="color: rgba(0, 0, 255, 1)">char</span> *<span style="color: rgba(0, 0, 0, 1)">)addr2line
+
+</span><span style="color: rgba(128, 0, 128, 1)">20180413</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天发现有同事在.h里面修改了结构体定义，但没有相应的编译所有.c。导致运行时出现内存越界。
+把程序make clean后重新编译就好了。
+    这个问题确实比较难解决，因为写makefile时不好确定每个.c依赖于哪些.h
+
+    今天写了一个将</span>/<span style="color: rgba(0, 0, 0, 1)">proc下面程序环境变量文件转成export语句的脚本
+    cat environ </span>| tr <span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">\0</span><span style="color: rgba(128, 0, 0, 1)">'</span> <span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">\n</span><span style="color: rgba(128, 0, 0, 1)">'</span> | awk -F <span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">=</span><span style="color: rgba(128, 0, 0, 1)">'</span> <span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)">{</span>
+    printf(<span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">export %s=%c%s%c\n</span><span style="color: rgba(128, 0, 0, 1)">"</span>, $<span style="color: rgba(128, 0, 128, 1)">1</span>, <span style="color: rgba(128, 0, 128, 1)">39</span>, $<span style="color: rgba(128, 0, 128, 1)">2</span>, <span style="color: rgba(128, 0, 128, 1)">39</span><span style="color: rgba(0, 0, 0, 1)">); 
+}</span><span style="color: rgba(128, 0, 0, 1)">'</span><span style="color: rgba(128, 0, 0, 1)"> #39是单引号的asscii码</span>
+
+
+<span style="color: rgba(128, 0, 128, 1)">20180414</span><span style="color: rgba(0, 0, 0, 1)">:
+    后来发现原来delete </span>* <span style="color: rgba(0, 0, 255, 1)">from</span><span style="color: rgba(0, 0, 0, 1)"> tab;也会造成高水位。之前以为只是有条件的delete会造成高水位。
+oracle对于每个数据段（可以简单理解为每个表）都有一个高水位(hwm)标记使用空间上限。hwm默认情况只会增大，不会减少。
+所以如果出现插入大量数据，然后又删除大量数据的表，会出现高水位远超过实际数据占用空间的情况。
+而数据库做全表扫描时会扫描高水位下面所有数据，这就会导致有时表的数据很少，但查询起来仍然很慢的情况。
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20180416</span><span style="color: rgba(0, 0, 0, 1)">:
+    http常见标准错误400  由于语法格式有误，服务器无法理解此请求。</span><span style="color: rgba(128, 0, 128, 1)">404</span><span style="color: rgba(0, 0, 0, 1)"> Web 服务器找不到您所请求的文件或脚本。
+
+</span><span style="color: rgba(128, 0, 128, 1)">20180417</span><span style="color: rgba(0, 0, 0, 1)">:
+    今天使用windows上的awk程序输出中文到屏幕时发现问题:
+    </span><span style="color: rgba(128, 0, 128, 1)">1</span> 使用print输出字符串时，如果字符串有中文，会报错fatal: print to <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">standard output</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)"> failed (Invalid argument)
+    </span><span style="color: rgba(128, 0, 128, 1)">2</span> 使用printf输出字符串时，如果字符串有中文，会报错fatal: printf to <span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(128, 0, 0, 1)">standard output</span><span style="color: rgba(128, 0, 0, 1)">"</span><span style="color: rgba(0, 0, 0, 1)"> failed (Bad file descriptor)
+    解决方法是不直接把awk运行结果输出到屏幕，使用重定向输出到txt文本，就不会报错了。
+
+</span><span style="color: rgba(128, 0, 128, 1)">20180419</span><span style="color: rgba(0, 0, 0, 1)">:
+    vs2015编译有utf8的源码时，需要在文件头添加BOM，否则会报错
+
+
+</span><span style="color: rgba(128, 0, 128, 1)">20180424</span><span style="color: rgba(0, 0, 0, 1)">:
+    C语言某些宏在宏里面写死了变量名，导致无法使用不同名称的变量调用该宏
+例如下面这个宏，强制要求使用变量名称txnJnl，如果想使用变量名txnJnl_realName则会调用失败
+</span><span style="color: rgba(0, 0, 255, 1)">#define</span> XML_TO_JNL(IDX) \
+<span style="color: rgba(0, 0, 255, 1)">do</span><span style="color: rgba(0, 0, 0, 1)"> { \
+    nRc </span>= XmlIpc2St(&amp;<span style="color: rgba(0, 0, 0, 1)">txnJnl, X2S(IDX));\
+    </span><span style="color: rgba(0, 0, 255, 1)">if</span> (nRc) <span style="color: rgba(0, 0, 255, 1)">return</span><span style="color: rgba(0, 0, 0, 1)"> nRc;\
+} </span><span style="color: rgba(0, 0, 255, 1)">while</span>(<span style="color: rgba(128, 0, 128, 1)">0</span><span style="color: rgba(0, 0, 0, 1)">)
+    对于这种情况c</span>++<span style="color: rgba(0, 0, 0, 1)">可以使用引用改变变量名，在c则可以使用下面的编码技巧曲线救国
+</span><span style="color: rgba(0, 0, 255, 1)">#define</span>  txnJnl txnJnl_realName <span style="color: rgba(0, 0, 0, 1)">
+    REQ_XML_TO_JNL(X2S_REVERSALAUTHREQ2ONLJNL);
+</span><span style="color: rgba(0, 0, 255, 1)">#undef</span> txnJnl<span style="color: rgba(0, 0, 0, 1)">
+    但最好还是推荐在写宏时参数带上变量名
+</span><span style="color: rgba(0, 0, 255, 1)">#define</span> REQ_XML_TO_JNL(txnJnl，IDX) \
+<span style="color: rgba(0, 0, 255, 1)">do</span><span style="color: rgba(0, 0, 0, 1)"> { \
+    nRc </span>= XmlIpc2St(&amp;<span style="color: rgba(0, 0, 0, 1)">txnJnl, X2S(IDX));\
+    </span><span style="color: rgba(0, 0, 255, 1)">if</span> (nRc) <span style="color: rgba(0, 0, 255, 1)">return</span><span style="color: rgba(0, 0, 0, 1)"> nRc;\
+} </span><span style="color: rgba(0, 0, 255, 1)">while</span>(<span style="color: rgba(128, 0, 128, 1)">0</span><span style="color: rgba(0, 0, 0, 1)">)
+    这样才符合高内聚低耦合的设计原则。</span></pre>
+</div>
+<p>&nbsp;</p>
+</div>
+<div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+    <div id="blog_post_info"></div>
+    <div class="clear"></div>
+    <div id="post_next_prev"></div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2019-06-16 12:12</span>&nbsp;
+<a href="https://www.cnblogs.com/kingstarer/">皇家救星</a>&nbsp;
+阅读(<span id="post_view_count">249</span>)&nbsp;
+评论(<span id="post_comment_count">0</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11031121" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(11031121);return false;">收藏</a>&nbsp;
+<a href="javascript:void(0)" onclick="reportManager.report({ currentUserId: '', targetType: 'blogPost', targetId: '11031121', targetLink: 'https://www.cnblogs.com/kingstarer/p/11031121.html', title: '工作碰上的技术问题及处理经验（二）' })">举报</a></div>
+        </div>
+        <script src="https://common.cnblogs.com/highlight/10.3.1/highlight.min.js"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 234136, cb_blogApp = 'kingstarer', cb_blogUserGuid = '6c01f56e-ee22-e511-b908-9dcfd8948a71';
+    var cb_entryId = 11031121, cb_entryCreatedDate = '2019-06-16 12:12', cb_postType = 1;
+    updatePostStats(
+        [cb_entryId],
+        function(id, count) { $("#post_view_count").text(count) },
+        function(id, count) { $("#post_comment_count").text(count) })
+    zoomManager.apply("#cnblogs_post_body img:not(.code_img_closed):not(.code_img_opened)");
+</script>
+        <a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+    <div id="comment_form_container"></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"></div>
+    <div id="opt_under_post"></div>
+    <div id="cnblogs_c1" class="under-post-card">
+        <div id='div-gpt-ad-1592365906576-0' style='width: 300px; height: 250px;'></div>
+    </div>
+    <div id="under_post_card1"></div>
+    <div id="cnblogs_c2" class="under-post-card">
+        <div id='div-gpt-ad-1592366332455-0' style='width: 468px; height: 60px;'></div>
+    </div>
+    <div id="under_post_card2"></div>
+    <div id="HistoryToday" class="under-post-card"></div>
+    <script type="text/javascript">
+       var commentManager = new blogCommentManager();
+       commentManager.renderComments(0);
+       fixPostBody();
+       deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);       deliverT2();
+       deliverC1C2();
+       loadNewsAndKb();
+       loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);       LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+       GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+       loadOptUnderPost();
+       GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+
+    </div>
+</div>
+            </div>
+        </div>
+
+        <div id="sideBar">
+            <div id="sideBarMain">
+                <div id="sidebar_news" class="newsItem">
+            <script>loadBlogNews();</script>
+</div>
+<div id="sidebar_c3"></div>
+                <div id="calendar"><div id="blog-calendar" style="display:none"></div></div>                
+                <script>loadBlogDefaultCalendar();</script>
+                <div id="leftcontentcontainer">
+                    <!-- begin:SingleColumn -->
+                    <div id="blog-sidecolumn"></div>
+                    <script>loadBlogSideColumn();</script>
+                    <!-- end:  SingleColumn -->
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+    <div id="footer">
+        <!--done-->
+Copyright &copy; 2021 皇家救星
+<br /><span id="poweredby">Powered by .NET 5.0 on Kubernetes</span>
+
+    </div>
+</div>
+
+    
+
+    <input type="hidden" id="antiforgery_token" value="CfDJ8L-rpLgFVEJMgssCVvNUAjuz4RJW4Vd_PpMEMpocHKhacYx9cvpvJH4rD9e351Oi-IPvK3qb80JdfjPQxuJ2CN_52N9rbVcS2SYiBQCrkDQlKCSPl2ODYuY3lVSvnpXs8SxGqp_q6PBLs5EcdpSSBqc" />
+</body>
+</html>
